@@ -5,11 +5,11 @@
       <h5>{{unit.description}}</h5>
 
       <p *ngIf="ms.game.researches.team1.done && unit.buyAction && unit.bonus.gt(0)">
-        You bought {{unit.buyAction.quantity | format}} times; bonus: + {{unit.bonus.times(100) | format}}%
+        你购买了 {{unit.buyAction.quantity | format}} 次; 奖励加成: + {{unit.bonus.times(100) | format}}%
       </p>
 
       <p *ngIf="unit.c.abs().gt(0.01)">
-        This is growing at:
+        产量:
         <app-polynom [a]="unit.a"
                      [b]="unit.b"
                      [c]="unit.c"></app-polynom>
@@ -21,7 +21,7 @@
                  [clrAlertSizeSmall]="false">
         <clr-alert-item>
           <span class="alert-text">
-            End in {{unit.endIn | endIn}}
+            耗尽: {{unit.endIn | endIn}}
           </span>
         </clr-alert-item>
       </clr-alert>
@@ -39,13 +39,13 @@
             <a [routerLink]="'/nav/unit/'+malus.malusType.id">
               {{malus.malusType.name}}
             </a>
-            prices.
+            价格.
           </span>
         </clr-alert-item>
       </clr-alert>
 
       <div *ngIf="unit.produces.length > 0 && !malus">
-        <span>Unit operativity: {{unit.efficiency | format}} %</span>
+        <span>单位操作能力: {{unit.efficiency | format}} %</span>
 
         <p-slider [min]="0"
                   [max]="100"

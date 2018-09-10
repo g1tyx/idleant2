@@ -1,7 +1,7 @@
 export const STRINGS = {
   units: {
     //  Materials
-    f: ["Food", "Food is used to sustain all units."],
+    f: ["Food", "食物用于维持所有单位。"],
     w: ["Soil", "Soil is used to build better nest."],
     c: ["Crystal", "Crystal is used to make science."],
     s: ["Science", "Science is used to discover new things."],

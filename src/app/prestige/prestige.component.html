@@ -1,0 +1,61 @@
+<div class="content-area">
+
+  <app-change-world *ngIf="skip || ms.game.canTravel; else noTravel"></app-change-world>
+  <ng-template #noTravel>
+
+    <h1>Travel to a new world
+      <button class="btn btn-danger-outline btn-link"
+              (click)="skip = true">Skip</button>
+    </h1>
+    <div class="clr-row">
+      <div class="clr-col-12 clr-col-sm-12 clr-col-md-6 clr-col-lg-6 clr-col-xl-6">
+        <div class="card">
+          <div class="card-block">
+            <h3 class="card-title">
+              You need:
+            </h3>
+            <div *ngFor="let price of ms.game.currentWorld.winContidions; trackBy:getPriceId">
+              <div class="winLabel">
+                {{price.base.name}}
+                <span class="monospace">
+                  {{price.base.quantity | format:true}}/{{price.price | format:true}}
+                </span>
+              </div>
+
+              <div class="progress-static"
+                   [ngClass]="{'success': price.canBuy,'danger': !price.canBuy}">
+                <div class="progress-meter"
+                     [attr.data-value]="price.completedPercent"
+                     [attr.data-displayval]="price.completedPercent"></div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="clr-col-12 clr-col-sm-12 clr-col-md-6 clr-col-lg-6 clr-col-xl-6"
+           *ngIf="ms.game.currentWorld.notWinConditions?.length > 0">
+        <div class="card">
+          <div class="card-block">
+            <h3 class="card-title">
+              You must kill:
+            </h3>
+            <ul class="list-unstyled">
+              <li *ngFor="let malus of ms.game.currentWorld.notWinConditions; trackBy:getMalusId">
+                <span>
+                  <clr-icon class="malusIcon"
+                            [ngClass]="malus.isKilled ? 'ok':'no'"
+                            [attr.shape]="malus.isKilled ? 'check' : 'times'"></clr-icon>
+                  {{malus.name}}
+                </span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </ng-template>
+</div>

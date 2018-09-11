@@ -990,7 +990,7 @@ var APPROUTES = [
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"content-area\">\n  <h1>Auto buyers</h1>\n  <form>\n    <section class=\"form-block\">\n      <div class=\"form-group\">\n        <label>Options:</label>\n        <clr-checkbox [name]=\"'on'\"\n                      [id]=\"'on1'\"\n                      [(clrChecked)]=\"ms.game.autoBuyManager.enabled\"\n                      [clrInline]=\"true\">\n          ON\n        </clr-checkbox>\n        <clr-checkbox [name]=\"'multi'\"\n                      [id]=\"'multi1'\"\n                      [(clrChecked)]=\"ms.game.autoBuyManager.multiBuy\"\n                      [clrInline]=\"true\">\n          Multi Buy\n        </clr-checkbox>\n      </div>\n    </section>\n  </form>\n\n  <div class=\"clr-row\">\n    <div class=\"clr-col-12\tclr-col-sm-12\tclr-col-md-10\tclr-col-lg-6\tclr-col-xl-5\"\n         *ngFor=\"let autoB of unlSpecial; trackBy:getAutoBuyId\">\n      <div class=\"card\">\n        <div class=\"card-block\">\n          <app-auto-buy [autoBuy]=\"autoB\"></app-auto-buy>\n        </div>\n      </div>\n    </div>\n  </div>\n\n</div>\n"
+module.exports = "<div class=\"content-area\">\n  <h1>自动购买者</h1>\n  <form>\n    <section class=\"form-block\">\n      <div class=\"form-group\">\n        <label>选项:</label>\n        <clr-checkbox [name]=\"'on'\"\n                      [id]=\"'on1'\"\n                      [(clrChecked)]=\"ms.game.autoBuyManager.enabled\"\n                      [clrInline]=\"true\">\n          开启\n        </clr-checkbox>\n        <clr-checkbox [name]=\"'multi'\"\n                      [id]=\"'multi1'\"\n                      [(clrChecked)]=\"ms.game.autoBuyManager.multiBuy\"\n                      [clrInline]=\"true\">\n          多重购买\n        </clr-checkbox>\n      </div>\n    </section>\n  </form>\n\n  <div class=\"clr-row\">\n    <div class=\"clr-col-12\tclr-col-sm-12\tclr-col-md-10\tclr-col-lg-6\tclr-col-xl-5\"\n         *ngFor=\"let autoB of unlSpecial; trackBy:getAutoBuyId\">\n      <div class=\"card\">\n        <div class=\"card-block\">\n          <app-auto-buy [autoBuy]=\"autoB\"></app-auto-buy>\n        </div>\n      </div>\n    </div>\n  </div>\n\n</div>\n"
 
 /***/ }),
 
@@ -1167,7 +1167,7 @@ var AutoBuyComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<h1>Here you can travel to a new world.</h1>\n\n<clr-alert [clrAlertType]=\"'alert-success'\"\n           [clrAlertClosable]=\"false\"\n           *ngIf=\"ms.game.canTravel; else warn\">\n  <div class=\"alert-item\">\n    <span class=\"alert-text\">\n      You will get\n      <span class=\"monospace\">{{ms.game.currentWorld.prestige}} </span>\n      experience\n    </span>\n  </div>\n</clr-alert>\n<ng-template #warn>\n  <clr-alert [clrAlertType]=\"'alert-danger'\"\n             [clrAlertClosable]=\"false\">\n    <div class=\"alert-item\">\n      <span class=\"alert-text\">\n        You are skipping. You will get nothing !\n      </span>\n    </div>\n  </clr-alert>\n</ng-template>\n<button class=\"btn\"\n        (click)=\"randomize()\">Randomize</button>\n\n<span>\n  Min level:\n  <span class=\"monospace\">\n    {{minLevel | format:true}}\n  </span>\n</span>\n<span>\n  Max level:\n  <span class=\"monospace\">\n    {{maxLevel | format:true}}\n  </span>\n</span>\n\n<p-slider [(ngModel)]=\"rangeValues\"\n          [range]=\"true\"\n          [min]=\"1\"\n          [max]=\"maxSafeInt\"\n          (onChange)=\"setLevels()\"></p-slider>\n\n<!-- <div class=\"card-columns\">\n    <app-world [world]=\"world\"\n               *ngFor=\"let world of ms.game.nextWorlds; trackBy:getWorldId\"></app-world>\n  </div> -->\n\n<div class=\"clr-row clr-justify-content-center\">\n  <div *ngFor=\"let world of ms.game.nextWorlds; trackBy:getWorldId\"\n       class=\"worldMaxWidt clr-col-sm-12 clr-col-md-4\">\n    <app-world [world]=\"world\"></app-world>\n  </div>\n</div>\n\n\n<clr-modal [(clrModalOpen)]=\"travelMessage\">\n  <h3 class=\"modal-title\">Change world ?</h3>\n  <div class=\"modal-body\">\n    <p>You will lose everything except prestige upgrade, continue ?</p>\n  </div>\n  <div class=\"modal-footer\">\n    <button type=\"button\"\n            class=\"btn btn-outline\"\n            (click)=\"travelMessage = false\">Cancel</button>\n    <button type=\"button\"\n            class=\"btn btn-primary\"\n            (click)=\"travel()\">Ok</button>\n  </div>\n</clr-modal>\n"
+module.exports = "<h1>从这里你可以旅行到新的世界.</h1>\n\n<clr-alert [clrAlertType]=\"'alert-success'\"\n           [clrAlertClosable]=\"false\"\n           *ngIf=\"ms.game.canTravel; else warn\">\n  <div class=\"alert-item\">\n    <span class=\"alert-text\">\n      你将会得到\n      <span class=\"monospace\">{{ms.game.currentWorld.prestige}} </span>\n      经验\n    </span>\n  </div>\n</clr-alert>\n<ng-template #warn>\n  <clr-alert [clrAlertType]=\"'alert-danger'\"\n             [clrAlertClosable]=\"false\">\n    <div class=\"alert-item\">\n      <span class=\"alert-text\">\n        您跳过了。你什么也得不到 !\n      </span>\n    </div>\n  </clr-alert>\n</ng-template>\n<button class=\"btn\"\n        (click)=\"randomize()\">随机</button>\n\n<span>\n  最低等级:\n  <span class=\"monospace\">\n    {{minLevel | format:true}}\n  </span>\n</span>\n<span>\n  最高等级:\n  <span class=\"monospace\">\n    {{maxLevel | format:true}}\n  </span>\n</span>\n\n<p-slider [(ngModel)]=\"rangeValues\"\n          [range]=\"true\"\n          [min]=\"1\"\n          [max]=\"maxSafeInt\"\n          (onChange)=\"setLevels()\"></p-slider>\n\n<!-- <div class=\"card-columns\">\n    <app-world [world]=\"world\"\n               *ngFor=\"let world of ms.game.nextWorlds; trackBy:getWorldId\"></app-world>\n  </div> -->\n\n<div class=\"clr-row clr-justify-content-center\">\n  <div *ngFor=\"let world of ms.game.nextWorlds; trackBy:getWorldId\"\n       class=\"worldMaxWidt clr-col-sm-12 clr-col-md-4\">\n    <app-world [world]=\"world\"></app-world>\n  </div>\n</div>\n\n\n<clr-modal [(clrModalOpen)]=\"travelMessage\">\n  <h3 class=\"modal-title\">更换世界 ?</h3>\n  <div class=\"modal-body\">\n    <p>你将失去一切，除了声望升级，继续 ?</p>\n  </div>\n  <div class=\"modal-footer\">\n    <button type=\"button\"\n            class=\"btn btn-outline\"\n            (click)=\"travelMessage = false\">取消</button>\n    <button type=\"button\"\n            class=\"btn btn-primary\"\n            (click)=\"travel()\">确定</button>\n  </div>\n</clr-modal>\n"
 
 /***/ }),
 
@@ -5398,7 +5398,7 @@ var __extends = (undefined && undefined.__extends) || (function () {
 var AutoBuyUnlock = /** @class */ (function (_super) {
     __extends(AutoBuyUnlock, _super);
     function AutoBuyUnlock() {
-        return _super.call(this, "autoB", "Auto Buyers") || this;
+        return _super.call(this, "autoB", "自动购买者") || this;
     }
     AutoBuyUnlock.prototype.declareStuff = function (game) {
         this.autoBuyQuantity = new _prestige__WEBPACK_IMPORTED_MODULE_0__["Prestige"]("H", game.genExperiencePrice(50));
@@ -5449,7 +5449,7 @@ var __extends = (undefined && undefined.__extends) || (function () {
 var Followers = /** @class */ (function (_super) {
     __extends(Followers, _super);
     function Followers() {
-        return _super.call(this, "foll", "Followers") || this;
+        return _super.call(this, "foll", "追随者") || this;
     }
     Followers.prototype.declareStuff = function (game) {
         var _this = this;
@@ -5495,7 +5495,7 @@ var __extends = (undefined && undefined.__extends) || (function () {
 var Followers2 = /** @class */ (function (_super) {
     __extends(Followers2, _super);
     function Followers2() {
-        return _super.call(this, "foll2", "Worker Followers") || this;
+        return _super.call(this, "foll2", "工人追随者") || this;
     }
     Followers2.prototype.declareStuff = function (game) {
         var _this = this;
@@ -5652,7 +5652,7 @@ var __extends = (undefined && undefined.__extends) || (function () {
 var Technology = /** @class */ (function (_super) {
     __extends(Technology, _super);
     function Technology() {
-        return _super.call(this, "tecno", "Technology") || this;
+        return _super.call(this, "tecno", "技术") || this;
     }
     Technology.prototype.declareStuff = function (game) {
         this.farming = new _prestige__WEBPACK_IMPORTED_MODULE_2__["Prestige"]("F", game.genExperiencePrice(10));
@@ -5708,7 +5708,7 @@ var __extends = (undefined && undefined.__extends) || (function () {
 var Time = /** @class */ (function (_super) {
     __extends(Time, _super);
     function Time() {
-        return _super.call(this, "time", "Time") || this;
+        return _super.call(this, "time", "时间") || this;
     }
     Time.prototype.declareStuff = function (game) {
         this.timeProducer = new _prestige__WEBPACK_IMPORTED_MODULE_0__["Prestige"]("P", game.genExperiencePrice(15));
@@ -5752,7 +5752,7 @@ var __extends = (undefined && undefined.__extends) || (function () {
 var WorldPrestige = /** @class */ (function (_super) {
     __extends(WorldPrestige, _super);
     function WorldPrestige() {
-        return _super.call(this, "world", "World") || this;
+        return _super.call(this, "world", "世界") || this;
     }
     WorldPrestige.prototype.declareStuff = function (game) {
         this.betterWorlds = new _prestige__WEBPACK_IMPORTED_MODULE_1__["Prestige"]("w", game.genExperiencePrice(20));
@@ -6271,18 +6271,18 @@ var STRINGS = {
         mG: ["水晶矿", "一个水晶矿。"],
         dG: ["大学", "大学产生毕业的科学家。"],
         //  Engineers
-        aGG: ["Hydro Eng.", "水利工程师对农场有加成"],
-        bGG: ["Soil Eng.", "Soil Engineers yeld Soil Camp."],
-        mGG: ["Mine Eng.", "Mine Engineers yeld Mine."],
-        dGG: ["Education Dep.", "Department of Education yeld University."],
+        aGG: ["水利工程", "水利工程师对农场有加成。"],
+        bGG: ["土壤工程师", "土壤工程师生产土壤营地。"],
+        mGG: ["矿山工程师", "矿山工程师生产矿山。"],
+        dGG: ["教育部门", "教育部门生产大学。"],
         //  World Bonus
-        1: ["Food Production Bonus", ""],
-        2: ["Soil Production Bonus", ""],
-        3: ["Crystal Production Bonus", ""],
-        4: ["Science Production Bonus", ""],
-        5: ["Kill Bonus", ""],
-        larvaBon: ["Larvae Production Bonus", ""],
-        queenBon: ["Queen Production Bonus", ""],
+        1: ["食物生产加成", ""],
+        2: ["土壤生产加成", ""],
+        3: ["水晶生产加成", ""],
+        4: ["科学生产加成", ""],
+        5: ["杀敌加成", ""],
+        larvaBon: ["幼虫生产加成", ""],
+        queenBon: ["女王生产加成", ""],
         //  Malus
         Mf1: ["Poisonous Fungus", "Poisonous Fungus"],
         Mf2: ["Ancient Fungus", "Ancient Fungus"],
@@ -6319,13 +6319,13 @@ var STRINGS = {
         Z: ["Foragging Bee", "Foragging Bee"],
         cb: ["Carpenter Bee", "Foragging Bee"],
         sb: ["Student Bee", "Foragging Bee"],
-        Q: ["Bee Larva", "Bee Larva"],
-        P: ["Bee Queen", ""],
-        N: ["Bee Hive", ""],
-        A: ["Bee Farmer", ""],
-        B: ["Bee Carpenter", ""],
-        E: ["Bee Miner", ""],
-        D: ["Bee Scientist", ""],
+        Q: ["蜜蜂幼虫", "蜜蜂幼虫"],
+        P: ["蜜蜂女王", ""],
+        N: ["蜜蜂巢穴", ""],
+        A: ["蜜蜂农民", ""],
+        B: ["蜜蜂木匠", ""],
+        E: ["蜜蜂矿工", ""],
+        D: ["蜜蜂科学家", ""],
         AG: ["2Bee Farmer", ""],
         BG: ["2Bee Carpenter", ""],
         EG: ["2Bee Miner", ""],
@@ -6335,8 +6335,8 @@ var STRINGS = {
         EGG: ["3Bee Miner", ""],
         DGG: ["3Bee Scientist", ""],
         //  Wasp
-        x: ["Foragging Wasp", "Foragging Wasp"],
-        hw: ["Hornet", ["Hornet", "A wasp on steroids."]],
+        x: ["Foragging Wasp", "觅食黄蜂"],
+        hw: ["Hornet", ["Hornet", "黄蜂处于类固醇上."]],
         sw: ["Smart Wasp", ""],
         y: ["Wasp Larva", ""],
         z: ["Wasp Queen", ""],
@@ -6373,7 +6373,7 @@ var STRINGS = {
         SP: ["产卵", "+50% 幼虫产量."],
         //  Workers
         wo: ["更好的工人", "+30% 来自工人的资源产量."],
-        we: ["高效的工人", "+10% 资源获的。"],
+        we: ["高效的工人", "+10% 资源获得。"],
         w: ["工人", "工人"],
         a: [
             "农民",
@@ -6415,17 +6415,17 @@ var STRINGS = {
         v: ["黄蜂农民", "一个农民黄蜂."],
         V: ["黄蜂木匠", "一个木匠黄蜂."],
         o: ["黄蜂矿工", "一个矿工黄蜂."],
-        p: ["黄蜂科学家", "A Scientist Wasp."],
-        vG: ["黄蜂农场", "Waspy Farm."],
-        VG: ["黄蜂土壤营地", "Waspy Soil Camp."],
-        oG: ["黄蜂矿山", "Waspy Mine."],
-        pG: ["黄蜂大学", "Waspy University"],
-        vGG: ["黄蜂水利工程师", "Wasp Hydro Engineer yields Wasp Farm."],
-        VGG: ["黄蜂土壤工程师", "Wasp Soil Engineer yields Wasp Soil Camp Farm."],
-        oGG: ["黄蜂矿山工程师", "Wasp Mine Engineer yields Wasp Mine."],
+        p: ["黄蜂科学家", "一个科学家黄蜂."],
+        vG: ["黄蜂农场", "黄蜂农场."],
+        VG: ["黄蜂土壤营地", "黄蜂土壤营地."],
+        oG: ["黄蜂矿山", "黄蜂矿山."],
+        pG: ["黄蜂大学", "黄蜂大学"],
+        vGG: ["黄蜂水利工程师", "黄蜂水利工程师生产农场."],
+        VGG: ["黄蜂土壤工程师", "黄蜂土壤工程师生产黄蜂土壤营地."],
+        oGG: ["黄蜂矿山工程师", "黄蜂矿山工程师生产黄蜂矿山."],
         pGG: [
-            "Wasp's Dep. of Education",
-            "Wasp's Department of Education yields Wasp University."
+            "黄蜂教育部门",
+            "黄蜂教育部门生产大学."
         ],
         //  Super Major
         sm: ["Super Major Helpers", ""],
@@ -6466,8 +6466,8 @@ var STRINGS = {
         majorPre: "Giant",
         majorSuff: "of Super Major",
         //  Malus Bonus
-        mkPre: "Hostile",
-        mkBio: "Battlefield",
+        mkPre: "充满敌意的",
+        mkBio: "战场",
         mkSuff: "of War",
         //  Larva
         larvaPre: "Swarming",
@@ -9813,7 +9813,7 @@ var PrestigeGroupComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<router-outlet></router-outlet>\n\n<clr-vertical-nav [clrVerticalNavCollapsible]=\"false\"\n                  [clr-nav-level]=\"2\">\n\n  <a clrVerticalNavLink>\n    Experience:\n    <span class=\"monospace\">{{ms.game.experience.quantity | format}}</span>\n  </a>\n\n  <a clrVerticalNavLink\n     *ngFor=\"let gr of ms.game.allPrestige.prestigeGroups; trackBy:getGroupId\"\n     [routerLink]=\"'/pre/'+gr.id\"\n     routerLinkActive=\"active\">\n    <!-- <clr-icon shape=\"floppy\"></clr-icon> -->\n    {{gr.name}}\n  </a>\n</clr-vertical-nav>\n"
+module.exports = "<router-outlet></router-outlet>\n\n<clr-vertical-nav [clrVerticalNavCollapsible]=\"false\"\n                  [clr-nav-level]=\"2\">\n\n  <a clrVerticalNavLink>\n    经验:\n    <span class=\"monospace\">{{ms.game.experience.quantity | format}}</span>\n  </a>\n\n  <a clrVerticalNavLink\n     *ngFor=\"let gr of ms.game.allPrestige.prestigeGroups; trackBy:getGroupId\"\n     [routerLink]=\"'/pre/'+gr.id\"\n     routerLinkActive=\"active\">\n    <!-- <clr-icon shape=\"floppy\"></clr-icon> -->\n    {{gr.name}}\n  </a>\n</clr-vertical-nav>\n"
 
 /***/ }),
 
@@ -9892,7 +9892,7 @@ var PrestigeNavComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"content-area\">\n\n  <app-change-world *ngIf=\"skip || ms.game.canTravel; else noTravel\"></app-change-world>\n  <ng-template #noTravel>\n\n    <h1>Travel to a new world\n      <button class=\"btn btn-danger-outline btn-link\"\n              (click)=\"skip = true\">Skip</button>\n    </h1>\n    <div class=\"clr-row\">\n      <div class=\"clr-col-12 clr-col-sm-12 clr-col-md-6 clr-col-lg-6 clr-col-xl-6\">\n        <div class=\"card\">\n          <div class=\"card-block\">\n            <h3 class=\"card-title\">\n              You need:\n            </h3>\n            <div *ngFor=\"let price of ms.game.currentWorld.winContidions; trackBy:getPriceId\">\n              <div class=\"winLabel\">\n                {{price.base.name}}\n                <span class=\"monospace\">\n                  {{price.base.quantity | format:true}}/{{price.price | format:true}}\n                </span>\n              </div>\n\n              <div class=\"progress-static\"\n                   [ngClass]=\"{'success': price.canBuy,'danger': !price.canBuy}\">\n                <div class=\"progress-meter\"\n                     [attr.data-value]=\"price.completedPercent\"\n                     [attr.data-displayval]=\"price.completedPercent\"></div>\n              </div>\n\n            </div>\n          </div>\n        </div>\n      </div>\n\n      <div class=\"clr-col-12 clr-col-sm-12 clr-col-md-6 clr-col-lg-6 clr-col-xl-6\"\n           *ngIf=\"ms.game.currentWorld.notWinConditions?.length > 0\">\n        <div class=\"card\">\n          <div class=\"card-block\">\n            <h3 class=\"card-title\">\n              You must kill:\n            </h3>\n            <ul class=\"list-unstyled\">\n              <li *ngFor=\"let malus of ms.game.currentWorld.notWinConditions; trackBy:getMalusId\">\n                <span>\n                  <clr-icon class=\"malusIcon\"\n                            [ngClass]=\"malus.isKilled ? 'ok':'no'\"\n                            [attr.shape]=\"malus.isKilled ? 'check' : 'times'\"></clr-icon>\n                  {{malus.name}}\n                </span>\n              </li>\n            </ul>\n          </div>\n        </div>\n      </div>\n\n    </div>\n\n  </ng-template>\n</div>\n"
+module.exports = "<div class=\"content-area\">\n\n  <app-change-world *ngIf=\"skip || ms.game.canTravel; else noTravel\"></app-change-world>\n  <ng-template #noTravel>\n\n    <h1>旅行到一个新世界\n      <button class=\"btn btn-danger-outline btn-link\"\n              (click)=\"skip = true\">跳过</button>\n    </h1>\n    <div class=\"clr-row\">\n      <div class=\"clr-col-12 clr-col-sm-12 clr-col-md-6 clr-col-lg-6 clr-col-xl-6\">\n        <div class=\"card\">\n          <div class=\"card-block\">\n            <h3 class=\"card-title\">\n              你需要:\n            </h3>\n            <div *ngFor=\"let price of ms.game.currentWorld.winContidions; trackBy:getPriceId\">\n              <div class=\"winLabel\">\n                {{price.base.name}}\n                <span class=\"monospace\">\n                  {{price.base.quantity | format:true}}/{{price.price | format:true}}\n                </span>\n              </div>\n\n              <div class=\"progress-static\"\n                   [ngClass]=\"{'success': price.canBuy,'danger': !price.canBuy}\">\n                <div class=\"progress-meter\"\n                     [attr.data-value]=\"price.completedPercent\"\n                     [attr.data-displayval]=\"price.completedPercent\"></div>\n              </div>\n\n            </div>\n          </div>\n        </div>\n      </div>\n\n      <div class=\"clr-col-12 clr-col-sm-12 clr-col-md-6 clr-col-lg-6 clr-col-xl-6\"\n           *ngIf=\"ms.game.currentWorld.notWinConditions?.length > 0\">\n        <div class=\"card\">\n          <div class=\"card-block\">\n            <h3 class=\"card-title\">\n              你必须杀死:\n            </h3>\n            <ul class=\"list-unstyled\">\n              <li *ngFor=\"let malus of ms.game.currentWorld.notWinConditions; trackBy:getMalusId\">\n                <span>\n                  <clr-icon class=\"malusIcon\"\n                            [ngClass]=\"malus.isKilled ? 'ok':'no'\"\n                            [attr.shape]=\"malus.isKilled ? 'check' : 'times'\"></clr-icon>\n                  {{malus.name}}\n                </span>\n              </li>\n            </ul>\n          </div>\n        </div>\n      </div>\n\n    </div>\n\n  </ng-template>\n</div>\n"
 
 /***/ }),
 

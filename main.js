@@ -1665,18 +1665,18 @@ var UnitGroupComponent = /** @class */ (function () {
             .map(function (u) { return u.name; })
             .reduce(function (p, c) { return p + ", " + c; });
         if (this.unitGroup.unlocked[0].buyAction) {
-            this.hatchActionGrp = new _model_actions_action_group__WEBPACK_IMPORTED_MODULE_2__["ActionGroup"]("Hatch", this.unitGroup.selected.filter(function (u) { return u.buyAction; }).map(function (u) { return u.buyAction; }), this.ms.game);
+            this.hatchActionGrp = new _model_actions_action_group__WEBPACK_IMPORTED_MODULE_2__["ActionGroup"]("孵化", this.unitGroup.selected.filter(function (u) { return u.buyAction; }).map(function (u) { return u.buyAction; }), this.ms.game);
             if (this.ms.game.researches.team2.done &&
                 this.unitGroup.unlocked[0].teamAction) {
                 this.team = true;
-                this.teamActionGrp = new _model_actions_action_group__WEBPACK_IMPORTED_MODULE_2__["ActionGroup"]("Teamwork", this.unitGroup.selected
+                this.teamActionGrp = new _model_actions_action_group__WEBPACK_IMPORTED_MODULE_2__["ActionGroup"]("团队合作", this.unitGroup.selected
                     .filter(function (u) { return u.teamAction; })
                     .map(function (u) { return u.teamAction; }), this.ms.game);
             }
             if (this.ms.game.researches.twin.done &&
                 this.unitGroup.unlocked[0].twinAction) {
                 this.twin = true;
-                this.twinActionGrp = new _model_actions_action_group__WEBPACK_IMPORTED_MODULE_2__["ActionGroup"]("Twin", this.unitGroup.selected
+                this.twinActionGrp = new _model_actions_action_group__WEBPACK_IMPORTED_MODULE_2__["ActionGroup"]("双胞胎", this.unitGroup.selected
                     .filter(function (u) { return u.twinAction; })
                     .map(function (u) { return u.twinAction; }), this.ms.game);
             }
@@ -3217,7 +3217,7 @@ var BuyAction = /** @class */ (function (_super) {
     function BuyAction(prices, unit, toUnlock, id) {
         if (toUnlock === void 0) { toUnlock = null; }
         if (id === void 0) { id = ""; }
-        var _this = _super.call(this, id === "" ? "B" : id, "Hatch", "", prices) || this;
+        var _this = _super.call(this, id === "" ? "B" : id, "孵化", "", prices) || this;
         _this.unit = unit;
         _this.toUnlock = toUnlock;
         _this.autoBuyPriceMulti = 1;
@@ -3272,7 +3272,7 @@ var __extends = (undefined && undefined.__extends) || (function () {
 var BuyResearch = /** @class */ (function (_super) {
     __extends(BuyResearch, _super);
     function BuyResearch(researches) {
-        var _this = _super.call(this, "resAutoBAct", "Buy Research", "购买更便宜的研究") || this;
+        var _this = _super.call(this, "resAutoBAct", "购买研究", "购买更便宜的研究") || this;
         _this.researches = researches;
         return _this;
     }
@@ -3330,7 +3330,7 @@ var __extends = (undefined && undefined.__extends) || (function () {
 var TeamAction = /** @class */ (function (_super) {
     __extends(TeamAction, _super);
     function TeamAction(prices) {
-        var _this = _super.call(this, "T", "Team", "得到更好的团队合作加成", prices) || this;
+        var _this = _super.call(this, "T", "团队合作", "得到更好的团队合作加成", prices) || this;
         _this.autoBuyPriceMulti = 1.5;
         _this.autoBuyTimeMulti = 1.5;
         return _this;
@@ -3376,7 +3376,7 @@ var __extends = (undefined && undefined.__extends) || (function () {
 var TwinAction = /** @class */ (function (_super) {
     __extends(TwinAction, _super);
     function TwinAction(prices, unit) {
-        var _this = _super.call(this, "w", "Twin", "Hatch more " + unit.name + " for the same price", prices) || this;
+        var _this = _super.call(this, "w", "双胞胎", "孵化更多的 " + unit.name + " 使用同样的价格", prices) || this;
         _this.unit = unit;
         _this.autoBuyPriceMulti = 2;
         _this.autoBuyTimeMulti = 2;
@@ -5608,7 +5608,7 @@ var __extends = (undefined && undefined.__extends) || (function () {
 var Team = /** @class */ (function (_super) {
     __extends(Team, _super);
     function Team() {
-        return _super.call(this, "teamPrest", "Team") || this;
+        return _super.call(this, "teamPrest", "团队合作") || this;
     }
     Team.prototype.declareStuff = function (game) {
         this.betterTeam = new _prestige__WEBPACK_IMPORTED_MODULE_0__["Prestige"]("E", game.genExperiencePrice(10));
@@ -6370,7 +6370,7 @@ var STRINGS = {
         1: ["1小时 扭曲", "免费的时间扭曲."],
         2: ["2小时 扭曲", "免费的时间扭曲."],
         3: ["3小时 扭曲", "免费的时间扭曲."],
-        SP: ["Spawn", "+50% 幼虫产量."],
+        SP: ["产卵", "+50% 幼虫产量."],
         //  Workers
         wo: ["更好的工人", "+30% 来自工人的资源产量."],
         we: ["高效的工人", "+10% 资源获的。"],
@@ -6399,30 +6399,30 @@ var STRINGS = {
         mGG: ["矿山工程师", "矿山工程师生产矿山."],
         dGG: ["教育部门", "教育部门生产大学"],
         //  Bee
-        A: ["Bee Farmer", "Farm flowers."],
-        B: ["Bee Carpenter", "A Carpenter Bee."],
-        E: ["Bee Miner", "A miner Bee."],
-        D: ["Bee Scientist", "A scientist Bee."],
-        AG: ["Flowers Farm", "A Farm of flowers."],
-        BG: ["Bee Soil Camp", "A Bee Soil Camp"],
-        EG: ["Bee Mine", "A Bee Mine"],
-        DG: ["Bee University", "Bee University"],
-        AGG: ["Florists Eng. ", "Florists Engineer yields Flowers Farms."],
-        BGG: ["Bee Soil Eng.", "Bee Soil Engineer yields Bee Soil Camp."],
-        EGG: ["Bee Mine Eng.", "Bee Mine Engineer yields Bee Mine."],
-        DGG: ["Bee's Dep. of Education", "Bee's Department of Education"],
+        A: ["蜜蜂农民", "农场花卉."],
+        B: ["蜜蜂木匠", "一个木匠蜜蜂."],
+        E: ["蜜蜂矿工", "一个矿工蜜蜂."],
+        D: ["蜜蜂科学家", "一个科学家蜜蜂."],
+        AG: ["鲜花农场", "一个种花的农场."],
+        BG: ["蜜蜂土壤营地", "一个蜜蜂土壤营地"],
+        EG: ["蜜蜂矿山", "一个蜜蜂矿山"],
+        DG: ["蜜蜂大学", "蜜蜂大学"],
+        AGG: ["花匠工程师", "花匠工程师生产花卉农场."],
+        BGG: ["蜜蜂土壤工程师", "蜜蜂土壤工程师生产蜜蜂土壤营地."],
+        EGG: ["蜜蜂矿山工程师", "蜜蜂矿山工程师生产矿山."],
+        DGG: ["蜜蜂教育部门", "蜜蜂的教育部门."],
         // Wasp
-        v: ["Wasp Farmer", "A Farming wasp."],
-        V: ["Wasp Carpenter", "A Carpenter Wasp."],
-        o: ["Wasp Miner", "A Miner Wasp."],
-        p: ["Wasp Scientist", "A Scientist Wasp."],
-        vG: ["Wasp Farm", "Waspy Farm."],
-        VG: ["Wasp Soil Camp", "Waspy Soil Camp."],
-        oG: ["Wasp Mine", "Waspy Mine."],
-        pG: ["Wasp University", "Waspy University"],
-        vGG: ["Wasp Hydro Eng.", "Wasp Hydro Engineer yields Wasp Farm."],
-        VGG: ["Wasp Soil Eng.", "Wasp Soil Engineer yields Wasp Soil Camp Farm."],
-        oGG: ["Wasp Mine Eng.", "Wasp Mine Engineer yields Wasp Mine."],
+        v: ["黄蜂农民", "一个农民黄蜂."],
+        V: ["黄蜂木匠", "一个木匠黄蜂."],
+        o: ["黄蜂矿工", "一个矿工黄蜂."],
+        p: ["黄蜂科学家", "A Scientist Wasp."],
+        vG: ["黄蜂农场", "Waspy Farm."],
+        VG: ["黄蜂土壤营地", "Waspy Soil Camp."],
+        oG: ["黄蜂矿山", "Waspy Mine."],
+        pG: ["黄蜂大学", "Waspy University"],
+        vGG: ["黄蜂水利工程师", "Wasp Hydro Engineer yields Wasp Farm."],
+        VGG: ["黄蜂土壤工程师", "Wasp Soil Engineer yields Wasp Soil Camp Farm."],
+        oGG: ["黄蜂矿山工程师", "Wasp Mine Engineer yields Wasp Mine."],
         pGG: [
             "Wasp's Dep. of Education",
             "Wasp's Department of Education yields Wasp University."
@@ -6478,23 +6478,23 @@ var STRINGS = {
     },
     prestige: {
         //  Followers 1
-        e: ["Drone Follower", "Start new worlds with 5 more drones"],
-        h: ["Geologist Follower", "Start new worlds with 5 more geologists"],
-        i: ["Student Follower", "Start new worlds with 5 more students"],
+        e: ["雄蜂追随者", "开始新的世界初始有更多5个雄蜂"],
+        h: ["地质学家追随者", "开始新的世界初始有更多5个地质学家"],
+        i: ["学生追随者", "开始新的世界初始有更多5个学生"],
         //  Followers 2
-        a: ["Farmer Follower", "Start new worlds with 5 more farmer"],
-        b: ["Carpenter Follower", "Start new worlds with 5 more farmer"],
-        m: ["Miner Follower", "Start new worlds with 5 more miner"],
-        d: ["Scientist Follower", "Start new worlds with 5 more scientist"],
+        a: ["农民追随者", "开始新的世界初始有更多5个农民"],
+        b: ["木匠追随者", "开始新的世界初始有更多5个木匠"],
+        m: ["矿工追随者", "开始新的世界初始有更多5个矿工"],
+        d: ["科学家追随者", "开始新的世界初始有更多5个科学家"],
         //  Time
-        P: ["Time Producer", "+0.1 时间/秒"],
-        B: ["Time Bank", "+1 max hour"],
+        P: ["时间生产者", "+0.1 时间/秒"],
+        B: ["时间银行", "+1 最大小时"],
         //  AutoBuy
         H: ["孵化自动购买者", "针对所有单位解锁孵化自动购买者"],
-        t: ["团队自动购买者", "Unlock Team Auto Buyer for all units"],
-        T: ["双胞胎自动购买者", "Unlock Twin Auto Buyer for all units"],
-        M: ["时间扭曲自动购买者", "Unlock one minute time warp Auto Buyer"],
-        R: ["研究自动购买者", "Unlock Research Auto Buyer"],
+        t: ["团队自动购买者", "针对所有单位解锁团队自动购买者"],
+        T: ["双胞胎自动购买者", "针对所有单位解锁双胞胎自动购买者"],
+        M: ["时间扭曲自动购买者", "解锁一分钟时间扭曲自动购买者"],
+        R: ["研究自动购买者", "解锁研究自动购买者"],
         //  Technology
         F: ["农业", "+10% 食物产量"],
         C: ["木工", "+10% 木头产量"],
@@ -6515,7 +6515,7 @@ var STRINGS = {
         0: "蚂蚁",
         1: "蜜蜂",
         2: "黄蜂",
-        3: "Super Major"
+        3: "主宰"
     }
 };
 
@@ -6854,7 +6854,7 @@ var __extends = (undefined && undefined.__extends) || (function () {
 var Ants = /** @class */ (function (_super) {
     __extends(Ants, _super);
     function Ants(game) {
-        var _this = _super.call(this, "Ants", game) || this;
+        var _this = _super.call(this, "蚂蚁", game) || this;
         _this.icon = "ant";
         return _this;
     }
@@ -6959,7 +6959,7 @@ var __extends = (undefined && undefined.__extends) || (function () {
 var Bees = /** @class */ (function (_super) {
     __extends(Bees, _super);
     function Bees(game) {
-        return _super.call(this, "Bee", game) || this;
+        return _super.call(this, "蜜蜂", game) || this;
     }
     Bees.prototype.declareStuff = function () {
         this.larva = new _full_unit__WEBPACK_IMPORTED_MODULE_2__["FullUnit"]("Q");
@@ -7042,7 +7042,7 @@ var __extends = (undefined && undefined.__extends) || (function () {
 var Buildings = /** @class */ (function (_super) {
     __extends(Buildings, _super);
     function Buildings(game) {
-        return _super.call(this, "Buildings", game) || this;
+        return _super.call(this, "建筑", game) || this;
     }
     Buildings.prototype.declareStuff = function () {
         this.generateProducer(this.game.advWorkers);
@@ -7120,7 +7120,7 @@ var __extends = (undefined && undefined.__extends) || (function () {
 var Engineers = /** @class */ (function (_super) {
     __extends(Engineers, _super);
     function Engineers(game) {
-        return _super.call(this, "Engineers", game) || this;
+        return _super.call(this, "工程师", game) || this;
     }
     Engineers.prototype.declareStuff = function () {
         this.generateProducer(this.game.buildings);
@@ -7200,7 +7200,7 @@ var __extends = (undefined && undefined.__extends) || (function () {
 var Gatherers = /** @class */ (function (_super) {
     __extends(Gatherers, _super);
     function Gatherers(game) {
-        return _super.call(this, "Gatherers", game) || this;
+        return _super.call(this, "采集者", game) || this;
     }
     Gatherers.prototype.declareStuff = function () {
         this.drone = new _full_unit__WEBPACK_IMPORTED_MODULE_2__["FullUnit"]("e");
@@ -7367,7 +7367,7 @@ var __extends = (undefined && undefined.__extends) || (function () {
 var Helpers = /** @class */ (function (_super) {
     __extends(Helpers, _super);
     function Helpers(game) {
-        return _super.call(this, "Heplers", game) || this;
+        return _super.call(this, "提升机", game) || this;
     }
     Helpers.prototype.declareStuff = function () {
         this.leafCutter = new _helper__WEBPACK_IMPORTED_MODULE_2__["Helper"]("lf", 0.1, this.game);
@@ -7501,7 +7501,7 @@ var __extends = (undefined && undefined.__extends) || (function () {
 var MalusKiller = /** @class */ (function (_super) {
     __extends(MalusKiller, _super);
     function MalusKiller(game) {
-        var _this = _super.call(this, "Army", game) || this;
+        var _this = _super.call(this, "军队", game) || this;
         _this.price = new Decimal(500);
         return _this;
     }
@@ -7606,7 +7606,7 @@ var __extends = (undefined && undefined.__extends) || (function () {
 var Materials = /** @class */ (function (_super) {
     __extends(Materials, _super);
     function Materials(game) {
-        return _super.call(this, "Materials", game) || this;
+        return _super.call(this, "材料", game) || this;
     }
     Materials.prototype.declareStuff = function () {
         this.food = new _full_unit__WEBPACK_IMPORTED_MODULE_1__["FullUnit"]("f");
@@ -7788,7 +7788,7 @@ var __extends = (undefined && undefined.__extends) || (function () {
 var Special = /** @class */ (function (_super) {
     __extends(Special, _super);
     function Special(game) {
-        return _super.call(this, "Special", game) || this;
+        return _super.call(this, "特殊", game) || this;
     }
     Special.prototype.declareStuff = function () {
         this.foodSupply = new _full_unit__WEBPACK_IMPORTED_MODULE_0__["FullUnit"]("fS");
@@ -7861,7 +7861,7 @@ var __extends = (undefined && undefined.__extends) || (function () {
 var Wasps = /** @class */ (function (_super) {
     __extends(Wasps, _super);
     function Wasps(game) {
-        return _super.call(this, "Wasps", game) || this;
+        return _super.call(this, "黄蜂", game) || this;
     }
     Wasps.prototype.declareStuff = function () {
         this.larva = new _full_unit__WEBPACK_IMPORTED_MODULE_2__["FullUnit"]("y");
@@ -7952,7 +7952,7 @@ var __extends = (undefined && undefined.__extends) || (function () {
 var Workers = /** @class */ (function (_super) {
     __extends(Workers, _super);
     function Workers(game) {
-        return _super.call(this, "Workers", game) || this;
+        return _super.call(this, "工人", game) || this;
     }
     Workers.prototype.declareStuff = function () {
         var _this = this;
@@ -8228,7 +8228,7 @@ var __extends = (undefined && undefined.__extends) || (function () {
 var WorldMalus = /** @class */ (function (_super) {
     __extends(WorldMalus, _super);
     function WorldMalus(game) {
-        return _super.call(this, "Enemy", game) || this;
+        return _super.call(this, "敌人", game) || this;
     }
     WorldMalus.prototype.declareStuff = function () {
         this.foodMalus1 = new _malus__WEBPACK_IMPORTED_MODULE_0__["Malus"]("Mf1");
@@ -10156,7 +10156,7 @@ var NameComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"card-block\">\n  <div class=\"card-title\">\n    <app-name [name]=\"research.name\"\n              [unlimited]=\"research.unlimited\"\n              [quantity]=\"research.quantity\"></app-name>\n  </div>\n  <div class=\"card-text p\">\n    {{research.description}}\n    <br />\n    <div *ngIf=\"!research.complete\">\n      <span>花费: </span>\n      <app-price-line *ngFor=\"let price of research.prices; trackBy:getPriceId\"\n                      [unit]=\"price.base\"\n                      [canBuy]=\"price.canBuy\"\n                      [price]=\"price.priceUser\">\n      </app-price-line>\n\n      <div *ngIf=\"research.unlimited \">\n        <label for=\"max\">最高等级:</label>\n        <input type=\"text\"\n               id=\"max\"\n               class=\"clr-input\"\n               [(ngModel)]=\"research.maxAutoBuyLevel\"\n               min=\"0\"\n               size=\"3\">\n      </div>\n\n    </div>\n  </div>\n</div>\n<div class=\"card-footer\"\n     *ngIf=\"!research.complete\">\n  <button *ngIf=\"!research.canBuy && !canSkip\"\n          class=\"btn btn-sm btn-link\"\n          disabled>\n    不能购买. 将会激活在 {{research.availableIn | endIn}}\n  </button>\n  <button *ngIf=\"!research.canBuy &&  canSkip\"\n          class=\"btn btn-danger btn-sm\"\n          (click)=\"skip()\">\n    不能购买. 跳过 {{minuteSkip}} 分钟\n  </button>\n  <button *ngIf=\"research.canBuy\"\n          class=\"btn btn-sm btn-link\"\n          (click)=\"research.buy(research.realNum)\">\n    研究\n  </button>\n</div>\n"
+module.exports = "<div class=\"card-block\">\n  <div class=\"card-title\">\n    <app-name [name]=\"research.name\"\n              [unlimited]=\"research.unlimited\"\n              [quantity]=\"research.quantity\"></app-name>\n  </div>\n  <div class=\"card-text p\">\n    {{research.description}}\n    <br />\n    <div *ngIf=\"!research.complete\">\n      <span>花费: </span>\n      <app-price-line *ngFor=\"let price of research.prices; trackBy:getPriceId\"\n                      [unit]=\"price.base\"\n                      [canBuy]=\"price.canBuy\"\n                      [price]=\"price.priceUser\">\n      </app-price-line>\n\n      <div *ngIf=\"research.unlimited \">\n        <label for=\"max\">最高等级:</label>\n        <input type=\"text\"\n               id=\"max\"\n               class=\"clr-input\"\n               [(ngModel)]=\"research.maxAutoBuyLevel\"\n               min=\"0\"\n               size=\"3\">\n      </div>\n\n    </div>\n  </div>\n</div>\n<div class=\"card-footer\"\n     *ngIf=\"!research.complete\">\n  <button *ngIf=\"!research.canBuy && !canSkip\"\n          class=\"btn btn-sm btn-link\"\n          disabled>\n    不能购买. 距离可购买还有 {{research.availableIn | endIn}} \n  </button>\n  <button *ngIf=\"!research.canBuy &&  canSkip\"\n          class=\"btn btn-danger btn-sm\"\n          (click)=\"skip()\">\n    不能购买. 跳过 {{minuteSkip}} 分钟\n  </button>\n  <button *ngIf=\"research.canBuy\"\n          class=\"btn btn-sm btn-link\"\n          (click)=\"research.buy(research.realNum)\">\n    研究\n  </button>\n</div>\n"
 
 /***/ }),
 

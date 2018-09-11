@@ -274,7 +274,7 @@ var ActionComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngIf=\"!action.complete\">\n  <input *ngIf=\"!action.isLimited || action.limit.gte(2); else one\"\n         id=\"userNum\"\n         [(ngModel)]=\"action.userNum\"\n         (change)=\"action.reloadUserPrices()\"\n         type=\"number\"\n         placeholder=\"1\"\n         step=\"1\"\n         min=\"1\"\n         size=\"3\">\n  <ng-template #one>1</ng-template>\n  <span>将会花费: </span>\n  <app-price-line *ngFor=\"let price of action.prices; trackBy:getPriceId\"\n                  [unit]=\"price.base\"\n                  [canBuy]=\"price.userCanBuy\"\n                  [price]=\"price.priceUser\"></app-price-line>\n</div>\n\n<div *ngIf=\"!action.complete\"\n     class=\"btn-group\">\n  <button *ngIf=\"!action.canBuy && !canSkip\"\n          class=\"btn btn-sm w-100\"\n          disabled>\n    不能购买\n    <span *ngIf=\"showTime\">\n      剩余时间 {{action.availableIn | endIn}}\n    </span>\n  </button>\n  <button *ngIf=\"!action.canBuy && skippable && showTime && canSkip\"\n          class=\"btn btn-danger btn-sm w-100\"\n          (click)=\"skip()\">\n    不能购买。 跳过 {{minuteSkip}} 分钟\n  </button>\n  <app-cant-buy-signposts *ngIf=\"showTime && !action.canBuy\"\n                          [action]=\"action\"></app-cant-buy-signposts>\n  <button *ngIf=\"action.canBuy\"\n          class=\"btn btn-sm w-100\"\n          (click)=\"buy(action.realNum)\"\n          [disabled]=\"!action.canUserBuy\">\n    购买\n    <span *ngIf=\"!action.isLimited || action.limit.gte(2)\">{{action.realNum | format: true}}</span>\n  </button>\n  <button *ngIf=\"action.maxBuy.gt(3)\"\n          class=\"btn btn-sm w-100\"\n          (click)=\"buy(action.maxBuy.div(2).floor())\">\n    购买 {{action.maxBuy.div(2).floor() | format: true}}\n  </button>\n  <button *ngIf=\"action.maxBuy.gte(2)\"\n          class=\"btn btn-sm w-100\"\n          (click)=\"buy(action.maxBuy)\">\n    购买 {{action.maxBuy | format: true}}\n  </button>\n</div>\n"
+module.exports = "<div *ngIf=\"!action.complete\">\n  <input *ngIf=\"!action.isLimited || action.limit.gte(2); else one\"\n         id=\"userNum\"\n         [(ngModel)]=\"action.userNum\"\n         (change)=\"action.reloadUserPrices()\"\n         type=\"number\"\n         placeholder=\"1\"\n         step=\"1\"\n         min=\"1\"\n         size=\"3\">\n  <ng-template #one>1</ng-template>\n  <span>将会花费: </span>\n  <app-price-line *ngFor=\"let price of action.prices; trackBy:getPriceId\"\n                  [unit]=\"price.base\"\n                  [canBuy]=\"price.userCanBuy\"\n                  [price]=\"price.priceUser\"></app-price-line>\n</div>\n\n<div *ngIf=\"!action.complete\"\n     class=\"btn-group\">\n  <button *ngIf=\"!action.canBuy && !canSkip\"\n          class=\"btn btn-sm w-100\"\n          disabled>\n    不能购买\n    <span *ngIf=\"showTime\">\n      距离可以购买还差 {{action.availableIn | endIn}}\n    </span>\n  </button>\n  <button *ngIf=\"!action.canBuy && skippable && showTime && canSkip\"\n          class=\"btn btn-danger btn-sm w-100\"\n          (click)=\"skip()\">\n    不能购买。 跳过 {{minuteSkip}} 分钟\n  </button>\n  <app-cant-buy-signposts *ngIf=\"showTime && !action.canBuy\"\n                          [action]=\"action\"></app-cant-buy-signposts>\n  <button *ngIf=\"action.canBuy\"\n          class=\"btn btn-sm w-100\"\n          (click)=\"buy(action.realNum)\"\n          [disabled]=\"!action.canUserBuy\">\n    购买\n    <span *ngIf=\"!action.isLimited || action.limit.gte(2)\">{{action.realNum | format: true}}</span>\n  </button>\n  <button *ngIf=\"action.maxBuy.gt(3)\"\n          class=\"btn btn-sm w-100\"\n          (click)=\"buy(action.maxBuy.div(2).floor())\">\n    购买 {{action.maxBuy.div(2).floor() | format: true}}\n  </button>\n  <button *ngIf=\"action.maxBuy.gte(2)\"\n          class=\"btn btn-sm w-100\"\n          (click)=\"buy(action.maxBuy)\">\n    购买 {{action.maxBuy | format: true}}\n  </button>\n</div>\n"
 
 /***/ }),
 
@@ -1318,11 +1318,11 @@ var EndInPipe = /** @class */ (function () {
                 return date_fns_distance_in_words_to_now__WEBPACK_IMPORTED_MODULE_1__(new Date(Date.now() + value));
             }
             else {
-                return ("in " + this.pipeFormat.transform(value / SECONDS_IN_YEAR) + " years");
+                return ("在 " + this.pipeFormat.transform(value / SECONDS_IN_YEAR) + " 年");
             }
         }
         else {
-            return "never";
+            return "没有";
         }
     };
     EndInPipe = __decorate([
@@ -1420,7 +1420,7 @@ var FormatPipe = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<h1>{{unitGroup.name}}\n\n  <clr-dropdown>\n    <button type=\"button\"\n            class=\"btn btn-outline-primary btn-link\"\n            clrDropdownTrigger>\n      Actions\n      <clr-icon shape=\"caret down\"></clr-icon>\n    </button>\n    <clr-dropdown-menu *clrIfOpen>\n      <label class=\"dropdown-header\">Selections</label>\n      <clr-dropdown>\n        <button type=\"button\"\n                clrDropdownTrigger>Select</button>\n        <clr-dropdown-menu>\n          <button type=\"button\"\n                  (click)=\"select(bug)\"\n                  clrDropdownItem\n                  *ngFor=\"let bug of bugs;trackBy getBugId\">\n            {{utility.getBugName(bug) }}\n          </button>\n        </clr-dropdown-menu>\n      </clr-dropdown>\n      <clr-dropdown>\n        <button type=\"button\"\n                clrDropdownTrigger>Add to selection</button>\n        <clr-dropdown-menu>\n          <button type=\"button\"\n                  (click)=\"selectAdd(bug)\"\n                  clrDropdownItem\n                  *ngFor=\"let bug of bugs;trackBy getBugId\">\n            {{utility.getBugName(bug) }}\n          </button>\n        </clr-dropdown-menu>\n      </clr-dropdown>\n      <clr-dropdown>\n        <button type=\"button\"\n                clrDropdownTrigger>Deselect</button>\n        <clr-dropdown-menu>\n          <button type=\"button\"\n                  (click)=\"selectRemove(bug)\"\n                  clrDropdownItem\n                  *ngFor=\"let bug of bugs;trackBy getBugId\">\n            {{utility.getBugName(bug) }}\n          </button>\n        </clr-dropdown-menu>\n      </clr-dropdown>\n\n    </clr-dropdown-menu>\n  </clr-dropdown>\n\n</h1>\n<clr-tabs>\n\n  <clr-tab>\n    <button clrTabLink\n            id=\"link1\">概览</button>\n    <clr-tab-content id=\"content1\"\n                     *clrIfActive=\"ms.overviewTaActive\">\n      <app-unit-group *ngIf=\"unitGroup\"\n                      [unitGroup]=\"unitGroup\"></app-unit-group>\n    </clr-tab-content>\n  </clr-tab>\n\n  <!-- <clr-tab *ngIf=\"ms.game.tabs.autoBuy.unlocked && unit.hasAutoBuyer\">\n    <button clrTabLink>Auto Buyers</button>\n    <clr-tab-content *clrIfActive=\"ms.prestigeTaActive\">\n      <app-group-autobuy [unitGroup]=\"unitGroup\"></app-group-autobuy>\n    </clr-tab-content>\n  </clr-tab>-->\n\n</clr-tabs>\n"
+module.exports = "<h1>{{unitGroup.name}}\n\n  <clr-dropdown>\n    <button type=\"button\"\n            class=\"btn btn-outline-primary btn-link\"\n            clrDropdownTrigger>\n      操作\n      <clr-icon shape=\"caret down\"></clr-icon>\n    </button>\n    <clr-dropdown-menu *clrIfOpen>\n      <label class=\"dropdown-header\">选项</label>\n      <clr-dropdown>\n        <button type=\"button\"\n                clrDropdownTrigger>选择</button>\n        <clr-dropdown-menu>\n          <button type=\"button\"\n                  (click)=\"select(bug)\"\n                  clrDropdownItem\n                  *ngFor=\"let bug of bugs;trackBy getBugId\">\n            {{utility.getBugName(bug) }}\n          </button>\n        </clr-dropdown-menu>\n      </clr-dropdown>\n      <clr-dropdown>\n        <button type=\"button\"\n                clrDropdownTrigger>添加到选项</button>\n        <clr-dropdown-menu>\n          <button type=\"button\"\n                  (click)=\"selectAdd(bug)\"\n                  clrDropdownItem\n                  *ngFor=\"let bug of bugs;trackBy getBugId\">\n            {{utility.getBugName(bug) }}\n          </button>\n        </clr-dropdown-menu>\n      </clr-dropdown>\n      <clr-dropdown>\n        <button type=\"button\"\n                clrDropdownTrigger>取消选择</button>\n        <clr-dropdown-menu>\n          <button type=\"button\"\n                  (click)=\"selectRemove(bug)\"\n                  clrDropdownItem\n                  *ngFor=\"let bug of bugs;trackBy getBugId\">\n            {{utility.getBugName(bug) }}\n          </button>\n        </clr-dropdown-menu>\n      </clr-dropdown>\n\n    </clr-dropdown-menu>\n  </clr-dropdown>\n\n</h1>\n<clr-tabs>\n\n  <clr-tab>\n    <button clrTabLink\n            id=\"link1\">概览</button>\n    <clr-tab-content id=\"content1\"\n                     *clrIfActive=\"ms.overviewTaActive\">\n      <app-unit-group *ngIf=\"unitGroup\"\n                      [unitGroup]=\"unitGroup\"></app-unit-group>\n    </clr-tab-content>\n  </clr-tab>\n\n  <!-- <clr-tab *ngIf=\"ms.game.tabs.autoBuy.unlocked && unit.hasAutoBuyer\">\n    <button clrTabLink>Auto Buyers</button>\n    <clr-tab-content *clrIfActive=\"ms.prestigeTaActive\">\n      <app-group-autobuy [unitGroup]=\"unitGroup\"></app-group-autobuy>\n    </clr-tab-content>\n  </clr-tab>-->\n\n</clr-tabs>\n"
 
 /***/ }),
 
@@ -1536,7 +1536,7 @@ var GroupTabsComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"clr-row\">\n  <div *ngIf=\"unitGroup\"\n       class=\"clr-col-xs-12\tclr-col-sm-6\tclr-col-md-6\tclr-col-lg-6\tclr-col-xl-6\">\n\n    <h5>\n      Aggregate group for {{unitGroup.name}}: {{unitsSpan}}\n    </h5>\n\n    <div *ngIf=\"hatchActionGrp\">\n      <span>Operativity (average): </span>\n      <p-slider [min]=\"0\"\n                [max]=\"100\"\n                [step]=\"0.01\"\n                [(ngModel)]=\"operativity\"\n                (onChange)=\"changeOperativity()\"\n                [disabled]=\"unitGroup.selected.length == 0\"\n                animate=\"true\"></p-slider>\n    </div>\n\n    <app-action-group *ngIf=\"hatchActionGrp\"\n                      [actGr]=\"hatchActionGrp\"></app-action-group>\n    <app-action-group *ngIf=\"teamActionGrp && ms.game.researches.team2.done\"\n                      [actGr]=\"teamActionGrp\"></app-action-group>\n    <app-action-group *ngIf=\"twinActionGrp && ms.game.researches.twin.done\"\n                      [actGr]=\"twinActionGrp\"></app-action-group>\n\n  </div>\n  <div class=\"clr-col-xs-12\tclr-col-sm-6\tclr-col-md-6\tclr-col-lg-6\tclr-col-xl-6\">\n    <h6> Stats: </h6>\n    <clr-datagrid *ngIf=\"unitGroup\"\n                  class=\"datagrid-compact\"\n                  [(clrDgSelected)]=\"unitGroup.selected\"\n                  (clrDgSelectedChange)=\"selectedChanged($event)\">\n\n      <clr-dg-column [clrDgField]=\"'unit.name'\">Name</clr-dg-column>\n      <clr-dg-column [clrDgSortBy]=\"unitQuantitySorter\">\n        <span *ngIf=\"!isSmall\">Quantity</span>\n        <span *ngIf=\"isSmall\">Q. B.</span>\n        <span *ngIf=\"team && isSmall\">Te.</span>\n        <span *ngIf=\"twin && isSmall\">Tw.</span>\n      </clr-dg-column>\n      <clr-dg-column [clrDgSortBy]=\"unitBoughtSorter\"\n                     *ngIf=\"!isSmall\">Bought</clr-dg-column>\n      <clr-dg-column [clrDgSortBy]=\"unitTeamSorter\"\n                     *ngIf=\"team && !isSmall\">Team</clr-dg-column>\n      <clr-dg-column [clrDgSortBy]=\"unitTwinSorter\"\n                     *ngIf=\"twin && !isSmall\">Twin</clr-dg-column>\n\n      <clr-dg-row *clrDgItems=\"let unit of unitGroup.unlocked\"\n                  [clrDgItem]=\"unit\">\n        <clr-dg-cell>\n          <a [routerLink]=\"'/nav/unit/'+unit.id\">\n            {{unit.name}}\n          </a>\n        </clr-dg-cell>\n        <clr-dg-cell>\n          <span *ngIf=\"!isSmall\"\n                class=\"monospace\">{{unit.quantity | format: true}}</span>\n          <span *ngIf=\"isSmall\"\n                class=\"monospace\">\n            {{unit.quantity | format: true}} - {{unit.buyAction?.quantity | format: true}}\n            <span *ngIf=\"team && isSmall\"\n                  class=\"monospace\">- {{unit.teamAction?.quantity | format: true}}</span>\n            <span *ngIf=\"twin && isSmall\"\n                  class=\"monospace\">- {{unit.twinAction?.quantity | format: true}}</span>\n          </span>\n        </clr-dg-cell>\n        <clr-dg-cell *ngIf=\"!isSmall\"\n                     class=\"monospace\">\n          {{unit.buyAction?.quantity | format: true}}\n        </clr-dg-cell>\n        <clr-dg-cell *ngIf=\"team && !isSmall\"\n                     class=\"monospace\">\n          {{unit.teamAction?.quantity | format: true}}\n        </clr-dg-cell>\n        <clr-dg-cell *ngIf=\"twin && !isSmall\"\n                     class=\"monospace\">\n          {{unit.twinAction?.quantity | format: true}}\n        </clr-dg-cell>\n      </clr-dg-row>\n\n\n    </clr-datagrid>\n\n    <div class=\"pieContainer\"\n         #pieContainer>\n      <!-- <canvas baseChart [data]=\"unitGroup.chartData\" [labels]=\"unitGroup.chartLabels\" [chartType]=\"'pie'\"> -->\n      <canvas #chart> </canvas>\n    </div>\n\n  </div>\n\n</div>\n"
+module.exports = "<div class=\"clr-row\">\n  <div *ngIf=\"unitGroup\"\n       class=\"clr-col-xs-12\tclr-col-sm-6\tclr-col-md-6\tclr-col-lg-6\tclr-col-xl-6\">\n\n    <h5>\n      这里集合了 {{unitGroup.name}}: {{unitsSpan}}\n    </h5>\n\n    <div *ngIf=\"hatchActionGrp\">\n      <span>操作性(平均数): </span>\n      <p-slider [min]=\"0\"\n                [max]=\"100\"\n                [step]=\"0.01\"\n                [(ngModel)]=\"operativity\"\n                (onChange)=\"changeOperativity()\"\n                [disabled]=\"unitGroup.selected.length == 0\"\n                animate=\"true\"></p-slider>\n    </div>\n\n    <app-action-group *ngIf=\"hatchActionGrp\"\n                      [actGr]=\"hatchActionGrp\"></app-action-group>\n    <app-action-group *ngIf=\"teamActionGrp && ms.game.researches.team2.done\"\n                      [actGr]=\"teamActionGrp\"></app-action-group>\n    <app-action-group *ngIf=\"twinActionGrp && ms.game.researches.twin.done\"\n                      [actGr]=\"twinActionGrp\"></app-action-group>\n\n  </div>\n  <div class=\"clr-col-xs-12\tclr-col-sm-6\tclr-col-md-6\tclr-col-lg-6\tclr-col-xl-6\">\n    <h6> 统计: </h6>\n    <clr-datagrid *ngIf=\"unitGroup\"\n                  class=\"datagrid-compact\"\n                  [(clrDgSelected)]=\"unitGroup.selected\"\n                  (clrDgSelectedChange)=\"selectedChanged($event)\">\n\n      <clr-dg-column [clrDgField]=\"'unit.name'\">名称</clr-dg-column>\n      <clr-dg-column [clrDgSortBy]=\"unitQuantitySorter\">\n        <span *ngIf=\"!isSmall\">数量</span>\n        <span *ngIf=\"isSmall\">Q. B.</span>\n        <span *ngIf=\"team && isSmall\">Te.</span>\n        <span *ngIf=\"twin && isSmall\">Tw.</span>\n      </clr-dg-column>\n      <clr-dg-column [clrDgSortBy]=\"unitBoughtSorter\"\n                     *ngIf=\"!isSmall\">已购买</clr-dg-column>\n      <clr-dg-column [clrDgSortBy]=\"unitTeamSorter\"\n                     *ngIf=\"team && !isSmall\">团队</clr-dg-column>\n      <clr-dg-column [clrDgSortBy]=\"unitTwinSorter\"\n                     *ngIf=\"twin && !isSmall\">双胞胎</clr-dg-column>\n\n      <clr-dg-row *clrDgItems=\"let unit of unitGroup.unlocked\"\n                  [clrDgItem]=\"unit\">\n        <clr-dg-cell>\n          <a [routerLink]=\"'/nav/unit/'+unit.id\">\n            {{unit.name}}\n          </a>\n        </clr-dg-cell>\n        <clr-dg-cell>\n          <span *ngIf=\"!isSmall\"\n                class=\"monospace\">{{unit.quantity | format: true}}</span>\n          <span *ngIf=\"isSmall\"\n                class=\"monospace\">\n            {{unit.quantity | format: true}} - {{unit.buyAction?.quantity | format: true}}\n            <span *ngIf=\"team && isSmall\"\n                  class=\"monospace\">- {{unit.teamAction?.quantity | format: true}}</span>\n            <span *ngIf=\"twin && isSmall\"\n                  class=\"monospace\">- {{unit.twinAction?.quantity | format: true}}</span>\n          </span>\n        </clr-dg-cell>\n        <clr-dg-cell *ngIf=\"!isSmall\"\n                     class=\"monospace\">\n          {{unit.buyAction?.quantity | format: true}}\n        </clr-dg-cell>\n        <clr-dg-cell *ngIf=\"team && !isSmall\"\n                     class=\"monospace\">\n          {{unit.teamAction?.quantity | format: true}}\n        </clr-dg-cell>\n        <clr-dg-cell *ngIf=\"twin && !isSmall\"\n                     class=\"monospace\">\n          {{unit.twinAction?.quantity | format: true}}\n        </clr-dg-cell>\n      </clr-dg-row>\n\n\n    </clr-datagrid>\n\n    <div class=\"pieContainer\"\n         #pieContainer>\n      <!-- <canvas baseChart [data]=\"unitGroup.chartData\" [labels]=\"unitGroup.chartLabels\" [chartType]=\"'pie'\"> -->\n      <canvas #chart> </canvas>\n    </div>\n\n  </div>\n\n</div>\n"
 
 /***/ }),
 
@@ -1752,7 +1752,7 @@ var UnitGroupComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<clr-header class=\"header\"\n            [ngClass]=\"headerClass\">\n\n  <div class=\"header-nav\"\n       [clr-nav-level]=\"1\">\n    <a [routerLink]='\"nav\"'\n       class=\"nav-link\"\n       [routerLinkActive]=\"'active'\"\n       (click)=\"navigateLast()\">\n      <span class=\"nav-text\">\n        <clr-icon shape=\"bug\"></clr-icon>\n      </span>\n    </a>\n    <a [routerLink]='\"lab\"'\n       class=\"nav-link\"\n       *ngIf=\"lab\"\n       [routerLinkActive]=\"'active'\">\n      <span class=\"nav-text\">\n        <clr-icon shape=\"lightbulb\"\n                  [ngClass]=\"{'has-badge': labBadge}\"></clr-icon>\n      </span>\n    </a>\n    <a [routerLink]='\"home\"'\n       class=\"nav-link\"\n       [routerLinkActive]=\"'active'\">\n      <span class=\"nav-text\">\n        <clr-icon shape=\"dashboard\"></clr-icon>\n      </span>\n    </a>\n    <a [routerLink]='\"travel\"'\n       class=\"nav-link\"\n       *ngIf=\"travel\"\n       [routerLinkActive]=\"'active'\">\n      <span class=\"nav-text\">\n        <clr-icon shape=\"world\"\n                  [ngClass]=\"{'has-badge': travelBadge}\"></clr-icon>\n      </span>\n    </a>\n    <a [routerLink]='\"auto\"'\n       class=\"nav-link\"\n       *ngIf=\"autoBuy\"\n       [routerLinkActive]=\"'active'\">\n      <span class=\"nav-text\">\n        <clr-icon shape=\"star\"></clr-icon>\n      </span>\n    </a>\n    <a [routerLink]='\"pre\"'\n       class=\"nav-link\"\n       *ngIf=\"prestige\"\n       [routerLinkActive]=\"'active'\">\n      <span class=\"nav-text\">\n        <clr-icon shape=\"store\"></clr-icon>\n      </span>\n    </a>\n    <a [routerLink]='\"mast\"'\n       class=\"nav-link\"\n       *ngIf=\"mastery\"\n       [routerLinkActive]=\"'active'\">\n      <span class=\"nav-text\">\n        <clr-icon shape=\"star\"></clr-icon>\n      </span>\n    </a>\n  </div>\n\n  <div class=\"header-actions\">\n\n    <form class=\"search\">\n      <label id=\"multiLabel\"\n             for=\"multi\">N:&nbsp;</label>\n      <input class=\"multiBuy\"\n             min=\"1\"\n             id=\"multi\"\n             type=\"number\"\n             name=\"buyMulti\"\n             placeholder=\"Buy multiplier\"\n             [(ngModel)]=\"buyMulti\">\n    </form>\n\n    <clr-dropdown>\n      <button class=\"nav-icon\"\n              clrDropdownTrigger>\n        <clr-icon shape=\"tools\"></clr-icon>\n        <clr-icon shape=\"caret down\"></clr-icon>\n      </button>\n      <clr-dropdown-menu *clrIfOpen\n                         clrPosition=\"bottom-right\">\n\n        <clr-dropdown *ngIf=\"ms.game.allPrestige.time.timeProducer.quantity.gt(0)\">\n          <button type=\"button\"\n                  clrDropdownTrigger>Time Warp</button>\n          <clr-dropdown-menu clrPosition=\"left-top\">\n            <a clrDropdownItem\n               (click)=\"warp(p)\"\n               *ngFor=\"let p of minuteWarps\"\n               [ngClass]=\"{'disabled': !warpAv(p)}\">\n              Warp {{p}} minutes\n            </a>\n          </clr-dropdown-menu>\n        </clr-dropdown>\n\n        <a clrDropdownItem\n           (click)=\"all100()\">All 100%</a>\n\n        <clr-dropdown *ngFor=\"let list of groupNoEnemy; trackBy:getListId\">\n          <button type=\"button\"\n                  clrDropdownTrigger>{{list.name}}</button>\n          <clr-dropdown-menu clrPosition=\"left-top\"\n                             *clrIfOpen>\n            <a clrDropdownItem\n               (click)=\"list.buyN(buyMulti)\">Buy n</a>\n            <a clrDropdownItem\n               (click)=\"list.buyTeam(buyMulti)\"\n               *ngIf=\"ms.game.researches.team2.done\">Team n</a>\n            <a clrDropdownItem\n               (click)=\"list.buyTwins(buyMulti)\"\n               *ngIf=\"ms.game.researches.twin.done\">Twins n</a>\n            <div class=\"dropdown-divider\"></div>\n            <clr-dropdown *ngIf=\"ms.game.tabs.autoBuy.unlocked && list.hasAutoBuy()\">\n              <button type=\"button\"\n                      clrDropdownTrigger>AutoBuyer</button>\n              <clr-dropdown-menu *clrIfOpen>\n                <a clrDropdownItem\n                   (click)=\"list.autoBuy(true)\">All ON</a>\n                <a clrDropdownItem\n                   (click)=\"list.autoBuy(false)\">All OFF</a>\n                <a clrDropdownItem\n                   *ngIf=\"list.hasAutoBuyBuy()\"\n                   (click)=\"list.autoBuyBuy(true)\">Hatch ON</a>\n                <a clrDropdownItem\n                   *ngIf=\"list.hasAutoBuyBuy()\"\n                   (click)=\"list.autoBuyBuy(false)\">Hatch OFF</a>\n                <a clrDropdownItem\n                   *ngIf=\"list.hasAutoBuyTeam()\"\n                   (click)=\"list.autoBuyTeam(true)\">Team ON</a>\n                <a clrDropdownItem\n                   *ngIf=\"list.hasAutoBuyTeam()\"\n                   (click)=\"list.autoBuyTeam(false)\">Team OFF</a>\n                <a clrDropdownItem\n                   *ngIf=\"list.hasAutoBuyTwin()\"\n                   (click)=\"list.autoBuyTwin(true)\">Twin ON</a>\n                <a clrDropdownItem\n                   *ngIf=\"list.hasAutoBuyTwin()\"\n                   (click)=\"list.autoBuyTwin(false)\">Twin OFF</a>\n              </clr-dropdown-menu>\n            </clr-dropdown>\n            <div class=\"dropdown-divider\"\n                 *ngIf=\"ms.game.tabs.autoBuy.unlocked && list.hasAutoBuy()\"></div>\n            <a clrDropdownItem\n               (click)=\"allCustom(p, list)\"\n               *ngFor=\"let p of percentPreset\">\n              {{p}}%\n            </a>\n          </clr-dropdown-menu>\n        </clr-dropdown>\n\n      </clr-dropdown-menu>\n    </clr-dropdown>\n\n    <a href=\"javascript://\"\n       class=\"nav-link nav-icon\">\n      <clr-icon shape=\"clock\"\n                (click)=\"openTimeModal()\"></clr-icon>\n    </a>\n    <a href=\"javascript://\"\n       class=\"nav-link nav-icon\">\n      <clr-icon [attr.shape]=\"ms.game.isPaused ? 'play' : 'pause'\"\n                (click)=\"ms.game.isPaused = ! ms.game.isPaused\"></clr-icon>\n    </a>\n    <a [routerLink]=\"'opt/save/'\"\n       class=\"nav-link nav-icon\"\n       [routerLinkActive]=\"'active'\">\n      <clr-icon shape=\"cog\"></clr-icon>\n    </a>\n  </div>\n\n</clr-header>\n\n<clr-modal [(clrModalOpen)]=\"timeModal\"\n           [clrModalSize]=\"'lg'\">\n  <h3 class=\"modal-title\">Time Warp</h3>\n  <div class=\"modal-body actMinH\"\n       *ngIf=\"ms.game.actMin && ms.game.actHour\">\n    <span> You can skip {{ms.game.time.quantity.toNumber() | endIn}}:\n      <span class=\"monospace\">\n        {{ms.game.time.quantity | format}} s\n      </span>\n    </span>\n    <br/>\n    <span>\n      You get\n      <span class=\"monospace\">\n        {{ms.game.time.c | format }}s</span>\n      /s Max: <span class=\"monospace\">{{ms.game.maxTimeBank | format}}</span>\n    </span>\n    <div class=\"clr-row\">\n      <div class=\"clr-col-6\">\n        <app-action [action]=\"ms.game.actMin\"></app-action>\n      </div>\n      <div class=\"clr-col-6\">\n        <app-action [action]=\"ms.game.actHour\"></app-action>\n      </div>\n    </div>\n  </div>\n</clr-modal>\n"
+module.exports = "<clr-header class=\"header\"\n            [ngClass]=\"headerClass\">\n\n  <div class=\"header-nav\"\n       [clr-nav-level]=\"1\">\n    <a [routerLink]='\"nav\"'\n       class=\"nav-link\"\n       [routerLinkActive]=\"'active'\"\n       (click)=\"navigateLast()\">\n      <span class=\"nav-text\">\n        <clr-icon shape=\"bug\"></clr-icon>\n      </span>\n    </a>\n    <a [routerLink]='\"lab\"'\n       class=\"nav-link\"\n       *ngIf=\"lab\"\n       [routerLinkActive]=\"'active'\">\n      <span class=\"nav-text\">\n        <clr-icon shape=\"lightbulb\"\n                  [ngClass]=\"{'has-badge': labBadge}\"></clr-icon>\n      </span>\n    </a>\n    <a [routerLink]='\"home\"'\n       class=\"nav-link\"\n       [routerLinkActive]=\"'active'\">\n      <span class=\"nav-text\">\n        <clr-icon shape=\"dashboard\"></clr-icon>\n      </span>\n    </a>\n    <a [routerLink]='\"travel\"'\n       class=\"nav-link\"\n       *ngIf=\"travel\"\n       [routerLinkActive]=\"'active'\">\n      <span class=\"nav-text\">\n        <clr-icon shape=\"world\"\n                  [ngClass]=\"{'has-badge': travelBadge}\"></clr-icon>\n      </span>\n    </a>\n    <a [routerLink]='\"auto\"'\n       class=\"nav-link\"\n       *ngIf=\"autoBuy\"\n       [routerLinkActive]=\"'active'\">\n      <span class=\"nav-text\">\n        <clr-icon shape=\"star\"></clr-icon>\n      </span>\n    </a>\n    <a [routerLink]='\"pre\"'\n       class=\"nav-link\"\n       *ngIf=\"prestige\"\n       [routerLinkActive]=\"'active'\">\n      <span class=\"nav-text\">\n        <clr-icon shape=\"store\"></clr-icon>\n      </span>\n    </a>\n    <a [routerLink]='\"mast\"'\n       class=\"nav-link\"\n       *ngIf=\"mastery\"\n       [routerLinkActive]=\"'active'\">\n      <span class=\"nav-text\">\n        <clr-icon shape=\"star\"></clr-icon>\n      </span>\n    </a>\n  </div>\n\n  <div class=\"header-actions\">\n\n    <form class=\"search\">\n      <label id=\"multiLabel\"\n             for=\"multi\">N:&nbsp;</label>\n      <input class=\"multiBuy\"\n             min=\"1\"\n             id=\"multi\"\n             type=\"number\"\n             name=\"buyMulti\"\n             placeholder=\"Buy multiplier\"\n             [(ngModel)]=\"buyMulti\">\n    </form>\n\n    <clr-dropdown>\n      <button class=\"nav-icon\"\n              clrDropdownTrigger>\n        <clr-icon shape=\"tools\"></clr-icon>\n        <clr-icon shape=\"caret down\"></clr-icon>\n      </button>\n      <clr-dropdown-menu *clrIfOpen\n                         clrPosition=\"bottom-right\">\n\n        <clr-dropdown *ngIf=\"ms.game.allPrestige.time.timeProducer.quantity.gt(0)\">\n          <button type=\"button\"\n                  clrDropdownTrigger>时间扭曲</button>\n          <clr-dropdown-menu clrPosition=\"left-top\">\n            <a clrDropdownItem\n               (click)=\"warp(p)\"\n               *ngFor=\"let p of minuteWarps\"\n               [ngClass]=\"{'disabled': !warpAv(p)}\">\n              扭曲 {{p}} 分钟\n            </a>\n          </clr-dropdown-menu>\n        </clr-dropdown>\n\n        <a clrDropdownItem\n           (click)=\"all100()\">全部 100%</a>\n\n        <clr-dropdown *ngFor=\"let list of groupNoEnemy; trackBy:getListId\">\n          <button type=\"button\"\n                  clrDropdownTrigger>{{list.name}}</button>\n          <clr-dropdown-menu clrPosition=\"left-top\"\n                             *clrIfOpen>\n            <a clrDropdownItem\n               (click)=\"list.buyN(buyMulti)\">购买 n</a>\n            <a clrDropdownItem\n               (click)=\"list.buyTeam(buyMulti)\"\n               *ngIf=\"ms.game.researches.team2.done\">团队 n</a>\n            <a clrDropdownItem\n               (click)=\"list.buyTwins(buyMulti)\"\n               *ngIf=\"ms.game.researches.twin.done\">双胞胎 n</a>\n            <div class=\"dropdown-divider\"></div>\n            <clr-dropdown *ngIf=\"ms.game.tabs.autoBuy.unlocked && list.hasAutoBuy()\">\n              <button type=\"button\"\n                      clrDropdownTrigger>AutoBuyer</button>\n              <clr-dropdown-menu *clrIfOpen>\n                <a clrDropdownItem\n                   (click)=\"list.autoBuy(true)\">全部开启</a>\n                <a clrDropdownItem\n                   (click)=\"list.autoBuy(false)\">全部关闭</a>\n                <a clrDropdownItem\n                   *ngIf=\"list.hasAutoBuyBuy()\"\n                   (click)=\"list.autoBuyBuy(true)\">孵化开启</a>\n                <a clrDropdownItem\n                   *ngIf=\"list.hasAutoBuyBuy()\"\n                   (click)=\"list.autoBuyBuy(false)\">孵化关闭</a>\n                <a clrDropdownItem\n                   *ngIf=\"list.hasAutoBuyTeam()\"\n                   (click)=\"list.autoBuyTeam(true)\">团队开启</a>\n                <a clrDropdownItem\n                   *ngIf=\"list.hasAutoBuyTeam()\"\n                   (click)=\"list.autoBuyTeam(false)\">团队关闭</a>\n                <a clrDropdownItem\n                   *ngIf=\"list.hasAutoBuyTwin()\"\n                   (click)=\"list.autoBuyTwin(true)\">双胞胎开启</a>\n                <a clrDropdownItem\n                   *ngIf=\"list.hasAutoBuyTwin()\"\n                   (click)=\"list.autoBuyTwin(false)\">双胞胎关闭</a>\n              </clr-dropdown-menu>\n            </clr-dropdown>\n            <div class=\"dropdown-divider\"\n                 *ngIf=\"ms.game.tabs.autoBuy.unlocked && list.hasAutoBuy()\"></div>\n            <a clrDropdownItem\n               (click)=\"allCustom(p, list)\"\n               *ngFor=\"let p of percentPreset\">\n              {{p}}%\n            </a>\n          </clr-dropdown-menu>\n        </clr-dropdown>\n\n      </clr-dropdown-menu>\n    </clr-dropdown>\n\n    <a href=\"javascript://\"\n       class=\"nav-link nav-icon\">\n      <clr-icon shape=\"clock\"\n                (click)=\"openTimeModal()\"></clr-icon>\n    </a>\n    <a href=\"javascript://\"\n       class=\"nav-link nav-icon\">\n      <clr-icon [attr.shape]=\"ms.game.isPaused ? 'play' : 'pause'\"\n                (click)=\"ms.game.isPaused = ! ms.game.isPaused\"></clr-icon>\n    </a>\n    <a [routerLink]=\"'opt/save/'\"\n       class=\"nav-link nav-icon\"\n       [routerLinkActive]=\"'active'\">\n      <clr-icon shape=\"cog\"></clr-icon>\n    </a>\n  </div>\n\n</clr-header>\n\n<clr-modal [(clrModalOpen)]=\"timeModal\"\n           [clrModalSize]=\"'lg'\">\n  <h3 class=\"modal-title\">时间扭曲</h3>\n  <div class=\"modal-body actMinH\"\n       *ngIf=\"ms.game.actMin && ms.game.actHour\">\n    <span> 你可以跳过 {{ms.game.time.quantity.toNumber() | endIn}}:\n      <span class=\"monospace\">\n        {{ms.game.time.quantity | format}} s\n      </span>\n    </span>\n    <br/>\n    <span>\n      你得到了\n      <span class=\"monospace\">\n        {{ms.game.time.c | format }}</span>\n      /秒 最大: <span class=\"monospace\">{{ms.game.maxTimeBank | format}}</span>\n    </span>\n    <div class=\"clr-row\">\n      <div class=\"clr-col-6\">\n        <app-action [action]=\"ms.game.actMin\"></app-action>\n      </div>\n      <div class=\"clr-col-6\">\n        <app-action [action]=\"ms.game.actHour\"></app-action>\n      </div>\n    </div>\n  </div>\n</clr-modal>\n"
 
 /***/ }),
 
@@ -2432,8 +2432,8 @@ var MainService = /** @class */ (function () {
                         100;
             }
             this.toastr.info(bonus > 0
-                ? "Bonus: " + date_fns_distance_in_words_to_now__WEBPACK_IMPORTED_MODULE_2__(new Date(Date.now() + bonus))
-                : "", "You where offline for: " +
+                ? "奖励: " + date_fns_distance_in_words_to_now__WEBPACK_IMPORTED_MODULE_2__(new Date(Date.now() + bonus))
+                : "", "你离线了: " +
                 date_fns_distance_in_words_to_now__WEBPACK_IMPORTED_MODULE_2__(new Date(Date.now() + diff)));
             diff = diff + bonus;
         }
@@ -2463,7 +2463,7 @@ var MainService = /** @class */ (function () {
             if (!!save) {
                 localStorage.setItem("save", save);
                 if (!autosave || this.options.autosaveNotification) {
-                    this.toastr.success("", "Game Saved");
+                    this.toastr.success("", "游戏已保存");
                     console.log("Game Saved");
                     this.lastSave = new Date();
                     this.saveEmitter.emit(this.lastSave);
@@ -2724,7 +2724,7 @@ var MasteryComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ul class=\"nav navMat\"\n    role=\"tablist\">\n  <li class=\"nav-item\"\n      class=\"matTab\"\n      *ngFor=\"let g of ms.game.materials.unlocked ; trackBy:getUnitId\">\n\n    <app-tab [id]=\"g.id\"\n             [isEnding]=\"g.isEnding\"\n             [name]=\"g.name\"\n             [quantity]=\"g.quantity\"\n             [perSec]=\"g.c\"></app-tab>\n\n  </li>\n  <li *ngIf=\"ms.game.firstEndigUnit\">\n\n    <clr-alert [clrAlertClosable]=\"false\"\n               [clrAlertType]=\"ms.game.firstEndigUnit.endIn < 3600000 ? 'alert-danger':'alert-warning'\">\n      <div clr-alert-item\n           class=\"alert-item\">\n        <span class=\"alert-text\">\n          {{ms.game.firstEndigUnit.name}} is ending in {{ms.game.firstEndigUnit.endIn | endIn}}\n        </span>\n      </div>\n    </clr-alert>\n\n  </li>\n</ul>\n"
+module.exports = "<ul class=\"nav navMat\"\n    role=\"tablist\">\n  <li class=\"nav-item\"\n      class=\"matTab\"\n      *ngFor=\"let g of ms.game.materials.unlocked ; trackBy:getUnitId\">\n\n    <app-tab [id]=\"g.id\"\n             [isEnding]=\"g.isEnding\"\n             [name]=\"g.name\"\n             [quantity]=\"g.quantity\"\n             [perSec]=\"g.c\"></app-tab>\n\n  </li>\n  <li *ngIf=\"ms.game.firstEndigUnit\">\n\n    <clr-alert [clrAlertClosable]=\"false\"\n               [clrAlertType]=\"ms.game.firstEndigUnit.endIn < 3600000 ? 'alert-danger':'alert-warning'\">\n      <div clr-alert-item\n           class=\"alert-item\">\n        <span class=\"alert-text\">\n          {{ms.game.firstEndigUnit.name}} 将在 {{ms.game.firstEndigUnit.endIn | endIn}} 后消耗完\n        </span>\n      </div>\n    </clr-alert>\n\n  </li>\n</ul>\n"
 
 /***/ }),
 
@@ -3272,7 +3272,7 @@ var __extends = (undefined && undefined.__extends) || (function () {
 var BuyResearch = /** @class */ (function (_super) {
     __extends(BuyResearch, _super);
     function BuyResearch(researches) {
-        var _this = _super.call(this, "resAutoBAct", "Buy Research", "Buy the less expensive research") || this;
+        var _this = _super.call(this, "resAutoBAct", "Buy Research", "购买更便宜的研究") || this;
         _this.researches = researches;
         return _this;
     }
@@ -3330,7 +3330,7 @@ var __extends = (undefined && undefined.__extends) || (function () {
 var TeamAction = /** @class */ (function (_super) {
     __extends(TeamAction, _super);
     function TeamAction(prices) {
-        var _this = _super.call(this, "T", "Team", "Get a better team work bonus", prices) || this;
+        var _this = _super.call(this, "T", "Team", "得到更好的团队合作加成", prices) || this;
         _this.autoBuyPriceMulti = 1.5;
         _this.autoBuyTimeMulti = 1.5;
         return _this;
@@ -4178,7 +4178,7 @@ var Game = /** @class */ (function () {
         //#region Worlds
         this.generateWorlds();
         this.currentWorld = new _world__WEBPACK_IMPORTED_MODULE_28__["World"]("home");
-        this.currentWorld.name = "Home World";
+        this.currentWorld.name = "初始世界";
         this.currentWorld.level = new Decimal(1);
         this.currentWorld.winContidions.push(new _price__WEBPACK_IMPORTED_MODULE_9__["Price"](this.materials.food, _CONSTATS__WEBPACK_IMPORTED_MODULE_3__["CONSTS"].BASE_WIN_CONDITION_MATERIALS));
         this.currentWorld.setLevel(new Decimal(1), this);
@@ -5184,27 +5184,27 @@ var Mastery = /** @class */ (function () {
                 break;
             }
             case MasteryTypes.HARVEST_BONUS: {
-                ret = "+" + 20 * num + "% resource\nfrom ghanteres";
+                ret = "+" + 20 * num + "% 资源\nfrom ghanteres";
                 break;
             }
             case MasteryTypes.MATERIAL_GAIN: {
-                ret = "+" + 10 * num + "%\nmaterials gain";
+                ret = "+" + 10 * num + "%\n材料获得";
                 break;
             }
             case MasteryTypes.MORE_FOLLOWERS_GA: {
-                ret = "+" + 300 * num + "% more\nGatherers followers";
+                ret = "+" + 300 * num + "% 的\n采集者追随者";
                 break;
             }
             case MasteryTypes.MORE_FOLLOWERS_WO: {
-                ret = "+" + 300 * num + "% more\nWorker followers";
+                ret = "+" + 300 * num + "% 的\n工人追随者";
                 break;
             }
             case MasteryTypes.TIME_GEN: {
-                ret = "+" + 30 * num + "%\ntime /s";
+                ret = "+" + 30 * num + "%\n时间 /秒";
                 break;
             }
             case MasteryTypes.TIME_BANK: {
-                ret = "+" + 50 * num + "%\n time bank";
+                ret = "+" + 50 * num + "%\n 时间银行";
                 break;
             }
             case MasteryTypes.TIME_GEN_AND_BANK: {
@@ -6222,19 +6222,19 @@ __webpack_require__.r(__webpack_exports__);
 var STRINGS = {
     units: {
         //  Materials
-        f: ["Food", "食物用于维持所有单位。"],
-        w: ["Soil", "土壤用于构建更好的巢。"],
-        c: ["Crystal", "水晶是用来制造科学。"],
-        s: ["Science", "科学是用来发现新事物的。"],
+        f: ["食物", "食物用于维持所有单位。"],
+        w: ["土壤", "土壤用于构建更好的巢。"],
+        c: ["水晶", "水晶是用来制造科学。"],
+        s: ["科学", "科学是用来发现新事物的。"],
         //  Ants
-        l: ["Larva", "幼虫"],
-        q: ["Queen", "女王"],
-        n: ["Nest", "巢穴"],
+        l: ["幼虫", "幼虫"],
+        q: ["女王", "女王"],
+        n: ["巢穴", "巢穴"],
         //  Ghantering
-        e: ["Drone", "雄蜂收集食物。"],
-        h: ["Geologist", "地质学家会寻找水晶。"],
+        e: ["雄蜂", "雄蜂收集食物。"],
+        h: ["地质学家", "地质学家会寻找水晶。"],
         i: [
-            "Student",
+            "学生",
             [
                 "学生将努力获得科学。",
                 "学生们习惯喝水晶酒。"
@@ -6242,23 +6242,23 @@ var STRINGS = {
         ],
         //  Workers
         a: [
-            "Farmer",
+            "农民",
             [
                 "水培农民使用晶体在没有土壤的情况下种植真菌。",
                 "蚂蚁是世界上最好的真菌种植户。",
                 "公元前10000年开始耕种。"
             ]
         ],
-        b: ["Carpenter", "木匠蚁在土壤中筑巢。"],
+        b: ["木匠", "木匠在土壤中筑巢。"],
         m: [
-            "Miner",
+            "矿工",
             [
                 "矿工通过采矿提取水晶。",
                 "不出所料，又是一场与矿工的无聊游戏。"
             ]
         ],
         d: [
-            "Scientist",
+            "科学家",
             [
                 "科学家收集的科学。",
                 "科学家过去常喝水晶酒。",
@@ -6266,10 +6266,10 @@ var STRINGS = {
             ]
         ],
         // Buildings
-        aG: ["Farm", "一个水培农场。"],
-        bG: ["Soil Camp", "土壤营地是用来获得更多的土壤。"],
-        mG: ["Mine", "一个水晶矿。"],
-        dG: ["University", "大学毕业的科学家。"],
+        aG: ["水培农场", "一个水培农场。"],
+        bG: ["土壤营地", "土壤营地是用来获得更多的土壤。"],
+        mG: ["水晶矿", "一个水晶矿。"],
+        dG: ["大学", "大学产生毕业的科学家。"],
         //  Engineers
         aGG: ["Hydro Eng.", "水利工程师对农场有加成"],
         bGG: ["Soil Eng.", "Soil Engineers yeld Soil Camp."],
@@ -6297,12 +6297,12 @@ var STRINGS = {
         Ms2: ["Zombie Fungus", ""],
         Ms3: ["Colony of Zombie Fungus ", ""],
         //  Killers
-        F: ["Disinfestation Ant", "Destroy poisonous fungus."],
-        W: ["Fire Ant", ["Burn Carnivorous plant", "Fire ant actually exists."]],
-        C: ["Black garden ant", "Kill Mites."],
-        S: ["Yellow crazy Ant", "Kill Zombie Fungus."],
-        HB: ["General", "+10% killing."],
-        HQ: ["Headquarter", "+10% killing."],
+        F: ["Disinfestation Ant", "消灭有毒真菌."],
+        W: ["Fire Ant", ["Burn Carnivorous plant", "火蚁确实存在."]],
+        C: ["Black garden ant", "杀死螨虫."],
+        S: ["Yellow crazy Ant", "杀死僵尸真菌."],
+        HB: ["General", "+10% 杀死."],
+        HQ: ["Headquarter", "+10% 杀死."],
         //  Mastery Bonus
         scieMast: ["Science Mastery"],
         fooMast: ["Food Mastery"],
@@ -6312,9 +6312,9 @@ var STRINGS = {
         matMast: ["Material Mastery"],
         armyMast: ["Army Mastery"],
         //  Supply
-        fS: ["Food Supply", "Never ending food supply"],
-        wS: ["Wood Supply", "Never ending wood supply"],
-        cS: ["Crystal Supply", "Never ending crystall supply"],
+        fS: ["食物供应", "永不停息的食物供应"],
+        wS: ["木头供应", "永不停息的木头供应"],
+        cS: ["水晶供应", "永不停息的水晶供应"],
         //  Bee
         Z: ["Foragging Bee", "Foragging Bee"],
         cb: ["Carpenter Bee", "Foragging Bee"],
@@ -6354,50 +6354,50 @@ var STRINGS = {
         oGG: ["3Wasp Miner", ""],
         pGG: ["3Wasp Scientist", ""],
         //  Helpers
-        lf: ["Leaf Cutter", "Improve Farming."],
-        hu: ["Hunter", ""],
-        mw: ["Major Worker", ""],
-        mh: ["Big Miner", "Improve Mining."],
-        sh: ["Big Carpenter", "Improve soil gathering."]
+        lf: ["切叶蚁", "改善农业。"],
+        hu: ["猎人", ""],
+        mw: ["主要工人", ""],
+        mh: ["大矿工", "改善采矿。"],
+        sh: ["大木匠", "改善土壤收集。"]
     },
     researches: {
-        t: ["Team Work", "Get production bonus based on manually bought."],
-        T: ["Team Work 2", "Make team bonus upgradable."],
-        W: ["Twin", "Multiple units for same price."],
-        r: ["Travel", "Travel to a new world !"],
-        M: ["Mastery", "Get one mastery point."],
-        h: ["Harvesting", "+100% resource from Gatherers."],
-        1: ["1H Warp", "Free time warp."],
-        2: ["2H Warp", "Free time warp."],
-        3: ["3H Warp", "Free time warp."],
-        SP: ["Spawn", "+50% larvae production."],
+        t: ["团队合作", "在手动购买的基础上获得生产加成。"],
+        T: ["团队合作 2", "提高团队合作的加成"],
+        W: ["双胞胎", "同样的价格购买更多的单位"],
+        r: ["旅行", "前往一个新的世界!"],
+        M: ["精通", "获得1个精通点数"],
+        h: ["收获", "+100% 来自采集者的资源。"],
+        1: ["1小时 扭曲", "免费的时间扭曲."],
+        2: ["2小时 扭曲", "免费的时间扭曲."],
+        3: ["3小时 扭曲", "免费的时间扭曲."],
+        SP: ["Spawn", "+50% 幼虫产量."],
         //  Workers
-        wo: ["Better Workers", "+30% production from workers."],
-        we: ["Efficient Workers", "+10% resource gain."],
-        w: ["Workers", "Workers"],
+        wo: ["更好的工人", "+30% 来自工人的资源产量."],
+        we: ["高效的工人", "+10% 资源获的。"],
+        w: ["工人", "工人"],
         a: [
-            "Farmer",
-            "Hydroponics farmers uses crystals to grow fungi without soil."
+            "农民",
+            "水培法农民使用晶体生长真菌没有土壤。"
         ],
         b: [
-            "Carpenter",
-            "Carpenter ants build nests inside wood consisting of galleries."
+            "木匠",
+            "木匠蚁在木头里筑巢，里面有走廊。"
         ],
-        m: ["Miner", "miner"],
-        d: ["Scientist", "scientist"],
-        scie1: ["Scientific Method", "+50% science production"],
+        m: ["矿工", "矿工"],
+        d: ["科学家", "科学家"],
+        scie1: ["科学方法", "+50% 科学产量"],
         // Buildings
-        u: ["Buildings", "Buildings yields workers."],
-        aG: ["Farm", "Hydroponics farm of Fungus."],
-        bG: ["Soil Camp", "A fertile soil source."],
-        mG: ["Mine", "A crystal mine."],
-        dG: ["University", "University Yelds students."],
+        u: ["建筑", "建筑生产工人."],
+        aG: ["水培农场", "水培真菌农场."],
+        bG: ["土壤营地", "肥沃的土壤源."],
+        mG: ["矿山", "一个水晶矿."],
+        dG: ["大学", "大学生产学生."],
         //  Engineers
-        e: ["Engineers", "Engineers yields Buildings."],
-        aGG: ["Hydro Eng.", "Hydro Engineer yields Farm."],
-        bGG: ["Soil Eng.", "Soil Engineer yields Soil Camp."],
-        mGG: ["Mine Eng.", "Mine Engineer yields Mine."],
-        dGG: ["Dep. of Education", "Department of Education yields University"],
+        e: ["工程师", "工程师建造建筑物."],
+        aGG: ["水利工程师", "水利工程师生产农场."],
+        bGG: ["土壤工程师", "土壤工程师生产土壤营地."],
+        mGG: ["矿山工程师", "矿山工程师生产矿山."],
+        dGG: ["教育部门", "教育部门生产大学"],
         //  Bee
         A: ["Bee Farmer", "Farm flowers."],
         B: ["Bee Carpenter", "A Carpenter Bee."],
@@ -6490,31 +6490,31 @@ var STRINGS = {
         P: ["Time Producer", "+0.1 时间/秒"],
         B: ["Time Bank", "+1 max hour"],
         //  AutoBuy
-        H: ["Hatch Auto Buyer", "Unlock Hatch Auto Buyer for all units"],
-        t: ["Team Auto Buyer", "Unlock Team Auto Buyer for all units"],
-        T: ["Twin Auto Buyer", "Unlock Twin Auto Buyer for all units"],
-        M: ["Time Warp Auto Buyer", "Unlock one minute time warp Auto Buyer"],
-        R: ["Research Auto Buyer", "Unlock Research Auto Buyer"],
+        H: ["孵化自动购买者", "针对所有单位解锁孵化自动购买者"],
+        t: ["团队自动购买者", "Unlock Team Auto Buyer for all units"],
+        T: ["双胞胎自动购买者", "Unlock Twin Auto Buyer for all units"],
+        M: ["时间扭曲自动购买者", "Unlock one minute time warp Auto Buyer"],
+        R: ["研究自动购买者", "Unlock Research Auto Buyer"],
         //  Technology
-        F: ["Farming", "+10% food production"],
-        C: ["Carpentery", "+10% wood production"],
-        p: ["Mining", "+10% crystal production"],
-        s: ["Studing", "+10% science production"],
+        F: ["农业", "+10% 食物产量"],
+        C: ["木工", "+10% 木头产量"],
+        p: ["采矿", "+10% 水晶产量"],
+        s: ["学习", "+10% 科学产量"],
         //  Team
-        E: ["Team Work", "+30% Team Work Bonus"],
+        E: ["团队合作", "+30% 团队合作加成"],
         //  Worlds
-        w: ["Better World", "+10% World Bonus"],
-        r: ["Better Army", "+10% Army killing stuff"],
-        L: ["Max Level", "+10% Max World Level"]
+        w: ["更好的世界", "+10% 世界加成"],
+        r: ["更好的军队", "+10% 军队杀人物资"],
+        L: ["最高等级", "+10% 最高世界等级"]
     },
     actions: {
-        warp60: ["Warp minute", "Time warp by minutes"],
-        warp3600: ["Warp hour", "Time warp by hours"]
+        warp60: ["扭曲分钟", "时间扭曲以分钟计算"],
+        warp3600: ["扭曲小时", "时间扭曲以小时计算"]
     },
     bug: {
-        0: "Ants",
-        1: "Bees",
-        2: "Wasps",
+        0: "蚂蚁",
+        1: "蜜蜂",
+        2: "黄蜂",
         3: "Super Major"
     }
 };
@@ -10156,7 +10156,7 @@ var NameComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"card-block\">\n  <div class=\"card-title\">\n    <app-name [name]=\"research.name\"\n              [unlimited]=\"research.unlimited\"\n              [quantity]=\"research.quantity\"></app-name>\n  </div>\n  <div class=\"card-text p\">\n    {{research.description}}\n    <br />\n    <div *ngIf=\"!research.complete\">\n      <span>Cost: </span>\n      <app-price-line *ngFor=\"let price of research.prices; trackBy:getPriceId\"\n                      [unit]=\"price.base\"\n                      [canBuy]=\"price.canBuy\"\n                      [price]=\"price.priceUser\">\n      </app-price-line>\n\n      <div *ngIf=\"research.unlimited \">\n        <label for=\"max\">Max level:</label>\n        <input type=\"text\"\n               id=\"max\"\n               class=\"clr-input\"\n               [(ngModel)]=\"research.maxAutoBuyLevel\"\n               min=\"0\"\n               size=\"3\">\n      </div>\n\n    </div>\n  </div>\n</div>\n<div class=\"card-footer\"\n     *ngIf=\"!research.complete\">\n  <button *ngIf=\"!research.canBuy && !canSkip\"\n          class=\"btn btn-sm btn-link\"\n          disabled>\n    Can't buy. Available in {{research.availableIn | endIn}}\n  </button>\n  <button *ngIf=\"!research.canBuy &&  canSkip\"\n          class=\"btn btn-danger btn-sm\"\n          (click)=\"skip()\">\n    Can't buy. Skip {{minuteSkip}} minutes\n  </button>\n  <button *ngIf=\"research.canBuy\"\n          class=\"btn btn-sm btn-link\"\n          (click)=\"research.buy(research.realNum)\">\n    Research\n  </button>\n</div>\n"
+module.exports = "<div class=\"card-block\">\n  <div class=\"card-title\">\n    <app-name [name]=\"research.name\"\n              [unlimited]=\"research.unlimited\"\n              [quantity]=\"research.quantity\"></app-name>\n  </div>\n  <div class=\"card-text p\">\n    {{research.description}}\n    <br />\n    <div *ngIf=\"!research.complete\">\n      <span>花费: </span>\n      <app-price-line *ngFor=\"let price of research.prices; trackBy:getPriceId\"\n                      [unit]=\"price.base\"\n                      [canBuy]=\"price.canBuy\"\n                      [price]=\"price.priceUser\">\n      </app-price-line>\n\n      <div *ngIf=\"research.unlimited \">\n        <label for=\"max\">最高等级:</label>\n        <input type=\"text\"\n               id=\"max\"\n               class=\"clr-input\"\n               [(ngModel)]=\"research.maxAutoBuyLevel\"\n               min=\"0\"\n               size=\"3\">\n      </div>\n\n    </div>\n  </div>\n</div>\n<div class=\"card-footer\"\n     *ngIf=\"!research.complete\">\n  <button *ngIf=\"!research.canBuy && !canSkip\"\n          class=\"btn btn-sm btn-link\"\n          disabled>\n    不能购买. 将会激活在 {{research.availableIn | endIn}}\n  </button>\n  <button *ngIf=\"!research.canBuy &&  canSkip\"\n          class=\"btn btn-danger btn-sm\"\n          (click)=\"skip()\">\n    不能购买. 跳过 {{minuteSkip}} 分钟\n  </button>\n  <button *ngIf=\"research.canBuy\"\n          class=\"btn btn-sm btn-link\"\n          (click)=\"research.buy(research.realNum)\">\n    研究\n  </button>\n</div>\n"
 
 /***/ }),
 
@@ -10359,7 +10359,7 @@ var MadeByChartComponent = /** @class */ (function () {
     };
     MadeByChartComponent.prototype.ngOnChanges = function () {
         this.title =
-            (this.consumers ? "Consumer" : "Producers") + " % of " + this.unit.name;
+            (this.consumers ? "消耗比例" : "生产比例") + " % 关于 " + this.unit.name;
         this.updateData();
     };
     MadeByChartComponent.prototype.ngAfterViewInit = function () {

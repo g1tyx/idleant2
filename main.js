@@ -30,7 +30,7 @@ webpackEmptyAsyncContext.id = "./src/$$_lazy_route_resource lazy recursive";
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<h6> {{actGr.name}}</h6>\n<div class=\"p\">\n\n  <input id=\"userNum\"\n         [(ngModel)]=\"actGr.userNum\"\n         (change)=\"actGr.reload(ms.game)\"\n         type=\"number\"\n         placeholder=\"1\"\n         step=\"1\"\n         min=\"1\"\n         size=\"3\">\n  <ng-template #one>1</ng-template>\n  <span> will cost: </span>\n  <app-price-line *ngFor=\"let price of actGr.pricesTemp; trackBy:getPriceId\"\n                  [unit]=\"price.base\"\n                  [canBuy]=\"price.canBuy\"\n                  [price]=\"price.price\"></app-price-line>\n\n</div>\n<div class=\"btn-group\">\n  <button *ngIf=\"!actGr.canBuy\"\n          class=\"btn btn-sm w-100\"\n          disabled>\n    Can't buy.\n  </button>\n  <!-- <app-cant-buy-signposts *ngIf=\"!action.canBuy\" [action]=\"action\"></app-cant-buy-signposts> -->\n  <button *ngIf=\"actGr.canBuy\"\n          class=\"btn btn-sm w-100\"\n          (click)=\"buy()\">\n    Get {{actGr.realNum | format: true}}\n  </button>\n</div>\n"
+module.exports = "<h6> {{actGr.name}}</h6>\n<div class=\"p\">\n\n  <input id=\"userNum\"\n         [(ngModel)]=\"actGr.userNum\"\n         (change)=\"actGr.reload(ms.game)\"\n         type=\"number\"\n         placeholder=\"1\"\n         step=\"1\"\n         min=\"1\"\n         size=\"3\">\n  <ng-template #one>1</ng-template>\n  <span> 将会花费: </span>\n  <app-price-line *ngFor=\"let price of actGr.pricesTemp; trackBy:getPriceId\"\n                  [unit]=\"price.base\"\n                  [canBuy]=\"price.canBuy\"\n                  [price]=\"price.price\"></app-price-line>\n\n</div>\n<div class=\"btn-group\">\n  <button *ngIf=\"!actGr.canBuy\"\n          class=\"btn btn-sm w-100\"\n          disabled>\n    不能购买\n  </button>\n  <!-- <app-cant-buy-signposts *ngIf=\"!action.canBuy\" [action]=\"action\"></app-cant-buy-signposts> -->\n  <button *ngIf=\"actGr.canBuy\"\n          class=\"btn btn-sm w-100\"\n          (click)=\"buy()\">\n    购买 {{actGr.realNum | format: true}}\n  </button>\n</div>\n"
 
 /***/ }),
 
@@ -274,7 +274,7 @@ var ActionComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngIf=\"!action.complete\">\n  <input *ngIf=\"!action.isLimited || action.limit.gte(2); else one\"\n         id=\"userNum\"\n         [(ngModel)]=\"action.userNum\"\n         (change)=\"action.reloadUserPrices()\"\n         type=\"number\"\n         placeholder=\"1\"\n         step=\"1\"\n         min=\"1\"\n         size=\"3\">\n  <ng-template #one>1</ng-template>\n  <span>will cost: </span>\n  <app-price-line *ngFor=\"let price of action.prices; trackBy:getPriceId\"\n                  [unit]=\"price.base\"\n                  [canBuy]=\"price.userCanBuy\"\n                  [price]=\"price.priceUser\"></app-price-line>\n</div>\n\n<div *ngIf=\"!action.complete\"\n     class=\"btn-group\">\n  <button *ngIf=\"!action.canBuy && !canSkip\"\n          class=\"btn btn-sm w-100\"\n          disabled>\n    Can't buy.\n    <span *ngIf=\"showTime\">\n      Available in {{action.availableIn | endIn}}\n    </span>\n  </button>\n  <button *ngIf=\"!action.canBuy && skippable && showTime && canSkip\"\n          class=\"btn btn-danger btn-sm w-100\"\n          (click)=\"skip()\">\n    Can't buy. Skip {{minuteSkip}} minutes\n  </button>\n  <app-cant-buy-signposts *ngIf=\"showTime && !action.canBuy\"\n                          [action]=\"action\"></app-cant-buy-signposts>\n  <button *ngIf=\"action.canBuy\"\n          class=\"btn btn-sm w-100\"\n          (click)=\"buy(action.realNum)\"\n          [disabled]=\"!action.canUserBuy\">\n    Get\n    <span *ngIf=\"!action.isLimited || action.limit.gte(2)\">{{action.realNum | format: true}}</span>\n  </button>\n  <button *ngIf=\"action.maxBuy.gt(3)\"\n          class=\"btn btn-sm w-100\"\n          (click)=\"buy(action.maxBuy.div(2).floor())\">\n    Get {{action.maxBuy.div(2).floor() | format: true}}\n  </button>\n  <button *ngIf=\"action.maxBuy.gte(2)\"\n          class=\"btn btn-sm w-100\"\n          (click)=\"buy(action.maxBuy)\">\n    Get {{action.maxBuy | format: true}}\n  </button>\n</div>\n"
+module.exports = "<div *ngIf=\"!action.complete\">\n  <input *ngIf=\"!action.isLimited || action.limit.gte(2); else one\"\n         id=\"userNum\"\n         [(ngModel)]=\"action.userNum\"\n         (change)=\"action.reloadUserPrices()\"\n         type=\"number\"\n         placeholder=\"1\"\n         step=\"1\"\n         min=\"1\"\n         size=\"3\">\n  <ng-template #one>1</ng-template>\n  <span>将会花费: </span>\n  <app-price-line *ngFor=\"let price of action.prices; trackBy:getPriceId\"\n                  [unit]=\"price.base\"\n                  [canBuy]=\"price.userCanBuy\"\n                  [price]=\"price.priceUser\"></app-price-line>\n</div>\n\n<div *ngIf=\"!action.complete\"\n     class=\"btn-group\">\n  <button *ngIf=\"!action.canBuy && !canSkip\"\n          class=\"btn btn-sm w-100\"\n          disabled>\n    不能购买\n    <span *ngIf=\"showTime\">\n      剩余时间 {{action.availableIn | endIn}}\n    </span>\n  </button>\n  <button *ngIf=\"!action.canBuy && skippable && showTime && canSkip\"\n          class=\"btn btn-danger btn-sm w-100\"\n          (click)=\"skip()\">\n    不能购买。 跳过 {{minuteSkip}} 分钟\n  </button>\n  <app-cant-buy-signposts *ngIf=\"showTime && !action.canBuy\"\n                          [action]=\"action\"></app-cant-buy-signposts>\n  <button *ngIf=\"action.canBuy\"\n          class=\"btn btn-sm w-100\"\n          (click)=\"buy(action.realNum)\"\n          [disabled]=\"!action.canUserBuy\">\n    购买\n    <span *ngIf=\"!action.isLimited || action.limit.gte(2)\">{{action.realNum | format: true}}</span>\n  </button>\n  <button *ngIf=\"action.maxBuy.gt(3)\"\n          class=\"btn btn-sm w-100\"\n          (click)=\"buy(action.maxBuy.div(2).floor())\">\n    购买 {{action.maxBuy.div(2).floor() | format: true}}\n  </button>\n  <button *ngIf=\"action.maxBuy.gte(2)\"\n          class=\"btn btn-sm w-100\"\n          (click)=\"buy(action.maxBuy)\">\n    购买 {{action.maxBuy | format: true}}\n  </button>\n</div>\n"
 
 /***/ }),
 
@@ -1420,7 +1420,7 @@ var FormatPipe = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<h1>{{unitGroup.name}}\n\n  <clr-dropdown>\n    <button type=\"button\"\n            class=\"btn btn-outline-primary btn-link\"\n            clrDropdownTrigger>\n      Actions\n      <clr-icon shape=\"caret down\"></clr-icon>\n    </button>\n    <clr-dropdown-menu *clrIfOpen>\n      <label class=\"dropdown-header\">Selections</label>\n      <clr-dropdown>\n        <button type=\"button\"\n                clrDropdownTrigger>Select</button>\n        <clr-dropdown-menu>\n          <button type=\"button\"\n                  (click)=\"select(bug)\"\n                  clrDropdownItem\n                  *ngFor=\"let bug of bugs;trackBy getBugId\">\n            {{utility.getBugName(bug) }}\n          </button>\n        </clr-dropdown-menu>\n      </clr-dropdown>\n      <clr-dropdown>\n        <button type=\"button\"\n                clrDropdownTrigger>Add to selection</button>\n        <clr-dropdown-menu>\n          <button type=\"button\"\n                  (click)=\"selectAdd(bug)\"\n                  clrDropdownItem\n                  *ngFor=\"let bug of bugs;trackBy getBugId\">\n            {{utility.getBugName(bug) }}\n          </button>\n        </clr-dropdown-menu>\n      </clr-dropdown>\n      <clr-dropdown>\n        <button type=\"button\"\n                clrDropdownTrigger>Deselect</button>\n        <clr-dropdown-menu>\n          <button type=\"button\"\n                  (click)=\"selectRemove(bug)\"\n                  clrDropdownItem\n                  *ngFor=\"let bug of bugs;trackBy getBugId\">\n            {{utility.getBugName(bug) }}\n          </button>\n        </clr-dropdown-menu>\n      </clr-dropdown>\n\n    </clr-dropdown-menu>\n  </clr-dropdown>\n\n</h1>\n<clr-tabs>\n\n  <clr-tab>\n    <button clrTabLink\n            id=\"link1\">Overview</button>\n    <clr-tab-content id=\"content1\"\n                     *clrIfActive=\"ms.overviewTaActive\">\n      <app-unit-group *ngIf=\"unitGroup\"\n                      [unitGroup]=\"unitGroup\"></app-unit-group>\n    </clr-tab-content>\n  </clr-tab>\n\n  <!-- <clr-tab *ngIf=\"ms.game.tabs.autoBuy.unlocked && unit.hasAutoBuyer\">\n    <button clrTabLink>Auto Buyers</button>\n    <clr-tab-content *clrIfActive=\"ms.prestigeTaActive\">\n      <app-group-autobuy [unitGroup]=\"unitGroup\"></app-group-autobuy>\n    </clr-tab-content>\n  </clr-tab>-->\n\n</clr-tabs>\n"
+module.exports = "<h1>{{unitGroup.name}}\n\n  <clr-dropdown>\n    <button type=\"button\"\n            class=\"btn btn-outline-primary btn-link\"\n            clrDropdownTrigger>\n      Actions\n      <clr-icon shape=\"caret down\"></clr-icon>\n    </button>\n    <clr-dropdown-menu *clrIfOpen>\n      <label class=\"dropdown-header\">Selections</label>\n      <clr-dropdown>\n        <button type=\"button\"\n                clrDropdownTrigger>Select</button>\n        <clr-dropdown-menu>\n          <button type=\"button\"\n                  (click)=\"select(bug)\"\n                  clrDropdownItem\n                  *ngFor=\"let bug of bugs;trackBy getBugId\">\n            {{utility.getBugName(bug) }}\n          </button>\n        </clr-dropdown-menu>\n      </clr-dropdown>\n      <clr-dropdown>\n        <button type=\"button\"\n                clrDropdownTrigger>Add to selection</button>\n        <clr-dropdown-menu>\n          <button type=\"button\"\n                  (click)=\"selectAdd(bug)\"\n                  clrDropdownItem\n                  *ngFor=\"let bug of bugs;trackBy getBugId\">\n            {{utility.getBugName(bug) }}\n          </button>\n        </clr-dropdown-menu>\n      </clr-dropdown>\n      <clr-dropdown>\n        <button type=\"button\"\n                clrDropdownTrigger>Deselect</button>\n        <clr-dropdown-menu>\n          <button type=\"button\"\n                  (click)=\"selectRemove(bug)\"\n                  clrDropdownItem\n                  *ngFor=\"let bug of bugs;trackBy getBugId\">\n            {{utility.getBugName(bug) }}\n          </button>\n        </clr-dropdown-menu>\n      </clr-dropdown>\n\n    </clr-dropdown-menu>\n  </clr-dropdown>\n\n</h1>\n<clr-tabs>\n\n  <clr-tab>\n    <button clrTabLink\n            id=\"link1\">概览</button>\n    <clr-tab-content id=\"content1\"\n                     *clrIfActive=\"ms.overviewTaActive\">\n      <app-unit-group *ngIf=\"unitGroup\"\n                      [unitGroup]=\"unitGroup\"></app-unit-group>\n    </clr-tab-content>\n  </clr-tab>\n\n  <!-- <clr-tab *ngIf=\"ms.game.tabs.autoBuy.unlocked && unit.hasAutoBuyer\">\n    <button clrTabLink>Auto Buyers</button>\n    <clr-tab-content *clrIfActive=\"ms.prestigeTaActive\">\n      <app-group-autobuy [unitGroup]=\"unitGroup\"></app-group-autobuy>\n    </clr-tab-content>\n  </clr-tab>-->\n\n</clr-tabs>\n"
 
 /***/ }),
 
@@ -1912,7 +1912,7 @@ var HeaderComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"card-block\">\n  <div class=\"card-title\">\n    Bugs in this world\n  </div>\n  <div class=\"card-text\">\n    <div id=\"container\"\n         #container>\n      <canvas #radar></canvas>\n    </div>\n  </div>\n</div>\n"
+module.exports = "<div class=\"card-block\">\n  <div class=\"card-title\">\n    这个世界上的虫子\n  </div>\n  <div class=\"card-text\">\n    <div id=\"container\"\n         #container>\n      <canvas #radar></canvas>\n    </div>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -1977,11 +1977,11 @@ var BugCardComponent = /** @class */ (function () {
                 type: "radar",
                 data: {
                     labels: [
-                        "Price",
-                        "Production",
-                        "Efficiency",
-                        "Team Price",
-                        "Twin Price"
+                        "价格",
+                        "生产",
+                        "效率",
+                        "团队价格",
+                        "双胞胎价格"
                     ],
                     datasets: _this.ms.game.currentWorld.additionalBugs.map(function (b) {
                         return _this.genDataset(b);
@@ -2127,7 +2127,7 @@ var HomeComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<clr-dropdown>\n  <button type=\"button\"\n          class=\"btn btn-outline-primary btn-link\"\n          clrDropdownTrigger>\n    Laboratory\n    <clr-icon shape=\"caret down\"></clr-icon>\n  </button>\n  <clr-dropdown-menu *clrIfOpen>\n    <label class=\"dropdown-header\">Buy one</label>\n    <button type=\"button\"\n            clrDropdownItem\n            (click)=\"buy1()\">Buy less expensive</button>\n    <button type=\"button\"\n            clrDropdownItem\n            (click)=\"buy1(false)\">Buy less expensive (no repeating)</button>\n    <div class=\"dropdown-divider\"></div>\n    <label class=\"dropdown-header\">Max Buy</label>\n    <button type=\"button\"\n            clrDropdownItem\n            (click)=\"buyMulti()\">Max Buy</button>\n    <button type=\"button\"\n            clrDropdownItem\n            (click)=\"buyMulti(false)\">Max Buy (no repeating)</button>\n    <button type=\"button\"\n            clrDropdownItem\n            (click)=\"buyMultiR()\">Max Buy Recursive</button>\n    <button type=\"button\"\n            clrDropdownItem\n            (click)=\"buyMultiR(false)\">Max Buy Recursive (no repeating)</button>\n  </clr-dropdown-menu>\n</clr-dropdown>\n"
+module.exports = "<clr-dropdown>\n  <button type=\"button\"\n          class=\"btn btn-outline-primary btn-link\"\n          clrDropdownTrigger>\n    实验室\n    <clr-icon shape=\"caret down\"></clr-icon>\n  </button>\n  <clr-dropdown-menu *clrIfOpen>\n    <label class=\"dropdown-header\">买1个</label>\n    <button type=\"button\"\n            clrDropdownItem\n            (click)=\"buy1()\">买便宜的</button>\n    <button type=\"button\"\n            clrDropdownItem\n            (click)=\"buy1(false)\">买更便宜的(不重复)</button>\n    <div class=\"dropdown-divider\"></div>\n    <label class=\"dropdown-header\">买最大数量</label>\n    <button type=\"button\"\n            clrDropdownItem\n            (click)=\"buyMulti()\">买最大数量</button>\n    <button type=\"button\"\n            clrDropdownItem\n            (click)=\"buyMulti(false)\">买最大数量 (不重复)</button>\n    <button type=\"button\"\n            clrDropdownItem\n            (click)=\"buyMultiR()\">递归购买最大数量</button>\n    <button type=\"button\"\n            clrDropdownItem\n            (click)=\"buyMultiR(false)\">递归购买最大数量(不重复)</button>\n  </clr-dropdown-menu>\n</clr-dropdown>\n"
 
 /***/ }),
 
@@ -2227,7 +2227,7 @@ var LabMenuComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"content-area\">\n  <h1>Here, scientists discuss things no one has seen before.</h1>\n\n  <div class=\"toggle-switch\">\n    <input type=\"checkbox\"\n           id=\"t1\"\n           [(ngModel)]=\"resDone\"\n           (change)=\"changeList()\">\n    <label for=\"t1\">Show research done</label>\n  </div>\n  <span>\n    Science:\n    <span class=\"monospace\">\n      {{ms.game.materials.science.quantity | format}} - {{ms.game.materials.science.c | format}} /s\n    </span>\n  </span>\n  <app-lab-menu></app-lab-menu>\n  <div class=\"card-columns card-columns-3\">\n    <app-research [research]=\"res\"\n                  *ngFor=\"let res of resList ;trackBy:getRestId\"></app-research>\n  </div>\n</div>\n"
+module.exports = "<div class=\"content-area\">\n  <h1>在这里，科学家们讨论着以前没人见过的东西。</h1>\n\n  <div class=\"toggle-switch\">\n    <input type=\"checkbox\"\n           id=\"t1\"\n           [(ngModel)]=\"resDone\"\n           (change)=\"changeList()\">\n    <label for=\"t1\">显示已完成的研究</label>\n  </div>\n  <span>\n    科学:\n    <span class=\"monospace\">\n      {{ms.game.materials.science.quantity | format}} - {{ms.game.materials.science.c | format}} /秒\n    </span>\n  </span>\n  <app-lab-menu></app-lab-menu>\n  <div class=\"card-columns card-columns-3\">\n    <app-research [research]=\"res\"\n                  *ngFor=\"let res of resList ;trackBy:getRestId\"></app-research>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -2412,8 +2412,7 @@ var MainService = /** @class */ (function () {
                 }, 5 * 1000);
             });
         }
-        else
-            console.log("Github build");
+        //else console.log("Github build");
     }
     MainService.prototype.start = function () {
         this.show = true;
@@ -2501,7 +2500,7 @@ var MainService = /** @class */ (function () {
             this.last = data.time;
             this.lastSave = new Date(this.last);
             this.game.restore(data.m);
-            setTimeout(function () { return _this.toastr.success("", "Game Loaded"); }, 0);
+            setTimeout(function () { return _this.toastr.success("", "游戏加载成功"); }, 0);
             return true;
         }
         catch (ex) {
@@ -2811,7 +2810,7 @@ var MaterialNavComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<a [routerLink]=\"['/nav/unit/'+id]\"\n   class=\"nav-link matLink clr-row clr-justify-content-between\"\n   routerLinkActive=\"active\"\n   [ngClass]=\"{'red': isEnding}\">\n\n  <span>\n    <clr-icon class=\"is-error is-solid\"\n              shape=\"exclamation-triangle\"\n              *ngIf=\"isEnding\"></clr-icon>\n    <span class=\"first small\">{{name}}</span>\n    <br/>\n    <span class=\"monospace\">{{quantity | format:false:ms.options.formatter}}</span>\n  </span>\n\n  <span class=\"perSecTab  monospace clr-col clr-align-self-end\">\n    <span *ngIf=\"perSec.abs().gt(0.001)\"\n          [ngClass]=\"{'noEnought': perSec.lt(0)}\">\n      {{perSec | format:false:ms.options.formatter}}/s\n    </span>\n  </span>\n\n</a>\n"
+module.exports = "<a [routerLink]=\"['/nav/unit/'+id]\"\n   class=\"nav-link matLink clr-row clr-justify-content-between\"\n   routerLinkActive=\"active\"\n   [ngClass]=\"{'red': isEnding}\">\n\n  <span>\n    <clr-icon class=\"is-error is-solid\"\n              shape=\"exclamation-triangle\"\n              *ngIf=\"isEnding\"></clr-icon>\n    <span class=\"first small\">{{name}}</span>\n    <br/>\n    <span class=\"monospace\">{{quantity | format:false:ms.options.formatter}}</span>\n  </span>\n\n  <span class=\"perSecTab  monospace clr-col clr-align-self-end\">\n    <span *ngIf=\"perSec.abs().gt(0.001)\"\n          [ngClass]=\"{'noEnought': perSec.lt(0)}\">\n      {{perSec | format:false:ms.options.formatter}}/秒\n    </span>\n  </span>\n\n</a>\n"
 
 /***/ }),
 
@@ -4365,11 +4364,11 @@ var Game = /** @class */ (function () {
                 //  Kill Malus
                 if (unitZero instanceof _malus__WEBPACK_IMPORTED_MODULE_5__["Malus"]) {
                     if (unitZero.kill()) {
-                        this.ms.toastr.success("", unitZero.name + " killed!");
+                        this.ms.toastr.success("", unitZero.name + " 被杀死了!");
                     }
                 }
                 else {
-                    this.ms.toastr.warning(unitZero.name + " ended!");
+                    this.ms.toastr.warning(unitZero.name + " 消耗光了!");
                 }
             }
             var remaning = delta - maxTime;
@@ -4947,7 +4946,7 @@ var AllMasteries = /** @class */ (function () {
         this.addMasteryLine(10, 60, _mastery__WEBPACK_IMPORTED_MODULE_3__["MasteryTypes"].TEAM_START, 5);
         this.addMasteryLine(10, 65, _mastery__WEBPACK_IMPORTED_MODULE_3__["MasteryTypes"].TEAM_PRESTIGE, 5);
         this.addMasteryLine(64, 100, _mastery__WEBPACK_IMPORTED_MODULE_3__["MasteryTypes"].START_TWIN, 1, 69);
-        //  Science && Tecnology
+        //  Science && Technology
         this.addMasteryLine(15, 70, _mastery__WEBPACK_IMPORTED_MODULE_3__["MasteryTypes"].SCIENTIFIC_METHOD, 5);
         this.addMasteryLine(15, 75, _mastery__WEBPACK_IMPORTED_MODULE_3__["MasteryTypes"].THECNOLOGY_PRESTIGE, 5);
         this.addMasteryLine(74, 103, _mastery__WEBPACK_IMPORTED_MODULE_3__["MasteryTypes"].START_RESEARCHS, 1, 79);
@@ -5225,7 +5224,7 @@ var Mastery = /** @class */ (function () {
                 break;
             }
             case MasteryTypes.THECNOLOGY_PRESTIGE: {
-                ret = "tecnology prestige up\n" + 100 * num + "% more effective";
+                ret = "technology prestige up\n" + 100 * num + "% more effective";
                 break;
             }
             case MasteryTypes.START_TWIN: {
@@ -5311,7 +5310,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _followers__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./followers */ "./src/app/model/prestige/followers.ts");
 /* harmony import */ var _followers2__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./followers2 */ "./src/app/model/prestige/followers2.ts");
 /* harmony import */ var _team__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./team */ "./src/app/model/prestige/team.ts");
-/* harmony import */ var _tecnology__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./tecnology */ "./src/app/model/prestige/tecnology.ts");
+/* harmony import */ var _technology__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./technology */ "./src/app/model/prestige/technology.ts");
 /* harmony import */ var _time__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./time */ "./src/app/model/prestige/time.ts");
 /* harmony import */ var _world_prestige__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./world-prestige */ "./src/app/model/prestige/world-prestige.ts");
 
@@ -5329,10 +5328,10 @@ var AllPrestige = /** @class */ (function () {
         this.followers2 = new _followers2__WEBPACK_IMPORTED_MODULE_2__["Followers2"]();
         this.time = new _time__WEBPACK_IMPORTED_MODULE_5__["Time"]();
         this.autoBuyUnlock = new _auto_buy_unlock__WEBPACK_IMPORTED_MODULE_0__["AutoBuyUnlock"]();
-        this.tecnology = new _tecnology__WEBPACK_IMPORTED_MODULE_4__["Tecnology"]();
+        this.technology = new _technology__WEBPACK_IMPORTED_MODULE_4__["Technology"]();
         this.team = new _team__WEBPACK_IMPORTED_MODULE_3__["Team"]();
         this.worldPrestige = new _world_prestige__WEBPACK_IMPORTED_MODULE_6__["WorldPrestige"]();
-        this.prestigeGroups.push(this.followers, this.followers2, this.tecnology, this.team, this.time, this.worldPrestige, this.autoBuyUnlock);
+        this.prestigeGroups.push(this.followers, this.followers2, this.technology, this.team, this.time, this.worldPrestige, this.autoBuyUnlock);
     }
     AllPrestige.prototype.declareStuff = function (game) {
         var _this = this;
@@ -5622,16 +5621,16 @@ var Team = /** @class */ (function (_super) {
 
 /***/ }),
 
-/***/ "./src/app/model/prestige/tecnology.ts":
-/*!*********************************************!*\
-  !*** ./src/app/model/prestige/tecnology.ts ***!
-  \*********************************************/
-/*! exports provided: Tecnology */
+/***/ "./src/app/model/prestige/technology.ts":
+/*!**********************************************!*\
+  !*** ./src/app/model/prestige/technology.ts ***!
+  \**********************************************/
+/*! exports provided: Technology */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Tecnology", function() { return Tecnology; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Technology", function() { return Technology; });
 /* harmony import */ var _masteries_mastery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../masteries/mastery */ "./src/app/model/masteries/mastery.ts");
 /* harmony import */ var _production_bonus__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../production-bonus */ "./src/app/model/production-bonus.ts");
 /* harmony import */ var _prestige__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./prestige */ "./src/app/model/prestige/prestige.ts");
@@ -5650,12 +5649,12 @@ var __extends = (undefined && undefined.__extends) || (function () {
 
 
 
-var Tecnology = /** @class */ (function (_super) {
-    __extends(Tecnology, _super);
-    function Tecnology() {
-        return _super.call(this, "tecno", "Tecnology") || this;
+var Technology = /** @class */ (function (_super) {
+    __extends(Technology, _super);
+    function Technology() {
+        return _super.call(this, "tecno", "Technology") || this;
     }
-    Tecnology.prototype.declareStuff = function (game) {
+    Technology.prototype.declareStuff = function (game) {
         this.farming = new _prestige__WEBPACK_IMPORTED_MODULE_2__["Prestige"]("F", game.genExperiencePrice(10));
         this.carpentry = new _prestige__WEBPACK_IMPORTED_MODULE_2__["Prestige"]("C", game.genExperiencePrice(10));
         this.mining = new _prestige__WEBPACK_IMPORTED_MODULE_2__["Prestige"]("i", game.genExperiencePrice(10));
@@ -5675,7 +5674,7 @@ var Tecnology = /** @class */ (function (_super) {
             };
         });
     };
-    return Tecnology;
+    return Technology;
 }(_prestige_group__WEBPACK_IMPORTED_MODULE_3__["PrestigeGroup"]));
 
 
@@ -6224,55 +6223,55 @@ var STRINGS = {
     units: {
         //  Materials
         f: ["Food", "食物用于维持所有单位。"],
-        w: ["Soil", "Soil is used to build better nest."],
-        c: ["Crystal", "Crystal is used to make science."],
-        s: ["Science", "Science is used to discover new things."],
+        w: ["Soil", "土壤用于构建更好的巢。"],
+        c: ["Crystal", "水晶是用来制造科学。"],
+        s: ["Science", "科学是用来发现新事物的。"],
         //  Ants
-        l: ["Larva", "Larva"],
-        q: ["Queen", "Queen"],
-        n: ["Nest", "Nest"],
+        l: ["Larva", "幼虫"],
+        q: ["Queen", "女王"],
+        n: ["Nest", "巢穴"],
         //  Ghantering
-        e: ["Drone", "Drone gather food."],
-        h: ["Geologist", "Geologist will seek for crystals."],
+        e: ["Drone", "雄蜂收集食物。"],
+        h: ["Geologist", "地质学家会寻找水晶。"],
         i: [
             "Student",
             [
-                "Students will try to acquire science.",
-                "Students were used to drink cristal."
+                "学生将努力获得科学。",
+                "学生们习惯喝水晶酒。"
             ]
         ],
         //  Workers
         a: [
             "Farmer",
             [
-                "Hydroponics farmers uses crystals to grow fungi without soil.",
-                "Ants are the World’s Best Fungus Farmers.",
-                "Farming since 10.000 BC."
+                "水培农民使用晶体在没有土壤的情况下种植真菌。",
+                "蚂蚁是世界上最好的真菌种植户。",
+                "公元前10000年开始耕种。"
             ]
         ],
-        b: ["Carpenter", "Carpenter ants builds nests in soil."],
+        b: ["Carpenter", "木匠蚁在土壤中筑巢。"],
         m: [
             "Miner",
             [
-                "Miners extracts crystal through mining.",
-                "Unsurprisingly, yet another idle game with miners."
+                "矿工通过采矿提取水晶。",
+                "不出所料，又是一场与矿工的无聊游戏。"
             ]
         ],
         d: [
             "Scientist",
             [
-                "Scientist gather science.",
-                "Scientist were used to drink cristal.",
-                "ScientAnts are like studentAnts, but betters."
+                "科学家收集的科学。",
+                "科学家过去常喝水晶酒。",
+                "科学家蚂蚁和学生蚂蚁一样,但他们是长辈。"
             ]
         ],
         // Buildings
-        aG: ["Farm", "An hydroponics farm."],
-        bG: ["Soil Camp", "Soil Camp is used to get more soil."],
-        mG: ["Mine", "A crystal mine."],
-        dG: ["University", "University yeld scientists."],
+        aG: ["Farm", "一个水培农场。"],
+        bG: ["Soil Camp", "土壤营地是用来获得更多的土壤。"],
+        mG: ["Mine", "一个水晶矿。"],
+        dG: ["University", "大学毕业的科学家。"],
         //  Engineers
-        aGG: ["Hydro Eng.", "Hydro Engineers yeld Farm."],
+        aGG: ["Hydro Eng.", "水利工程师对农场有加成"],
         bGG: ["Soil Eng.", "Soil Engineers yeld Soil Camp."],
         mGG: ["Mine Eng.", "Mine Engineers yeld Mine."],
         dGG: ["Education Dep.", "Department of Education yeld University."],
@@ -6488,7 +6487,7 @@ var STRINGS = {
         m: ["Miner Follower", "Start new worlds with 5 more miner"],
         d: ["Scientist Follower", "Start new worlds with 5 more scientist"],
         //  Time
-        P: ["Time Producer", "+0.1 time/s"],
+        P: ["Time Producer", "+0.1 时间/秒"],
         B: ["Time Bank", "+1 max hour"],
         //  AutoBuy
         H: ["Hatch Auto Buyer", "Unlock Hatch Auto Buyer for all units"],
@@ -6496,7 +6495,7 @@ var STRINGS = {
         T: ["Twin Auto Buyer", "Unlock Twin Auto Buyer for all units"],
         M: ["Time Warp Auto Buyer", "Unlock one minute time warp Auto Buyer"],
         R: ["Research Auto Buyer", "Unlock Research Auto Buyer"],
-        //  Tecnology
+        //  Technology
         F: ["Farming", "+10% food production"],
         C: ["Carpentery", "+10% wood production"],
         p: ["Mining", "+10% crystal production"],
@@ -9064,7 +9063,7 @@ var UnitLineComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<router-outlet></router-outlet>\n<clr-vertical-nav [clrVerticalNavCollapsible]=\"false\"\n                  [clr-nav-level]=\"2\">\n  <a clrVerticalNavLink\n     routerLink=\"/opt/save\"\n     routerLinkActive=\"active\">\n    <clr-icon shape=\"floppy\"></clr-icon>\n    Save\n  </a>\n  <a clrVerticalNavLink\n     routerLink=\"/opt/ui\"\n     routerLinkActive=\"active\">\n    <clr-icon shape=\"paint-roller\"></clr-icon>\n    Ui\n  </a>\n  <a clrVerticalNavLink\n     routerLink=\"/opt/stats\"\n     routerLinkActive=\"active\">\n    <clr-icon shape=\"info-standard\"></clr-icon>\n    Statistics\n  </a>\n</clr-vertical-nav>\n"
+module.exports = "<router-outlet></router-outlet>\n<clr-vertical-nav [clrVerticalNavCollapsible]=\"false\"\n                  [clr-nav-level]=\"2\">\n  <a clrVerticalNavLink\n     routerLink=\"/opt/save\"\n     routerLinkActive=\"active\">\n    <clr-icon shape=\"floppy\"></clr-icon>\n    保存\n  </a>\n  <a clrVerticalNavLink\n     routerLink=\"/opt/ui\"\n     routerLinkActive=\"active\">\n    <clr-icon shape=\"paint-roller\"></clr-icon>\n    界面\n  </a>\n  <a clrVerticalNavLink\n     routerLink=\"/opt/stats\"\n     routerLinkActive=\"active\">\n    <clr-icon shape=\"info-standard\"></clr-icon>\n    统计\n  </a>\n</clr-vertical-nav>\n"
 
 /***/ }),
 
@@ -9137,7 +9136,7 @@ var OptionsNavComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<h1>Save</h1>\n<div class=\"btn-group btn-primary\">\n  <button class=\"btn btn-success\"\n          (click)=\"serv.save()\">\n    <clr-icon shape=\"floppy\"></clr-icon>\n    Save\n  </button>\n  <button class=\"btn\"\n          (click)=\"serv.load()\">\n    <clr-icon shape=\"install\"></clr-icon>\n    Load\n  </button>\n  <button class=\"btn btn-danger\"\n          (click)=\"clearModal = true\">\n    <clr-icon shape=\"uninstall\"></clr-icon>\n    Clear\n  </button>\n</div>\n<p>\n  <br />\n  Last save: {{serv.lastSave | date:'medium' }}\n</p>\n<h2>Export / Import Save</h2>\n<textarea name=\"raw\"\n          [(ngModel)]=\"exp\"\n          rows=\"3\"></textarea>\n<div class=\"btn-group btn-primary\">\n  <button class=\"btn btn-success\"\n          (click)=\"export()\">\n    Export\n  </button>\n  <button class=\"btn\"\n          (click)=\"import()\">\n    Import\n  </button>\n</div>\n<h2>Autosave Options</h2>\n<div class=\"toggle-switch\">\n  <input type=\"checkbox\"\n         id=\"t1\"\n         [(ngModel)]=\"serv.options.autosaveNotification\">\n  <label for=\"t1\">Autosave Notification</label>\n</div>\n\n<clr-modal [(clrModalOpen)]=\"clearModal\">\n  <h3 class=\"modal-title\">Clear</h3>\n  <div class=\"modal-body\">\n    <p>Are you sure you want to delete everything ?</p>\n  </div>\n  <div class=\"modal-footer\">\n    <button type=\"button\"\n            class=\"btn btn-outline\"\n            (click)=\"clearModal = false\">Cancel</button>\n    <button type=\"button\"\n            class=\"btn btn-danger\"\n            (click)=\"this.serv.clear(); clearModal = false\">Clear</button>\n  </div>\n</clr-modal>\n"
+module.exports = "<h1>保存</h1>\n<div class=\"btn-group btn-primary\">\n  <button class=\"btn btn-success\"\n          (click)=\"serv.save()\">\n    <clr-icon shape=\"floppy\"></clr-icon>\n    保存\n  </button>\n  <button class=\"btn\"\n          (click)=\"serv.load()\">\n    <clr-icon shape=\"install\"></clr-icon>\n    加载\n  </button>\n  <button class=\"btn btn-danger\"\n          (click)=\"clearModal = true\">\n    <clr-icon shape=\"uninstall\"></clr-icon>\n    清空\n  </button>\n</div>\n<p>\n  <br />\n  每5分钟自动保存一次。\n  <br />\n  上次保存时间: {{serv.lastSave | date:'medium' }}\n</p>\n<h2>导出 / 导入存档</h2>\n<textarea name=\"raw\"\n          [(ngModel)]=\"exp\"\n          rows=\"3\"></textarea>\n<div class=\"btn-group btn-primary\">\n  <button class=\"btn btn-success\"\n          (click)=\"export()\">\n    导出\n  </button>\n  <button class=\"btn\"\n          (click)=\"import()\">\n    导入\n  </button>\n</div>\n<h2>自动保存设置</h2>\n<div class=\"toggle-switch\">\n  <input type=\"checkbox\"\n         id=\"t1\"\n         [(ngModel)]=\"serv.options.autosaveNotification\">\n  <label for=\"t1\">自动保存通知</label>\n</div>\n<br />\n<a href=\"https://scorzy.github.io/IdleAnt2/changelog.txt\"\n   target=\"_blank\">更新日志\n</a>\n\n<clr-modal [(clrModalOpen)]=\"clearModal\">\n  <h3 class=\"modal-title\">重置</h3>\n  <div class=\"modal-body\">\n    <p>你确定要删除所有游戏进度？</p>\n  </div>\n  <div class=\"modal-footer\">\n    <button type=\"button\"\n            class=\"btn btn-outline\"\n            (click)=\"clearModal = false\">取消</button>\n    <button type=\"button\"\n            class=\"btn btn-danger\"\n            (click)=\"this.serv.clear(); clearModal = false\">删除</button>\n  </div>\n</clr-modal>\n"
 
 /***/ }),
 
@@ -9226,7 +9225,7 @@ var SaveComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<h1>Statistics</h1>\n<div class=\"clr-row\">\n  <div class=\"clr-col-12\tclr-col-sm-12\tclr-col-md-12\tclr-col-lg-12\tclr-col-xl-4\">\n    <h6>Total:</h6>\n    <ul class=\"list\">\n      <!-- <li>\n        Current experience:\n        <span>{{ms.game.experience | format:true}}</span>\n      </li> -->\n      <li>\n        Total earned Experience:\n        <span>{{ms.game.stats.totalExperience | format:true}}</span>\n      </li>\n      <li>\n        Total earned Mastery:\n        <span>{{ms.game.allMateries.totalEarned}}</span>\n      </li>\n      <li>\n        Completed worlds:\n        <span>{{ms.game.stats.completedWorld | format:true}}</span>\n      </li>\n      <li>\n        Best Experience/s:\n        <span>{{ms.game.stats.bestExpS}}</span>\n      </li>\n      <li>\n        Words start:\n        <span>{{ms.game.stats.worldStartDate | date:'medium'}}</span>\n      </li>\n    </ul>\n\n  </div>\n  <div class=\"clr-col-12\tclr-col-sm-12\tclr-col-md-12\tclr-col-lg-12\tclr-col-xl-8\">\n    <h6>Lasts 10 worlds:</h6>\n    <clr-datagrid class=\"datagrid-compact\">\n      <clr-dg-column [clrDgField]=\"'startDate'\">Start Date</clr-dg-column>\n      <clr-dg-column [clrDgField]=\"'endDate'\">End Date</clr-dg-column>\n      <clr-dg-column [clrDgField]=\"'worldName'\">Name</clr-dg-column>\n      <clr-dg-column [clrDgSortBy]=\"runExpSorter\">Exp</clr-dg-column>\n      <clr-dg-column [clrDgSortBy]=\"runExpPerSecSorter\">Exp/s</clr-dg-column>\n      <clr-dg-column [clrDgField]=\"'completed'\">Completed</clr-dg-column>\n\n      <clr-dg-row *clrDgItems=\"let run of ms.game.stats.runs\">\n        <clr-dg-cell>{{run.startDate | date:'medium'}}</clr-dg-cell>\n        <clr-dg-cell>{{run.endDate | date:'medium'}}</clr-dg-cell>\n        <clr-dg-cell>{{run.worldName}}</clr-dg-cell>\n        <clr-dg-cell>{{run.experience | format:true}}</clr-dg-cell>\n        <clr-dg-cell>{{run.expPerSec | format}}</clr-dg-cell>\n        <clr-dg-cell>{{run.completed}}</clr-dg-cell>\n      </clr-dg-row>\n    </clr-datagrid>\n  </div>\n  <div class=\"clr-col-12\tclr-col-sm-12\tclr-col-md-12\tclr-col-lg-12\tclr-col-xl-12\">\n    <div style=\"width: 100%\">\n      <canvas #chart></canvas>\n    </div>\n  </div>\n</div>\n"
+module.exports = "<h1>统计</h1>\n<div class=\"clr-row\">\n  <div class=\"clr-col-12\tclr-col-sm-12\tclr-col-md-12\tclr-col-lg-12\tclr-col-xl-4\">\n    <h6>总计:</h6>\n    <ul class=\"list\">\n      <!-- <li>\n        Current experience:\n        <span>{{ms.game.experience | format:true}}</span>\n      </li> -->\n      <li>\n        经验获得总数:\n        <span>{{ms.game.stats.totalExperience | format:true}}</span>\n      </li>\n      <li>\n        累计获得的能力:\n        <span>{{ms.game.allMateries.totalEarned}}</span>\n      </li>\n      <li>\n        完成的世界:\n        <span>{{ms.game.stats.completedWorld | format:true}}</span>\n      </li>\n      <li>\n        最佳经验/秒:\n        <span>{{ms.game.stats.bestExpS}}</span>\n      </li>\n      <li>\n        游戏开始时间:\n        <span>{{ms.game.stats.worldStartDate | date:'medium'}}</span>\n      </li>\n    </ul>\n\n  </div>\n  <div class=\"clr-col-12\tclr-col-sm-12\tclr-col-md-12\tclr-col-lg-12\tclr-col-xl-8\">\n    <h6>最近10个世界:</h6>\n    <clr-datagrid class=\"datagrid-compact\">\n      <clr-dg-column [clrDgField]=\"'startDate'\">开始时间</clr-dg-column>\n      <clr-dg-column [clrDgField]=\"'endDate'\">结束时间</clr-dg-column>\n      <clr-dg-column [clrDgField]=\"'worldName'\">名称</clr-dg-column>\n      <clr-dg-column [clrDgSortBy]=\"runExpSorter\">经验</clr-dg-column>\n      <clr-dg-column [clrDgSortBy]=\"runExpPerSecSorter\">经验/秒</clr-dg-column>\n      <clr-dg-column [clrDgField]=\"'completed'\">已完成</clr-dg-column>\n\n      <clr-dg-row *clrDgItems=\"let run of ms.game.stats.runs\">\n        <clr-dg-cell>{{run.startDate | date:'medium'}}</clr-dg-cell>\n        <clr-dg-cell>{{run.endDate | date:'medium'}}</clr-dg-cell>\n        <clr-dg-cell>{{run.worldName}}</clr-dg-cell>\n        <clr-dg-cell>{{run.experience | format:true}}</clr-dg-cell>\n        <clr-dg-cell>{{run.expPerSec | format}}</clr-dg-cell>\n        <clr-dg-cell>{{run.completed}}</clr-dg-cell>\n      </clr-dg-row>\n    </clr-datagrid>\n  </div>\n  <div class=\"clr-col-12\tclr-col-sm-12\tclr-col-md-12\tclr-col-lg-12\tclr-col-xl-12\">\n    <div style=\"width: 100%\">\n      <canvas #chart></canvas>\n    </div>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -9292,7 +9291,7 @@ var StatsComponent = /** @class */ (function () {
                     labels: reverseRun.map(function (r) { return r.worldName; }),
                     datasets: [
                         {
-                            label: "Experience %",
+                            label: "经验 %",
                             data: reverseRun.map(function (r) {
                                 return Math.floor(r.experience.div(totalExp).toNumber() * 100);
                             }),
@@ -9301,7 +9300,7 @@ var StatsComponent = /** @class */ (function () {
                             borderWidth: 0
                         },
                         {
-                            label: "Time spent %",
+                            label: "花费时间 %",
                             data: reverseRun.map(function (r) {
                                 return Math.floor(((r.endDate.getTime() - r.startDate.getTime()) * 100) /
                                     totalTime);
@@ -9366,7 +9365,7 @@ var StatsComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<h1>Options</h1>\n<form clrForm\n      class=\"clr-form clr-form-compact\">\n\n  <div class=\"form-group\">\n    <label for=\"t1\">Theme:</label>\n    <div class=\"toggle-switch\">\n      <input name=\"dark\"\n             type=\"checkbox\"\n             id=\"dark\"\n             [(ngModel)]=\"ms.options.dark\"\n             (change)=\"ms.setTheme()\">\n      <label for=\"dark\">Dark</label>\n    </div>\n  </div>\n\n  <div class=\"form-group\">\n    <label for=\"selects_1\">Header color</label>\n    <div class=\"select\">\n      <select name=\"header\"\n              id=\"selects_1\"\n              [(ngModel)]=\"ms.options.header\"\n              (change)=\"ms.options.headerEmitter.emit(ms.options.header)\">\n        <option>1</option>\n        <option>2</option>\n        <option>3</option>\n        <option>4</option>\n        <option>5</option>\n        <option>6</option>\n        <option>7</option>\n      </select>\n    </div>\n  </div>\n\n  <div class=\"form-group\">\n    <label for=\"t1\">Alternative number format:</label>\n    <div class=\"toggle-switch\">\n      <input type=\"checkbox\"\n             id=\"format\"\n             name=\"format\"\n             [(ngModel)]=\"ms.options.usaFormat\"\n             (change)=\"ms.options.generateFormatter()\">\n      <label for=\"format\">On</label>\n    </div>\n  </div>\n\n  <div class=\"form-group\">\n    <label for=\"numFormat\">Number format:</label>\n    <div class=\"select\">\n      <select id=\"numFormat\"\n              name=\"numFormat\"\n              [(ngModel)]=\"ms.options.numFormat\"\n              (change)=\"ms.options.generateFormatter()\">\n        <option value=\"standard\">Standard</option>\n        <option value=\"scientific\">Scientific</option>\n        <option value=\"engineering\">Engineering</option>\n        <option value=\"longScale\">Long Scale</option>\n      </select>\n    </div>\n  </div>\n\n  <div class=\"form-group\">\n    <label for=\"matPos\">Materials position:</label>\n    <div class=\"select\">\n      <select id=\"matPos\"\n              name=\"matPos\"\n              [(ngModel)]=\"os.materialPosition\"\n              (change)=\"onChangeMaterialPos()\">\n        <option value=\"1\">Both</option>\n        <option value=\"2\">Top</option>\n        <option value=\"3\">Side</option>\n      </select>\n    </div>\n  </div>\n\n  <div class=\"form-group\">\n    <label for=\"si\">Show I on new units:</label>\n    <div class=\"toggle-switch\">\n      <input name=\"si\"\n             type=\"checkbox\"\n             id=\"si\"\n             [(ngModel)]=\"ms.options.showI\">\n      <label for=\"si\"></label>\n    </div>\n  </div>\n\n</form>\n"
+module.exports = "<h1>选项</h1>\n<form clrForm\n      class=\"clr-form clr-form-compact\">\n\n  <div class=\"form-group\">\n    <label for=\"t1\">主题:</label>\n    <div class=\"toggle-switch\">\n      <input name=\"dark\"\n             type=\"checkbox\"\n             id=\"dark\"\n             [(ngModel)]=\"ms.options.dark\"\n             (change)=\"ms.setTheme()\">\n      <label for=\"dark\">黑色</label>\n    </div>\n  </div>\n\n  <div class=\"form-group\">\n    <label for=\"selects_1\">顶部颜色</label>\n    <div class=\"select\">\n      <select name=\"header\"\n              id=\"selects_1\"\n              [(ngModel)]=\"ms.options.header\"\n              (change)=\"ms.options.headerEmitter.emit(ms.options.header)\">\n        <option>1</option>\n        <option>2</option>\n        <option>3</option>\n        <option>4</option>\n        <option>5</option>\n        <option>6</option>\n        <option>7</option>\n      </select>\n    </div>\n  </div>\n\n  <div class=\"form-group\">\n    <label for=\"t1\">使用另一种数字格式:</label>\n    <div class=\"toggle-switch\">\n      <input type=\"checkbox\"\n             id=\"format\"\n             name=\"format\"\n             [(ngModel)]=\"ms.options.usaFormat\"\n             (change)=\"ms.options.generateFormatter()\">\n      <label for=\"format\">开</label>\n    </div>\n  </div>\n\n  <div class=\"form-group\">\n    <label for=\"numFormat\">数字格式:</label>\n    <div class=\"select\">\n      <select id=\"numFormat\"\n              name=\"numFormat\"\n              [(ngModel)]=\"ms.options.numFormat\"\n              (change)=\"ms.options.generateFormatter()\">\n        <option value=\"standard\">默认</option>\n        <option value=\"scientific\">科学计数法</option>\n        <option value=\"engineering\">工程计数法</option>\n        <option value=\"longScale\">长比例尺</option>\n      </select>\n    </div>\n  </div>\n\n  <div class=\"form-group\">\n    <label for=\"matPos\">材料位置:</label>\n    <div class=\"select\">\n      <select id=\"matPos\"\n              name=\"matPos\"\n              [(ngModel)]=\"os.materialPosition\"\n              (change)=\"onChangeMaterialPos()\">\n        <option value=\"1\">全部</option>\n        <option value=\"2\">顶部</option>\n        <option value=\"3\">侧边</option>\n      </select>\n    </div>\n  </div>\n\n  <div class=\"form-group\">\n    <label for=\"si\">显示我的新单位:</label>\n    <div class=\"toggle-switch\">\n      <input name=\"si\"\n             type=\"checkbox\"\n             id=\"si\"\n             [(ngModel)]=\"ms.options.showI\">\n      <label for=\"si\"></label>\n    </div>\n  </div>\n\n</form>\n"
 
 /***/ }),
 
@@ -9483,10 +9482,15 @@ var OptionsService = /** @class */ (function () {
         this.generateFormatter();
     }
     OptionsService.prototype.generateFormatter = function () {
-        this.formatter = new numberformat.Formatter({
-            format: this.numFormat,
-            flavor: "short"
-        });
+        try {
+            this.formatter = new numberformat.Formatter({
+                format: this.numFormat,
+                flavor: "short"
+            });
+        }
+        catch (ex) {
+            console.log("Error generateFormatter:" + ex);
+        }
         if (!!this.formatEmitter)
             this.formatEmitter.emit(1);
     };
@@ -9978,7 +9982,7 @@ var PrestigeComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<clr-signpost>\n  <clr-signpost-content *clrIfOpen=\"open\"\n                        [clrPosition]=\"'left-middle'\">\n    <h3>{{production.product.name}}:</h3>\n    <ul class=\"list\">\n      <li [class.noEnought]=\"production.rateo.lt(0)\">\n        Base production: {{production.rateo | format}}\n      </li>\n      <li>\n        Operativity: {{production.producer.efficiency}}%\n      </li>\n      <li *ngIf=\"ms.game.researches.team1.done && production.producer.buyAction\">\n        Teamwork bonus: +{{production.producer.bonus.times(100) | format}}%\n      </li>\n    </ul>\n    <div *ngIf=\"productionsAll.length +productionsEfficienty.length +  productionsBonus.length >0\">\n      <h6>Additive Bonus:</h6>\n      <ul class=\"list\">\n        <li *ngFor=\"let bon of productionsAll; trackBy getProdID\">\n          {{bon.unit.name}}: +{{bon.getBonusPercent() | format }}%\n        </li>\n        <li *ngFor=\"let bon of productionsEfficienty; trackBy getProdID\">\n          {{bon.unit.name}}: +{{bon.getBonusPercent() | format }}%\n        </li>\n        <li *ngFor=\"let bon of productionsBonus; trackBy getProdID\">\n          {{bon.unit.name}}: +{{bon.getBonusPercent() | format }}%\n        </li>\n      </ul>\n    </div>\n  </clr-signpost-content>\n</clr-signpost>\n"
+module.exports = "<clr-signpost>\n  <clr-signpost-content *clrIfOpen=\"open\"\n                        [clrPosition]=\"'left-middle'\">\n    <h3>{{production.product.name}}:</h3>\n    <ul class=\"list\">\n      <li [class.noEnought]=\"production.rateo.lt(0)\">\n        基础产量: {{production.rateo | format}}\n      </li>\n      <li>\n        Operativity: {{production.producer.efficiency}}%\n      </li>\n      <li *ngIf=\"ms.game.researches.team1.done && production.producer.buyAction\">\n        团队加成: +{{production.producer.bonus.times(100) | format}}%\n      </li>\n    </ul>\n    <div *ngIf=\"productionsAll.length +productionsEfficienty.length +  productionsBonus.length >0\">\n      <h6>Additive Bonus:</h6>\n      <ul class=\"list\">\n        <li *ngFor=\"let bon of productionsAll; trackBy getProdID\">\n          {{bon.unit.name}}: +{{bon.getBonusPercent() | format }}%\n        </li>\n        <li *ngFor=\"let bon of productionsEfficienty; trackBy getProdID\">\n          {{bon.unit.name}}: +{{bon.getBonusPercent() | format }}%\n        </li>\n        <li *ngFor=\"let bon of productionsBonus; trackBy getProdID\">\n          {{bon.unit.name}}: +{{bon.getBonusPercent() | format }}%\n        </li>\n      </ul>\n    </div>\n  </clr-signpost-content>\n</clr-signpost>\n"
 
 /***/ }),
 
@@ -10567,7 +10571,7 @@ var UnitAutoBuyComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<h1>{{unit.name}}</h1>\n\n<clr-tabs>\n\n  <clr-tab>\n    <button clrTabLink\n            id=\"link1\">Overview</button>\n    <clr-tab-content id=\"content1\"\n                     *clrIfActive=\"ms.overviewTaActive\">\n      <app-unit [unit]=\"unit\"></app-unit>\n    </clr-tab-content>\n  </clr-tab>\n\n  <clr-tab *ngIf=\"ms.game.tabs.autoBuy.unlocked && unit.hasAutoBuyer\">\n    <button clrTabLink>Auto Buyers</button>\n    <clr-tab-content *clrIfActive=\"ms.prestigeTaActive\">\n      <app-unit-auto-buy [unit]=\"unit\"></app-unit-auto-buy>\n    </clr-tab-content>\n  </clr-tab>\n\n</clr-tabs>\n"
+module.exports = "<h1>{{unit.name}}</h1>\n\n<clr-tabs>\n\n  <clr-tab>\n    <button clrTabLink\n            id=\"link1\">概览</button>\n    <clr-tab-content id=\"content1\"\n                     *clrIfActive=\"ms.overviewTaActive\">\n      <app-unit [unit]=\"unit\"></app-unit>\n    </clr-tab-content>\n  </clr-tab>\n\n  <clr-tab *ngIf=\"ms.game.tabs.autoBuy.unlocked && unit.hasAutoBuyer\">\n    <button clrTabLink>自动购买者</button>\n    <clr-tab-content *clrIfActive=\"ms.prestigeTaActive\">\n      <app-unit-auto-buy [unit]=\"unit\"></app-unit-auto-buy>\n    </clr-tab-content>\n  </clr-tab>\n\n</clr-tabs>\n"
 
 /***/ }),
 
@@ -10673,7 +10677,7 @@ var UnitTabsComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngIf=\"unit\">\n  <div class=\"clr-row\">\n    <div class=\"clr-col-xs-12\tclr-col-sm-6\tclr-col-md-6\tclr-col-lg-6\tclr-col-xl-6\">\n\n      <h5>{{unit.description}}</h5>\n\n      <p *ngIf=\"ms.game.researches.team1.done && unit.buyAction && unit.bonus.gt(0)\">\n        你购买了 {{unit.buyAction.quantity | format}} 次; 奖励加成: + {{unit.bonus.times(100) | format}}%\n      </p>\n\n      <p *ngIf=\"unit.c.abs().gt(0.01)\">\n        产量:\n        <app-polynom [a]=\"unit.a\"\n                     [b]=\"unit.b\"\n                     [c]=\"unit.c\"></app-polynom>\n      </p>\n\n      <clr-alert *ngIf=\"unit.isEnding\"\n                 [clrAlertType]=\"malus ? 'alert-sucess': (ms.game.firstEndigUnit.endIn < 3600000 ? 'alert-danger':'alert-warning')\"\n                 [clrAlertClosable]=\"false\"\n                 [clrAlertSizeSmall]=\"false\">\n        <clr-alert-item>\n          <span class=\"alert-text\">\n            耗尽: {{unit.endIn | endIn}}\n          </span>\n        </clr-alert-item>\n      </clr-alert>\n\n      <clr-alert *ngIf=\"malus && malus.first && malus.isActive()\"\n                 [clrAlertType]=\"'alert-danger'\"\n                 [clrAlertSizeSmall]=\"false\"\n                 [clrAlertClosable]=\"false\">\n        <clr-alert-item>\n          <span>\n            {{malus.name}} is causing\n            <span class=\"monospace\"> {{malus.priceMultiplier.minus(1).times(100) | format}} %\n            </span>\n            increased\n            <a [routerLink]=\"'/nav/unit/'+malus.malusType.id\">\n              {{malus.malusType.name}}\n            </a>\n            价格.\n          </span>\n        </clr-alert-item>\n      </clr-alert>\n\n      <div *ngIf=\"unit.produces.length > 0 && !malus\">\n        <span>单位操作能力: {{unit.efficiency | format}} %</span>\n\n        <p-slider [min]=\"0\"\n                  [max]=\"100\"\n                  [step]=\"0.01\"\n                  [(ngModel)]=\"unit.efficiency\"\n                  animate=\"true\"></p-slider>\n      </div>\n\n      <app-action *ngIf=\"unit.buyAction\"\n                  [action]=\"unit.buyAction\"></app-action>\n      <app-action *ngIf=\"unit.teamAction && ms.game.researches.team2.done\"\n                  [action]=\"unit.teamAction\"></app-action>\n      <app-action *ngIf=\"unit.twinAction && ms.game.researches.twin.done\"\n                  [action]=\"unit.twinAction\"></app-action>\n\n      <div *ngIf=\"madeChart\"\n           class=\"chartDiv\">\n        <app-made-by-chart [unit]=\"unit\"></app-made-by-chart>\n        <app-made-by-chart [unit]=\"unit\"\n                           [consumers]=\"true\"></app-made-by-chart>\n      </div>\n\n    </div>\n    <div class=\"clr-col-xs-12\tclr-col-sm-6 clr-col-md-6\tclr-col-lg-6 clr-col-xl-6\">\n      <div *ngIf=\"activeProduct?.length > 0\">\n        <h6>\n          {{unit.name}} produces:\n        </h6>\n        <clr-datagrid class=\"datagrid-compact\">\n          <clr-dg-column [clrDgField]=\"'product.name'\">Name</clr-dg-column>\n          <clr-dg-column [clrDgSortBy]=\"prodSorter\">Ratio</clr-dg-column>\n          <clr-dg-column [clrDgSortBy]=\"totalProdSorter\">Total production</clr-dg-column>\n\n          <clr-dg-row *clrDgItems=\"let product of activeProduct\">\n            <clr-dg-cell>\n              <a [routerLink]=\"'/nav/unit/'+product.product.id\">\n                {{product.product.name}}\n              </a>\n            </clr-dg-cell>\n            <clr-dg-cell>\n              <span [class.noEnought]=\"product.rateo.lt(0)\"\n                    class=\"monospace\">\n                {{product.prodPerSec | format}}</span>\n              <app-production-signposts [production]=\"product\"></app-production-signposts>\n            </clr-dg-cell>\n            <clr-dg-cell>\n              <span [class.noEnought]=\"product.rateo.lt(0)\"\n                    class=\"monospace\">\n                {{product.prodPerSec.times(unit.quantity) | format}}\n              </span>\n            </clr-dg-cell>\n          </clr-dg-row>\n\n          <clr-dg-footer>\n            <clr-dg-pagination #pagination\n                               [clrDgPageSize]=\"10\">\n              {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}} of {{pagination.totalItems}}\n            </clr-dg-pagination>\n          </clr-dg-footer>\n\n        </clr-datagrid>\n      </div>\n\n      <div *ngIf=\"activeProducer?.length > 0\">\n        <h6>\n          {{unit.name}} is made by:\n        </h6>\n        <clr-datagrid class=\"datagrid-compact\">\n          <clr-dg-column [clrDgField]=\"'producer.name'\">Name</clr-dg-column>\n          <clr-dg-column [clrDgSortBy]=\"prodSorter\">Ratio</clr-dg-column>\n          <clr-dg-column [clrDgSortBy]=\"totalProdSorter\">Total production</clr-dg-column>\n\n          <clr-dg-row *clrDgItems=\"let producer of activeProducer\">\n            <clr-dg-cell>\n              <a [routerLink]=\"'/nav/unit/'+producer.producer.id\">\n                {{producer.producer.name}}\n              </a>\n            </clr-dg-cell>\n            <clr-dg-cell>\n              <span [class.noEnought]=\"producer.rateo.lt(0)\"\n                    class=\"monospace\">\n                {{producer.prodPerSec | format}}\n              </span>\n            </clr-dg-cell>\n            <clr-dg-cell>\n              <span [class.noEnought]=\"producer.rateo.lt(0)\"\n                    class=\"monospace\">\n                {{producer.prodPerSec.times(producer.producer.quantity) | format}}</span>\n            </clr-dg-cell>\n          </clr-dg-row>\n\n          <clr-dg-footer>\n            <clr-dg-pagination #pagination\n                               [clrDgPageSize]=\"10\">\n              {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}} of {{pagination.totalItems}}\n            </clr-dg-pagination>\n          </clr-dg-footer>\n\n        </clr-datagrid>\n      </div>\n\n    </div>\n  </div>\n</div>\n"
+module.exports = "<div *ngIf=\"unit\">\n  <div class=\"clr-row\">\n    <div class=\"clr-col-xs-12\tclr-col-sm-6\tclr-col-md-6\tclr-col-lg-6\tclr-col-xl-6\">\n\n      <h5>{{unit.description}}</h5>\n\n      <p *ngIf=\"ms.game.researches.team1.done && unit.buyAction && unit.bonus.gt(0)\">\n        你购买了 {{unit.buyAction.quantity | format}} 次; 奖励加成: + {{unit.bonus.times(100) | format}}%\n      </p>\n\n      <p *ngIf=\"unit.c.abs().gt(0.01)\">\n        产量:\n        <app-polynom [a]=\"unit.a\"\n                     [b]=\"unit.b\"\n                     [c]=\"unit.c\"></app-polynom>\n      </p>\n\n      <clr-alert *ngIf=\"unit.isEnding\"\n                 [clrAlertType]=\"malus ? 'alert-sucess': (ms.game.firstEndigUnit.endIn < 3600000 ? 'alert-danger':'alert-warning')\"\n                 [clrAlertClosable]=\"false\"\n                 [clrAlertSizeSmall]=\"false\">\n        <clr-alert-item>\n          <span class=\"alert-text\">\n            耗尽: {{unit.endIn | endIn}}\n          </span>\n        </clr-alert-item>\n      </clr-alert>\n\n      <clr-alert *ngIf=\"malus && malus.first && malus.isActive()\"\n                 [clrAlertType]=\"'alert-danger'\"\n                 [clrAlertSizeSmall]=\"false\"\n                 [clrAlertClosable]=\"false\">\n        <clr-alert-item>\n          <span>\n            {{malus.name}} is causing\n            <span class=\"monospace\"> {{malus.priceMultiplier.minus(1).times(100) | format}} %\n            </span>\n            增长\n            <a [routerLink]=\"'/nav/unit/'+malus.malusType.id\">\n              {{malus.malusType.name}}\n            </a>\n            价格.\n          </span>\n        </clr-alert-item>\n      </clr-alert>\n\n      <div *ngIf=\"unit.produces.length > 0 && !malus\">\n        <span>工作者比例: {{unit.efficiency | format}} %</span>\n\n        <p-slider [min]=\"0\"\n                  [max]=\"100\"\n                  [step]=\"0.01\"\n                  [(ngModel)]=\"unit.efficiency\"\n                  animate=\"true\"></p-slider>\n      </div>\n\n      <app-action *ngIf=\"unit.buyAction\"\n                  [action]=\"unit.buyAction\"></app-action>\n      <app-action *ngIf=\"unit.teamAction && ms.game.researches.team2.done\"\n                  [action]=\"unit.teamAction\"></app-action>\n      <app-action *ngIf=\"unit.twinAction && ms.game.researches.twin.done\"\n                  [action]=\"unit.twinAction\"></app-action>\n\n      <div *ngIf=\"madeChart\"\n           class=\"chartDiv\">\n        <app-made-by-chart [unit]=\"unit\"></app-made-by-chart>\n        <app-made-by-chart [unit]=\"unit\"\n                           [consumers]=\"true\"></app-made-by-chart>\n      </div>\n\n    </div>\n    <div class=\"clr-col-xs-12\tclr-col-sm-6 clr-col-md-6\tclr-col-lg-6 clr-col-xl-6\">\n      <div *ngIf=\"activeProduct?.length > 0\">\n        <h6>\n          {{unit.name}} 生产:\n        </h6>\n        <clr-datagrid class=\"datagrid-compact\">\n          <clr-dg-column [clrDgField]=\"'product.name'\">名称</clr-dg-column>\n          <clr-dg-column [clrDgSortBy]=\"prodSorter\">比例</clr-dg-column>\n          <clr-dg-column [clrDgSortBy]=\"totalProdSorter\">总产量</clr-dg-column>\n\n          <clr-dg-row *clrDgItems=\"let product of activeProduct\">\n            <clr-dg-cell>\n              <a [routerLink]=\"'/nav/unit/'+product.product.id\">\n                {{product.product.name}}\n              </a>\n            </clr-dg-cell>\n            <clr-dg-cell>\n              <span [class.noEnought]=\"product.rateo.lt(0)\"\n                    class=\"monospace\">\n                {{product.prodPerSec | format}}</span>\n              <app-production-signposts [production]=\"product\"></app-production-signposts>\n            </clr-dg-cell>\n            <clr-dg-cell>\n              <span [class.noEnought]=\"product.rateo.lt(0)\"\n                    class=\"monospace\">\n                {{product.prodPerSec.times(unit.quantity) | format}}\n              </span>\n            </clr-dg-cell>\n          </clr-dg-row>\n\n          <clr-dg-footer>\n            <clr-dg-pagination #pagination\n                               [clrDgPageSize]=\"10\">\n              {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}} of {{pagination.totalItems}}\n            </clr-dg-pagination>\n          </clr-dg-footer>\n\n        </clr-datagrid>\n      </div>\n\n      <div *ngIf=\"activeProducer?.length > 0\">\n        <h6>\n          {{unit.name}} 产量来自:\n        </h6>\n        <clr-datagrid class=\"datagrid-compact\">\n          <clr-dg-column [clrDgField]=\"'producer.name'\">名字</clr-dg-column>\n          <clr-dg-column [clrDgSortBy]=\"prodSorter\">比例</clr-dg-column>\n          <clr-dg-column [clrDgSortBy]=\"totalProdSorter\">总产量</clr-dg-column>\n\n          <clr-dg-row *clrDgItems=\"let producer of activeProducer\">\n            <clr-dg-cell>\n              <a [routerLink]=\"'/nav/unit/'+producer.producer.id\">\n                {{producer.producer.name}}\n              </a>\n            </clr-dg-cell>\n            <clr-dg-cell>\n              <span [class.noEnought]=\"producer.rateo.lt(0)\"\n                    class=\"monospace\">\n                {{producer.prodPerSec | format}}\n              </span>\n            </clr-dg-cell>\n            <clr-dg-cell>\n              <span [class.noEnought]=\"producer.rateo.lt(0)\"\n                    class=\"monospace\">\n                {{producer.prodPerSec.times(producer.producer.quantity) | format}}</span>\n            </clr-dg-cell>\n          </clr-dg-row>\n\n          <clr-dg-footer>\n            <clr-dg-pagination #pagination\n                               [clrDgPageSize]=\"10\">\n              {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}} of {{pagination.totalItems}}\n            </clr-dg-pagination>\n          </clr-dg-footer>\n\n        </clr-datagrid>\n      </div>\n\n    </div>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -10795,7 +10799,7 @@ var UnitComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"card-block\"\n     *ngIf=\"world\"\n     (click)=\"openModal()\">\n  <h3 class=\"card-title\">{{world.name}} ({{world.level |format:true}})</h3>\n  <span class=\"p2\">Prestige:\n    <span class=\"monospace\">{{world.prestige | format:true}}</span>\n  </span>\n  <ul class=\"list\">\n    <li *ngFor=\"let bug of world.additionalBugs; trackBy:getBugId\">\n      {{getBugName(bug)}}\n    </li>\n    <li *ngFor=\"let bon of world.productionsBonus; trackBy:getBonusId\">\n      {{bon[0].name }} + {{bon[0].usedForProductionBonus[0].getBonusPercentForNum(bon[1]) |format }}%\n    </li>\n    <li *ngFor=\"let bon of world.productionsEfficienty; trackBy:getBonusId\">\n      {{bon[0].name }} + {{bon[0].usedForProductionBonus[0].getBonusPercentForNum(bon[1]) |format }}%\n    </li>\n    <li *ngFor=\"let bon of world.productionsAll; trackBy:getBonusId\">\n      {{bon[0].name }} + {{bon[0].usedForProductionBonus[0].getBonusPercentForNum(bon[1]) |format }}%\n    </li>\n    <li *ngFor=\"let unl of world.startingUnlocked; trackBy:getResearchId\">\n      {{unl.name}} available.\n    </li>\n    <li *ngFor=\"let start of world.startingUnit; trackBy:getStartId\">\n      <ng-container *ngIf=\"start[1].gt(0);else zero\">{{start[1] | format}} x {{start[0].name}}</ng-container>\n      <ng-template #zero>{{start[0].name}} available.</ng-template>\n    </li>\n  </ul>\n\n  <span class=\"p2\">Win conditions:</span>\n  <ul class=\"list\">\n    <li *ngFor=\"let win of world.winContidions; trackBy:getWinId\">\n      {{win.price | format:true}} {{win.base.name}}\n    </li>\n  </ul>\n\n  <div *ngIf=\"world.notWinConditions?.length > 0\">\n    <span class=\"p2\">Malus:</span>\n    <ul class=\"list\">\n      <li *ngFor=\"let mal of world.notWinConditions; trackBy:getMalusId\">\n        {{mal.name}}\n      </li>\n    </ul>\n  </div>\n\n</div>\n"
+module.exports = "<div class=\"card-block\"\n     *ngIf=\"world\"\n     (click)=\"openModal()\">\n  <h3 class=\"card-title\">{{world.name}} ({{world.level |format:true}})</h3>\n  <span class=\"p2\">声望:\n    <span class=\"monospace\">{{world.prestige | format:true}}</span>\n  </span>\n  <ul class=\"list\">\n    <li *ngFor=\"let bug of world.additionalBugs; trackBy:getBugId\">\n      {{getBugName(bug)}}\n    </li>\n    <li *ngFor=\"let bon of world.productionsBonus; trackBy:getBonusId\">\n      {{bon[0].name }} + {{bon[0].usedForProductionBonus[0].getBonusPercentForNum(bon[1]) |format }}%\n    </li>\n    <li *ngFor=\"let bon of world.productionsEfficienty; trackBy:getBonusId\">\n      {{bon[0].name }} + {{bon[0].usedForProductionBonus[0].getBonusPercentForNum(bon[1]) |format }}%\n    </li>\n    <li *ngFor=\"let bon of world.productionsAll; trackBy:getBonusId\">\n      {{bon[0].name }} + {{bon[0].usedForProductionBonus[0].getBonusPercentForNum(bon[1]) |format }}%\n    </li>\n    <li *ngFor=\"let unl of world.startingUnlocked; trackBy:getResearchId\">\n      {{unl.name}} available.\n    </li>\n    <li *ngFor=\"let start of world.startingUnit; trackBy:getStartId\">\n      <ng-container *ngIf=\"start[1].gt(0);else zero\">{{start[1] | format}} x {{start[0].name}}</ng-container>\n      <ng-template #zero>{{start[0].name}} 可用。</ng-template>\n    </li>\n  </ul>\n\n  <span class=\"p2\">胜利条件:</span>\n  <ul class=\"list\">\n    <li *ngFor=\"let win of world.winContidions; trackBy:getWinId\">\n      {{win.price | format:true}} {{win.base.name}}\n    </li>\n  </ul>\n\n  <div *ngIf=\"world.notWinConditions?.length > 0\">\n    <span class=\"p2\">苹果:</span>\n    <ul class=\"list\">\n      <li *ngFor=\"let mal of world.notWinConditions; trackBy:getMalusId\">\n        {{mal.name}}\n      </li>\n    </ul>\n  </div>\n\n</div>\n"
 
 /***/ }),
 

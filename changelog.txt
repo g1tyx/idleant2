@@ -1,13 +1,13 @@
 11-09-2018
-- Fixed world not saving experience
-- Fixed Student Followers/Mining confusion
-- Fixed Twin rounding
-- Fixed group charts not updating
-- Light bulb ignore repeatable research, if quantity > max buy
+- 修复世界不保存经验
+- 修复学生追随者/采矿混淆
+- 修复双胞胎四舍五入
+- 修复组织图表没有更新
+- 灯泡忽略可重复的研究，如果数量大于最大可买
 
 10-09-2018
-- Fixed loading error
-- Fixed some typos
+- 修复加载错误
+- 修复一些拼写错误
 
 09-09-2018
-- Initial release
+- 最初版本

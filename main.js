@@ -656,7 +656,8 @@ var AppComponent = /** @class */ (function () {
             uninstall: _clr_icons_shapes_technology_shapes__WEBPACK_IMPORTED_MODULE_9__["ClrShapeUninstall"],
             tools: _clr_icons_shapes_essential_shapes__WEBPACK_IMPORTED_MODULE_3__["ClrShapeTools"],
             star: _clr_icons_shapes_social_shapes__WEBPACK_IMPORTED_MODULE_8__["ClrShapeStar"],
-            dashboard: _clr_icons_shapes_technology_shapes__WEBPACK_IMPORTED_MODULE_9__["ClrShapeDashboard"]
+            dashboard: _clr_icons_shapes_technology_shapes__WEBPACK_IMPORTED_MODULE_9__["ClrShapeDashboard"],
+            certificate: _clr_icons_shapes_technology_shapes__WEBPACK_IMPORTED_MODULE_9__["ClrShapeCertificate"]
         });
     }
     AppComponent.prototype.ngOnInit = function () {
@@ -737,31 +738,33 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _material_nav_tab_tab_component__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ./material-nav/tab/tab.component */ "./src/app/material-nav/tab/tab.component.ts");
 /* harmony import */ var _nav_nav_component__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ./nav/nav.component */ "./src/app/nav/nav.component.ts");
 /* harmony import */ var _nav_unit_line_unit_line_component__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ./nav/unit-line/unit-line.component */ "./src/app/nav/unit-line/unit-line.component.ts");
-/* harmony import */ var _options_nav_options_nav_component__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! ./options-nav/options-nav.component */ "./src/app/options-nav/options-nav.component.ts");
-/* harmony import */ var _options_nav_save_save_component__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! ./options-nav/save/save.component */ "./src/app/options-nav/save/save.component.ts");
-/* harmony import */ var _options_nav_stats_stats_component__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(/*! ./options-nav/stats/stats.component */ "./src/app/options-nav/stats/stats.component.ts");
-/* harmony import */ var _options_nav_ui_options_ui_options_component__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(/*! ./options-nav/ui-options/ui-options.component */ "./src/app/options-nav/ui-options/ui-options.component.ts");
-/* harmony import */ var _options_service__WEBPACK_IMPORTED_MODULE_38__ = __webpack_require__(/*! ./options.service */ "./src/app/options.service.ts");
-/* harmony import */ var _polynom_polynom_component__WEBPACK_IMPORTED_MODULE_39__ = __webpack_require__(/*! ./polynom/polynom.component */ "./src/app/polynom/polynom.component.ts");
-/* harmony import */ var _prestige_buy_prestige_buy_component__WEBPACK_IMPORTED_MODULE_40__ = __webpack_require__(/*! ./prestige-buy/prestige-buy.component */ "./src/app/prestige-buy/prestige-buy.component.ts");
-/* harmony import */ var _prestige_group_prestige_group_component__WEBPACK_IMPORTED_MODULE_41__ = __webpack_require__(/*! ./prestige-group/prestige-group.component */ "./src/app/prestige-group/prestige-group.component.ts");
-/* harmony import */ var _prestige_nav_prestige_nav_component__WEBPACK_IMPORTED_MODULE_42__ = __webpack_require__(/*! ./prestige-nav/prestige-nav.component */ "./src/app/prestige-nav/prestige-nav.component.ts");
-/* harmony import */ var _prestige_prestige_component__WEBPACK_IMPORTED_MODULE_43__ = __webpack_require__(/*! ./prestige/prestige.component */ "./src/app/prestige/prestige.component.ts");
-/* harmony import */ var _production_signposts_production_signposts_component__WEBPACK_IMPORTED_MODULE_44__ = __webpack_require__(/*! ./production-signposts/production-signposts.component */ "./src/app/production-signposts/production-signposts.component.ts");
-/* harmony import */ var _research_name_name_component__WEBPACK_IMPORTED_MODULE_45__ = __webpack_require__(/*! ./research/name/name.component */ "./src/app/research/name/name.component.ts");
-/* harmony import */ var _research_research_component__WEBPACK_IMPORTED_MODULE_46__ = __webpack_require__(/*! ./research/research.component */ "./src/app/research/research.component.ts");
-/* harmony import */ var _roman_pipe__WEBPACK_IMPORTED_MODULE_47__ = __webpack_require__(/*! ./roman.pipe */ "./src/app/roman.pipe.ts");
-/* harmony import */ var _unit_tabs_made_by_chart_made_by_chart_component__WEBPACK_IMPORTED_MODULE_48__ = __webpack_require__(/*! ./unit-tabs/made-by-chart/made-by-chart.component */ "./src/app/unit-tabs/made-by-chart/made-by-chart.component.ts");
-/* harmony import */ var _unit_tabs_unit_auto_buy_unit_auto_buy_component__WEBPACK_IMPORTED_MODULE_49__ = __webpack_require__(/*! ./unit-tabs/unit-auto-buy/unit-auto-buy.component */ "./src/app/unit-tabs/unit-auto-buy/unit-auto-buy.component.ts");
-/* harmony import */ var _unit_tabs_unit_tabs_component__WEBPACK_IMPORTED_MODULE_50__ = __webpack_require__(/*! ./unit-tabs/unit-tabs.component */ "./src/app/unit-tabs/unit-tabs.component.ts");
-/* harmony import */ var _unit_tabs_unit_unit_component__WEBPACK_IMPORTED_MODULE_51__ = __webpack_require__(/*! ./unit-tabs/unit/unit.component */ "./src/app/unit-tabs/unit/unit.component.ts");
-/* harmony import */ var _world_world_component__WEBPACK_IMPORTED_MODULE_52__ = __webpack_require__(/*! ./world/world.component */ "./src/app/world/world.component.ts");
+/* harmony import */ var _options_nav_credits_credits_component__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! ./options-nav/credits/credits.component */ "./src/app/options-nav/credits/credits.component.ts");
+/* harmony import */ var _options_nav_options_nav_component__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! ./options-nav/options-nav.component */ "./src/app/options-nav/options-nav.component.ts");
+/* harmony import */ var _options_nav_save_save_component__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(/*! ./options-nav/save/save.component */ "./src/app/options-nav/save/save.component.ts");
+/* harmony import */ var _options_nav_stats_stats_component__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(/*! ./options-nav/stats/stats.component */ "./src/app/options-nav/stats/stats.component.ts");
+/* harmony import */ var _options_nav_ui_options_ui_options_component__WEBPACK_IMPORTED_MODULE_38__ = __webpack_require__(/*! ./options-nav/ui-options/ui-options.component */ "./src/app/options-nav/ui-options/ui-options.component.ts");
+/* harmony import */ var _options_service__WEBPACK_IMPORTED_MODULE_39__ = __webpack_require__(/*! ./options.service */ "./src/app/options.service.ts");
+/* harmony import */ var _polynom_polynom_component__WEBPACK_IMPORTED_MODULE_40__ = __webpack_require__(/*! ./polynom/polynom.component */ "./src/app/polynom/polynom.component.ts");
+/* harmony import */ var _prestige_buy_prestige_buy_component__WEBPACK_IMPORTED_MODULE_41__ = __webpack_require__(/*! ./prestige-buy/prestige-buy.component */ "./src/app/prestige-buy/prestige-buy.component.ts");
+/* harmony import */ var _prestige_group_prestige_group_component__WEBPACK_IMPORTED_MODULE_42__ = __webpack_require__(/*! ./prestige-group/prestige-group.component */ "./src/app/prestige-group/prestige-group.component.ts");
+/* harmony import */ var _prestige_nav_prestige_nav_component__WEBPACK_IMPORTED_MODULE_43__ = __webpack_require__(/*! ./prestige-nav/prestige-nav.component */ "./src/app/prestige-nav/prestige-nav.component.ts");
+/* harmony import */ var _prestige_prestige_component__WEBPACK_IMPORTED_MODULE_44__ = __webpack_require__(/*! ./prestige/prestige.component */ "./src/app/prestige/prestige.component.ts");
+/* harmony import */ var _production_signposts_production_signposts_component__WEBPACK_IMPORTED_MODULE_45__ = __webpack_require__(/*! ./production-signposts/production-signposts.component */ "./src/app/production-signposts/production-signposts.component.ts");
+/* harmony import */ var _research_name_name_component__WEBPACK_IMPORTED_MODULE_46__ = __webpack_require__(/*! ./research/name/name.component */ "./src/app/research/name/name.component.ts");
+/* harmony import */ var _research_research_component__WEBPACK_IMPORTED_MODULE_47__ = __webpack_require__(/*! ./research/research.component */ "./src/app/research/research.component.ts");
+/* harmony import */ var _roman_pipe__WEBPACK_IMPORTED_MODULE_48__ = __webpack_require__(/*! ./roman.pipe */ "./src/app/roman.pipe.ts");
+/* harmony import */ var _unit_tabs_made_by_chart_made_by_chart_component__WEBPACK_IMPORTED_MODULE_49__ = __webpack_require__(/*! ./unit-tabs/made-by-chart/made-by-chart.component */ "./src/app/unit-tabs/made-by-chart/made-by-chart.component.ts");
+/* harmony import */ var _unit_tabs_unit_auto_buy_unit_auto_buy_component__WEBPACK_IMPORTED_MODULE_50__ = __webpack_require__(/*! ./unit-tabs/unit-auto-buy/unit-auto-buy.component */ "./src/app/unit-tabs/unit-auto-buy/unit-auto-buy.component.ts");
+/* harmony import */ var _unit_tabs_unit_tabs_component__WEBPACK_IMPORTED_MODULE_51__ = __webpack_require__(/*! ./unit-tabs/unit-tabs.component */ "./src/app/unit-tabs/unit-tabs.component.ts");
+/* harmony import */ var _unit_tabs_unit_unit_component__WEBPACK_IMPORTED_MODULE_52__ = __webpack_require__(/*! ./unit-tabs/unit/unit.component */ "./src/app/unit-tabs/unit/unit.component.ts");
+/* harmony import */ var _world_world_component__WEBPACK_IMPORTED_MODULE_53__ = __webpack_require__(/*! ./world/world.component */ "./src/app/world/world.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -824,45 +827,46 @@ var AppModule = /** @class */ (function () {
                 _app_component__WEBPACK_IMPORTED_MODULE_14__["AppComponent"],
                 _header_header_component__WEBPACK_IMPORTED_MODULE_23__["HeaderComponent"],
                 _nav_nav_component__WEBPACK_IMPORTED_MODULE_32__["NavComponent"],
-                _unit_tabs_unit_unit_component__WEBPACK_IMPORTED_MODULE_51__["UnitComponent"],
+                _unit_tabs_unit_unit_component__WEBPACK_IMPORTED_MODULE_52__["UnitComponent"],
                 _format_pipe__WEBPACK_IMPORTED_MODULE_20__["FormatPipe"],
                 _action_action_component__WEBPACK_IMPORTED_MODULE_10__["ActionComponent"],
                 _nav_unit_line_unit_line_component__WEBPACK_IMPORTED_MODULE_33__["UnitLineComponent"],
                 _action_price_line_price_line_component__WEBPACK_IMPORTED_MODULE_13__["PriceLineComponent"],
-                _polynom_polynom_component__WEBPACK_IMPORTED_MODULE_39__["PolynomComponent"],
-                _options_nav_options_nav_component__WEBPACK_IMPORTED_MODULE_34__["OptionsNavComponent"],
-                _options_nav_save_save_component__WEBPACK_IMPORTED_MODULE_35__["SaveComponent"],
+                _polynom_polynom_component__WEBPACK_IMPORTED_MODULE_40__["PolynomComponent"],
+                _options_nav_options_nav_component__WEBPACK_IMPORTED_MODULE_35__["OptionsNavComponent"],
+                _options_nav_save_save_component__WEBPACK_IMPORTED_MODULE_36__["SaveComponent"],
                 _laboratory_laboratory_component__WEBPACK_IMPORTED_MODULE_27__["LaboratoryComponent"],
                 _end_in_pipe__WEBPACK_IMPORTED_MODULE_19__["EndInPipe"],
-                _research_research_component__WEBPACK_IMPORTED_MODULE_46__["ResearchComponent"],
+                _research_research_component__WEBPACK_IMPORTED_MODULE_47__["ResearchComponent"],
                 _material_nav_material_nav_component__WEBPACK_IMPORTED_MODULE_30__["MaterialNavComponent"],
-                _production_signposts_production_signposts_component__WEBPACK_IMPORTED_MODULE_44__["ProductionSignpostsComponent"],
+                _production_signposts_production_signposts_component__WEBPACK_IMPORTED_MODULE_45__["ProductionSignpostsComponent"],
                 _action_cant_buy_signposts_cant_buy_signposts_component__WEBPACK_IMPORTED_MODULE_12__["CantBuySignpostsComponent"],
                 _group_tabs_unit_group_unit_group_component__WEBPACK_IMPORTED_MODULE_22__["UnitGroupComponent"],
                 _action_group_action_group_component__WEBPACK_IMPORTED_MODULE_8__["ActionGroupComponent"],
                 _material_nav_tab_tab_component__WEBPACK_IMPORTED_MODULE_31__["TabComponent"],
-                _world_world_component__WEBPACK_IMPORTED_MODULE_52__["WorldComponent"],
+                _world_world_component__WEBPACK_IMPORTED_MODULE_53__["WorldComponent"],
                 _change_world_change_world_component__WEBPACK_IMPORTED_MODULE_18__["ChangeWorldComponent"],
-                _prestige_prestige_component__WEBPACK_IMPORTED_MODULE_43__["PrestigeComponent"],
-                _options_nav_ui_options_ui_options_component__WEBPACK_IMPORTED_MODULE_37__["UiOptionsComponent"],
-                _prestige_nav_prestige_nav_component__WEBPACK_IMPORTED_MODULE_42__["PrestigeNavComponent"],
-                _prestige_group_prestige_group_component__WEBPACK_IMPORTED_MODULE_41__["PrestigeGroupComponent"],
-                _prestige_buy_prestige_buy_component__WEBPACK_IMPORTED_MODULE_40__["PrestigeBuyComponent"],
+                _prestige_prestige_component__WEBPACK_IMPORTED_MODULE_44__["PrestigeComponent"],
+                _options_nav_ui_options_ui_options_component__WEBPACK_IMPORTED_MODULE_38__["UiOptionsComponent"],
+                _prestige_nav_prestige_nav_component__WEBPACK_IMPORTED_MODULE_43__["PrestigeNavComponent"],
+                _prestige_group_prestige_group_component__WEBPACK_IMPORTED_MODULE_42__["PrestigeGroupComponent"],
+                _prestige_buy_prestige_buy_component__WEBPACK_IMPORTED_MODULE_41__["PrestigeBuyComponent"],
                 _auto_buy_auto_buy_component__WEBPACK_IMPORTED_MODULE_17__["AutoBuyComponent"],
-                _unit_tabs_unit_auto_buy_unit_auto_buy_component__WEBPACK_IMPORTED_MODULE_49__["UnitAutoBuyComponent"],
-                _unit_tabs_unit_tabs_component__WEBPACK_IMPORTED_MODULE_50__["UnitTabsComponent"],
+                _unit_tabs_unit_auto_buy_unit_auto_buy_component__WEBPACK_IMPORTED_MODULE_50__["UnitAutoBuyComponent"],
+                _unit_tabs_unit_tabs_component__WEBPACK_IMPORTED_MODULE_51__["UnitTabsComponent"],
                 _action_buttons_buttons_component__WEBPACK_IMPORTED_MODULE_11__["ButtonsComponent"],
                 _action_action_header_action_header_component__WEBPACK_IMPORTED_MODULE_9__["ActionHeaderComponent"],
-                _options_nav_stats_stats_component__WEBPACK_IMPORTED_MODULE_36__["StatsComponent"],
+                _options_nav_stats_stats_component__WEBPACK_IMPORTED_MODULE_37__["StatsComponent"],
                 _mastery_mastery_component__WEBPACK_IMPORTED_MODULE_29__["MasteryComponent"],
-                _research_name_name_component__WEBPACK_IMPORTED_MODULE_45__["NameComponent"],
-                _roman_pipe__WEBPACK_IMPORTED_MODULE_47__["RomanPipe"],
+                _research_name_name_component__WEBPACK_IMPORTED_MODULE_46__["NameComponent"],
+                _roman_pipe__WEBPACK_IMPORTED_MODULE_48__["RomanPipe"],
                 _auto_buy_tab_auto_buy_tab_component__WEBPACK_IMPORTED_MODULE_16__["AutoBuyTabComponent"],
                 _home_home_component__WEBPACK_IMPORTED_MODULE_25__["HomeComponent"],
                 _group_tabs_group_tabs_component__WEBPACK_IMPORTED_MODULE_21__["GroupTabsComponent"],
                 _laboratory_lab_menu_lab_menu_component__WEBPACK_IMPORTED_MODULE_26__["LabMenuComponent"],
                 _home_bug_card_bug_card_component__WEBPACK_IMPORTED_MODULE_24__["BugCardComponent"],
-                _unit_tabs_made_by_chart_made_by_chart_component__WEBPACK_IMPORTED_MODULE_48__["MadeByChartComponent"]
+                _unit_tabs_made_by_chart_made_by_chart_component__WEBPACK_IMPORTED_MODULE_49__["MadeByChartComponent"],
+                _options_nav_credits_credits_component__WEBPACK_IMPORTED_MODULE_34__["CreditsComponent"]
             ],
             imports: [
                 _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_3__["BrowserAnimationsModule"],
@@ -878,8 +882,9 @@ var AppModule = /** @class */ (function () {
                 primeng_slider__WEBPACK_IMPORTED_MODULE_7__["SliderModule"],
                 _clr_angular__WEBPACK_IMPORTED_MODULE_5__["ClrFormsNextModule"]
             ],
-            providers: [ngx_toastr__WEBPACK_IMPORTED_MODULE_6__["ToastrService"], _options_service__WEBPACK_IMPORTED_MODULE_38__["OptionsService"], _main_service__WEBPACK_IMPORTED_MODULE_28__["MainService"]],
-            bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_14__["AppComponent"]]
+            providers: [ngx_toastr__WEBPACK_IMPORTED_MODULE_6__["ToastrService"], _options_service__WEBPACK_IMPORTED_MODULE_39__["OptionsService"], _main_service__WEBPACK_IMPORTED_MODULE_28__["MainService"]],
+            bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_14__["AppComponent"]],
+            exports: [_options_nav_credits_credits_component__WEBPACK_IMPORTED_MODULE_34__["CreditsComponent"]]
         })
     ], AppModule);
     return AppModule;
@@ -905,15 +910,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _laboratory_laboratory_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./laboratory/laboratory.component */ "./src/app/laboratory/laboratory.component.ts");
 /* harmony import */ var _mastery_mastery_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./mastery/mastery.component */ "./src/app/mastery/mastery.component.ts");
 /* harmony import */ var _nav_nav_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./nav/nav.component */ "./src/app/nav/nav.component.ts");
-/* harmony import */ var _options_nav_options_nav_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./options-nav/options-nav.component */ "./src/app/options-nav/options-nav.component.ts");
-/* harmony import */ var _options_nav_save_save_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./options-nav/save/save.component */ "./src/app/options-nav/save/save.component.ts");
-/* harmony import */ var _options_nav_stats_stats_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./options-nav/stats/stats.component */ "./src/app/options-nav/stats/stats.component.ts");
-/* harmony import */ var _options_nav_ui_options_ui_options_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./options-nav/ui-options/ui-options.component */ "./src/app/options-nav/ui-options/ui-options.component.ts");
-/* harmony import */ var _prestige_group_prestige_group_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./prestige-group/prestige-group.component */ "./src/app/prestige-group/prestige-group.component.ts");
-/* harmony import */ var _prestige_nav_prestige_nav_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./prestige-nav/prestige-nav.component */ "./src/app/prestige-nav/prestige-nav.component.ts");
-/* harmony import */ var _prestige_prestige_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./prestige/prestige.component */ "./src/app/prestige/prestige.component.ts");
-/* harmony import */ var _unit_tabs_unit_tabs_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./unit-tabs/unit-tabs.component */ "./src/app/unit-tabs/unit-tabs.component.ts");
-/* harmony import */ var _unit_tabs_unit_unit_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./unit-tabs/unit/unit.component */ "./src/app/unit-tabs/unit/unit.component.ts");
+/* harmony import */ var _options_nav_credits_credits_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./options-nav/credits/credits.component */ "./src/app/options-nav/credits/credits.component.ts");
+/* harmony import */ var _options_nav_options_nav_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./options-nav/options-nav.component */ "./src/app/options-nav/options-nav.component.ts");
+/* harmony import */ var _options_nav_save_save_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./options-nav/save/save.component */ "./src/app/options-nav/save/save.component.ts");
+/* harmony import */ var _options_nav_stats_stats_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./options-nav/stats/stats.component */ "./src/app/options-nav/stats/stats.component.ts");
+/* harmony import */ var _options_nav_ui_options_ui_options_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./options-nav/ui-options/ui-options.component */ "./src/app/options-nav/ui-options/ui-options.component.ts");
+/* harmony import */ var _prestige_group_prestige_group_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./prestige-group/prestige-group.component */ "./src/app/prestige-group/prestige-group.component.ts");
+/* harmony import */ var _prestige_nav_prestige_nav_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./prestige-nav/prestige-nav.component */ "./src/app/prestige-nav/prestige-nav.component.ts");
+/* harmony import */ var _prestige_prestige_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./prestige/prestige.component */ "./src/app/prestige/prestige.component.ts");
+/* harmony import */ var _unit_tabs_unit_tabs_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./unit-tabs/unit-tabs.component */ "./src/app/unit-tabs/unit-tabs.component.ts");
+/* harmony import */ var _unit_tabs_unit_unit_component__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./unit-tabs/unit/unit.component */ "./src/app/unit-tabs/unit/unit.component.ts");
+
 
 
 
@@ -939,15 +946,15 @@ var APPROUTES = [
         path: "nav",
         component: _nav_nav_component__WEBPACK_IMPORTED_MODULE_5__["NavComponent"],
         children: [
-            { path: "unit", component: _unit_tabs_unit_unit_component__WEBPACK_IMPORTED_MODULE_14__["UnitComponent"] },
-            { path: "unit/:id", component: _unit_tabs_unit_tabs_component__WEBPACK_IMPORTED_MODULE_13__["UnitTabsComponent"] },
+            { path: "unit", component: _unit_tabs_unit_unit_component__WEBPACK_IMPORTED_MODULE_15__["UnitComponent"] },
+            { path: "unit/:id", component: _unit_tabs_unit_tabs_component__WEBPACK_IMPORTED_MODULE_14__["UnitTabsComponent"] },
             { path: "group/:id", component: _group_tabs_group_tabs_component__WEBPACK_IMPORTED_MODULE_1__["GroupTabsComponent"] }
         ]
     },
     {
         path: "pre",
-        component: _prestige_nav_prestige_nav_component__WEBPACK_IMPORTED_MODULE_11__["PrestigeNavComponent"],
-        children: [{ path: ":id", component: _prestige_group_prestige_group_component__WEBPACK_IMPORTED_MODULE_10__["PrestigeGroupComponent"] }]
+        component: _prestige_nav_prestige_nav_component__WEBPACK_IMPORTED_MODULE_12__["PrestigeNavComponent"],
+        children: [{ path: ":id", component: _prestige_group_prestige_group_component__WEBPACK_IMPORTED_MODULE_11__["PrestigeGroupComponent"] }]
     },
     {
         path: "lab",
@@ -955,15 +962,16 @@ var APPROUTES = [
     },
     {
         path: "travel",
-        component: _prestige_prestige_component__WEBPACK_IMPORTED_MODULE_12__["PrestigeComponent"]
+        component: _prestige_prestige_component__WEBPACK_IMPORTED_MODULE_13__["PrestigeComponent"]
     },
     {
         path: "opt",
-        component: _options_nav_options_nav_component__WEBPACK_IMPORTED_MODULE_6__["OptionsNavComponent"],
+        component: _options_nav_options_nav_component__WEBPACK_IMPORTED_MODULE_7__["OptionsNavComponent"],
         children: [
-            { path: "save", component: _options_nav_save_save_component__WEBPACK_IMPORTED_MODULE_7__["SaveComponent"] },
-            { path: "ui", component: _options_nav_ui_options_ui_options_component__WEBPACK_IMPORTED_MODULE_9__["UiOptionsComponent"] },
-            { path: "stats", component: _options_nav_stats_stats_component__WEBPACK_IMPORTED_MODULE_8__["StatsComponent"] }
+            { path: "save", component: _options_nav_save_save_component__WEBPACK_IMPORTED_MODULE_8__["SaveComponent"] },
+            { path: "ui", component: _options_nav_ui_options_ui_options_component__WEBPACK_IMPORTED_MODULE_10__["UiOptionsComponent"] },
+            { path: "stats", component: _options_nav_stats_stats_component__WEBPACK_IMPORTED_MODULE_9__["StatsComponent"] },
+            { path: "credits", component: _options_nav_credits_credits_component__WEBPACK_IMPORTED_MODULE_6__["CreditsComponent"] }
         ]
     },
     {
@@ -1596,8 +1604,10 @@ var UnitGroupComponent = /** @class */ (function () {
         this.twin = false;
         this.isSmall = false;
         this.operativity = 100;
+        this.forceChange = false;
     }
     UnitGroupComponent.prototype.ngOnChanges = function (changes) {
+        this.forceChange = true;
         this.getGroup();
     };
     UnitGroupComponent.prototype.ngAfterViewInit = function () {
@@ -1697,12 +1707,18 @@ var UnitGroupComponent = /** @class */ (function () {
             return;
         var lastData = this.unitGroup.chartData;
         this.unitGroup.updateChart();
-        if (lastData !== this.unitGroup.chartData ||
+        if (this.forceChange ||
+            lastData !== this.unitGroup.chartData ||
             (this.chart &&
                 this.chart.data &&
                 this.chart.data.datasets[0] &&
-                this.chart.data.datasets[0].data.length === 0)) {
+                this.chart.data.datasets[0].data.length === 0) ||
+            (this.chart &&
+                this.chart.labels &&
+                this.chart.labels[0] !== this.unitGroup.chartLabels[0])) {
             this.doGraph();
+            this.forceChange = false;
+            console.log("up");
         }
     };
     UnitGroupComponent.prototype.doGraph = function () {
@@ -3030,12 +3046,14 @@ var Action = /** @class */ (function (_super) {
             if (this.isLimited) {
                 this.maxBuy = Decimal.min(this.limit.minus(this.quantity), this.maxBuy);
             }
+            this.maxBuy = this.maxBuy.floor();
             this.canBuy = this.maxBuy.gte(1);
         }
     };
     Action.prototype.buy = function (toBuy) {
         var _this = this;
         if (toBuy === void 0) { toBuy = new Decimal(1); }
+        toBuy = toBuy.floor();
         this.reload();
         if (this.canBuy && this.maxBuy.gte(toBuy)) {
             this.prices.forEach(function (p) { return p.buy(toBuy, _this.quantity); });
@@ -4411,7 +4429,11 @@ var Game = /** @class */ (function () {
         if (!this.isPaused)
             this.autoBuyManager.update(time);
         this.researches.toDo.forEach(function (u) { return u.reload(); });
-        this.canBuyResearch = !!this.researches.researches.find(function (r) { return r.unlocked && r.canBuy; });
+        this.canBuyResearch = !!this.researches.toDo.find(function (r) {
+            return r.unlocked &&
+                r.canBuy &&
+                (!r.unlimited || r.quantity.lt(r.maxAutoBuyLevel));
+        });
         this.unlockedUnits.forEach(function (u) {
             u.actions.forEach(function (a) { return a.reload(); });
         });
@@ -5160,31 +5182,31 @@ var Mastery = /** @class */ (function () {
         var ret = "";
         switch (type) {
             case MasteryTypes.MORE_FOLLOWERS: {
-                ret = "+" + 100 * num + "%\nmore followers";
+                ret = "+" + 100 * num + "%\n更多的追随者";
                 break;
             }
             case MasteryTypes.MORE_IDLE_8H: {
-                ret = "+" + 30 * num + "% idle time\nafter 8h";
+                ret = "+" + 30 * num + "% 空闲时间\n在8小时后";
                 break;
             }
             case MasteryTypes.SCIENCE_BONUS: {
-                ret = "+" + 10 * num + "%\nscience";
+                ret = "+" + 10 * num + "%\n科学";
                 break;
             }
             case MasteryTypes.FOOD_BONUS: {
-                ret = "+" + 10 * num + "%\nfood";
+                ret = "+" + 10 * num + "%\n食物";
                 break;
             }
             case MasteryTypes.SOIL_BONUS: {
-                ret = "+" + 10 * num + "%\nwood";
+                ret = "+" + 10 * num + "%\n土壤";
                 break;
             }
             case MasteryTypes.CRYSTALL_BONUS: {
-                ret = "+" + 10 * num + "%\ncrystall";
+                ret = "+" + 10 * num + "%\n水晶";
                 break;
             }
             case MasteryTypes.HARVEST_BONUS: {
-                ret = "+" + 20 * num + "% 资源\nfrom ghanteres";
+                ret = "+" + 20 * num + "% 资源\n来自采集者";
                 break;
             }
             case MasteryTypes.MATERIAL_GAIN: {
@@ -5208,67 +5230,67 @@ var Mastery = /** @class */ (function () {
                 break;
             }
             case MasteryTypes.TIME_GEN_AND_BANK: {
-                ret = "+" + 200 * num + "%\n time /s and time bank";
+                ret = "+" + 200 * num + "%\n 时间 /秒 和时间银行";
                 break;
             }
             case MasteryTypes.TEAM_START: {
-                ret = "start new world with\n" + 1 * num + " team upgrade";
+                ret = "开始新世界时默认就有\n" + 1 * num + " 团队升级";
                 break;
             }
             case MasteryTypes.TEAM_PRESTIGE: {
-                ret = "prestige team up are \n" + 100 * num + "% more effective";
+                ret = "团队声望升级\n" + 100 * num + "% 更高效率";
                 break;
             }
             case MasteryTypes.SCIENTIFIC_METHOD: {
-                ret = "scientific method research\n" + 100 * num + "% more effective";
+                ret = "科学方法研究\n" + 100 * num + "% 更高效率";
                 break;
             }
             case MasteryTypes.THECNOLOGY_PRESTIGE: {
-                ret = "technology prestige up\n" + 100 * num + "% more effective";
+                ret = "技术声望升级\n" + 100 * num + "% 更高效率";
                 break;
             }
             case MasteryTypes.START_TWIN: {
-                ret = "start new world with\n" + 1 * num + " twin upgrade";
+                ret = "开始新世界时默认就有\n" + 1 * num + " 双胞胎升级";
                 break;
             }
             case MasteryTypes.FREE_WARP_RES: {
-                ret = "start new world \nfree warps (1h 2h 3h)";
+                ret = "开始新世界时默认就有 \n免费扭曲 (1小时 2小时 3小时)";
                 break;
             }
             case MasteryTypes.START_RESEARCHS: {
-                ret = "start new world\n4 scientific method and harvesting";
+                ret = "开始新世界时默认就有\n4 科学方法和收获";
                 break;
             }
             case MasteryTypes.DOUBLE_PREFIX: {
-                ret = "30% chance of\ndouble Prefix";
+                ret = "30% 几率出现\n双重前缀";
                 break;
             }
             case MasteryTypes.DOUBLE_SUFFIX: {
-                ret = "30% chance of\ndouble Suffix";
+                ret = "30% 几率出现\n双重后缀";
                 break;
             }
             case MasteryTypes.WORLD_LEVEL: {
-                ret = "+50% max World Level";
+                ret = "+50% 最高世界等级";
                 break;
             }
             case MasteryTypes.BETTER_WORLD: {
-                ret = "+20%\nWorld Bonus";
+                ret = "+20%\n世界加成";
                 break;
             }
             case MasteryTypes.BETTER_WORLD_EXPERIENCE: {
-                ret = "Better World Prestige up are\n50% more effective";
+                ret = "更好的世界声望升级\n50% 更高效率";
                 break;
             }
             case MasteryTypes.WORLD_LEVEL_PRESTIGE: {
-                ret = "Max Level Prestige are\n50% more effective";
+                ret = "最高等级声望升级\n50% 更高效率";
                 break;
             }
             case MasteryTypes.BETTER_HELPERS: {
-                ret = "+100% Bonus\nfrom Helpers";
+                ret = "+100% 加成\n来自助手";
                 break;
             }
             case MasteryTypes.DOUBLE_ARMY: {
-                ret = "+200%\nArmy killing";
+                ret = "+200%\n军队杀敌加成";
                 break;
             }
         }
@@ -5657,7 +5679,7 @@ var Technology = /** @class */ (function (_super) {
     Technology.prototype.declareStuff = function (game) {
         this.farming = new _prestige__WEBPACK_IMPORTED_MODULE_2__["Prestige"]("F", game.genExperiencePrice(10));
         this.carpentry = new _prestige__WEBPACK_IMPORTED_MODULE_2__["Prestige"]("C", game.genExperiencePrice(10));
-        this.mining = new _prestige__WEBPACK_IMPORTED_MODULE_2__["Prestige"]("i", game.genExperiencePrice(10));
+        this.mining = new _prestige__WEBPACK_IMPORTED_MODULE_2__["Prestige"]("n", game.genExperiencePrice(10));
         this.studing = new _prestige__WEBPACK_IMPORTED_MODULE_2__["Prestige"]("s", game.genExperiencePrice(10));
         this.list = [this.farming, this.carpentry, this.mining, this.studing];
         var foodBon = new _production_bonus__WEBPACK_IMPORTED_MODULE_1__["ProductionBonus"](this.farming, new Decimal(0.1));
@@ -6284,41 +6306,41 @@ var STRINGS = {
         larvaBon: ["幼虫生产加成", ""],
         queenBon: ["女王生产加成", ""],
         //  Malus
-        Mf1: ["Poisonous Fungus", "Poisonous Fungus"],
-        Mf2: ["Ancient Fungus", "Ancient Fungus"],
-        Mf3: ["Zombie Fungus", "Zombie Fungus"],
-        Mw1: ["Carnivorous plant", ""],
-        Mw2: ["Flypaper traps", ""],
-        Mw3: ["Pitcher plant", ""],
-        Mc1: ["Small Mites", ""],
-        Mc2: ["Mites", ""],
-        Mc3: ["Parasitic Mites", ""],
-        Ms1: ["Zombie Fungus Spore", ""],
-        Ms2: ["Zombie Fungus", ""],
-        Ms3: ["Colony of Zombie Fungus ", ""],
+        Mf1: ["有毒真菌", "有毒真菌"],
+        Mf2: ["古老的真菌", "古老的真菌"],
+        Mf3: ["僵尸真菌", "僵尸真菌"],
+        Mw1: ["食虫植物", ""],
+        Mw2: ["捕蝇纸陷阱", ""],
+        Mw3: ["猪笼草", ""],
+        Mc1: ["小螨虫", ""],
+        Mc2: ["螨虫", ""],
+        Mc3: ["寄生螨虫", ""],
+        Ms1: ["僵尸真菌孢子", ""],
+        Ms2: ["僵尸真菌", ""],
+        Ms3: ["僵尸真菌菌落 ", ""],
         //  Killers
-        F: ["Disinfestation Ant", "消灭有毒真菌."],
-        W: ["Fire Ant", ["Burn Carnivorous plant", "火蚁确实存在."]],
-        C: ["Black garden ant", "杀死螨虫."],
-        S: ["Yellow crazy Ant", "杀死僵尸真菌."],
-        HB: ["General", "+10% 杀死."],
-        HQ: ["Headquarter", "+10% 杀死."],
+        F: ["消毒蚂蚁", "消灭有毒真菌."],
+        W: ["火蚂蚁", ["燃烧食肉植物", "火蚁确实存在."]],
+        C: ["黑色花园蚂蚁", "杀死螨虫."],
+        S: ["黄色疯狂蚂蚁", "杀死僵尸真菌."],
+        HB: ["常规", "+10% 杀敌."],
+        HQ: ["总部", "+10% 杀敌."],
         //  Mastery Bonus
-        scieMast: ["Science Mastery"],
-        fooMast: ["Food Mastery"],
-        wooMast: ["Wood Mastery"],
-        cryMast: ["Crystall Mastery"],
-        harvMast: ["Harvest Mastery"],
-        matMast: ["Material Mastery"],
-        armyMast: ["Army Mastery"],
+        scieMast: ["科学精通"],
+        fooMast: ["食物精通"],
+        wooMast: ["土壤精通"],
+        cryMast: ["水晶精通"],
+        harvMast: ["收获精通"],
+        matMast: ["材料精通"],
+        armyMast: ["军队精通"],
         //  Supply
         fS: ["食物供应", "永不停息的食物供应"],
-        wS: ["木头供应", "永不停息的木头供应"],
+        wS: ["土壤供应", "永不停息的土壤供应"],
         cS: ["水晶供应", "永不停息的水晶供应"],
         //  Bee
-        Z: ["Foragging Bee", "Foragging Bee"],
-        cb: ["Carpenter Bee", "Foragging Bee"],
-        sb: ["Student Bee", "Foragging Bee"],
+        Z: ["觅食蜜蜂", "觅食蜜蜂"],
+        cb: ["木匠蜜蜂", "木匠蜜蜂"],
+        sb: ["学生蜜蜂", "学生蜜蜂"],
         Q: ["蜜蜂幼虫", "蜜蜂幼虫"],
         P: ["蜜蜂女王", ""],
         N: ["蜜蜂巢穴", ""],
@@ -6335,16 +6357,16 @@ var STRINGS = {
         EGG: ["3Bee Miner", ""],
         DGG: ["3Bee Scientist", ""],
         //  Wasp
-        x: ["Foragging Wasp", "觅食黄蜂"],
-        hw: ["Hornet", ["Hornet", "黄蜂处于类固醇上."]],
-        sw: ["Smart Wasp", ""],
-        y: ["Wasp Larva", ""],
-        z: ["Wasp Queen", ""],
-        r: ["Wasp Hive", ""],
-        v: ["Wasp Farmer", ""],
-        V: ["Wasp Carpenter", ""],
-        o: ["Wasp Miner", ""],
-        p: ["Wasp Scientist", ""],
+        x: ["觅食黄蜂", "觅食黄蜂"],
+        hw: ["大黄蜂", ["大黄蜂", "黄蜂处于类固醇上."]],
+        sw: ["聪明黄蜂", ""],
+        y: ["黄蜂幼虫", ""],
+        z: ["黄蜂女王", ""],
+        r: ["黄蜂巢穴", ""],
+        v: ["黄蜂农民", ""],
+        V: ["黄蜂木匠", ""],
+        o: ["黄蜂矿工", ""],
+        p: ["黄蜂科学家", ""],
         vG: ["2Wasp Farmer", ""],
         VG: ["2Wasp Carpenter", ""],
         oG: ["2Wasp Miner", ""],
@@ -6379,10 +6401,7 @@ var STRINGS = {
             "农民",
             "水培法农民使用晶体生长真菌没有土壤。"
         ],
-        b: [
-            "木匠",
-            "木匠蚁在木头里筑巢，里面有走廊。"
-        ],
+        b: ["木匠", "木匠蚂蚁建造由画廊组成的巢."],
         m: ["矿工", "矿工"],
         d: ["科学家", "科学家"],
         scie1: ["科学方法", "+50% 科学产量"],
@@ -6428,53 +6447,53 @@ var STRINGS = {
             "黄蜂教育部门生产大学."
         ],
         //  Super Major
-        sm: ["Super Major Helpers", ""],
-        lf: ["Leaf Cutter", "Improve Farming."],
-        mh: ["Big Miner", "Improve Mining."],
-        sh: ["Big Carpenter", "Improve soil gathering."],
+        sm: ["主宰助手", ""],
+        lf: ["切叶蚁", "改善农业。"],
+        mh: ["大矿工", "改善采矿。"],
+        sh: ["大木匠", "改善土壤收集。"],
         //  Kill World
-        aow: ["Art of War", "Improve killers by 10%"]
+        aow: ["战争的艺术", "杀手提高10%"]
     },
     worlds: {
-        "1Pre": "Hot",
-        "2Pre": "Wooded",
-        "3Pre": "Crystallized",
-        "4Pre": "Scientific",
-        "1Suf": "of Food",
-        "2Suf": "of Wood",
-        "3Suf": "of Crystall",
-        "4Suf": "of Science",
-        fBio: "Farm",
-        wBio: "Forest",
-        cBio: "Mine",
-        sBio: "University",
-        fSPre: "Food supply",
-        wSPre: "Wood supply",
-        cSPre: "Crystal supply",
-        fSSuff: "with Food",
-        wSSuff: "with Wood",
-        cSSuff: "with Crystal",
+        "1Pre": "炽热的",
+        "2Pre": "树木繁茂的",
+        "3Pre": "结晶的",
+        "4Pre": "科学的",
+        "1Suf": "食物的",
+        "2Suf": "土壤的",
+        "3Suf": "水晶的",
+        "4Suf": "科学的",
+        fBio: "农田",
+        wBio: "森林",
+        cBio: "矿山",
+        sBio: "大学",
+        fSPre: "食品供应",
+        wSPre: "土壤供应",
+        cSPre: "水晶供应",
+        fSSuff: "食物",
+        wSSuff: "土壤",
+        cSSuff: "水晶",
         //  Bee
-        beePre: "Apian",
-        beeBio: "Hive",
-        beeSuff: "of Bee",
+        beePre: "蜜蜂的",
+        beeBio: "蜂巢",
+        beeSuff: "蜜蜂的",
         //  Wasp
-        waspPre: "Waspy",
-        waspBio: "Nest",
-        waspSuff: "of Wasp",
+        waspPre: "黄蜂",
+        waspBio: "巢穴",
+        waspSuff: "黄蜂的",
         //  Super Major
-        majorPre: "Giant",
-        majorSuff: "of Super Major",
+        majorPre: "主宰",
+        majorSuff: "主宰的",
         //  Malus Bonus
         mkPre: "充满敌意的",
         mkBio: "战场",
-        mkSuff: "of War",
+        mkSuff: "战争的",
         //  Larva
-        larvaPre: "Swarming",
-        larvaSuff: "of Larvae",
+        larvaPre: "蜂群",
+        larvaSuff: "幼虫",
         //  Queen
-        queenPre: "Queenly",
-        queenSuff: "of Queen"
+        queenPre: "高贵的",
+        queenSuff: "女王"
     },
     prestige: {
         //  Followers 1
@@ -6497,7 +6516,7 @@ var STRINGS = {
         R: ["研究自动购买者", "解锁研究自动购买者"],
         //  Technology
         F: ["农业", "+10% 食物产量"],
-        C: ["木工", "+10% 木头产量"],
+        C: ["木工", "+10% 土壤产量"],
         p: ["采矿", "+10% 水晶产量"],
         s: ["学习", "+10% 科学产量"],
         //  Team
@@ -8723,7 +8742,8 @@ var World = /** @class */ (function () {
             pa: this.productionsAll.map(function (b) { return [b[0].id, b[1]]; }),
             wc: this.winContidions.map(function (w) { return [w.base.id, w.price]; }),
             nwc: this.notWinConditions.map(function (n) { return n.id; }),
-            adb: this.additionalBugs
+            adb: this.additionalBugs,
+            k: this.prestige
         };
     };
     World.prototype.restore = function (data, game) {
@@ -8763,6 +8783,13 @@ var World = /** @class */ (function () {
         if ("adb" in data) {
             this.additionalBugs = data.adb;
         }
+        this.prestige =
+            "k" in data
+                ? new Decimal(data.k)
+                : this.level
+                    .times(10)
+                    .times(this.level.plus(10).log10())
+                    .floor();
     };
     World.prototype.findBonus = function (id, game) {
         return game.worldBonus.bonusList.find(function (b) { return b.id === id; });
@@ -9056,6 +9083,72 @@ var UnitLineComponent = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/options-nav/credits/credits.component.html":
+/*!************************************************************!*\
+  !*** ./src/app/options-nav/credits/credits.component.html ***!
+  \************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<h1>Credits</h1>\n<p>\n  Idle Ant 2 is an incremental game about ants.\n  <br /> The game uses Angular 6 and Clarity Design System\n  <a target=\"_blank\"\n     href=\"https://github.com/scorzy/IdleAnt2/blob/master/package.json\">list of used package</a>.\n</p>\n\n<ul lass=\"list\">\n  <li>Code:\n    <a target=\"_blank\"\n       href=\"https://github.com/scorzy/IdleAnt2\">https://github.com/scorzy/IdleAnt2</a>\n  </li>\n  <li>SubReddit:\n    <a target=\"_blank\"\n       href=\"https://www.reddit.com/r/IdleAnts/\">https://www.reddit.com/r/IdleAnts/</a>\n  </li>\n</ul>\n"
+
+/***/ }),
+
+/***/ "./src/app/options-nav/credits/credits.component.scss":
+/*!************************************************************!*\
+  !*** ./src/app/options-nav/credits/credits.component.scss ***!
+  \************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/options-nav/credits/credits.component.ts":
+/*!**********************************************************!*\
+  !*** ./src/app/options-nav/credits/credits.component.ts ***!
+  \**********************************************************/
+/*! exports provided: CreditsComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CreditsComponent", function() { return CreditsComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var CreditsComponent = /** @class */ (function () {
+    function CreditsComponent() {
+    }
+    CreditsComponent.prototype.ngOnInit = function () { };
+    CreditsComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: "app-credits",
+            template: __webpack_require__(/*! ./credits.component.html */ "./src/app/options-nav/credits/credits.component.html"),
+            styles: [__webpack_require__(/*! ./credits.component.scss */ "./src/app/options-nav/credits/credits.component.scss")],
+            changeDetection: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ChangeDetectionStrategy"].OnPush,
+            host: {
+                "[class.content-area]": "true"
+            }
+        }),
+        __metadata("design:paramtypes", [])
+    ], CreditsComponent);
+    return CreditsComponent;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/options-nav/options-nav.component.html":
 /*!********************************************************!*\
   !*** ./src/app/options-nav/options-nav.component.html ***!
@@ -9063,7 +9156,7 @@ var UnitLineComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<router-outlet></router-outlet>\n<clr-vertical-nav [clrVerticalNavCollapsible]=\"false\"\n                  [clr-nav-level]=\"2\">\n  <a clrVerticalNavLink\n     routerLink=\"/opt/save\"\n     routerLinkActive=\"active\">\n    <clr-icon shape=\"floppy\"></clr-icon>\n    保存\n  </a>\n  <a clrVerticalNavLink\n     routerLink=\"/opt/ui\"\n     routerLinkActive=\"active\">\n    <clr-icon shape=\"paint-roller\"></clr-icon>\n    界面\n  </a>\n  <a clrVerticalNavLink\n     routerLink=\"/opt/stats\"\n     routerLinkActive=\"active\">\n    <clr-icon shape=\"info-standard\"></clr-icon>\n    统计\n  </a>\n</clr-vertical-nav>\n"
+module.exports = "<router-outlet></router-outlet>\n<clr-vertical-nav [clrVerticalNavCollapsible]=\"false\"\n                  [clr-nav-level]=\"2\">\n  <a clrVerticalNavLink\n     routerLink=\"/opt/save\"\n     routerLinkActive=\"active\">\n    <clr-icon shape=\"floppy\"></clr-icon>\n    保存\n  </a>\n  <a clrVerticalNavLink\n     routerLink=\"/opt/ui\"\n     routerLinkActive=\"active\">\n    <clr-icon shape=\"paint-roller\"></clr-icon>\n    界面\n  </a>\n  <a clrVerticalNavLink\n     routerLink=\"/opt/stats\"\n     routerLinkActive=\"active\">\n    <clr-icon shape=\"info-standard\"></clr-icon>\n    统计\n  </a>\n  <a clrVerticalNavLink\n     routerLink=\"/opt/credits\"\n     routerLinkActive=\"active\">\n    <clr-icon shape=\"certificate\"></clr-icon>\n    Credits\n  </a>\n</clr-vertical-nav>\n"
 
 /***/ }),
 
@@ -9982,7 +10075,7 @@ var PrestigeComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<clr-signpost>\n  <clr-signpost-content *clrIfOpen=\"open\"\n                        [clrPosition]=\"'left-middle'\">\n    <h3>{{production.product.name}}:</h3>\n    <ul class=\"list\">\n      <li [class.noEnought]=\"production.rateo.lt(0)\">\n        基础产量: {{production.rateo | format}}\n      </li>\n      <li>\n        Operativity: {{production.producer.efficiency}}%\n      </li>\n      <li *ngIf=\"ms.game.researches.team1.done && production.producer.buyAction\">\n        团队加成: +{{production.producer.bonus.times(100) | format}}%\n      </li>\n    </ul>\n    <div *ngIf=\"productionsAll.length +productionsEfficienty.length +  productionsBonus.length >0\">\n      <h6>Additive Bonus:</h6>\n      <ul class=\"list\">\n        <li *ngFor=\"let bon of productionsAll; trackBy getProdID\">\n          {{bon.unit.name}}: +{{bon.getBonusPercent() | format }}%\n        </li>\n        <li *ngFor=\"let bon of productionsEfficienty; trackBy getProdID\">\n          {{bon.unit.name}}: +{{bon.getBonusPercent() | format }}%\n        </li>\n        <li *ngFor=\"let bon of productionsBonus; trackBy getProdID\">\n          {{bon.unit.name}}: +{{bon.getBonusPercent() | format }}%\n        </li>\n      </ul>\n    </div>\n  </clr-signpost-content>\n</clr-signpost>\n"
+module.exports = "<clr-signpost>\n  <clr-signpost-content *clrIfOpen=\"open\"\n                        [clrPosition]=\"'left-middle'\">\n    <h3>{{production.product.name}}:</h3>\n    <ul class=\"list\">\n      <li [class.noEnought]=\"production.rateo.lt(0)\">\n        基础产量: {{production.rateo | format}}\n      </li>\n      <li>\n        可操作性: {{production.producer.efficiency}}%\n      </li>\n      <li *ngIf=\"ms.game.researches.team1.done && production.producer.buyAction\">\n        团队加成: +{{production.producer.bonus.times(100) | format}}%\n      </li>\n    </ul>\n    <div *ngIf=\"productionsAll.length +productionsEfficienty.length +  productionsBonus.length >0\">\n      <h6>附加奖励:</h6>\n      <ul class=\"list\">\n        <li *ngFor=\"let bon of productionsAll; trackBy getProdID\">\n          {{bon.unit.name}}: +{{bon.getBonusPercent() | format }}%\n        </li>\n        <li *ngFor=\"let bon of productionsEfficienty; trackBy getProdID\">\n          {{bon.unit.name}}: +{{bon.getBonusPercent() | format }}%\n        </li>\n        <li *ngFor=\"let bon of productionsBonus; trackBy getProdID\">\n          {{bon.unit.name}}: +{{bon.getBonusPercent() | format }}%\n        </li>\n      </ul>\n    </div>\n  </clr-signpost-content>\n</clr-signpost>\n"
 
 /***/ }),
 
@@ -10156,7 +10249,7 @@ var NameComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"card-block\">\n  <div class=\"card-title\">\n    <app-name [name]=\"research.name\"\n              [unlimited]=\"research.unlimited\"\n              [quantity]=\"research.quantity\"></app-name>\n  </div>\n  <div class=\"card-text p\">\n    {{research.description}}\n    <br />\n    <div *ngIf=\"!research.complete\">\n      <span>花费: </span>\n      <app-price-line *ngFor=\"let price of research.prices; trackBy:getPriceId\"\n                      [unit]=\"price.base\"\n                      [canBuy]=\"price.canBuy\"\n                      [price]=\"price.priceUser\">\n      </app-price-line>\n\n      <div *ngIf=\"research.unlimited \">\n        <label for=\"max\">最高等级:</label>\n        <input type=\"text\"\n               id=\"max\"\n               class=\"clr-input\"\n               [(ngModel)]=\"research.maxAutoBuyLevel\"\n               min=\"0\"\n               size=\"3\">\n      </div>\n\n    </div>\n  </div>\n</div>\n<div class=\"card-footer\"\n     *ngIf=\"!research.complete\">\n  <button *ngIf=\"!research.canBuy && !canSkip\"\n          class=\"btn btn-sm btn-link\"\n          disabled>\n    不能购买. 距离可购买还有 {{research.availableIn | endIn}} \n  </button>\n  <button *ngIf=\"!research.canBuy &&  canSkip\"\n          class=\"btn btn-danger btn-sm\"\n          (click)=\"skip()\">\n    不能购买. 跳过 {{minuteSkip}} 分钟\n  </button>\n  <button *ngIf=\"research.canBuy\"\n          class=\"btn btn-sm btn-link\"\n          (click)=\"research.buy(research.realNum)\">\n    研究\n  </button>\n</div>\n"
+module.exports = "<div class=\"card-block\">\n  <div class=\"card-title\">\n    <app-name [name]=\"research.name\"\n              [unlimited]=\"research.unlimited\"\n              [quantity]=\"research.quantity\"></app-name>\n  </div>\n  <div class=\"card-text p\">\n    {{research.description}}\n    <br />\n    <div *ngIf=\"!research.complete\">\n      <span>花费: </span>\n      <app-price-line *ngFor=\"let price of research.prices; trackBy:getPriceId\"\n                      [unit]=\"price.base\"\n                      [canBuy]=\"price.canBuy\"\n                      [price]=\"price.priceUser\">\n      </app-price-line>\n\n      <div *ngIf=\"research.unlimited \">\n        <label for=\"max\">最高等级:</label>\n        <input type=\"number\"\n               id=\"max\"\n               class=\"clr-input\"\n               [(ngModel)]=\"research.maxAutoBuyLevel\"\n               min=\"0\"\n               size=\"3\">\n      </div>\n\n    </div>\n  </div>\n</div>\n<div class=\"card-footer\"\n     *ngIf=\"!research.complete\">\n  <button *ngIf=\"!research.canBuy && !canSkip\"\n          class=\"btn btn-sm btn-link\"\n          disabled>\n    不能购买. 距离可购买还有 {{research.availableIn | endIn}} \n  </button>\n  <button *ngIf=\"!research.canBuy &&  canSkip\"\n          class=\"btn btn-danger btn-sm\"\n          (click)=\"skip()\">\n    不能购买. 跳过 {{minuteSkip}} 分钟\n  </button>\n  <button *ngIf=\"research.canBuy\"\n          class=\"btn btn-sm btn-link\"\n          (click)=\"research.buy(research.realNum)\">\n    研究\n  </button>\n</div>\n"
 
 /***/ }),
 
@@ -10799,7 +10892,7 @@ var UnitComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"card-block\"\n     *ngIf=\"world\"\n     (click)=\"openModal()\">\n  <h3 class=\"card-title\">{{world.name}} ({{world.level |format:true}})</h3>\n  <span class=\"p2\">声望:\n    <span class=\"monospace\">{{world.prestige | format:true}}</span>\n  </span>\n  <ul class=\"list\">\n    <li *ngFor=\"let bug of world.additionalBugs; trackBy:getBugId\">\n      {{getBugName(bug)}}\n    </li>\n    <li *ngFor=\"let bon of world.productionsBonus; trackBy:getBonusId\">\n      {{bon[0].name }} + {{bon[0].usedForProductionBonus[0].getBonusPercentForNum(bon[1]) |format }}%\n    </li>\n    <li *ngFor=\"let bon of world.productionsEfficienty; trackBy:getBonusId\">\n      {{bon[0].name }} + {{bon[0].usedForProductionBonus[0].getBonusPercentForNum(bon[1]) |format }}%\n    </li>\n    <li *ngFor=\"let bon of world.productionsAll; trackBy:getBonusId\">\n      {{bon[0].name }} + {{bon[0].usedForProductionBonus[0].getBonusPercentForNum(bon[1]) |format }}%\n    </li>\n    <li *ngFor=\"let unl of world.startingUnlocked; trackBy:getResearchId\">\n      {{unl.name}} available.\n    </li>\n    <li *ngFor=\"let start of world.startingUnit; trackBy:getStartId\">\n      <ng-container *ngIf=\"start[1].gt(0);else zero\">{{start[1] | format}} x {{start[0].name}}</ng-container>\n      <ng-template #zero>{{start[0].name}} 可用。</ng-template>\n    </li>\n  </ul>\n\n  <span class=\"p2\">胜利条件:</span>\n  <ul class=\"list\">\n    <li *ngFor=\"let win of world.winContidions; trackBy:getWinId\">\n      {{win.price | format:true}} {{win.base.name}}\n    </li>\n  </ul>\n\n  <div *ngIf=\"world.notWinConditions?.length > 0\">\n    <span class=\"p2\">苹果:</span>\n    <ul class=\"list\">\n      <li *ngFor=\"let mal of world.notWinConditions; trackBy:getMalusId\">\n        {{mal.name}}\n      </li>\n    </ul>\n  </div>\n\n</div>\n"
+module.exports = "<div class=\"card-block\"\n     *ngIf=\"world\"\n     (click)=\"openModal()\">\n  <h3 class=\"card-title\">{{world.name}} ({{world.level |format:true}})</h3>\n  <span class=\"p2\">经验:\n    <span class=\"monospace\">{{world.prestige | format:true}}</span>\n  </span>\n  <ul class=\"list\">\n    <li *ngFor=\"let bug of world.additionalBugs; trackBy:getBugId\">\n      {{getBugName(bug)}}\n    </li>\n    <li *ngFor=\"let bon of world.productionsBonus; trackBy:getBonusId\">\n      {{bon[0].name }} + {{bon[0].usedForProductionBonus[0].getBonusPercentForNum(bon[1]) |format }}%\n    </li>\n    <li *ngFor=\"let bon of world.productionsEfficienty; trackBy:getBonusId\">\n      {{bon[0].name }} + {{bon[0].usedForProductionBonus[0].getBonusPercentForNum(bon[1]) |format }}%\n    </li>\n    <li *ngFor=\"let bon of world.productionsAll; trackBy:getBonusId\">\n      {{bon[0].name }} + {{bon[0].usedForProductionBonus[0].getBonusPercentForNum(bon[1]) |format }}%\n    </li>\n    <li *ngFor=\"let unl of world.startingUnlocked; trackBy:getResearchId\">\n      {{unl.name}} 可用.\n    </li>\n    <li *ngFor=\"let start of world.startingUnit; trackBy:getStartId\">\n      <ng-container *ngIf=\"start[1].gt(0);else zero\">{{start[1] | format}} x {{start[0].name}}</ng-container>\n      <ng-template #zero>{{start[0].name}} 可用。</ng-template>\n    </li>\n  </ul>\n\n  <span class=\"p2\">胜利条件:</span>\n  <ul class=\"list\">\n    <li *ngFor=\"let win of world.winContidions; trackBy:getWinId\">\n      {{win.price | format:true}} {{win.base.name}}\n    </li>\n  </ul>\n\n  <div *ngIf=\"world.notWinConditions?.length > 0\">\n    <span class=\"p2\">苹果:</span>\n    <ul class=\"list\">\n      <li *ngFor=\"let mal of world.notWinConditions; trackBy:getMalusId\">\n        {{mal.name}}\n      </li>\n    </ul>\n  </div>\n\n</div>\n"
 
 /***/ }),
 

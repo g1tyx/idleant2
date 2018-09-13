@@ -1175,7 +1175,7 @@ var AutoBuyComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<h1>从这里你可以旅行到新的世界.</h1>\n\n<clr-alert [clrAlertType]=\"'alert-success'\"\n           [clrAlertClosable]=\"false\"\n           *ngIf=\"ms.game.canTravel; else warn\">\n  <div class=\"alert-item\">\n    <span class=\"alert-text\">\n      你将会得到\n      <span class=\"monospace\">{{ms.game.currentWorld.prestige}} </span>\n      经验\n    </span>\n  </div>\n</clr-alert>\n<ng-template #warn>\n  <clr-alert [clrAlertType]=\"'alert-danger'\"\n             [clrAlertClosable]=\"false\">\n    <div class=\"alert-item\">\n      <span class=\"alert-text\">\n        您跳过了。你什么也得不到 !\n      </span>\n    </div>\n  </clr-alert>\n</ng-template>\n<button class=\"btn\"\n        (click)=\"randomize()\">随机</button>\n\n<span>\n  最低等级:\n  <span class=\"monospace\">\n    {{minLevel | format:true}}\n  </span>\n</span>\n<span>\n  最高等级:\n  <span class=\"monospace\">\n    {{maxLevel | format:true}}\n  </span>\n</span>\n\n<p-slider [(ngModel)]=\"rangeValues\"\n          [range]=\"true\"\n          [min]=\"1\"\n          [max]=\"maxSafeInt\"\n          (onChange)=\"setLevels()\"></p-slider>\n\n<!-- <div class=\"card-columns\">\n    <app-world [world]=\"world\"\n               *ngFor=\"let world of ms.game.nextWorlds; trackBy:getWorldId\"></app-world>\n  </div> -->\n\n<div class=\"clr-row clr-justify-content-center\">\n  <div *ngFor=\"let world of ms.game.nextWorlds; trackBy:getWorldId\"\n       class=\"worldMaxWidt clr-col-sm-12 clr-col-md-4\">\n    <app-world [world]=\"world\"></app-world>\n  </div>\n</div>\n\n\n<clr-modal [(clrModalOpen)]=\"travelMessage\">\n  <h3 class=\"modal-title\">更换世界 ?</h3>\n  <div class=\"modal-body\">\n    <p>你将失去一切，除了声望升级，继续 ?</p>\n  </div>\n  <div class=\"modal-footer\">\n    <button type=\"button\"\n            class=\"btn btn-outline\"\n            (click)=\"travelMessage = false\">取消</button>\n    <button type=\"button\"\n            class=\"btn btn-primary\"\n            (click)=\"travel()\">确定</button>\n  </div>\n</clr-modal>\n"
+module.exports = "<h1>从这里你可以旅行到新的世界.</h1>\n\n<clr-alert [clrAlertType]=\"'alert-success'\"\n           [clrAlertClosable]=\"false\"\n           *ngIf=\"ms.game.canTravel; else warn\">\n  <div class=\"alert-item\">\n    <span class=\"alert-text\">\n      你将会得到\n      <span class=\"monospace\">{{ms.game.currentWorld.prestige}} </span>\n      经验\n    </span>\n  </div>\n</clr-alert>\n<ng-template #warn>\n  <clr-alert [clrAlertType]=\"'alert-danger'\"\n             [clrAlertClosable]=\"false\">\n    <div class=\"alert-item\">\n      <span class=\"alert-text\">\n        如果您选择跳过，你将得不到经验奖励!\n      </span>\n    </div>\n  </clr-alert>\n</ng-template>\n<button class=\"btn\"\n        (click)=\"randomize()\">随机</button>\n\n<span>\n  最低等级:\n  <span class=\"monospace\">\n    {{minLevel | format:true}}\n  </span>\n</span>\n<span>\n  最高等级:\n  <span class=\"monospace\">\n    {{maxLevel | format:true}}\n  </span>\n</span>\n\n<p-slider [(ngModel)]=\"rangeValues\"\n          [range]=\"true\"\n          [min]=\"1\"\n          [max]=\"maxSafeInt\"\n          (onChange)=\"setLevels()\"></p-slider>\n\n<!-- <div class=\"card-columns\">\n    <app-world [world]=\"world\"\n               *ngFor=\"let world of ms.game.nextWorlds; trackBy:getWorldId\"></app-world>\n  </div> -->\n\n<div class=\"clr-row clr-justify-content-center\">\n  <div *ngFor=\"let world of ms.game.nextWorlds; trackBy:getWorldId\"\n       class=\"worldMaxWidt clr-col-sm-12 clr-col-md-4\">\n    <app-world [world]=\"world\"></app-world>\n  </div>\n</div>\n\n\n<clr-modal [(clrModalOpen)]=\"travelMessage\">\n  <h3 class=\"modal-title\">更换世界 ?</h3>\n  <div class=\"modal-body\">\n    <p>你将失去一切，除了声望升级，继续 ?</p>\n  </div>\n  <div class=\"modal-footer\">\n    <button type=\"button\"\n            class=\"btn btn-outline\"\n            (click)=\"travelMessage = false\">取消</button>\n    <button type=\"button\"\n            class=\"btn btn-primary\"\n            (click)=\"travel()\">确定</button>\n  </div>\n</clr-modal>\n"
 
 /***/ }),
 
@@ -1875,6 +1875,9 @@ var HeaderComponent = /** @class */ (function () {
     HeaderComponent.prototype.getListId = function (index, list) {
         return list.name;
     };
+    HeaderComponent.prototype.warpAv = function (minutes) {
+        return this.ms.game.time.quantity.gt(minutes * 60);
+    };
     __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
         __metadata("design:type", Object)
@@ -2486,7 +2489,7 @@ var MainService = /** @class */ (function () {
                 }
             }
             else
-                this.toastr.error("Unknow error 1", "Save Error");
+                this.toastr.error("未知错误 1", "保存失败");
         }
         catch (ex) {
             this.toastr.error(ex && ex.message ? ex.message : "unknow error", "Save Error");
@@ -2498,14 +2501,14 @@ var MainService = /** @class */ (function () {
         try {
             if (!raw) {
                 if (!first) {
-                    setTimeout(function () { return _this.toastr.error("No save found", "Not Loaded"); }, 0);
+                    setTimeout(function () { return _this.toastr.error("未找到存档", "加载失败"); }, 0);
                 }
                 return false;
             }
             var json = lz_string__WEBPACK_IMPORTED_MODULE_3__["decompressFromBase64"](raw);
             var data = JSON.parse(json);
-            if (!data.m) {
-                setTimeout(function () { return _this.toastr.error("Save is not valid", "Not Loaded"); }, 0);
+            if (!("m" in data)) {
+                setTimeout(function () { return _this.toastr.error("存档无效", "加载失败"); }, 0);
                 return false;
             }
             this.game = null;
@@ -2594,7 +2597,7 @@ var MainService = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"content-area\">\n  <div id=\"network\"\n       #network></div>\n</div>\n<clr-vertical-nav [clrVerticalNavCollapsible]=\"true\"\n                  class=\"nav-trigger--bottom\">\n\n  <a clrVerticalNavLink>\n    <h6>Mastery\n      <span class=\"monospace\"\n            *ngIf=\"ms.game.allMateries.masteryPoint > 0\">{{ms.game.allMateries.masteryPoint}}</span>\n    </h6>\n  </a>\n  <div *ngIf=\"!node; else buy\">\n    <a clrVerticalNavLink\n       *ngFor=\"let desc of list; trackBy:getDescId\">\n      {{desc}}\n    </a>\n  </div>\n  <ng-template #buy>\n    <p clrVerticalNavLink>{{node.label}}</p>\n    <button class=\"btn\"\n            *ngIf=\"node.avaiable && !node.owned\"\n            [disabled]=\"ms.game.allMateries.masteryPoint <1\"\n            (click)=\"buyMastery()\">\n      Buy\n    </button>\n  </ng-template>\n\n  <!-- Debug Stuff -->\n  <!-- <button class=\"btn\"\n          (click)=\"export()\">\n    Export positions\n  </button>\n  <textarea name=\"raw\"\n            [(ngModel)]=\"exp\"\n            rows=\"1\"></textarea> -->\n\n</clr-vertical-nav>\n"
+module.exports = "<div class=\"content-area\">\n  <div id=\"network\"\n       #network></div>\n</div>\n<clr-vertical-nav [clrVerticalNavCollapsible]=\"true\"\n                  class=\"nav-trigger--bottom\">\n\n  <a clrVerticalNavLink>\n    <h6>专精\n      <span class=\"monospace\"\n            *ngIf=\"ms.game.allMateries.masteryPoint > 0\">{{ms.game.allMateries.masteryPoint}}</span>\n    </h6>\n  </a>\n  <div *ngIf=\"!node; else buy\">\n    <a clrVerticalNavLink\n       *ngFor=\"let desc of list; trackBy:getDescId\">\n      {{desc}}\n    </a>\n  </div>\n  <ng-template #buy>\n    <p clrVerticalNavLink>{{node.label}}</p>\n    <button class=\"btn\"\n            *ngIf=\"node.avaiable && !node.owned\"\n            [disabled]=\"ms.game.allMateries.masteryPoint <1\"\n            (click)=\"buyMastery()\">\n      购买\n    </button>\n  </ng-template>\n\n  <!-- Debug Stuff -->\n  <!-- <button class=\"btn\"\n          (click)=\"export()\">\n    Export positions\n  </button>\n  <textarea name=\"raw\"\n            [(ngModel)]=\"exp\"\n            rows=\"1\"></textarea> -->\n\n</clr-vertical-nav>\n"
 
 /***/ }),
 
@@ -3180,14 +3183,16 @@ var ActionGroup = /** @class */ (function () {
                     _this.pricesTemp.push(priTemp);
                 }
             });
-            _this.pricesTemp.forEach(function (p) {
-                p.reloadRealPrice();
-                p.reload(new Decimal(0));
-            });
-            _this.canBuy = _this.pricesTemp.findIndex(function (p) { return !p.canBuy; }) < 0;
         });
+        this.pricesTemp.forEach(function (p) {
+            // p.reloadRealPrice();
+            // p.reload(new Decimal(0));
+            p.canBuy = p.base.quantity.gt(p.price);
+        });
+        this.canBuy = this.pricesTemp.findIndex(function (p) { return !p.canBuy; }) < 0;
         if (this.actionList.findIndex(function (a) { return !a.canBuy; }) > -1) {
             this.canBuy = false;
+            return;
         }
     };
     ActionGroup.prototype.buy = function (game, toBuy) {
@@ -3906,7 +3911,7 @@ var FullUnit = /** @class */ (function (_super) {
         }
     };
     FullUnit.prototype.isActive = function () {
-        return this.unlocked && this.efficiency > 0 && this.quantity.gt(0);
+        return (this.unlocked && this.efficiency > Number.EPSILON && this.quantity.gt(0));
     };
     FullUnit.prototype.isStopped = function () {
         return this.efficiency < 0.01;
@@ -4089,6 +4094,7 @@ __webpack_require__.r(__webpack_exports__);
 var STARTING_FOOD = new Decimal(100);
 var ADDITIONAL_PRICE1 = new Decimal(1e4);
 var ADDITIONAL_PRICE2 = new Decimal(1e9);
+var MAX_UPDATE_TRY = 20;
 var Game = /** @class */ (function () {
     function Game(ms) {
         var _this = this;
@@ -4107,6 +4113,7 @@ var Game = /** @class */ (function () {
         this.realMaxLevel = new Decimal(5);
         this.canBuyResearch = false;
         this.maxTimeBank = new Decimal(0);
+        this.upNumber = 0;
         this.tabs = new _tabs__WEBPACK_IMPORTED_MODULE_12__["Tabs"]();
         //#region Declarations
         this.materials = new _units_materials__WEBPACK_IMPORTED_MODULE_20__["Materials"](this);
@@ -4144,8 +4151,13 @@ var Game = /** @class */ (function () {
         this.experience = new _full_unit__WEBPACK_IMPORTED_MODULE_4__["FullUnit"]("prest");
         this.experience.reset = function () {
             //  Do nothing !
+            //  Intended
         };
         this.time = new _full_unit__WEBPACK_IMPORTED_MODULE_4__["FullUnit"]("time");
+        this.time.reset = function () {
+            //  Do nothing !
+            //  Intended
+        };
         //#endregion
         //#region Build Lists
         this.unitGroups
@@ -4303,6 +4315,11 @@ var Game = /** @class */ (function () {
      */
     Game.prototype.update = function (delta, force) {
         if (force === void 0) { force = false; }
+        this.upNumber++;
+        if (this.upNumber > MAX_UPDATE_TRY) {
+            this.ms.toastr.error("Error: infinite loop.", "Please report to developer.");
+            return;
+        }
         var maxTime = delta;
         var unitZero = null;
         this.firstEndigUnit = null;
@@ -4373,12 +4390,17 @@ var Game = /** @class */ (function () {
             if (maxTime > 10) {
                 this.update2(new Decimal(maxTime).div(1000));
             }
-            // Something has ened
+            // Something has ended
             if (unitZero) {
                 //  Stop consumers
-                unitZero.producedBy
-                    .filter(function (p) { return p.rateo.lt(0); })
-                    .forEach(function (p) { return (p.producer.efficiency = 0); });
+                unitZero.producedBy.filter(function (p) { return p.rateo.lt(0); }).forEach(function (p) {
+                    p.producer.efficiency = 0;
+                });
+                unitZero.producedBy.filter(function (p) { return p.rateo.gt(0); }).forEach(function (p) {
+                    p.producer.producedBy.filter(function (p2) { return p2.rateo.lt(0); }).forEach(function (p2) {
+                        p2.producer.efficiency = 0;
+                    });
+                });
                 //  Kill Malus
                 if (unitZero instanceof _malus__WEBPACK_IMPORTED_MODULE_5__["Malus"]) {
                     if (unitZero.kill()) {
@@ -4410,7 +4432,6 @@ var Game = /** @class */ (function () {
                 .plus(u.c.times(seconds));
         });
         this.unlockedUnits.forEach(function (u) {
-            // u.actions.forEach(a => a.reload());
             u.quantity = u.quantity.max(0);
         });
     };
@@ -4419,6 +4440,7 @@ var Game = /** @class */ (function () {
      *  and eventually fix quantity > 0
      */
     Game.prototype.postUpdate = function (time) {
+        this.upNumber = 0;
         this.worldMalus.foodMalus1.reloadPriceMulti();
         this.worldMalus.woodMalus1.reloadPriceMulti();
         this.worldMalus.crystalMalus1.reloadPriceMulti();
@@ -4712,6 +4734,7 @@ var Game = /** @class */ (function () {
             //  Debug
             //
             // this.materials.list.forEach(m => (m.quantity = new Decimal(1e100)));
+            // this.materials.food.quantity = new Decimal(100);
             // this.ants.nest.quantity = new Decimal(70);
             // this.experience.quantity = new Decimal(1e10);
             // this.allMateries.masteryPoint = 100;
@@ -4848,10 +4871,9 @@ var Malus = /** @class */ (function (_super) {
     Malus.prototype.reloadPriceMulti = function () {
         if (!this.first)
             return;
-        this.priceMultiplier =
-            this.quantity.gte(1) && this.isActive()
-                ? new Decimal(this.quantity.log(20))
-                : (this.priceMultiplier = new Decimal(1));
+        this.priceMultiplier = (this.quantity.gte(1) && this.isActive()
+            ? new Decimal(this.quantity.log(20))
+            : (this.priceMultiplier = new Decimal(1))).max(1);
     };
     Malus.prototype.isActive = function () {
         return !this.isKilled && _super.prototype.isActive.call(this);
@@ -9229,7 +9251,7 @@ var OptionsNavComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<h1>保存</h1>\n<div class=\"btn-group btn-primary\">\n  <button class=\"btn btn-success\"\n          (click)=\"serv.save()\">\n    <clr-icon shape=\"floppy\"></clr-icon>\n    保存\n  </button>\n  <button class=\"btn\"\n          (click)=\"serv.load()\">\n    <clr-icon shape=\"install\"></clr-icon>\n    加载\n  </button>\n  <button class=\"btn btn-danger\"\n          (click)=\"clearModal = true\">\n    <clr-icon shape=\"uninstall\"></clr-icon>\n    清空\n  </button>\n</div>\n<p>\n  <br />\n  每5分钟自动保存一次。\n  <br />\n  上次保存时间: {{serv.lastSave | date:'medium' }}\n</p>\n<h2>导出 / 导入存档</h2>\n<textarea name=\"raw\"\n          [(ngModel)]=\"exp\"\n          rows=\"3\"></textarea>\n<div class=\"btn-group btn-primary\">\n  <button class=\"btn btn-success\"\n          (click)=\"export()\">\n    导出\n  </button>\n  <button class=\"btn\"\n          (click)=\"import()\">\n    导入\n  </button>\n</div>\n<h2>自动保存设置</h2>\n<div class=\"toggle-switch\">\n  <input type=\"checkbox\"\n         id=\"t1\"\n         [(ngModel)]=\"serv.options.autosaveNotification\">\n  <label for=\"t1\">自动保存通知</label>\n</div>\n<br />\n<a href=\"https://scorzy.github.io/IdleAnt2/changelog.txt\"\n   target=\"_blank\">更新日志\n</a>\n\n<clr-modal [(clrModalOpen)]=\"clearModal\">\n  <h3 class=\"modal-title\">重置</h3>\n  <div class=\"modal-body\">\n    <p>你确定要删除所有游戏进度？</p>\n  </div>\n  <div class=\"modal-footer\">\n    <button type=\"button\"\n            class=\"btn btn-outline\"\n            (click)=\"clearModal = false\">取消</button>\n    <button type=\"button\"\n            class=\"btn btn-danger\"\n            (click)=\"this.serv.clear(); clearModal = false\">删除</button>\n  </div>\n</clr-modal>\n"
+module.exports = "<h1>保存</h1>\n<div class=\"btn-group btn-primary\">\n  <button class=\"btn btn-success\"\n          (click)=\"serv.save()\">\n    <clr-icon shape=\"floppy\"></clr-icon>\n    保存\n  </button>\n  <button class=\"btn\"\n          (click)=\"serv.load()\">\n    <clr-icon shape=\"install\"></clr-icon>\n    加载\n  </button>\n  <button class=\"btn btn-danger\"\n          (click)=\"clearModal = true\">\n    <clr-icon shape=\"uninstall\"></clr-icon>\n    清空\n  </button>\n</div>\n<p>\n  <br />\n  每5分钟自动保存一次。\n  <br />\n  上次保存时间: {{serv.lastSave | date:'medium' }}\n</p>\n<h2>导出 / 导入存档</h2>\n<textarea name=\"raw\"\n          [(ngModel)]=\"exp\"\n          rows=\"3\"></textarea>\n<div class=\"btn-group btn-primary\">\n  <button class=\"btn btn-success\"\n          (click)=\"export()\">\n    导出\n  </button>\n  <button class=\"btn\"\n          (click)=\"import()\">\n    导入\n  </button>\n</div>\n<h2>自动保存设置</h2>\n<div class=\"toggle-switch\">\n  <input type=\"checkbox\"\n         id=\"t1\"\n         [(ngModel)]=\"serv.options.autosaveNotification\">\n  <label for=\"t1\">自动保存通知</label>\n</div>\n<br />\n<a href=\"https://likexia.gitee.io/idleant2/changelog.html\"\n   target=\"_blank\">更新日志\n</a>\n\n<clr-modal [(clrModalOpen)]=\"clearModal\">\n  <h3 class=\"modal-title\">重置</h3>\n  <div class=\"modal-body\">\n    <p>你确定要删除所有游戏进度？</p>\n  </div>\n  <div class=\"modal-footer\">\n    <button type=\"button\"\n            class=\"btn btn-outline\"\n            (click)=\"clearModal = false\">取消</button>\n    <button type=\"button\"\n            class=\"btn btn-danger\"\n            (click)=\"this.serv.clear(); clearModal = false\">删除</button>\n  </div>\n</clr-modal>\n"
 
 /***/ }),
 

@@ -1175,7 +1175,7 @@ var AutoBuyComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<h1>从这里你可以旅行到新的世界.</h1>\n\n<clr-alert [clrAlertType]=\"'alert-success'\"\n           [clrAlertClosable]=\"false\"\n           *ngIf=\"ms.game.canTravel; else warn\">\n  <div class=\"alert-item\">\n    <span class=\"alert-text\">\n      你将会得到\n      <span class=\"monospace\">{{ms.game.currentWorld.prestige}} </span>\n      经验\n    </span>\n  </div>\n</clr-alert>\n<ng-template #warn>\n  <clr-alert [clrAlertType]=\"'alert-danger'\"\n             [clrAlertClosable]=\"false\">\n    <div class=\"alert-item\">\n      <span class=\"alert-text\">\n        如果您选择跳过，你将得不到经验奖励!\n      </span>\n    </div>\n  </clr-alert>\n</ng-template>\n<button class=\"btn\"\n        (click)=\"randomize()\">随机</button>\n\n<span>\n  最低等级:\n  <span class=\"monospace\">\n    {{minLevel | format:true}}\n  </span>\n</span>\n<span>\n  最高等级:\n  <span class=\"monospace\">\n    {{maxLevel | format:true}}\n  </span>\n</span>\n\n<p-slider [(ngModel)]=\"rangeValues\"\n          [range]=\"true\"\n          [min]=\"1\"\n          [max]=\"maxSafeInt\"\n          (onChange)=\"setLevels()\"></p-slider>\n\n<!-- <div class=\"card-columns\">\n    <app-world [world]=\"world\"\n               *ngFor=\"let world of ms.game.nextWorlds; trackBy:getWorldId\"></app-world>\n  </div> -->\n\n<div class=\"clr-row clr-justify-content-center\">\n  <div *ngFor=\"let world of ms.game.nextWorlds; trackBy:getWorldId\"\n       class=\"worldMaxWidt clr-col-sm-12 clr-col-md-4\">\n    <app-world [world]=\"world\"></app-world>\n  </div>\n</div>\n\n\n<clr-modal [(clrModalOpen)]=\"travelMessage\">\n  <h3 class=\"modal-title\">更换世界 ?</h3>\n  <div class=\"modal-body\">\n    <p>你将失去一切，除了声望升级，继续 ?</p>\n  </div>\n  <div class=\"modal-footer\">\n    <button type=\"button\"\n            class=\"btn btn-outline\"\n            (click)=\"travelMessage = false\">取消</button>\n    <button type=\"button\"\n            class=\"btn btn-primary\"\n            (click)=\"travel()\">确定</button>\n  </div>\n</clr-modal>\n"
+module.exports = "<h1>从这里你可以旅行到新的世界.</h1>\n\n\n<clr-alert [clrAlertType]=\"'alert-success'\"\n           [clrAlertClosable]=\"false\"\n           *ngIf=\"ms.game.canTravel; else warn\">\n  <div class=\"alert-item\">\n    <span class=\"alert-text\">\n      你将会得到\n      <span class=\"monospace\">{{ms.game.currentWorld.prestige}} </span>\n      经验\n\n      <span *ngIf=\"ms.game.researches.overNineThousand.done\n      && ms.game.currentWorld.level.gt(this.maxLevel.times(0.9))\">\n        和 1 精通点\n      </span>\n    </span>\n  </div>\n</clr-alert>\n\n<ng-template #warn>\n  <clr-alert [clrAlertType]=\"'alert-danger'\"\n             [clrAlertClosable]=\"false\">\n    <div class=\"alert-item\">\n      <span class=\"alert-text\">\n        如果您选择跳过，你将得不到经验奖励!\n      </span>\n    </div>\n  </clr-alert>\n</ng-template>\n\n\n<clr-alert [clrAlertType]=\"'alert-warning'\"\n           [clrAlertClosable]=\"false\"\n           *ngIf=\"!ms.game.researches.mastery.done\">\n  <div class=\"alert-item \">\n    <span class=\"alert-text\">\n      精通研究未完成。\n    </span>\n  </div>\n</clr-alert>\n\n<button class=\"btn\"\n        (click)=\"randomize()\">随机</button>\n\n<span>\n  最低等级:\n  <span class=\"monospace\">\n    {{minLevel | format:true}}\n  </span>\n</span>\n<span>\n  最高等级:\n  <span class=\"monospace\">\n    {{maxLevel | format:true}}\n  </span>\n</span>\n\n<p-slider [(ngModel)]=\"rangeValues\"\n          [range]=\"true\"\n          [min]=\"1\"\n          [max]=\"maxSafeInt\"\n          (onChange)=\"setLevels()\"></p-slider>\n\n<!-- <div class=\"card-columns\">\n    <app-world [world]=\"world\"\n               *ngFor=\"let world of ms.game.nextWorlds; trackBy:getWorldId\"></app-world>\n  </div> -->\n\n<div class=\"clr-row clr-justify-content-center\">\n  <div *ngFor=\"let world of ms.game.nextWorlds; trackBy:getWorldId\"\n       class=\"worldMaxWidt clr-col-sm-12 clr-col-md-4\">\n    <app-world [world]=\"world\"></app-world>\n  </div>\n</div>\n\n\n<clr-modal [(clrModalOpen)]=\"travelMessage\">\n  <h3 class=\"modal-title\">更换世界 ?</h3>\n  <div class=\"modal-body\">\n    <p>你将失去一切，除了声望升级，继续 ?</p>\n  </div>\n  <div class=\"modal-footer\">\n    <button type=\"button\"\n            class=\"btn btn-outline\"\n            (click)=\"travelMessage = false\">取消</button>\n    <button type=\"button\"\n            class=\"btn btn-primary\"\n            (click)=\"travel()\">确定</button>\n  </div>\n</clr-modal>\n"
 
 /***/ }),
 
@@ -1718,7 +1718,6 @@ var UnitGroupComponent = /** @class */ (function () {
                 this.chart.labels[0] !== this.unitGroup.chartLabels[0])) {
             this.doGraph();
             this.forceChange = false;
-            console.log("up");
         }
     };
     UnitGroupComponent.prototype.doGraph = function () {
@@ -1768,7 +1767,7 @@ var UnitGroupComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<clr-header class=\"header\"\n            [ngClass]=\"headerClass\">\n\n  <div class=\"header-nav\"\n       [clr-nav-level]=\"1\">\n    <a [routerLink]='\"nav\"'\n       class=\"nav-link\"\n       [routerLinkActive]=\"'active'\"\n       (click)=\"navigateLast()\">\n      <span class=\"nav-text\">\n        <clr-icon shape=\"bug\"></clr-icon>\n      </span>\n    </a>\n    <a [routerLink]='\"lab\"'\n       class=\"nav-link\"\n       *ngIf=\"lab\"\n       [routerLinkActive]=\"'active'\">\n      <span class=\"nav-text\">\n        <clr-icon shape=\"lightbulb\"\n                  [ngClass]=\"{'has-badge': labBadge}\"></clr-icon>\n      </span>\n    </a>\n    <a [routerLink]='\"home\"'\n       class=\"nav-link\"\n       [routerLinkActive]=\"'active'\">\n      <span class=\"nav-text\">\n        <clr-icon shape=\"dashboard\"></clr-icon>\n      </span>\n    </a>\n    <a [routerLink]='\"travel\"'\n       class=\"nav-link\"\n       *ngIf=\"travel\"\n       [routerLinkActive]=\"'active'\">\n      <span class=\"nav-text\">\n        <clr-icon shape=\"world\"\n                  [ngClass]=\"{'has-badge': travelBadge}\"></clr-icon>\n      </span>\n    </a>\n    <a [routerLink]='\"auto\"'\n       class=\"nav-link\"\n       *ngIf=\"autoBuy\"\n       [routerLinkActive]=\"'active'\">\n      <span class=\"nav-text\">\n        <clr-icon shape=\"star\"></clr-icon>\n      </span>\n    </a>\n    <a [routerLink]='\"pre\"'\n       class=\"nav-link\"\n       *ngIf=\"prestige\"\n       [routerLinkActive]=\"'active'\">\n      <span class=\"nav-text\">\n        <clr-icon shape=\"store\"></clr-icon>\n      </span>\n    </a>\n    <a [routerLink]='\"mast\"'\n       class=\"nav-link\"\n       *ngIf=\"mastery\"\n       [routerLinkActive]=\"'active'\">\n      <span class=\"nav-text\">\n        <clr-icon shape=\"star\"></clr-icon>\n      </span>\n    </a>\n  </div>\n\n  <div class=\"header-actions\">\n\n    <form class=\"search\">\n      <label id=\"multiLabel\"\n             for=\"multi\">N:&nbsp;</label>\n      <input class=\"multiBuy\"\n             min=\"1\"\n             id=\"multi\"\n             type=\"number\"\n             name=\"buyMulti\"\n             placeholder=\"Buy multiplier\"\n             [(ngModel)]=\"buyMulti\">\n    </form>\n\n    <clr-dropdown  style=\"padding-left: 15px;\">\n      <button class=\"nav-icon\"\n              clrDropdownTrigger>\n        <clr-icon shape=\"tools\"></clr-icon>\n        <clr-icon shape=\"caret down\"></clr-icon>\n      </button>\n      <clr-dropdown-menu *clrIfOpen\n                         clrPosition=\"bottom-right\">\n\n        <clr-dropdown *ngIf=\"ms.game.allPrestige.time.timeProducer.quantity.gt(0)\">\n          <button type=\"button\"\n                  clrDropdownTrigger>时间扭曲</button>\n          <clr-dropdown-menu clrPosition=\"left-top\">\n            <a clrDropdownItem\n               (click)=\"warp(p)\"\n               *ngFor=\"let p of minuteWarps\"\n               [ngClass]=\"{'disabled': !warpAv(p)}\">\n              扭曲 {{p}} 分钟\n            </a>\n          </clr-dropdown-menu>\n        </clr-dropdown>\n\n        <a clrDropdownItem\n           (click)=\"all100()\">全部 100%</a>\n\n        <clr-dropdown *ngFor=\"let list of groupNoEnemy; trackBy:getListId\">\n          <button type=\"button\"\n                  clrDropdownTrigger>{{list.name}}</button>\n          <clr-dropdown-menu clrPosition=\"left-top\"\n                             *clrIfOpen>\n            <a clrDropdownItem\n               (click)=\"list.buyN(buyMulti)\">购买 n</a>\n            <a clrDropdownItem\n               (click)=\"list.buyTeam(buyMulti)\"\n               *ngIf=\"ms.game.researches.team2.done\">团队 n</a>\n            <a clrDropdownItem\n               (click)=\"list.buyTwins(buyMulti)\"\n               *ngIf=\"ms.game.researches.twin.done\">双胞胎 n</a>\n            <div class=\"dropdown-divider\"></div>\n            <clr-dropdown *ngIf=\"ms.game.tabs.autoBuy.unlocked && list.hasAutoBuy()\">\n              <button type=\"button\"\n                      clrDropdownTrigger>AutoBuyer</button>\n              <clr-dropdown-menu *clrIfOpen>\n                <a clrDropdownItem\n                   (click)=\"list.autoBuy(true)\">全部开启</a>\n                <a clrDropdownItem\n                   (click)=\"list.autoBuy(false)\">全部关闭</a>\n                <a clrDropdownItem\n                   *ngIf=\"list.hasAutoBuyBuy()\"\n                   (click)=\"list.autoBuyBuy(true)\">孵化开启</a>\n                <a clrDropdownItem\n                   *ngIf=\"list.hasAutoBuyBuy()\"\n                   (click)=\"list.autoBuyBuy(false)\">孵化关闭</a>\n                <a clrDropdownItem\n                   *ngIf=\"list.hasAutoBuyTeam()\"\n                   (click)=\"list.autoBuyTeam(true)\">团队开启</a>\n                <a clrDropdownItem\n                   *ngIf=\"list.hasAutoBuyTeam()\"\n                   (click)=\"list.autoBuyTeam(false)\">团队关闭</a>\n                <a clrDropdownItem\n                   *ngIf=\"list.hasAutoBuyTwin()\"\n                   (click)=\"list.autoBuyTwin(true)\">双胞胎开启</a>\n                <a clrDropdownItem\n                   *ngIf=\"list.hasAutoBuyTwin()\"\n                   (click)=\"list.autoBuyTwin(false)\">双胞胎关闭</a>\n              </clr-dropdown-menu>\n            </clr-dropdown>\n            <div class=\"dropdown-divider\"\n                 *ngIf=\"ms.game.tabs.autoBuy.unlocked && list.hasAutoBuy()\"></div>\n            <a clrDropdownItem\n               (click)=\"allCustom(p, list)\"\n               *ngFor=\"let p of percentPreset\">\n              {{p}}%\n            </a>\n          </clr-dropdown-menu>\n        </clr-dropdown>\n\n      </clr-dropdown-menu>\n    </clr-dropdown>\n\n    <a href=\"javascript://\"\n       class=\"nav-link nav-icon\">\n      <clr-icon shape=\"clock\"\n                (click)=\"openTimeModal()\"></clr-icon>\n    </a>\n    <a href=\"javascript://\"\n       class=\"nav-link nav-icon\">\n      <clr-icon [attr.shape]=\"ms.game.isPaused ? 'play' : 'pause'\"\n                (click)=\"ms.game.isPaused = ! ms.game.isPaused\"></clr-icon>\n    </a>\n    <a [routerLink]=\"'opt/save/'\"\n       class=\"nav-link nav-icon\"\n       [routerLinkActive]=\"'active'\">\n      <clr-icon shape=\"cog\"></clr-icon>\n    </a>\n  </div>\n\n</clr-header>\n\n<clr-modal [(clrModalOpen)]=\"timeModal\"\n           [clrModalSize]=\"'lg'\">\n  <h3 class=\"modal-title\">时间扭曲</h3>\n  <div class=\"modal-body actMinH\"\n       *ngIf=\"ms.game.actMin && ms.game.actHour\">\n    <span> 你可以跳过 {{ms.game.time.quantity.toNumber() | endIn}}:\n      <span class=\"monospace\">\n        {{ms.game.time.quantity | format}}\n      </span>\n    </span>\n    <br/>\n    <span>\n      你得到了\n      <span class=\"monospace\">\n        {{ms.game.time.c | format }}</span>\n      /秒 最大: <span class=\"monospace\">{{ms.game.maxTimeBank | format}}</span>\n    </span>\n    <div class=\"clr-row\">\n      <div class=\"clr-col-6\">\n        <app-action [action]=\"ms.game.actMin\"></app-action>\n      </div>\n      <div class=\"clr-col-6\">\n        <app-action [action]=\"ms.game.actHour\"></app-action>\n      </div>\n    </div>\n  </div>\n</clr-modal>\n"
+module.exports = "<clr-header class=\"header\"\n            [ngClass]=\"headerClass\">\n\n  <div class=\"header-nav\"\n       [clr-nav-level]=\"1\">\n    <a [routerLink]='\"nav\"'\n       class=\"nav-link\"\n       [routerLinkActive]=\"'active'\"\n       (click)=\"navigateLast()\">\n      <span class=\"nav-text\">\n        <clr-icon shape=\"bug\"></clr-icon>\n      </span>\n    </a>\n    <a [routerLink]='\"lab\"'\n       class=\"nav-link\"\n       *ngIf=\"lab\"\n       [routerLinkActive]=\"'active'\">\n      <span class=\"nav-text\">\n        <clr-icon shape=\"lightbulb\"\n                  [ngClass]=\"{'has-badge': labBadge}\"></clr-icon>\n      </span>\n    </a>\n    <a [routerLink]='\"home\"'\n       class=\"nav-link\"\n       [routerLinkActive]=\"'active'\">\n      <span class=\"nav-text\">\n        <clr-icon shape=\"dashboard\"></clr-icon>\n      </span>\n    </a>\n    <a [routerLink]='\"travel\"'\n       class=\"nav-link\"\n       *ngIf=\"travel\"\n       [routerLinkActive]=\"'active'\">\n      <span class=\"nav-text\">\n        <clr-icon shape=\"world\"\n                  [ngClass]=\"{'has-badge': travelBadge}\"></clr-icon>\n      </span>\n    </a>\n    <a [routerLink]='\"auto\"'\n       class=\"nav-link\"\n       *ngIf=\"autoBuy\"\n       [routerLinkActive]=\"'active'\">\n      <span class=\"nav-text\">\n        <clr-icon shape=\"star\"></clr-icon>\n      </span>\n    </a>\n    <a [routerLink]='\"pre\"'\n       class=\"nav-link\"\n       *ngIf=\"prestige\"\n       [routerLinkActive]=\"'active'\">\n      <span class=\"nav-text\">\n        <clr-icon shape=\"store\"></clr-icon>\n      </span>\n    </a>\n    <a [routerLink]='\"mast\"'\n       class=\"nav-link\"\n       *ngIf=\"mastery\"\n       [routerLinkActive]=\"'active'\">\n      <span class=\"nav-text\">\n        <clr-icon shape=\"star\"></clr-icon>\n      </span>\n    </a>\n  </div>\n\n  <div class=\"header-actions\">\n\n    <form class=\"search\">\n      <label id=\"multiLabel\"\n             for=\"multi\">N:&nbsp;</label>\n      <input class=\"multiBuy\"\n             min=\"1\"\n             id=\"multi\"\n             type=\"number\"\n             name=\"buyMulti\"\n             placeholder=\"Buy multiplier\"\n             [(ngModel)]=\"buyMulti\">\n    </form>\n\n    <clr-dropdown  style=\"padding-left: 15px;\">\n      <button class=\"nav-icon\"\n              clrDropdownTrigger>\n        <clr-icon shape=\"tools\"></clr-icon>\n        <clr-icon shape=\"caret down\"></clr-icon>\n      </button>\n      <clr-dropdown-menu *clrIfOpen\n                         clrPosition=\"bottom-right\">\n\n        <clr-dropdown *ngIf=\"ms.game.allPrestige.time.timeProducer.quantity.gt(0)\">\n          <button type=\"button\"\n                  clrDropdownTrigger>时间扭曲</button>\n          <clr-dropdown-menu clrPosition=\"left-top\">\n            <a clrDropdownItem\n               (click)=\"warp(p)\"\n               *ngFor=\"let p of minuteWarps\"\n               [ngClass]=\"{'disabled': !warpAv(p)}\">\n              扭曲 {{p}} 分钟\n            </a>\n          </clr-dropdown-menu>\n        </clr-dropdown>\n\n        <a clrDropdownItem\n           (click)=\"all100()\">全部 100%</a>\n\n        <clr-dropdown *ngFor=\"let list of groupNoEnemy; trackBy:getListId\">\n          <button type=\"button\"\n                  clrDropdownTrigger>{{list.name}}</button>\n          <clr-dropdown-menu clrPosition=\"left-top\"\n                             *clrIfOpen>\n            <a clrDropdownItem\n               (click)=\"list.buyN(buyMulti)\">购买 n</a>\n            <a clrDropdownItem\n               (click)=\"list.buyTeam(buyMulti)\"\n               *ngIf=\"ms.game.researches.team2.done\">团队 n</a>\n            <a clrDropdownItem\n               (click)=\"list.buyTwins(buyMulti)\"\n               *ngIf=\"ms.game.researches.twin.done\">双胞胎 n</a>\n            <div class=\"dropdown-divider\"></div>\n            <clr-dropdown *ngIf=\"ms.game.tabs.autoBuy.unlocked && list.hasAutoBuy()\">\n              <button type=\"button\"\n                      clrDropdownTrigger>AutoBuyer</button>\n              <clr-dropdown-menu *clrIfOpen>\n                <a clrDropdownItem\n                   (click)=\"list.autoBuy(true)\">全部开启</a>\n                <a clrDropdownItem\n                   (click)=\"list.autoBuy(false)\">全部关闭</a>\n                <a clrDropdownItem\n                   *ngIf=\"list.hasAutoBuyBuy()\"\n                   (click)=\"list.autoBuyBuy(true)\">孵化开启</a>\n                <a clrDropdownItem\n                   *ngIf=\"list.hasAutoBuyBuy()\"\n                   (click)=\"list.autoBuyBuy(false)\">孵化关闭</a>\n                <a clrDropdownItem\n                   *ngIf=\"list.hasAutoBuyTeam()\"\n                   (click)=\"list.autoBuyTeam(true)\">团队开启</a>\n                <a clrDropdownItem\n                   *ngIf=\"list.hasAutoBuyTeam()\"\n                   (click)=\"list.autoBuyTeam(false)\">团队关闭</a>\n                <a clrDropdownItem\n                   *ngIf=\"list.hasAutoBuyTwin()\"\n                   (click)=\"list.autoBuyTwin(true)\">双胞胎开启</a>\n                <a clrDropdownItem\n                   *ngIf=\"list.hasAutoBuyTwin()\"\n                   (click)=\"list.autoBuyTwin(false)\">双胞胎关闭</a>\n              </clr-dropdown-menu>\n            </clr-dropdown>\n            <div class=\"dropdown-divider\"\n                 *ngIf=\"ms.game.tabs.autoBuy.unlocked && list.hasAutoBuy()\"></div>\n            <a clrDropdownItem\n               (click)=\"allCustom(p, list)\"\n               *ngFor=\"let p of percentPreset\">\n              {{p}}%\n            </a>\n          </clr-dropdown-menu>\n        </clr-dropdown>\n\n      </clr-dropdown-menu>\n    </clr-dropdown>\n\n    <a href=\"javascript://\"\n       class=\"nav-link nav-icon\">\n      <clr-icon shape=\"clock\"\n                (click)=\"openTimeModal()\"></clr-icon>\n    </a>\n    <a href=\"javascript://\"\n       class=\"nav-link nav-icon\">\n      <clr-icon [attr.shape]=\"ms.game.isPaused ? 'play' : 'pause'\"\n                (click)=\"ms.game.isPaused = ! ms.game.isPaused\"></clr-icon>\n    </a>\n    <a [routerLink]=\"'opt/save/'\"\n       class=\"nav-link nav-icon\"\n       [routerLinkActive]=\"'active'\">\n      <clr-icon shape=\"cog\"></clr-icon>\n    </a>\n  </div>\n\n</clr-header>\n\n<clr-modal [(clrModalOpen)]=\"timeModal\"\n           [clrModalSize]=\"'lg'\">\n  <h3 class=\"modal-title\">时间扭曲</h3>\n  <div class=\"modal-body actMinH\"\n       *ngIf=\"ms.game.actMin && ms.game.actHour\">\n    <span> 你可以跳过 {{ms.game.time.quantity.toNumber() *1000| endIn}}:\n      <span class=\"monospace\">\n        {{ms.game.time.quantity | format}}\n      </span>\n    </span>\n    <br />\n    <span>\n      你得到了\n      <span class=\"monospace\">\n        {{ms.game.time.c | format }}</span>\n      /秒 最大: <span class=\"monospace\">{{ms.game.maxTimeBank | format}}</span>\n    </span>\n    <div class=\"clr-row\">\n      <div class=\"clr-col-6\">\n        <app-action [action]=\"ms.game.actMin\"></app-action>\n      </div>\n      <div class=\"clr-col-6\">\n        <app-action [action]=\"ms.game.actHour\"></app-action>\n      </div>\n    </div>\n  </div>\n</clr-modal>\n"
 
 /***/ }),
 
@@ -3485,6 +3484,7 @@ var WarpAction = /** @class */ (function (_super) {
         if (!_super.prototype.buy.call(this, toBuy))
             return false;
         this.game.warp(toBuy.toNumber() * 1000 * this.warp);
+        return true;
     };
     return WarpAction;
 }(_action__WEBPACK_IMPORTED_MODULE_0__["Action"]));
@@ -4033,35 +4033,37 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ADDITIONAL_PRICE1", function() { return ADDITIONAL_PRICE1; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ADDITIONAL_PRICE2", function() { return ADDITIONAL_PRICE2; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Game", function() { return Game; });
-/* harmony import */ var _actions_warp_action__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./actions/warp-action */ "./src/app/model/actions/warp-action.ts");
-/* harmony import */ var _autoBuy_auto_buy_manager__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./autoBuy/auto-buy-manager */ "./src/app/model/autoBuy/auto-buy-manager.ts");
-/* harmony import */ var _bugsTypes__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./bugsTypes */ "./src/app/model/bugsTypes.ts");
-/* harmony import */ var _CONSTATS__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./CONSTATS */ "./src/app/model/CONSTATS.ts");
-/* harmony import */ var _full_unit__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./full-unit */ "./src/app/model/full-unit.ts");
-/* harmony import */ var _malus__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./malus */ "./src/app/model/malus.ts");
-/* harmony import */ var _masteries_all_masteries__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./masteries/all-masteries */ "./src/app/model/masteries/all-masteries.ts");
-/* harmony import */ var _masteries_mastery__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./masteries/mastery */ "./src/app/model/masteries/mastery.ts");
-/* harmony import */ var _prestige_all_prestige__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./prestige/all-prestige */ "./src/app/model/prestige/all-prestige.ts");
-/* harmony import */ var _price__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./price */ "./src/app/model/price.ts");
-/* harmony import */ var _production_bonus__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./production-bonus */ "./src/app/model/production-bonus.ts");
-/* harmony import */ var _stats_stats__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./stats/stats */ "./src/app/model/stats/stats.ts");
-/* harmony import */ var _tabs__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./tabs */ "./src/app/model/tabs.ts");
-/* harmony import */ var _units_ants__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./units/ants */ "./src/app/model/units/ants.ts");
-/* harmony import */ var _units_bees__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./units/bees */ "./src/app/model/units/bees.ts");
-/* harmony import */ var _units_buildings__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./units/buildings */ "./src/app/model/units/buildings.ts");
-/* harmony import */ var _units_engineers__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./units/engineers */ "./src/app/model/units/engineers.ts");
-/* harmony import */ var _units_gatherers__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./units/gatherers */ "./src/app/model/units/gatherers.ts");
-/* harmony import */ var _units_helpers__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./units/helpers */ "./src/app/model/units/helpers.ts");
-/* harmony import */ var _units_malus_killer__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./units/malus-killer */ "./src/app/model/units/malus-killer.ts");
-/* harmony import */ var _units_materials__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./units/materials */ "./src/app/model/units/materials.ts");
-/* harmony import */ var _units_researches__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./units/researches */ "./src/app/model/units/researches.ts");
-/* harmony import */ var _units_special__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./units/special */ "./src/app/model/units/special.ts");
-/* harmony import */ var _units_wasps__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./units/wasps */ "./src/app/model/units/wasps.ts");
-/* harmony import */ var _units_workers__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./units/workers */ "./src/app/model/units/workers.ts");
-/* harmony import */ var _units_world_bonus__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./units/world-bonus */ "./src/app/model/units/world-bonus.ts");
-/* harmony import */ var _units_world_malus__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./units/world-malus */ "./src/app/model/units/world-malus.ts");
-/* harmony import */ var _utility__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./utility */ "./src/app/model/utility.ts");
-/* harmony import */ var _world__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./world */ "./src/app/model/world.ts");
+/* harmony import */ var lodash_es_sample__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lodash-es/sample */ "./node_modules/lodash-es/sample.js");
+/* harmony import */ var _actions_warp_action__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./actions/warp-action */ "./src/app/model/actions/warp-action.ts");
+/* harmony import */ var _autoBuy_auto_buy_manager__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./autoBuy/auto-buy-manager */ "./src/app/model/autoBuy/auto-buy-manager.ts");
+/* harmony import */ var _bugsTypes__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./bugsTypes */ "./src/app/model/bugsTypes.ts");
+/* harmony import */ var _CONSTATS__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./CONSTATS */ "./src/app/model/CONSTATS.ts");
+/* harmony import */ var _full_unit__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./full-unit */ "./src/app/model/full-unit.ts");
+/* harmony import */ var _malus__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./malus */ "./src/app/model/malus.ts");
+/* harmony import */ var _masteries_all_masteries__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./masteries/all-masteries */ "./src/app/model/masteries/all-masteries.ts");
+/* harmony import */ var _masteries_mastery__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./masteries/mastery */ "./src/app/model/masteries/mastery.ts");
+/* harmony import */ var _prestige_all_prestige__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./prestige/all-prestige */ "./src/app/model/prestige/all-prestige.ts");
+/* harmony import */ var _price__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./price */ "./src/app/model/price.ts");
+/* harmony import */ var _production_bonus__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./production-bonus */ "./src/app/model/production-bonus.ts");
+/* harmony import */ var _stats_stats__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./stats/stats */ "./src/app/model/stats/stats.ts");
+/* harmony import */ var _tabs__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./tabs */ "./src/app/model/tabs.ts");
+/* harmony import */ var _units_ants__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./units/ants */ "./src/app/model/units/ants.ts");
+/* harmony import */ var _units_bees__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./units/bees */ "./src/app/model/units/bees.ts");
+/* harmony import */ var _units_buildings__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./units/buildings */ "./src/app/model/units/buildings.ts");
+/* harmony import */ var _units_engineers__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./units/engineers */ "./src/app/model/units/engineers.ts");
+/* harmony import */ var _units_gatherers__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./units/gatherers */ "./src/app/model/units/gatherers.ts");
+/* harmony import */ var _units_helpers__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./units/helpers */ "./src/app/model/units/helpers.ts");
+/* harmony import */ var _units_malus_killer__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./units/malus-killer */ "./src/app/model/units/malus-killer.ts");
+/* harmony import */ var _units_materials__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./units/materials */ "./src/app/model/units/materials.ts");
+/* harmony import */ var _units_researches__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./units/researches */ "./src/app/model/units/researches.ts");
+/* harmony import */ var _units_special__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./units/special */ "./src/app/model/units/special.ts");
+/* harmony import */ var _units_wasps__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./units/wasps */ "./src/app/model/units/wasps.ts");
+/* harmony import */ var _units_workers__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./units/workers */ "./src/app/model/units/workers.ts");
+/* harmony import */ var _units_world_bonus__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./units/world-bonus */ "./src/app/model/units/world-bonus.ts");
+/* harmony import */ var _units_world_malus__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./units/world-malus */ "./src/app/model/units/world-malus.ts");
+/* harmony import */ var _utility__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./utility */ "./src/app/model/utility.ts");
+/* harmony import */ var _world__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ./world */ "./src/app/model/world.ts");
+
 
 
 
@@ -4106,7 +4108,7 @@ var Game = /** @class */ (function () {
         this.isPaused = false;
         //#endregion
         this.lastUnitUrl = "nav/unit/f";
-        this.currentWorld = new _world__WEBPACK_IMPORTED_MODULE_28__["World"]();
+        this.currentWorld = new _world__WEBPACK_IMPORTED_MODULE_29__["World"]();
         this.nextWorlds = new Array();
         this.canTravel = false;
         this.maxLevel = new Decimal(5);
@@ -4114,46 +4116,46 @@ var Game = /** @class */ (function () {
         this.canBuyResearch = false;
         this.maxTimeBank = new Decimal(0);
         this.upNumber = 0;
-        this.tabs = new _tabs__WEBPACK_IMPORTED_MODULE_12__["Tabs"]();
+        this.tabs = new _tabs__WEBPACK_IMPORTED_MODULE_13__["Tabs"]();
         //#region Declarations
-        this.materials = new _units_materials__WEBPACK_IMPORTED_MODULE_20__["Materials"](this);
+        this.materials = new _units_materials__WEBPACK_IMPORTED_MODULE_21__["Materials"](this);
         this.unitGroups.push(this.materials);
-        this.researches = new _units_researches__WEBPACK_IMPORTED_MODULE_21__["Researches"](this.ms.researchEmitter, this);
-        this.ants = new _units_ants__WEBPACK_IMPORTED_MODULE_13__["Ants"](this);
+        this.researches = new _units_researches__WEBPACK_IMPORTED_MODULE_22__["Researches"](this.ms.researchEmitter, this);
+        this.ants = new _units_ants__WEBPACK_IMPORTED_MODULE_14__["Ants"](this);
         this.unitGroups.push(this.ants);
-        this.bees = new _units_bees__WEBPACK_IMPORTED_MODULE_14__["Bees"](this);
+        this.bees = new _units_bees__WEBPACK_IMPORTED_MODULE_15__["Bees"](this);
         this.unitGroups.push(this.bees);
-        this.wasps = new _units_wasps__WEBPACK_IMPORTED_MODULE_23__["Wasps"](this);
+        this.wasps = new _units_wasps__WEBPACK_IMPORTED_MODULE_24__["Wasps"](this);
         this.unitGroups.push(this.wasps);
-        this.gatherers = new _units_gatherers__WEBPACK_IMPORTED_MODULE_17__["Gatherers"](this);
+        this.gatherers = new _units_gatherers__WEBPACK_IMPORTED_MODULE_18__["Gatherers"](this);
         this.unitGroups.push(this.gatherers);
-        this.advWorkers = new _units_workers__WEBPACK_IMPORTED_MODULE_24__["Workers"](this);
+        this.advWorkers = new _units_workers__WEBPACK_IMPORTED_MODULE_25__["Workers"](this);
         this.unitGroups.push(this.advWorkers);
-        this.buildings = new _units_buildings__WEBPACK_IMPORTED_MODULE_15__["Buildings"](this);
+        this.buildings = new _units_buildings__WEBPACK_IMPORTED_MODULE_16__["Buildings"](this);
         this.unitGroups.push(this.buildings);
-        this.engineers = new _units_engineers__WEBPACK_IMPORTED_MODULE_16__["Engineers"](this);
+        this.engineers = new _units_engineers__WEBPACK_IMPORTED_MODULE_17__["Engineers"](this);
         this.unitGroups.push(this.engineers);
-        this.worldMalus = new _units_world_malus__WEBPACK_IMPORTED_MODULE_26__["WorldMalus"](this);
+        this.worldMalus = new _units_world_malus__WEBPACK_IMPORTED_MODULE_27__["WorldMalus"](this);
         this.unitGroups.push(this.worldMalus);
-        this.killers = new _units_malus_killer__WEBPACK_IMPORTED_MODULE_19__["MalusKiller"](this);
+        this.killers = new _units_malus_killer__WEBPACK_IMPORTED_MODULE_20__["MalusKiller"](this);
         this.unitGroups.push(this.killers);
-        this.special = new _units_special__WEBPACK_IMPORTED_MODULE_22__["Special"](this);
+        this.special = new _units_special__WEBPACK_IMPORTED_MODULE_23__["Special"](this);
         this.unitGroups.push(this.special);
-        this.helpers = new _units_helpers__WEBPACK_IMPORTED_MODULE_18__["Helpers"](this);
+        this.helpers = new _units_helpers__WEBPACK_IMPORTED_MODULE_19__["Helpers"](this);
         this.unitGroups.push(this.helpers);
         this.unitGroups.forEach(function (g) { return g.declareStuff(); });
         this.advWorkers.additionalBuyPreces = [
-            new _price__WEBPACK_IMPORTED_MODULE_9__["Price"](this.materials.soil, ADDITIONAL_PRICE1)
+            new _price__WEBPACK_IMPORTED_MODULE_10__["Price"](this.materials.soil, ADDITIONAL_PRICE1)
         ];
         this.researches.declareStuff();
-        this.worldBonus = new _units_world_bonus__WEBPACK_IMPORTED_MODULE_25__["WorldBonus"]();
+        this.worldBonus = new _units_world_bonus__WEBPACK_IMPORTED_MODULE_26__["WorldBonus"]();
         this.worldBonus.declareStuff();
-        this.experience = new _full_unit__WEBPACK_IMPORTED_MODULE_4__["FullUnit"]("prest");
+        this.experience = new _full_unit__WEBPACK_IMPORTED_MODULE_5__["FullUnit"]("prest");
         this.experience.reset = function () {
             //  Do nothing !
             //  Intended
         };
-        this.time = new _full_unit__WEBPACK_IMPORTED_MODULE_4__["FullUnit"]("time");
+        this.time = new _full_unit__WEBPACK_IMPORTED_MODULE_5__["FullUnit"]("time");
         this.time.reset = function () {
             //  Do nothing !
             //  Intended
@@ -4176,12 +4178,12 @@ var Game = /** @class */ (function () {
         this.unitGroups.forEach(function (g) { return g.addWorlds(); });
         //#endregion
         //#region Prestige
-        this.allPrestige = new _prestige_all_prestige__WEBPACK_IMPORTED_MODULE_8__["AllPrestige"]();
+        this.allPrestige = new _prestige_all_prestige__WEBPACK_IMPORTED_MODULE_9__["AllPrestige"]();
         this.allPrestige.declareStuff(this);
         //#endregion
         //#region Time Warp
-        this.actMin = new _actions_warp_action__WEBPACK_IMPORTED_MODULE_0__["WarpAction"](60, this);
-        this.actHour = new _actions_warp_action__WEBPACK_IMPORTED_MODULE_0__["WarpAction"](3600, this);
+        this.actMin = new _actions_warp_action__WEBPACK_IMPORTED_MODULE_1__["WarpAction"](60, this);
+        this.actHour = new _actions_warp_action__WEBPACK_IMPORTED_MODULE_1__["WarpAction"](3600, this);
         //#endregion
         //#region Assign team and twin research to actions
         this.units.forEach(function (u) {
@@ -4192,7 +4194,7 @@ var Game = /** @class */ (function () {
         });
         //#endregion
         //#region Autobuyers
-        this.autoBuyManager = new _autoBuy_auto_buy_manager__WEBPACK_IMPORTED_MODULE_1__["AutoBuyManager"]();
+        this.autoBuyManager = new _autoBuy_auto_buy_manager__WEBPACK_IMPORTED_MODULE_2__["AutoBuyManager"]();
         this.units.filter(function (u) { return u.hasAutoBuyer; }).forEach(function (u) {
             if (!!u.buyAction) {
                 _this.autoBuyManager.createFromUnit(u, _this);
@@ -4203,14 +4205,14 @@ var Game = /** @class */ (function () {
         });
         this.autoBuyManager.createSpecial(this);
         //#endregion
-        this.allMateries = new _masteries_all_masteries__WEBPACK_IMPORTED_MODULE_6__["AllMasteries"](this);
-        this.stats = new _stats_stats__WEBPACK_IMPORTED_MODULE_11__["Stats"]();
+        this.allMateries = new _masteries_all_masteries__WEBPACK_IMPORTED_MODULE_7__["AllMasteries"](this);
+        this.stats = new _stats_stats__WEBPACK_IMPORTED_MODULE_12__["Stats"]();
         //#region Worlds
         this.generateWorlds();
-        this.currentWorld = new _world__WEBPACK_IMPORTED_MODULE_28__["World"]("home");
+        this.currentWorld = new _world__WEBPACK_IMPORTED_MODULE_29__["World"]("home");
         this.currentWorld.name = "初始世界";
         this.currentWorld.level = new Decimal(1);
-        this.currentWorld.winContidions.push(new _price__WEBPACK_IMPORTED_MODULE_9__["Price"](this.materials.food, _CONSTATS__WEBPACK_IMPORTED_MODULE_3__["CONSTS"].BASE_WIN_CONDITION_MATERIALS));
+        this.currentWorld.winContidions.push(new _price__WEBPACK_IMPORTED_MODULE_10__["Price"](this.materials.food, _CONSTATS__WEBPACK_IMPORTED_MODULE_4__["CONSTS"].BASE_WIN_CONDITION_MATERIALS));
         this.currentWorld.setLevel(new Decimal(1), this);
         this.setStartingStuff();
         //#endregion
@@ -4218,8 +4220,9 @@ var Game = /** @class */ (function () {
         this.researches.mastery.onBuy = function () {
             _this.allMateries.totalEarned++;
             _this.allMateries.masteryPoint++;
+            _this.researches.masteryResDone++;
         };
-        this.materials.science.productionsBonus.push(new _production_bonus__WEBPACK_IMPORTED_MODULE_10__["ProductionBonus"](this.experience, new Decimal(1)));
+        this.materials.science.productionsBonus.push(new _production_bonus__WEBPACK_IMPORTED_MODULE_11__["ProductionBonus"](this.experience, new Decimal(1)));
         this.setMaxTimeBank();
         this.units.forEach(function (u) {
             if (u.teamAction)
@@ -4227,6 +4230,40 @@ var Game = /** @class */ (function () {
             if (u.twinAction)
                 u.twinAction.twinRes = _this.researches.twin;
         });
+        // Extreme
+        this.researches.overNineThousand.onBuy = function () {
+            var malus = [
+                _this.worldMalus.foodMalus1,
+                _this.worldMalus.woodMalus1,
+                _this.worldMalus.crystalMalus1,
+                _this.worldMalus.scienceMalus1
+            ].filter(function (m) { return !_this.currentWorld.notWinConditions.includes(m); });
+            _this.currentWorld.notWinConditions.push(Object(lodash_es_sample__WEBPACK_IMPORTED_MODULE_0__["default"])(malus));
+            _this.currentWorld.setMalus();
+            _this.currentWorld.name = "Extreme " + _this.currentWorld.name;
+            _this.currentWorld.prestige = _this.currentWorld.prestige
+                .times(1.1)
+                .floor();
+            _this.currentWorld.winContidions.forEach(function (w) {
+                w.price = w.price.times(1.2).floor();
+            });
+            _this.worldMalus.unlocked.forEach(function (m) {
+                if (m instanceof _malus__WEBPACK_IMPORTED_MODULE_6__["Malus"]) {
+                    m.isKilled = false;
+                    m.efficiency = 100;
+                    m.quantity = m.quantity.times(10);
+                    if (m.produces.length === 1 && m.producedBy.length === 1) {
+                        m.quantity = m.quantity.times(20);
+                    }
+                    if (m.produces.length === 0)
+                        m.quantity = m.quantity.times(200);
+                }
+            });
+            _this.buildLists();
+            _this.killers.unlocked.forEach(function (k) {
+                k.efficiency = 100;
+            });
+        };
         //#endregion
         //#region Debug
         // this.materials.list.forEach(u => (u.unlocked = true));
@@ -4269,7 +4306,7 @@ var Game = /** @class */ (function () {
         var _this = this;
         this.unlockedUnits = [];
         this.units.forEach(function (u) {
-            if (u instanceof _full_unit__WEBPACK_IMPORTED_MODULE_4__["FullUnit"] && u.unlocked)
+            if (u instanceof _full_unit__WEBPACK_IMPORTED_MODULE_5__["FullUnit"] && u.unlocked)
                 _this.unlockedUnits.push(u);
         });
         var oldNum = this.unlockedGroups.length;
@@ -4287,8 +4324,8 @@ var Game = /** @class */ (function () {
             .times(3600)
             .plus(7200)
             .times(1 +
-            0.5 * this.allMateries.getSum(_masteries_mastery__WEBPACK_IMPORTED_MODULE_7__["MasteryTypes"].TIME_BANK) +
-            2 * this.allMateries.getSum(_masteries_mastery__WEBPACK_IMPORTED_MODULE_7__["MasteryTypes"].TIME_GEN_AND_BANK));
+            0.5 * this.allMateries.getSum(_masteries_mastery__WEBPACK_IMPORTED_MODULE_8__["MasteryTypes"].TIME_BANK) +
+            2 * this.allMateries.getSum(_masteries_mastery__WEBPACK_IMPORTED_MODULE_8__["MasteryTypes"].TIME_GEN_AND_BANK));
     };
     /**
      * Update game and add time
@@ -4298,8 +4335,8 @@ var Game = /** @class */ (function () {
         var timePerSec = this.allPrestige.time.timeProducer.quantity
             .div(10)
             .times(1 +
-            0.3 * this.allMateries.getSum(_masteries_mastery__WEBPACK_IMPORTED_MODULE_7__["MasteryTypes"].TIME_GEN) +
-            2 * this.allMateries.getSum(_masteries_mastery__WEBPACK_IMPORTED_MODULE_7__["MasteryTypes"].TIME_GEN_AND_BANK));
+            0.3 * this.allMateries.getSum(_masteries_mastery__WEBPACK_IMPORTED_MODULE_8__["MasteryTypes"].TIME_GEN) +
+            2 * this.allMateries.getSum(_masteries_mastery__WEBPACK_IMPORTED_MODULE_8__["MasteryTypes"].TIME_GEN_AND_BANK));
         this.time.quantity = this.time.quantity
             .plus(timePerSec.times(delta / 1000))
             .min(this.maxTimeBank);
@@ -4367,7 +4404,7 @@ var Game = /** @class */ (function () {
                 unit.c = unit.tempC;
             //#endregion
             if (unit.a.lt(0) || unit.b.lt(0) || unit.c.lt(0) || d.lt(0)) {
-                var solution = _utility__WEBPACK_IMPORTED_MODULE_27__["Utility"].solveEquation(unit.a, unit.b, unit.c, d).filter(function (s) { return s.gte(0); });
+                var solution = _utility__WEBPACK_IMPORTED_MODULE_28__["Utility"].solveEquation(unit.a, unit.b, unit.c, d).filter(function (s) { return s.gte(0); });
                 if (solution.length > 0) {
                     var min = solution.reduce(function (p, c) { return p.min(c); }, new Decimal(Number.POSITIVE_INFINITY));
                     if (maxTime > min.toNumber() * 1000) {
@@ -4376,7 +4413,7 @@ var Game = /** @class */ (function () {
                     }
                     unit.endIn = Math.min(min.times(1000).toNumber(), unit.endIn);
                     unit.isEnding = true;
-                    if (!(unit instanceof _malus__WEBPACK_IMPORTED_MODULE_5__["Malus"]) &&
+                    if (!(unit instanceof _malus__WEBPACK_IMPORTED_MODULE_6__["Malus"]) &&
                         (!this.firstEndigUnit || this.firstEndigUnit.endIn > unit.endIn)) {
                         this.firstEndigUnit = unit;
                     }
@@ -4402,7 +4439,7 @@ var Game = /** @class */ (function () {
                     });
                 });
                 //  Kill Malus
-                if (unitZero instanceof _malus__WEBPACK_IMPORTED_MODULE_5__["Malus"]) {
+                if (unitZero instanceof _malus__WEBPACK_IMPORTED_MODULE_6__["Malus"]) {
                     if (unitZero.kill()) {
                         this.ms.toastr.success("", unitZero.name + " 被杀死了!");
                     }
@@ -4463,6 +4500,8 @@ var Game = /** @class */ (function () {
         var twin = this.researches.twin.done;
         this.unitGroups.forEach(function (g) { return g.setFlags(team, twin); });
         this.canTravel = this.currentWorld.canTravel();
+        if (!this.researches.travel.done)
+            this.canTravel = false;
         this.actHour.reload();
         this.actMin.reload();
     };
@@ -4474,7 +4513,7 @@ var Game = /** @class */ (function () {
         if (delta > 0) {
             this.ms.toastr.info(this.ms.endInPipe.transform(delta), "Time Warp");
             this.update(delta, true);
-            this.autoBuyManager.update(delta);
+            //this.autoBuyManager.update(delta);
         }
     };
     /**
@@ -4484,7 +4523,7 @@ var Game = /** @class */ (function () {
         var _this = this;
         var teamPrestigeBonus = this.allPrestige.team.betterTeam.quantity
             .times(0.3)
-            .times(1 + this.allMateries.getSum(_masteries_mastery__WEBPACK_IMPORTED_MODULE_7__["MasteryTypes"].TEAM_PRESTIGE))
+            .times(1 + this.allMateries.getSum(_masteries_mastery__WEBPACK_IMPORTED_MODULE_8__["MasteryTypes"].TEAM_PRESTIGE))
             .plus(1);
         this.unlockedUnits.forEach(function (u) {
             u.reloadTeamBonus(_this.researches.team1.done, teamPrestigeBonus);
@@ -4526,6 +4565,12 @@ var Game = /** @class */ (function () {
      */
     Game.prototype.goToWorld = function (world) {
         this.stats.logWorldCompleted(this.currentWorld, !this.canTravel);
+        if (this.canTravel &&
+            this.researches.overNineThousand.done &&
+            this.currentWorld.level.gt(this.maxLevel.times(0.9))) {
+            this.allMateries.totalEarned++;
+            this.allMateries.masteryPoint++;
+        }
         var newPrestige = this.experience.quantity.plus(this.currentWorld.prestige);
         this.units.forEach(function (u) { return u.reset(); });
         this.worldBonus.reset();
@@ -4547,9 +4592,9 @@ var Game = /** @class */ (function () {
         this.applyWorldBonus();
         this.researches.reset(this.materials.science);
         //#region Followers
-        var flollowerMulti = this.allMateries.getSum(_masteries_mastery__WEBPACK_IMPORTED_MODULE_7__["MasteryTypes"].MORE_FOLLOWERS) + 1;
-        var flollowerMultiGa = this.allMateries.getSum(_masteries_mastery__WEBPACK_IMPORTED_MODULE_7__["MasteryTypes"].MORE_FOLLOWERS_GA) * 3;
-        var flollowerMultiWo = this.allMateries.getSum(_masteries_mastery__WEBPACK_IMPORTED_MODULE_7__["MasteryTypes"].MORE_FOLLOWERS_WO) * 3;
+        var flollowerMulti = this.allMateries.getSum(_masteries_mastery__WEBPACK_IMPORTED_MODULE_8__["MasteryTypes"].MORE_FOLLOWERS) + 1;
+        var flollowerMultiGa = this.allMateries.getSum(_masteries_mastery__WEBPACK_IMPORTED_MODULE_8__["MasteryTypes"].MORE_FOLLOWERS_GA) * 3;
+        var flollowerMultiWo = this.allMateries.getSum(_masteries_mastery__WEBPACK_IMPORTED_MODULE_8__["MasteryTypes"].MORE_FOLLOWERS_WO) * 3;
         this.units.filter(function (u) { return u.follower; }).forEach(function (u) {
             u.quantity = u.quantity.plus(u.follower.quantity.times(u.followerQuantity).times(flollowerMulti));
             if (u.quantity.gt(0.5)) {
@@ -4567,7 +4612,7 @@ var Game = /** @class */ (function () {
         });
         //#endregion
         //#region Starting Team && TWin
-        var startTeam = this.allMateries.getSum(_masteries_mastery__WEBPACK_IMPORTED_MODULE_7__["MasteryTypes"].TEAM_START);
+        var startTeam = this.allMateries.getSum(_masteries_mastery__WEBPACK_IMPORTED_MODULE_8__["MasteryTypes"].TEAM_START);
         if (startTeam > 0) {
             this.units
                 .filter(function (u) { return u.teamAction; })
@@ -4585,7 +4630,7 @@ var Game = /** @class */ (function () {
             this.researches.team2.toUnlock.forEach(function (u) { return u.unlock(); });
             this.materials.science.unlock();
         }
-        var startTwin = this.allMateries.getSum(_masteries_mastery__WEBPACK_IMPORTED_MODULE_7__["MasteryTypes"].START_TWIN);
+        var startTwin = this.allMateries.getSum(_masteries_mastery__WEBPACK_IMPORTED_MODULE_8__["MasteryTypes"].START_TWIN);
         if (startTwin > 0) {
             this.units
                 .filter(function (u) { return u.twinAction; })
@@ -4601,8 +4646,8 @@ var Game = /** @class */ (function () {
         //#endregion
         //#region Mastery && Free Warp
         this.researches.free1hWarp.unlocked =
-            this.allMateries.getSum(_masteries_mastery__WEBPACK_IMPORTED_MODULE_7__["MasteryTypes"].FREE_WARP_RES) > 0;
-        if (this.allMateries.getSum(_masteries_mastery__WEBPACK_IMPORTED_MODULE_7__["MasteryTypes"].START_RESEARCHS) > 0) {
+            this.allMateries.getSum(_masteries_mastery__WEBPACK_IMPORTED_MODULE_8__["MasteryTypes"].FREE_WARP_RES) > 0;
+        if (this.allMateries.getSum(_masteries_mastery__WEBPACK_IMPORTED_MODULE_8__["MasteryTypes"].START_RESEARCHS) > 0) {
             this.advWorkers.scientificMethod1.unlocked = true;
             this.advWorkers.scientificMethod1.quantity = new Decimal(4);
             this.researches.harvesting.unlocked = true;
@@ -4610,21 +4655,21 @@ var Game = /** @class */ (function () {
         }
         //#endregion
         //#region other Bugs
-        if (this.currentWorld.additionalBugs.includes(_bugsTypes__WEBPACK_IMPORTED_MODULE_2__["BugTypes"].BEE)) {
+        if (this.currentWorld.additionalBugs.includes(_bugsTypes__WEBPACK_IMPORTED_MODULE_3__["BugTypes"].BEE)) {
             this.bees.larva.unlocked = true;
             this.bees.queen.unlocked = true;
             this.bees.larva.quantity = new Decimal(10);
             this.bees.queen.quantity = new Decimal(1);
             this.gatherers.foraggingBee.unlocked = true;
         }
-        if (this.currentWorld.additionalBugs.includes(_bugsTypes__WEBPACK_IMPORTED_MODULE_2__["BugTypes"].WASP)) {
+        if (this.currentWorld.additionalBugs.includes(_bugsTypes__WEBPACK_IMPORTED_MODULE_3__["BugTypes"].WASP)) {
             this.wasps.larva.unlocked = true;
             this.wasps.queen.unlocked = true;
             this.wasps.larva.quantity = new Decimal(10);
             this.wasps.queen.quantity = new Decimal(1);
             this.gatherers.foraggingWasp.unlocked = true;
         }
-        if (this.currentWorld.additionalBugs.includes(_bugsTypes__WEBPACK_IMPORTED_MODULE_2__["BugTypes"].SUPER_MAJOR)) {
+        if (this.currentWorld.additionalBugs.includes(_bugsTypes__WEBPACK_IMPORTED_MODULE_3__["BugTypes"].SUPER_MAJOR)) {
             this.gatherers.hunter.unlocked = true;
         }
         //#endregion
@@ -4649,18 +4694,18 @@ var Game = /** @class */ (function () {
             userMax = this.realMaxLevel;
         userMax = Decimal.min(userMax, this.realMaxLevel);
         this.nextWorlds = [
-            _world__WEBPACK_IMPORTED_MODULE_28__["World"].getRandomWorld(userMin, userMax, this),
-            _world__WEBPACK_IMPORTED_MODULE_28__["World"].getRandomWorld(userMin, userMax, this),
-            _world__WEBPACK_IMPORTED_MODULE_28__["World"].getRandomWorld(userMin, userMax, this)
+            _world__WEBPACK_IMPORTED_MODULE_29__["World"].getRandomWorld(userMin, userMax, this),
+            _world__WEBPACK_IMPORTED_MODULE_29__["World"].getRandomWorld(userMin, userMax, this),
+            _world__WEBPACK_IMPORTED_MODULE_29__["World"].getRandomWorld(userMin, userMax, this)
         ];
     };
     Game.prototype.genSciencePrice = function (price, growRate) {
         if (growRate === void 0) { growRate = 1; }
-        return [new _price__WEBPACK_IMPORTED_MODULE_9__["Price"](this.materials.science, new Decimal(price), growRate)];
+        return [new _price__WEBPACK_IMPORTED_MODULE_10__["Price"](this.materials.science, new Decimal(price), growRate)];
     };
     Game.prototype.genExperiencePrice = function (price, growRate) {
         if (growRate === void 0) { growRate = 1.3; }
-        return [new _price__WEBPACK_IMPORTED_MODULE_9__["Price"](this.experience, new Decimal(price), growRate)];
+        return [new _price__WEBPACK_IMPORTED_MODULE_10__["Price"](this.experience, new Decimal(price), growRate)];
     };
     Game.prototype.addTeamAction = function (unit, price) {
         unit.generateTeamAction(this.genTeamPrice(price));
@@ -4671,9 +4716,9 @@ var Game = /** @class */ (function () {
     Game.prototype.reloadMaxLevel = function () {
         this.realMaxLevel = this.maxLevel.times(this.allPrestige.worldPrestige.maxLevel.quantity
             .times(0.1)
-            .times(1 + 0.5 * this.allMateries.getSum(_masteries_mastery__WEBPACK_IMPORTED_MODULE_7__["MasteryTypes"].WORLD_LEVEL_PRESTIGE))
+            .times(1 + 0.5 * this.allMateries.getSum(_masteries_mastery__WEBPACK_IMPORTED_MODULE_8__["MasteryTypes"].WORLD_LEVEL_PRESTIGE))
             .plus(1));
-        var masteryMulti = this.allMateries.getSum(_masteries_mastery__WEBPACK_IMPORTED_MODULE_7__["MasteryTypes"].WORLD_LEVEL);
+        var masteryMulti = this.allMateries.getSum(_masteries_mastery__WEBPACK_IMPORTED_MODULE_8__["MasteryTypes"].WORLD_LEVEL);
         this.realMaxLevel = this.realMaxLevel.times(1 + masteryMulti / 2).floor();
     };
     //#endregion
@@ -4707,6 +4752,8 @@ var Game = /** @class */ (function () {
             }
             if ("t" in data)
                 this.tabs.restore(data.t);
+            if ("mas" in data)
+                this.allMateries.restore(data.mas);
             if ("r" in data)
                 this.researches.restore(data.r, this.materials.science);
             if ("w" in data)
@@ -4721,11 +4768,9 @@ var Game = /** @class */ (function () {
                 this.autoBuyManager.restore(data.abm);
             if ("s" in data)
                 this.stats.restore(data.s);
-            if ("mas" in data)
-                this.allMateries.restore(data.mas);
             if ("wor" in data) {
                 this.nextWorlds = data.wor.map(function (w) {
-                    var newW = new _world__WEBPACK_IMPORTED_MODULE_28__["World"]("");
+                    var newW = new _world__WEBPACK_IMPORTED_MODULE_29__["World"]("");
                     newW.restore(w, _this);
                     return newW;
                 });
@@ -4758,10 +4803,10 @@ var Game = /** @class */ (function () {
     };
     //#region Price Utility
     Game.prototype.genTeamPrice = function (price) {
-        return [new _price__WEBPACK_IMPORTED_MODULE_9__["Price"](this.materials.science, new Decimal(price), 4)];
+        return [new _price__WEBPACK_IMPORTED_MODULE_10__["Price"](this.materials.science, new Decimal(price), 4)];
     };
     Game.prototype.genTwinPrice = function (price) {
-        return [new _price__WEBPACK_IMPORTED_MODULE_9__["Price"](this.materials.science, new Decimal(price), 10)];
+        return [new _price__WEBPACK_IMPORTED_MODULE_10__["Price"](this.materials.science, new Decimal(price), 10)];
     };
     return Game;
 }());
@@ -4865,7 +4910,6 @@ var Malus = /** @class */ (function (_super) {
             if (p.producer instanceof Malus)
                 p.producer.kill();
         });
-        //  ToDo
         return true;
     };
     Malus.prototype.reloadPriceMulti = function () {
@@ -5878,6 +5922,12 @@ var Price = /** @class */ (function () {
         if (this.priceUser.cmp(tempPrice) !== 0)
             this.priceUser = tempPrice;
     };
+    Price.prototype.getPriceForOne = function (start) {
+        var num = new Decimal(1);
+        return this.growRate > 1
+            ? Decimal.sumGeometricSeries(num, this.realPrice, this.growRate, start)
+            : this.realPrice.times(num);
+    };
     Price.prototype.getTime = function () {
         if (this.priceUser.lte(this.base.quantity))
             return new Decimal(0);
@@ -6364,39 +6414,42 @@ var STRINGS = {
         cb: ["木匠蜜蜂", "木匠蜜蜂"],
         sb: ["学生蜜蜂", "学生蜜蜂"],
         Q: ["蜜蜂幼虫", "蜜蜂幼虫"],
-        P: ["蜜蜂女王", ""],
-        N: ["蜜蜂巢穴", ""],
-        A: ["蜜蜂农民", ""],
-        B: ["蜜蜂木匠", ""],
-        E: ["蜜蜂矿工", ""],
-        D: ["蜜蜂科学家", ""],
-        AG: ["蜜蜂农民", ""],
-        BG: ["蜜蜂木匠2", ""],
-        EG: ["蜜蜂矿工2", ""],
-        DG: ["蜜蜂科学家2", ""],
-        AGG: ["蜜蜂农民3", ""],
-        BGG: ["蜜蜂木匠3", ""],
-        EGG: ["蜜蜂矿工3", ""],
-        DGG: ["蜜蜂科学家3", ""],
+        P: ["蜜蜂女王", "蜜蜂女王"],
+        N: ["蜜蜂巢穴", "蜜蜂巢穴"],
+        A: ["蜜蜂农民", "种植鲜花"],
+        B: ["蜜蜂木匠", "木匠蜜蜂"],
+        E: ["蜜蜂矿工", "矿工蜜蜂"],
+        D: ["蜜蜂科学家", "科学家蜜蜂"],
+        AG: ["鲜花农场", "种满鲜花的农场."],
+        BG: ["蜜蜂土壤营地", "蜜蜂土壤营地"],
+        EG: ["蜜蜂矿山", "蜜蜂矿山"],
+        DG: ["蜜蜂大学", "蜜蜂大学"],
+        AGG: ["花匠工程师 ", "花匠工程师生产鲜花农场."],
+        BGG: ["蜜蜂土壤工程师", "蜜蜂土壤工程师生产蜜蜂土壤营地."],
+        EGG: ["蜜蜂矿山工程师", "蜜蜂矿山工程师生产蜜蜂矿山."],
+        DGG: ["蜜蜂教育部门", "蜜蜂教育部门."],
         //  Wasp
         x: ["觅食黄蜂", "觅食黄蜂"],
-        hw: ["大黄蜂", ["大黄蜂", "黄蜂处于类固醇上."]],
-        sw: ["聪明黄蜂", ""],
-        y: ["黄蜂幼虫", ""],
-        z: ["黄蜂女王", ""],
-        r: ["黄蜂巢穴", ""],
-        v: ["黄蜂农民", ""],
-        V: ["黄蜂木匠", ""],
-        o: ["黄蜂矿工", ""],
-        p: ["黄蜂科学家", ""],
-        vG: ["黄蜂农民2", ""],
-        VG: ["黄蜂木匠2", ""],
-        oG: ["黄蜂矿工2", ""],
-        pG: ["黄蜂科学家2", ""],
-        vGG: ["黄蜂农民3", ""],
-        VGG: ["黄蜂木匠3", ""],
-        oGG: ["黄蜂矿工3", ""],
-        pGG: ["黄蜂科学家3", ""],
+        hw: ["大黄蜂", ["大黄蜂", "一只服用类固醇的黄蜂。"]],
+        sw: ["聪明的黄蜂", "市场黄蜂"],
+        y: ["黄蜂幼虫", "黄蜂幼虫"],
+        z: ["黄蜂女王", "W黄蜂女王"],
+        r: ["黄蜂巢穴", "黄蜂巢穴"],
+        v: ["黄蜂农民", "一个农民黄蜂."],
+        V: ["黄蜂木匠", "一个木匠黄蜂."],
+        o: ["黄蜂矿工", "一个矿工黄蜂."],
+        p: ["黄蜂科学家", "一个科学家黄蜂."],
+        vG: ["黄蜂农场", "黄蜂农场."],
+        VG: ["黄蜂土壤营地", "黄蜂土壤营地."],
+        oG: ["黄蜂矿山", "黄蜂矿山."],
+        pG: ["黄蜂大学", "黄蜂大学"],
+        vGG: ["黄蜂水利工程师", "黄蜂水利工程师生产农场"],
+        VGG: ["黄蜂土壤工程师", "黄蜂土壤工程师生产土壤营地"],
+        oGG: ["黄蜂矿山工程师", "黄蜂矿山工程师生产矿山"],
+        pGG: [
+            "黄蜂教育部门",
+            "黄蜂教育部门生产大学。"
+        ],
         //  Helpers
         lf: ["切叶蚁", "改善农业。"],
         hu: ["猎人", ""],
@@ -6406,7 +6459,7 @@ var STRINGS = {
     },
     researches: {
         t: ["团队合作", "在手动购买的基础上获得生产加成。"],
-        T: ["团队合作 2", "提高团队合作的加成"],
+        T: ["团队合作2", "提高团队合作的加成"],
         W: ["双胞胎", "同样的价格购买更多的单位"],
         r: ["旅行", "前往一个新的世界!"],
         M: ["精通", "获得1个精通点数"],
@@ -6415,6 +6468,10 @@ var STRINGS = {
         2: ["2小时 扭曲", "免费的时间扭曲."],
         3: ["3小时 扭曲", "免费的时间扭曲."],
         SP: ["产卵", "+50% 幼虫产量."],
+        ont: [
+            "极端",
+            "+10% 世界等级和经验;+20% 需求; 增加随机苹果，以及提高苹果;如果等级 > 0.9 * 最大授予1精通点在旅行的时候"
+        ],
         //  Workers
         wo: ["更好的工人", "+30% 来自工人的资源产量."],
         we: ["高效的工人", "+10% 资源获得。"],
@@ -6440,18 +6497,18 @@ var STRINGS = {
         mGG: ["矿山工程师", "矿山工程师生产矿山."],
         dGG: ["教育部门", "教育部门生产大学"],
         //  Bee
-        A: ["蜜蜂农民", "农场花卉."],
-        B: ["蜜蜂木匠", "一个木匠蜜蜂."],
-        E: ["蜜蜂矿工", "一个矿工蜜蜂."],
-        D: ["蜜蜂科学家", "一个科学家蜜蜂."],
-        AG: ["鲜花农场", "一个种花的农场."],
-        BG: ["蜜蜂土壤营地", "一个蜜蜂土壤营地"],
-        EG: ["蜜蜂矿山", "一个蜜蜂矿山"],
+        A: ["蜜蜂农民", "种植鲜花."],
+        B: ["蜜蜂木匠", "木匠蜜蜂."],
+        E: ["蜜蜂矿工", "矿工蜜蜂."],
+        D: ["蜜蜂科学家", "科学家蜜蜂."],
+        AG: ["鲜花农场", "种满鲜花的农场."],
+        BG: ["蜜蜂土壤营地", "蜜蜂土壤营地"],
+        EG: ["蜜蜂矿山", "蜜蜂矿山"],
         DG: ["蜜蜂大学", "蜜蜂大学"],
-        AGG: ["花匠工程师", "花匠工程师生产花卉农场."],
+        AGG: ["花匠工程师 ", "花匠工程师生产鲜花农场"],
         BGG: ["蜜蜂土壤工程师", "蜜蜂土壤工程师生产蜜蜂土壤营地."],
-        EGG: ["蜜蜂矿山工程师", "蜜蜂矿山工程师生产矿山."],
-        DGG: ["蜜蜂教育部门", "蜜蜂的教育部门."],
+        EGG: ["蜜蜂矿山工程师", "蜜蜂矿山工程师生产蜜蜂矿山."],
+        DGG: ["蜜蜂教育部门", "蜜蜂教育部门."],
         // Wasp
         v: ["黄蜂农民", "一个农民黄蜂."],
         V: ["黄蜂木匠", "一个木匠黄蜂."],
@@ -6738,12 +6795,34 @@ var UnitGroup = /** @class */ (function () {
         if (team === void 0) { team = false; }
         if (twin === void 0) { twin = false; }
         this.isEnding = this.unlocked.findIndex(function (u) { return u.isEnding; }) > -1;
-        this.upTeam =
-            team &&
-                this.unlocked.findIndex(function (u) { return u.teamAction && u.teamAction.canBuy; }) > -1;
-        this.upTwin =
-            twin &&
-                this.unlocked.findIndex(function (u) { return u.twinAction && u.twinAction.canBuy; }) > -1;
+        if (team) {
+            var teamList = this.unlocked.filter(function (u) { return u.teamAction; });
+            this.upTeam =
+                teamList.length > 0 &&
+                    teamList
+                        .map(function (u) {
+                        return u.teamAction.prices[0].getPriceForOne(u.teamAction.quantity);
+                    })
+                        .reduce(function (p, n) { return p.plus(n); }, new Decimal(0))
+                        .lte(this.game.materials.science.quantity);
+        }
+        else {
+            this.upTeam = false;
+        }
+        if (twin) {
+            var twinList = this.unlocked.filter(function (u) { return u.twinAction; });
+            this.upTwin =
+                twinList.length > 0 &&
+                    twinList
+                        .map(function (u) {
+                        return u.twinAction.prices[0].getPriceForOne(u.twinAction.quantity);
+                    })
+                        .reduce(function (p, n) { return p.plus(n); }, new Decimal(0))
+                        .lte(this.game.materials.science.quantity);
+        }
+        else {
+            this.upTwin = false;
+        }
     };
     UnitGroup.prototype.updateChart = function () {
         var qtList = this.selected.map(function (u) { return u.quantity; });
@@ -7092,7 +7171,7 @@ var Buildings = /** @class */ (function (_super) {
     Buildings.prototype.setRelations = function () {
         var _this = this;
         this.game.advWorkers.firstResearch.toUnlock.push(this.firstResearch);
-        this.firstResearch.prices = this.game.genSciencePrice(_CONSTATS__WEBPACK_IMPORTED_MODULE_0__["CONSTS"].RES_PRICE_2.div(2));
+        this.firstResearch.prices = this.game.genSciencePrice(_CONSTATS__WEBPACK_IMPORTED_MODULE_0__["CONSTS"].RES_PRICE_2.div(50));
         var len = this.list.length;
         var _loop_1 = function (i) {
             var product = this_1.game.advWorkers.list[i];
@@ -7170,7 +7249,7 @@ var Engineers = /** @class */ (function (_super) {
     Engineers.prototype.setRelations = function () {
         var _this = this;
         this.game.buildings.firstResearch.toUnlock.push(this.firstResearch);
-        this.firstResearch.prices = this.game.genSciencePrice(_CONSTATS__WEBPACK_IMPORTED_MODULE_0__["CONSTS"].RES_PRICE_3.div(2));
+        this.firstResearch.prices = this.game.genSciencePrice(_CONSTATS__WEBPACK_IMPORTED_MODULE_0__["CONSTS"].RES_PRICE_3.div(50));
         var len = this.list.length;
         var _loop_1 = function (i) {
             var product = this_1.game.buildings.list[i];
@@ -7361,7 +7440,7 @@ var Gatherers = /** @class */ (function (_super) {
         ]);
         this.majorWorker.setBugType(_bugsTypes__WEBPACK_IMPORTED_MODULE_0__["BugTypes"].SUPER_MAJOR);
         this.game.materials.soil.addProducer(this.majorWorker, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PROD_GAN.times(0.7));
-        this.game.materials.soil.addProducer(this.majorWorker, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PROD_GAN.times(0.3));
+        this.game.materials.crystal.addProducer(this.majorWorker, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PROD_GAN.times(0.3));
         this.game.materials.food.addProducer(this.majorWorker, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].CONSUME_GAN);
     };
     return Gatherers;
@@ -7408,7 +7487,7 @@ var __extends = (undefined && undefined.__extends) || (function () {
 var Helpers = /** @class */ (function (_super) {
     __extends(Helpers, _super);
     function Helpers(game) {
-        return _super.call(this, "提升机", game) || this;
+        return _super.call(this, "助手", game) || this;
     }
     Helpers.prototype.declareStuff = function () {
         this.leafCutter = new _helper__WEBPACK_IMPORTED_MODULE_2__["Helper"]("lf", 0.1, this.game);
@@ -7694,6 +7773,7 @@ var Researches = /** @class */ (function () {
         this.researchEmitter = researchEmitter;
         this.game = game;
         this.researches = new Array();
+        this.masteryResDone = 0;
     }
     Researches.prototype.declareStuff = function () {
         this.team1 = new _research__WEBPACK_IMPORTED_MODULE_2__["Research"]("t", this);
@@ -7706,6 +7786,7 @@ var Researches = /** @class */ (function () {
         this.free2hWarp = new _research__WEBPACK_IMPORTED_MODULE_2__["Research"]("2", this);
         this.free3hWarp = new _research__WEBPACK_IMPORTED_MODULE_2__["Research"]("3", this);
         this.spawn = new _research__WEBPACK_IMPORTED_MODULE_2__["Research"]("SP", this, true);
+        this.overNineThousand = new _research__WEBPACK_IMPORTED_MODULE_2__["Research"]("ont", this);
         this.team1.unlocked = true;
         this.reloadLists();
     };
@@ -7715,6 +7796,7 @@ var Researches = /** @class */ (function () {
         this.twin.genPrice(new Decimal(1e6), science);
         this.travel.genPrice(new Decimal(1e13), science);
         this.mastery.genPrice(new Decimal(1e20), science);
+        this.overNineThousand.genPrice(new Decimal(1e20), science);
         this.harvesting.prices = game.genSciencePrice(1e3, 4);
         this.free1hWarp.prices = game.genSciencePrice(1);
         this.free2hWarp.prices = game.genSciencePrice(1);
@@ -7730,7 +7812,7 @@ var Researches = /** @class */ (function () {
         this.game.buildings.firstResearch.toUnlock.push(this.spawn);
         this.game.engineers.firstResearch.toUnlock.push(this.travel);
         this.travel.toUnlock.push(game.tabs.travel, this.mastery);
-        this.mastery.toUnlock.push(game.tabs.mastery);
+        this.mastery.toUnlock.push(game.tabs.mastery, this.overNineThousand);
         this.free1hWarp.toUnlock.push(this.free2hWarp);
         this.free1hWarp.onBuy = function () {
             game.warp(3600 * 1000);
@@ -7757,18 +7839,26 @@ var Researches = /** @class */ (function () {
         this.reloadLists();
     };
     Researches.prototype.reloadLists = function () {
-        this.toDo = this.researches.filter(function (r) { return r.unlocked && (!r.done || r.unlimited); });
-        this.done = this.researches.filter(function (r) { return r.unlocked && r.done && !r.unlimited; });
+        this.toDo = this.researches.filter(function (r) {
+            return r.unlocked &&
+                (!r.done || (r.unlimited && r.quantity.lt(r.maxAutoBuyLevel)));
+        });
+        this.done = this.researches.filter(function (r) {
+            return r.unlocked &&
+                r.done &&
+                (!r.unlimited || r.quantity.gte(r.maxAutoBuyLevel));
+        });
         this.researchEmitter.emit("");
     };
     Researches.prototype.reloadMasteryPrice = function (science) {
-        var masteryNum = this.mastery.quantity;
-        this.mastery.genPrice(new Decimal(1e18).times(Decimal.pow(2, masteryNum)), science);
+        this.mastery.genPrice(new Decimal(1e18).times(Decimal.pow(2, this.masteryResDone)), science);
+        this.mastery.genPrice(new Decimal(1e20).times(Decimal.pow(2, this.masteryResDone)), science);
     };
     //#region Save and load
     Researches.prototype.getSave = function () {
         return {
-            res: this.researches.map(function (r) { return r.getSave(); })
+            res: this.researches.map(function (r) { return r.getSave(); }),
+            mrd: this.masteryResDone
         };
     };
     Researches.prototype.restore = function (data, science) {
@@ -7783,6 +7873,8 @@ var Researches = /** @class */ (function () {
                 var r = _a[_i];
                 _loop_1(r);
             }
+            this.masteryResDone =
+                "mrd" in data ? data.mrd : this.game.allMateries.totalEarned;
             this.reloadMasteryPrice(science);
             this.reloadLists();
             return true;
@@ -8684,7 +8776,7 @@ var World = /** @class */ (function () {
             w.price = w.price.times(multi);
             w.price = w.base.winNonLiner
                 ? w.price.pow(0.7)
-                : w.price.times(Decimal.pow(5, multi));
+                : w.price.times(Decimal.pow(4, multi)).pow(0.95);
             w.price = w.price.floor();
         });
         this.prestige = this.level
@@ -10007,7 +10099,7 @@ var PrestigeNavComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"content-area\">\n\n  <app-change-world *ngIf=\"skip || ms.game.canTravel; else noTravel\"></app-change-world>\n  <ng-template #noTravel>\n\n    <h1>旅行到一个新世界\n      <button class=\"btn btn-danger-outline btn-link\"\n              (click)=\"skip = true\">跳过</button>\n    </h1>\n    <div class=\"clr-row\">\n      <div class=\"clr-col-12 clr-col-sm-12 clr-col-md-6 clr-col-lg-6 clr-col-xl-6\">\n        <div class=\"card\">\n          <div class=\"card-block\">\n            <h3 class=\"card-title\">\n              你需要:\n            </h3>\n            <div *ngFor=\"let price of ms.game.currentWorld.winContidions; trackBy:getPriceId\">\n              <div class=\"winLabel\">\n                {{price.base.name}}\n                <span class=\"monospace\">\n                  {{price.base.quantity | format:true}}/{{price.price | format:true}}\n                </span>\n              </div>\n\n              <div class=\"progress-static\"\n                   [ngClass]=\"{'success': price.canBuy,'danger': !price.canBuy}\">\n                <div class=\"progress-meter\"\n                     [attr.data-value]=\"price.completedPercent\"\n                     [attr.data-displayval]=\"price.completedPercent\"></div>\n              </div>\n\n            </div>\n          </div>\n        </div>\n      </div>\n\n      <div class=\"clr-col-12 clr-col-sm-12 clr-col-md-6 clr-col-lg-6 clr-col-xl-6\"\n           *ngIf=\"ms.game.currentWorld.notWinConditions?.length > 0\">\n        <div class=\"card\">\n          <div class=\"card-block\">\n            <h3 class=\"card-title\">\n              你必须杀死:\n            </h3>\n            <ul class=\"list-unstyled\">\n              <li *ngFor=\"let malus of ms.game.currentWorld.notWinConditions; trackBy:getMalusId\">\n                <span>\n                  <clr-icon class=\"malusIcon\"\n                            [ngClass]=\"malus.isKilled ? 'ok':'no'\"\n                            [attr.shape]=\"malus.isKilled ? 'check' : 'times'\"></clr-icon>\n                  {{malus.name}}\n                </span>\n              </li>\n            </ul>\n          </div>\n        </div>\n      </div>\n\n    </div>\n\n  </ng-template>\n</div>\n"
+module.exports = "<div class=\"content-area\">\n\n  <app-change-world *ngIf=\"skip || ms.game.canTravel; else noTravel\"></app-change-world>\n  <ng-template #noTravel>\n\n    <h1>旅行到一个新世界\n      <button class=\"btn btn-danger-outline btn-link\"\n              (click)=\"skip = true\">跳过</button>\n    </h1>\n\n    <clr-alert [clrAlertType]=\"'alert-danger'\"\n               [clrAlertClosable]=\"false\"\n               *ngIf=\"!ms.game.researches.travel.done\">\n      <div class=\"alert-item\">\n        <span class=\"alert-text\">\n          旅行需要先完成研究旅行科技。\n        </span>\n      </div>\n    </clr-alert>\n\n    <div class=\"clr-row\">\n      <div class=\"clr-col-12 clr-col-sm-12 clr-col-md-6 clr-col-lg-6 clr-col-xl-6\">\n        <div class=\"card\">\n          <div class=\"card-block\">\n            <h3 class=\"card-title\">\n              你需要:\n            </h3>\n            <div *ngFor=\"let price of ms.game.currentWorld.winContidions; trackBy:getPriceId\">\n              <div class=\"winLabel\">\n                {{price.base.name}}\n                <span class=\"monospace\">\n                  {{price.base.quantity | format:true}}/{{price.price | format:true}}\n                </span>\n              </div>\n\n              <div class=\"progress-static\"\n                   [ngClass]=\"{'success': price.canBuy,'danger': !price.canBuy}\">\n                <div class=\"progress-meter\"\n                     [attr.data-value]=\"price.completedPercent\"\n                     [attr.data-displayval]=\"price.completedPercent\"></div>\n              </div>\n\n            </div>\n          </div>\n        </div>\n      </div>\n\n      <div class=\"clr-col-12 clr-col-sm-12 clr-col-md-6 clr-col-lg-6 clr-col-xl-6\"\n           *ngIf=\"ms.game.currentWorld.notWinConditions?.length > 0\">\n        <div class=\"card\">\n          <div class=\"card-block\">\n            <h3 class=\"card-title\">\n              你必须杀死:\n            </h3>\n            <ul class=\"list-unstyled\">\n              <li *ngFor=\"let malus of ms.game.currentWorld.notWinConditions; trackBy:getMalusId\">\n                <span>\n                  <clr-icon class=\"malusIcon\"\n                            [ngClass]=\"malus.isKilled ? 'ok':'no'\"\n                            [attr.shape]=\"malus.isKilled ? 'check' : 'times'\"></clr-icon>\n                  {{malus.name}}\n                </span>\n              </li>\n            </ul>\n          </div>\n        </div>\n      </div>\n\n    </div>\n\n  </ng-template>\n</div>\n"
 
 /***/ }),
 
@@ -10271,7 +10363,7 @@ var NameComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"card-block\">\n  <div class=\"card-title\">\n    <app-name [name]=\"research.name\"\n              [unlimited]=\"research.unlimited\"\n              [quantity]=\"research.quantity\"></app-name>\n  </div>\n  <div class=\"card-text p\">\n    {{research.description}}\n    <br />\n    <div *ngIf=\"!research.complete\">\n      <span>花费: </span>\n      <app-price-line *ngFor=\"let price of research.prices; trackBy:getPriceId\"\n                      [unit]=\"price.base\"\n                      [canBuy]=\"price.canBuy\"\n                      [price]=\"price.priceUser\">\n      </app-price-line>\n\n      <div *ngIf=\"research.unlimited \">\n        <label for=\"max\">最高等级:</label>\n        <input type=\"number\"\n               id=\"max\"\n               class=\"clr-input\"\n               [(ngModel)]=\"research.maxAutoBuyLevel\"\n               min=\"0\"\n               size=\"3\">\n      </div>\n\n    </div>\n  </div>\n</div>\n<div class=\"card-footer\"\n     *ngIf=\"!research.complete\">\n  <button *ngIf=\"!research.canBuy && !canSkip\"\n          class=\"btn btn-sm btn-link\"\n          disabled>\n    不能购买. 距离可购买还有 {{research.availableIn | endIn}} \n  </button>\n  <button *ngIf=\"!research.canBuy &&  canSkip\"\n          class=\"btn btn-danger btn-sm\"\n          (click)=\"skip()\">\n    不能购买. 跳过 {{minuteSkip}} 分钟\n  </button>\n  <button *ngIf=\"research.canBuy\"\n          class=\"btn btn-sm btn-link\"\n          (click)=\"research.buy(research.realNum)\">\n    研究\n  </button>\n</div>\n"
+module.exports = "<div class=\"card-block\">\n  <div class=\"card-title\">\n    <app-name [name]=\"research.name\"\n              [unlimited]=\"research.unlimited\"\n              [quantity]=\"research.quantity\"></app-name>\n  </div>\n  <div class=\"card-text p\">\n    {{research.description}}\n    <br />\n    <div *ngIf=\"!research.complete\">\n      <span>花费: </span>\n      <app-price-line *ngFor=\"let price of research.prices; trackBy:getPriceId\"\n                      [unit]=\"price.base\"\n                      [canBuy]=\"price.canBuy\"\n                      [price]=\"price.priceUser\">\n      </app-price-line>\n\n      <div *ngIf=\"research.unlimited \">\n        <label for=\"max\">最高等级:</label>\n        <input type=\"number\"\n               id=\"max\"\n               class=\"clr-input\"\n               [(ngModel)]=\"research.maxAutoBuyLevel\"\n               (change)=\"ms.game.researches.reloadLists()\"\n               min=\"0\"\n               size=\"3\">\n      </div>\n\n    </div>\n  </div>\n</div>\n<div class=\"card-footer\"\n     *ngIf=\"!research.complete\">\n  <button *ngIf=\"!research.canBuy && !canSkip\"\n          class=\"btn btn-sm btn-link\"\n          disabled>\n    不能购买. 距离可购买还有 {{research.availableIn | endIn}} \n  </button>\n  <button *ngIf=\"!research.canBuy &&  canSkip\"\n          class=\"btn btn-danger btn-sm\"\n          (click)=\"skip()\">\n    不能购买. 跳过 {{minuteSkip}} 分钟\n  </button>\n  <button *ngIf=\"research.canBuy\"\n          class=\"btn btn-sm btn-link\"\n          (click)=\"research.buy(research.realNum)\">\n    研究\n  </button>\n</div>\n"
 
 /***/ }),
 

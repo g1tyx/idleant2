@@ -657,7 +657,9 @@ var AppComponent = /** @class */ (function () {
             tools: _clr_icons_shapes_essential_shapes__WEBPACK_IMPORTED_MODULE_3__["ClrShapeTools"],
             star: _clr_icons_shapes_social_shapes__WEBPACK_IMPORTED_MODULE_8__["ClrShapeStar"],
             dashboard: _clr_icons_shapes_technology_shapes__WEBPACK_IMPORTED_MODULE_9__["ClrShapeDashboard"],
-            certificate: _clr_icons_shapes_technology_shapes__WEBPACK_IMPORTED_MODULE_9__["ClrShapeCertificate"]
+            certificate: _clr_icons_shapes_technology_shapes__WEBPACK_IMPORTED_MODULE_9__["ClrShapeCertificate"],
+            "upload-cloud": _clr_icons_shapes_technology_shapes__WEBPACK_IMPORTED_MODULE_9__["ClrShapeUploadCloud"],
+            "download-cloud": _clr_icons_shapes_technology_shapes__WEBPACK_IMPORTED_MODULE_9__["ClrShapeDownloadCloud"]
         });
     }
     AppComponent.prototype.ngOnInit = function () {
@@ -1175,7 +1177,7 @@ var AutoBuyComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<h1>从这里你可以旅行到新的世界.</h1>\n\n\n<clr-alert [clrAlertType]=\"'alert-success'\"\n           [clrAlertClosable]=\"false\"\n           *ngIf=\"ms.game.canTravel; else warn\">\n  <div class=\"alert-item\">\n    <span class=\"alert-text\">\n      你将会得到\n      <span class=\"monospace\">{{ms.game.currentWorld.prestige}} </span>\n      经验\n\n      <span *ngIf=\"ms.game.researches.overNineThousand.done\n      && ms.game.currentWorld.level.gt(this.maxLevel.times(0.9))\">\n        和 1 精通点\n      </span>\n    </span>\n  </div>\n</clr-alert>\n\n<ng-template #warn>\n  <clr-alert [clrAlertType]=\"'alert-danger'\"\n             [clrAlertClosable]=\"false\">\n    <div class=\"alert-item\">\n      <span class=\"alert-text\">\n        如果您选择跳过，你将得不到经验奖励!\n      </span>\n    </div>\n  </clr-alert>\n</ng-template>\n\n\n<clr-alert [clrAlertType]=\"'alert-warning'\"\n           [clrAlertClosable]=\"false\"\n           *ngIf=\"!ms.game.researches.mastery.done\">\n  <div class=\"alert-item \">\n    <span class=\"alert-text\">\n      精通研究未完成。\n    </span>\n  </div>\n</clr-alert>\n\n<button class=\"btn\"\n        (click)=\"randomize()\">随机</button>\n\n<span>\n  最低等级:\n  <span class=\"monospace\">\n    {{minLevel | format:true}}\n  </span>\n</span>\n<span>\n  最高等级:\n  <span class=\"monospace\">\n    {{maxLevel | format:true}}\n  </span>\n</span>\n\n<p-slider [(ngModel)]=\"rangeValues\"\n          [range]=\"true\"\n          [min]=\"1\"\n          [max]=\"maxSafeInt\"\n          (onChange)=\"setLevels()\"></p-slider>\n\n<!-- <div class=\"card-columns\">\n    <app-world [world]=\"world\"\n               *ngFor=\"let world of ms.game.nextWorlds; trackBy:getWorldId\"></app-world>\n  </div> -->\n\n<div class=\"clr-row clr-justify-content-center\">\n  <div *ngFor=\"let world of ms.game.nextWorlds; trackBy:getWorldId\"\n       class=\"worldMaxWidt clr-col-sm-12 clr-col-md-4\">\n    <app-world [world]=\"world\"></app-world>\n  </div>\n</div>\n\n\n<clr-modal [(clrModalOpen)]=\"travelMessage\">\n  <h3 class=\"modal-title\">更换世界 ?</h3>\n  <div class=\"modal-body\">\n    <p>你将失去一切，除了声望升级，继续 ?</p>\n  </div>\n  <div class=\"modal-footer\">\n    <button type=\"button\"\n            class=\"btn btn-outline\"\n            (click)=\"travelMessage = false\">取消</button>\n    <button type=\"button\"\n            class=\"btn btn-primary\"\n            (click)=\"travel()\">确定</button>\n  </div>\n</clr-modal>\n"
+module.exports = "<h1>从这里你可以旅行到新的世界.</h1>\n\n\n<clr-alert [clrAlertType]=\"'alert-success'\"\n           [clrAlertClosable]=\"false\"\n           *ngIf=\"ms.game.canTravel; else warn\">\n  <div class=\"alert-item\">\n    <span class=\"alert-text\">\n      你将会得到\n      <span class=\"monospace\">{{ms.game.currentWorld.prestige}} </span>\n      经验\n\n            <span *ngIf=\"ms.game.hasSecondMastery()\">\n        和 1 精通点\n      </span>\n    </span>\n  </div>\n</clr-alert>\n\n<ng-template #warn>\n  <clr-alert [clrAlertType]=\"'alert-danger'\"\n             [clrAlertClosable]=\"false\">\n    <div class=\"alert-item\">\n      <span class=\"alert-text\">\n        如果您选择跳过，你将得不到经验奖励!\n      </span>\n    </div>\n  </clr-alert>\n</ng-template>\n\n\n<clr-alert [clrAlertType]=\"'alert-warning'\"\n           [clrAlertClosable]=\"false\"\n           *ngIf=\"!ms.game.researches.mastery.done\">\n  <div class=\"alert-item \">\n    <span class=\"alert-text\">\n      精通研究未完成。\n    </span>\n  </div>\n</clr-alert>\n\n<button class=\"btn\"\n        (click)=\"randomize()\">随机</button>\n\n<span>\n  最低等级:\n  <span class=\"monospace\">\n    {{minLevel | format:true}}\n  </span>\n</span>\n<span>\n  最高等级:\n  <span class=\"monospace\">\n    {{maxLevel | format:true}}\n  </span>\n</span>\n\n<p-slider [(ngModel)]=\"rangeValues\"\n          [range]=\"true\"\n          [min]=\"1\"\n          [max]=\"maxSafeInt\"\n          (onChange)=\"setLevels()\"></p-slider>\n\n<!-- <div class=\"card-columns\">\n    <app-world [world]=\"world\"\n               *ngFor=\"let world of ms.game.nextWorlds; trackBy:getWorldId\"></app-world>\n  </div> -->\n\n<div class=\"clr-row clr-justify-content-center\">\n  <div *ngFor=\"let world of ms.game.nextWorlds; trackBy:getWorldId\"\n       class=\"worldMaxWidt clr-col-sm-12 clr-col-md-4\">\n    <app-world [world]=\"world\"></app-world>\n  </div>\n</div>\n\n\n<clr-modal [(clrModalOpen)]=\"travelMessage\">\n  <h3 class=\"modal-title\">更换世界 ?</h3>\n  <div class=\"modal-body\">\n    <p>你将失去一切，除了声望升级，继续 ?</p>\n  </div>\n  <div class=\"modal-footer\">\n    <button type=\"button\"\n            class=\"btn btn-outline\"\n            (click)=\"travelMessage = false\">取消</button>\n    <button type=\"button\"\n            class=\"btn btn-primary\"\n            (click)=\"travel()\">确定</button>\n  </div>\n</clr-modal>\n"
 
 /***/ }),
 
@@ -2379,7 +2381,6 @@ var H1 = 3600 * 1000;
 var SAVE_INTERVAL = 5 * 60 * 1000;
 var UP_INTERVAL = 250; // 4 fps
 var MainService = /** @class */ (function () {
-    //#endregion
     function MainService(options, toastr, document) {
         var _this = this;
         this.options = options;
@@ -2396,6 +2397,11 @@ var MainService = /** @class */ (function () {
         this.lastTab = 0;
         this.overviewTaActive = false;
         this.prestigeTaActive = false;
+        //#endregion
+        this.titleId = "E86B";
+        this.playFabId = -1;
+        this.testing = false;
+        this.playFabLogged = false;
         this.endInPipe = new _end_in_pipe__WEBPACK_IMPORTED_MODULE_5__["EndInPipe"](this.options);
         this.themeClarity = this.document.createElement("link");
         this.themeClarity.rel = "stylesheet";
@@ -2494,9 +2500,17 @@ var MainService = /** @class */ (function () {
             this.toastr.error(ex && ex.message ? ex.message : "unknow error", "Save Error");
         }
     };
-    MainService.prototype.import = function (raw, first) {
+    MainService.prototype.import = function (raw, first, playFab) {
         var _this = this;
         if (first === void 0) { first = false; }
+        if (playFab === void 0) { playFab = false; }
+        try {
+            if (raw === "TEST") {
+                this.testing = true;
+                return;
+            }
+        }
+        catch (e) { }
         try {
             if (!raw) {
                 if (!first) {
@@ -2570,7 +2584,128 @@ var MainService = /** @class */ (function () {
             }
         }
         catch (e) {
-            console.log("Error: " + e.message);
+            console.log("Kongregate Stats error: " + e.message);
+        }
+    };
+    //#region PlayFab
+    MainService.prototype.playFabLogin = function () {
+        if (!this.kongregate) {
+            this.toastr.error("You need to be logged in to Kongregate.", "PlayFab error");
+            return;
+        }
+        try {
+            var authTicket = this.kongregate.services.getGameAuthToken();
+            var requestData = {
+                TitleId: this.titleId,
+                KongregateId: this.kongregate.services.getUserId(),
+                AuthTicket: authTicket,
+                CreateAccount: true
+            };
+            try {
+                PlayFab.ClientApi.LoginWithKongregate(requestData, this.playFabLoginCallback.bind(this));
+            }
+            catch (e) {
+                console.log("Unable to send login request to PlayFab.");
+                this.toastr.error("Unable to send login request to PlayFab.");
+            }
+        }
+        catch (e) {
+            console.log(e);
+        }
+    };
+    MainService.prototype.playFabLoginCallback = function (data, error) {
+        if (error) {
+            console.log(error.errorMessage);
+            this.toastr.error("You need to be logged in to Kongregate.", "Couldn't log in to PlayFab Cloud");
+            return;
+        }
+        if (data) {
+            this.playFabId = data.data.PlayFabId;
+            PlayFab.settings.titleId = "E86B";
+            this.playFabLogged = true;
+            this.saveEmitter.emit();
+            console.log("Logged in to playFab");
+            this.toastr.info("Logged in to PlayFab");
+        }
+    };
+    MainService.prototype.savePlayFab = function () {
+        if (!this.playFabId ||
+            typeof PlayFab === "undefined" ||
+            typeof PlayFab.ClientApi === "undefined") {
+            return false;
+        }
+        // Cut compressed object into strings of 10,000 bytes for PlayFab
+        var chunks = this.getSave().match(/.{1,10000}/g);
+        if (chunks.length > 10) {
+            this.toastr.error("size limit exceeded", "Error saving to cloud");
+        }
+        var requestData = {
+            TitleId: this.titleId,
+            PlayFabId: this.playFabId,
+            // convert array into object with numbers as keys
+            Data: $.extend({}, chunks)
+        };
+        try {
+            PlayFab.ClientApi.UpdateUserData(requestData, this.saveToPlayFabCallback.bind(this));
+        }
+        catch (e) {
+            console.log(e);
+        }
+    };
+    MainService.prototype.saveToPlayFabCallback = function (data, error) {
+        if (error) {
+            console.log(error);
+            return false;
+        }
+        if (data) {
+            console.log("Game Saved!");
+            this.toastr.success("Game saved to PlayFab");
+            return true;
+        }
+    };
+    MainService.prototype.loadPlayFab = function () {
+        if (!this.playFabId ||
+            typeof PlayFab === "undefined" ||
+            typeof PlayFab.ClientApi === "undefined") {
+            console.log(this.playFabId, PlayFab);
+            return false;
+        }
+        var requestData = {
+            Keys: ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "save"],
+            PlayFabId: this.playFabId
+        };
+        try {
+            console.log("attempting to send load request");
+            PlayFab.ClientApi.GetUserData(requestData, this.loadFromPlayFabCallback.bind(this));
+            console.log("sent load request");
+        }
+        catch (e) {
+            console.log(e);
+        }
+    };
+    MainService.prototype.loadFromPlayFabCallback = function (data, error) {
+        try {
+            console.log("loading callback fired");
+            // console.log(data, error);
+            if (error) {
+                console.log(error);
+                return;
+            }
+            if (data) {
+                if (data.data.Data) {
+                    var raw = Object.values(data.data.Data)
+                        .map(function (val) {
+                        return val.Value;
+                    })
+                        .join("");
+                    console.log(raw);
+                    this.import(raw, false, true);
+                }
+            }
+        }
+        catch (e) {
+            console.log(e);
+            this.toastr.error("PlayFab Load error");
         }
     };
     MainService = __decorate([
@@ -2678,9 +2813,9 @@ var MasteryComponent = /** @class */ (function () {
                         roundness: 0.5
                     }
                 },
-                interaction: { hover: true },
+                interaction: { dragNodes: false, hover: true },
                 physics: {
-                    enabled: true,
+                    enabled: false,
                     barnesHut: {
                         gravitationalConstant: -6900,
                         avoidOverlap: 0.0
@@ -4511,7 +4646,7 @@ var Game = /** @class */ (function () {
      */
     Game.prototype.warp = function (delta) {
         if (delta > 0) {
-            this.ms.toastr.info(this.ms.endInPipe.transform(delta), "Time Warp");
+            this.ms.toastr.info(this.ms.endInPipe.transform(delta), "时间扭曲");
             this.update(delta, true);
             //this.autoBuyManager.update(delta);
         }
@@ -4565,9 +4700,7 @@ var Game = /** @class */ (function () {
      */
     Game.prototype.goToWorld = function (world) {
         this.stats.logWorldCompleted(this.currentWorld, !this.canTravel);
-        if (this.canTravel &&
-            this.researches.overNineThousand.done &&
-            this.currentWorld.level.gt(this.maxLevel.times(0.9))) {
+        if (this.canTravel && this.hasSecondMastery()) {
             this.allMateries.totalEarned++;
             this.allMateries.masteryPoint++;
         }
@@ -4682,6 +4815,11 @@ var Game = /** @class */ (function () {
         if (this.ms.kongregate)
             setTimeout(this.ms.sendKong.bind(this.ms), 10);
         return true;
+    };
+    Game.prototype.hasSecondMastery = function () {
+        return (this.researches.overNineThousand.done &&
+            this.currentWorld.level.gt(15) &&
+            this.currentWorld.level.gt(this.maxLevel.times(0.5)));
     };
     //#region Unit Utils
     Game.prototype.generateWorlds = function (userMin, userMax) {
@@ -5234,7 +5372,7 @@ var Mastery = /** @class */ (function () {
         this.color = "blue";
         this.avaiable = false;
         this.owned = false;
-        this.label = id + " " + Mastery.getDescription(type);
+        this.label = Mastery.getDescription(type);
         this.color = notable.find(function (n) { return n === _this.type; })
             ? Mastery.notableColor
             : Mastery.normalColor;
@@ -5312,7 +5450,7 @@ var Mastery = /** @class */ (function () {
                 break;
             }
             case MasteryTypes.THECNOLOGY_PRESTIGE: {
-                ret = "技术声望升级\n" + 100 * num + "% 更高效率";
+                ret = "技术经验升级\n" + 100 * num + "% 更高效率";
                 break;
             }
             case MasteryTypes.START_TWIN: {
@@ -6470,7 +6608,7 @@ var STRINGS = {
         SP: ["产卵", "+50% 幼虫产量."],
         ont: [
             "极端",
-            "+10% 世界等级和经验;+20% 需求; 增加随机敌人，以及提高敌人;如果等级 > 0.9 * 最大授予1精通点在旅行的时候"
+            "+10% 世界等级和经验;+20% 需求; 增加随机敌人，以及提高敌人;如果当前世界等级高于15并且高于50%最大等级, 在旅行时会给予你1个精通点"
         ],
         //  Workers
         wo: ["更好的工人", "+30% 来自工人的资源产量."],
@@ -9343,7 +9481,7 @@ var OptionsNavComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<h1>保存</h1>\n<div class=\"btn-group btn-primary\">\n  <button class=\"btn btn-success\"\n          (click)=\"serv.save()\">\n    <clr-icon shape=\"floppy\"></clr-icon>\n    保存\n  </button>\n  <button class=\"btn\"\n          (click)=\"serv.load()\">\n    <clr-icon shape=\"install\"></clr-icon>\n    加载\n  </button>\n  <button class=\"btn btn-danger\"\n          (click)=\"clearModal = true\">\n    <clr-icon shape=\"uninstall\"></clr-icon>\n    清空\n  </button>\n</div>\n<p>\n  <br />\n  每5分钟自动保存一次。\n  <br />\n  上次保存时间: {{serv.lastSave | date:'medium' }}\n</p>\n<h2>导出 / 导入存档</h2>\n<textarea name=\"raw\"\n          [(ngModel)]=\"exp\"\n          rows=\"3\"></textarea>\n<div class=\"btn-group btn-primary\">\n  <button class=\"btn btn-success\"\n          (click)=\"export()\">\n    导出\n  </button>\n  <button class=\"btn\"\n          (click)=\"import()\">\n    导入\n  </button>\n</div>\n<h2>自动保存设置</h2>\n<div class=\"toggle-switch\">\n  <input type=\"checkbox\"\n         id=\"t1\"\n         [(ngModel)]=\"serv.options.autosaveNotification\">\n  <label for=\"t1\">自动保存通知</label>\n</div>\n<br />\n<a href=\"https://likexia.gitee.io/idleant2/changelog.html\"\n   target=\"_blank\">更新日志\n</a>\n\n<clr-modal [(clrModalOpen)]=\"clearModal\">\n  <h3 class=\"modal-title\">重置</h3>\n  <div class=\"modal-body\">\n    <p>你确定要删除所有游戏进度？</p>\n  </div>\n  <div class=\"modal-footer\">\n    <button type=\"button\"\n            class=\"btn btn-outline\"\n            (click)=\"clearModal = false\">取消</button>\n    <button type=\"button\"\n            class=\"btn btn-danger\"\n            (click)=\"this.serv.clear(); clearModal = false\">删除</button>\n  </div>\n</clr-modal>\n"
+module.exports = "<h1>保存</h1>\n\n<ng-container *ngIf=\"serv.kongregate\">\n  <clr-alert [clrAlertClosable]=\"false\"\n             [clrAlertType]=\"'alert-warning'\">\n    <div clr-alert-item\n         class=\"alert-item\">\n      <span class=\"alert-text\">\n        云存储是实验性的!建议导出备份。\n      </span>\n    </div>\n  </clr-alert>\n  <br />\n</ng-container>\n\n<div class=\"btn-group btn-primary\">\n  <button class=\"btn btn-success\"\n          (click)=\"serv.save()\">\n    <clr-icon shape=\"floppy\"></clr-icon>\n    保存\n  </button>\n  <button class=\"btn\"\n          (click)=\"serv.load()\">\n    <clr-icon shape=\"install\"></clr-icon>\n    加载\n  </button>\n  <button class=\"btn btn-danger\"\n          (click)=\"clearModal = true\">\n    <clr-icon shape=\"uninstall\"></clr-icon>\n    清空\n  </button>\n</div>\n\n<div class=\"btn-group btn-primary\"\n     *ngIf=\"serv.kongregate\">\n  <button class=\"btn btn-info\"\n          (click)=\"serv.playFabLogin()\">\n    <clr-icon shape=\"user\"></clr-icon>\n    Log PlayFab\n  </button>\n  <button *ngIf=\"serv.playFabLogged\"\n          class=\"btn btn-success\"\n          (click)=\"serv.savePlayFab()\">\n    <clr-icon shape=\"upload-cloud\"></clr-icon>\n    云存储\n  </button>\n  <button *ngIf=\"serv.playFabLogged\"\n          class=\"btn\"\n          (click)=\"serv.loadPlayFab()\">\n    <clr-icon shape=\"download-cloud\"></clr-icon>\n    云加载\n  </button>\n</div>\n<p>\n  <br />\n  每5分钟自动保存一次。\n  <br />\n  上次保存时间: {{serv.lastSave | date:'medium' }}\n</p>\n<h2>导出 / 导入存档</h2>\n<textarea name=\"raw\"\n          [(ngModel)]=\"exp\"\n          rows=\"3\"></textarea>\n<div class=\"btn-group btn-primary\">\n  <button class=\"btn btn-success\"\n          (click)=\"export()\">\n    导出\n  </button>\n  <button class=\"btn\"\n          (click)=\"import()\">\n    导入\n  </button>\n</div>\n<h2>自动保存设置</h2>\n<div class=\"toggle-switch\">\n  <input type=\"checkbox\"\n         id=\"t1\"\n         [(ngModel)]=\"serv.options.autosaveNotification\">\n  <label for=\"t1\">自动保存通知</label>\n</div>\n<br />\n<a href=\"https://likexia.gitee.io/idleant2/changelog.html\"\n   target=\"_blank\">更新日志\n</a>\n\n<clr-modal [(clrModalOpen)]=\"clearModal\">\n  <h3 class=\"modal-title\">重置</h3>\n  <div class=\"modal-body\">\n    <p>你确定要删除所有游戏进度？</p>\n  </div>\n  <div class=\"modal-footer\">\n    <button type=\"button\"\n            class=\"btn btn-outline\"\n            (click)=\"clearModal = false\">取消</button>\n    <button type=\"button\"\n            class=\"btn btn-danger\"\n            (click)=\"this.serv.clear(); clearModal = false\">删除</button>\n  </div>\n</clr-modal>\n"
 
 /***/ }),
 
@@ -10884,7 +11022,7 @@ var UnitTabsComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngIf=\"unit\">\n  <div class=\"clr-row\">\n    <div class=\"clr-col-xs-12\tclr-col-sm-6\tclr-col-md-6\tclr-col-lg-6\tclr-col-xl-6\">\n\n      <h5>{{unit.description}}</h5>\n\n      <p *ngIf=\"ms.game.researches.team1.done && unit.buyAction && unit.bonus.gt(0)\">\n        你购买了 {{unit.buyAction.quantity | format}} 次; 奖励加成: + {{unit.bonus.times(100) | format}}%\n      </p>\n\n      <p *ngIf=\"unit.c.abs().gt(0.01)\">\n        产量:\n        <app-polynom [a]=\"unit.a\"\n                     [b]=\"unit.b\"\n                     [c]=\"unit.c\"></app-polynom>\n      </p>\n\n      <clr-alert *ngIf=\"unit.isEnding\"\n                 [clrAlertType]=\"malus ? 'alert-sucess': (ms.game.firstEndigUnit.endIn < 3600000 ? 'alert-danger':'alert-warning')\"\n                 [clrAlertClosable]=\"false\"\n                 [clrAlertSizeSmall]=\"false\">\n        <clr-alert-item>\n          <span class=\"alert-text\">\n            耗尽: {{unit.endIn | endIn}}\n          </span>\n        </clr-alert-item>\n      </clr-alert>\n\n      <clr-alert *ngIf=\"malus && malus.first && malus.isActive()\"\n                 [clrAlertType]=\"'alert-danger'\"\n                 [clrAlertSizeSmall]=\"false\"\n                 [clrAlertClosable]=\"false\">\n        <clr-alert-item>\n          <span>\n            {{malus.name}} 正在导致\n            <span class=\"monospace\"> {{malus.priceMultiplier.minus(1).times(100) | format}} %\n            </span>\n            \n            <a [routerLink]=\"'/nav/unit/'+malus.malusType.id\">\n              {{malus.malusType.name}}\n            </a>\n            价格增长.\n          </span>\n        </clr-alert-item>\n      </clr-alert>\n\n      <div *ngIf=\"unit.produces.length > 0 && !malus\">\n        <span>工作者比例: {{unit.efficiency | format}} %</span>\n\n        <p-slider [min]=\"0\"\n                  [max]=\"100\"\n                  [step]=\"0.01\"\n                  [(ngModel)]=\"unit.efficiency\"\n                  animate=\"true\"></p-slider>\n      </div>\n\n      <app-action *ngIf=\"unit.buyAction\"\n                  [action]=\"unit.buyAction\"></app-action>\n      <app-action *ngIf=\"unit.teamAction && ms.game.researches.team2.done\"\n                  [action]=\"unit.teamAction\"></app-action>\n      <app-action *ngIf=\"unit.twinAction && ms.game.researches.twin.done\"\n                  [action]=\"unit.twinAction\"></app-action>\n\n      <div *ngIf=\"madeChart\"\n           class=\"chartDiv\">\n        <app-made-by-chart [unit]=\"unit\"></app-made-by-chart>\n        <app-made-by-chart [unit]=\"unit\"\n                           [consumers]=\"true\"></app-made-by-chart>\n      </div>\n\n    </div>\n    <div class=\"clr-col-xs-12\tclr-col-sm-6 clr-col-md-6\tclr-col-lg-6 clr-col-xl-6\">\n      <div *ngIf=\"activeProduct?.length > 0\">\n        <h6>\n          {{unit.name}} 生产:\n        </h6>\n        <clr-datagrid class=\"datagrid-compact\">\n          <clr-dg-column [clrDgField]=\"'product.name'\">名称</clr-dg-column>\n          <clr-dg-column [clrDgSortBy]=\"prodSorter\">比例</clr-dg-column>\n          <clr-dg-column [clrDgSortBy]=\"totalProdSorter\">总产量</clr-dg-column>\n\n          <clr-dg-row *clrDgItems=\"let product of activeProduct\">\n            <clr-dg-cell>\n              <a [routerLink]=\"'/nav/unit/'+product.product.id\">\n                {{product.product.name}}\n              </a>\n            </clr-dg-cell>\n            <clr-dg-cell>\n              <span [class.noEnought]=\"product.rateo.lt(0)\"\n                    class=\"monospace\">\n                {{product.prodPerSec | format}}</span>\n              <app-production-signposts [production]=\"product\"></app-production-signposts>\n            </clr-dg-cell>\n            <clr-dg-cell>\n              <span [class.noEnought]=\"product.rateo.lt(0)\"\n                    class=\"monospace\">\n                {{product.prodPerSec.times(unit.quantity) | format}}\n              </span>\n            </clr-dg-cell>\n          </clr-dg-row>\n\n          <clr-dg-footer>\n            <clr-dg-pagination #pagination\n                               [clrDgPageSize]=\"10\">\n              {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}} of {{pagination.totalItems}}\n            </clr-dg-pagination>\n          </clr-dg-footer>\n\n        </clr-datagrid>\n      </div>\n\n      <div *ngIf=\"activeProducer?.length > 0\">\n        <h6>\n          {{unit.name}} 产量来自:\n        </h6>\n        <clr-datagrid class=\"datagrid-compact\">\n          <clr-dg-column [clrDgField]=\"'producer.name'\">名字</clr-dg-column>\n          <clr-dg-column [clrDgSortBy]=\"prodSorter\">比例</clr-dg-column>\n          <clr-dg-column [clrDgSortBy]=\"totalProdSorter\">总产量</clr-dg-column>\n\n          <clr-dg-row *clrDgItems=\"let producer of activeProducer\">\n            <clr-dg-cell>\n              <a [routerLink]=\"'/nav/unit/'+producer.producer.id\">\n                {{producer.producer.name}}\n              </a>\n            </clr-dg-cell>\n            <clr-dg-cell>\n              <span [class.noEnought]=\"producer.rateo.lt(0)\"\n                    class=\"monospace\">\n                {{producer.prodPerSec | format}}\n              </span>\n            </clr-dg-cell>\n            <clr-dg-cell>\n              <span [class.noEnought]=\"producer.rateo.lt(0)\"\n                    class=\"monospace\">\n                {{producer.prodPerSec.times(producer.producer.quantity) | format}}</span>\n            </clr-dg-cell>\n          </clr-dg-row>\n\n          <clr-dg-footer>\n            <clr-dg-pagination #pagination\n                               [clrDgPageSize]=\"10\">\n              {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}} of {{pagination.totalItems}}\n            </clr-dg-pagination>\n          </clr-dg-footer>\n\n        </clr-datagrid>\n      </div>\n\n    </div>\n  </div>\n</div>\n"
+module.exports = "<div *ngIf=\"unit\">\n  <div class=\"clr-row\">\n    <div class=\"clr-col-xs-12\tclr-col-sm-6\tclr-col-md-6\tclr-col-lg-6\tclr-col-xl-6\">\n\n      <h5>{{unit.description}}</h5>\n\n      <p *ngIf=\"ms.game.researches.team1.done && unit.buyAction && unit.bonus.gt(0)\">\n        你购买了 {{unit.buyAction.quantity | format}} 次; 奖励加成: + {{unit.bonus.times(100) | format}}%\n      </p>\n\n      <p *ngIf=\"unit.c.abs().gt(0.01)\">\n        产量:\n        <app-polynom [a]=\"unit.a\"\n                     [b]=\"unit.b\"\n                     [c]=\"unit.c\"></app-polynom>\n      </p>\n\n      <clr-alert *ngIf=\"unit.isEnding\"\n                 [clrAlertType]=\"malus ? 'alert-sucess': (ms.game.firstEndigUnit.endIn < 3600000 ? 'alert-danger':'alert-warning')\"\n                 [clrAlertClosable]=\"false\"\n                 [clrAlertSizeSmall]=\"false\">\n        <clr-alert-item>\n          <span class=\"alert-text\">\n            耗尽: {{unit.endIn | endIn}}\n          </span>\n        </clr-alert-item>\n      </clr-alert>\n\n      <clr-alert *ngIf=\"malus && malus.first && malus.isActive()\"\n                 [clrAlertType]=\"'alert-danger'\"\n                 [clrAlertSizeSmall]=\"false\"\n                 [clrAlertClosable]=\"false\">\n        <clr-alert-item>\n          <span>\n            {{malus.name}} 正在导致\n            <span class=\"monospace\"> {{malus.priceMultiplier.minus(1).times(100) | format}} %\n            </span>\n            \n            <a [routerLink]=\"'/nav/unit/'+malus.malusType.id\">\n              {{malus.malusType.name}}\n            </a>\n            价格增长.\n          </span>\n        </clr-alert-item>\n      </clr-alert>\n\n      <div *ngIf=\"unit.produces.length > 0 && !malus\">\n        <span>工作者比例: {{unit.efficiency | format}} %</span>\n\n        <p-slider [min]=\"0\"\n                  [max]=\"100\"\n                  [step]=\"0.01\"\n                  [(ngModel)]=\"unit.efficiency\"\n                  animate=\"true\"></p-slider>\n      </div>\n\n      <app-action *ngIf=\"unit.buyAction\"\n                  [action]=\"unit.buyAction\"></app-action>\n      <app-action *ngIf=\"unit.teamAction && ms.game.researches.team2.done\"\n                  [action]=\"unit.teamAction\"></app-action>\n      <app-action *ngIf=\"unit.twinAction && ms.game.researches.twin.done\"\n                  [action]=\"unit.twinAction\"></app-action>\n\n      <div *ngIf=\"madeChart\"\n           class=\"chartDiv\">\n        <app-made-by-chart [unit]=\"unit\"></app-made-by-chart>\n        <app-made-by-chart [unit]=\"unit\"\n                           [consumers]=\"true\"></app-made-by-chart>\n      </div>\n\n    </div>\n    <div class=\"clr-col-xs-12\tclr-col-sm-6 clr-col-md-6\tclr-col-lg-6 clr-col-xl-6\">\n      <div *ngIf=\"activeProduct?.length > 0\">\n        <h6>\n          {{unit.name}} 生产:\n        </h6>\n        <clr-datagrid class=\"datagrid-compact\">\n          <clr-dg-column [clrDgField]=\"'product.name'\">名称</clr-dg-column>\n          <clr-dg-column [clrDgSortBy]=\"prodSorter\">每个单位的产量/秒</clr-dg-column>\n          <clr-dg-column [clrDgSortBy]=\"totalProdSorter\">总产量</clr-dg-column>\n\n          <clr-dg-row *clrDgItems=\"let product of activeProduct\">\n            <clr-dg-cell>\n              <a [routerLink]=\"'/nav/unit/'+product.product.id\">\n                {{product.product.name}}\n              </a>\n            </clr-dg-cell>\n            <clr-dg-cell>\n              <span [class.noEnought]=\"product.rateo.lt(0)\"\n                    class=\"monospace\">\n                {{product.prodPerSec | format}}</span>\n              <app-production-signposts [production]=\"product\"></app-production-signposts>\n            </clr-dg-cell>\n            <clr-dg-cell>\n              <span [class.noEnought]=\"product.rateo.lt(0)\"\n                    class=\"monospace\">\n                {{product.prodPerSec.times(unit.quantity) | format}}\n              </span>\n            </clr-dg-cell>\n          </clr-dg-row>\n\n          <clr-dg-footer>\n            <clr-dg-pagination #pagination\n                               [clrDgPageSize]=\"10\">\n              {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}} of {{pagination.totalItems}}\n            </clr-dg-pagination>\n          </clr-dg-footer>\n\n        </clr-datagrid>\n      </div>\n\n      <div *ngIf=\"activeProducer?.length > 0\">\n        <h6>\n          {{unit.name}} 产量来自:\n        </h6>\n        <clr-datagrid class=\"datagrid-compact\">\n          <clr-dg-column [clrDgField]=\"'producer.name'\">名字</clr-dg-column>\n          <clr-dg-column [clrDgSortBy]=\"prodSorter\">每个单位的产量/秒</clr-dg-column>\n          <clr-dg-column [clrDgSortBy]=\"totalProdSorter\">总产量</clr-dg-column>\n\n          <clr-dg-row *clrDgItems=\"let producer of activeProducer\">\n            <clr-dg-cell>\n              <a [routerLink]=\"'/nav/unit/'+producer.producer.id\">\n                {{producer.producer.name}}\n              </a>\n            </clr-dg-cell>\n            <clr-dg-cell>\n              <span [class.noEnought]=\"producer.rateo.lt(0)\"\n                    class=\"monospace\">\n                {{producer.prodPerSec | format}}\n              </span>\n            </clr-dg-cell>\n            <clr-dg-cell>\n              <span [class.noEnought]=\"producer.rateo.lt(0)\"\n                    class=\"monospace\">\n                {{producer.prodPerSec.times(producer.producer.quantity) | format}}</span>\n            </clr-dg-cell>\n          </clr-dg-row>\n\n          <clr-dg-footer>\n            <clr-dg-pagination #pagination\n                               [clrDgPageSize]=\"10\">\n              {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}} of {{pagination.totalItems}}\n            </clr-dg-pagination>\n          </clr-dg-footer>\n\n        </clr-datagrid>\n      </div>\n\n    </div>\n  </div>\n</div>\n"
 
 /***/ }),
 

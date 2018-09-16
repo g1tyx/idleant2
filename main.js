@@ -1000,7 +1000,7 @@ var APPROUTES = [
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"content-area\">\n  <h1>自动购买者</h1>\n  <form>\n    <section class=\"form-block\">\n      <div class=\"form-group\">\n        <label>选项:</label>\n        <clr-checkbox [name]=\"'on'\"\n                      [id]=\"'on1'\"\n                      [(clrChecked)]=\"ms.game.autoBuyManager.enabled\"\n                      [clrInline]=\"true\">\n          开启\n        </clr-checkbox>\n        <clr-checkbox [name]=\"'multi'\"\n                      [id]=\"'multi1'\"\n                      [(clrChecked)]=\"ms.game.autoBuyManager.multiBuy\"\n                      [clrInline]=\"true\">\n          多重购买\n        </clr-checkbox>\n      </div>\n    </section>\n  </form>\n\n  <div class=\"clr-row\">\n    <div class=\"clr-col-12\tclr-col-sm-12\tclr-col-md-10\tclr-col-lg-6\tclr-col-xl-5\"\n         *ngFor=\"let autoB of unlSpecial; trackBy:getAutoBuyId\">\n      <div class=\"card\">\n        <div class=\"card-block\">\n          <app-auto-buy [autoBuy]=\"autoB\"></app-auto-buy>\n        </div>\n      </div>\n    </div>\n  </div>\n\n</div>\n"
+module.exports = "<div class=\"content-area\">\n  <h1>自动购买者</h1>\n  <p>\n    其他自动购买者可以在单个单位页面找到。\n    自动购买者执行是按优先级排序的，升序(es: -5优先级在100优先级之前执行)。\n    最小间隔为1秒，之后您将获得最高购买。\n  </p>\n  <form>\n    <section class=\"form-block\">\n      <div class=\"form-group\">\n        <label>选项:</label>\n        <clr-checkbox [name]=\"'on'\"\n          [id]=\"'on1'\"\n          [(clrChecked)]=\"ms.game.autoBuyManager.enabled\"\n          [clrInline]=\"true\">\n          开启\n        </clr-checkbox>\n        <clr-checkbox [name]=\"'multi'\"\n          [id]=\"'multi1'\"\n          [(clrChecked)]=\"ms.game.autoBuyManager.multiBuy\"\n          [clrInline]=\"true\">\n          多重购买\n        </clr-checkbox>\n      </div>\n    </section>\n  </form>\n\n  <div class=\"clr-row\">\n    <div class=\"clr-col-12\tclr-col-sm-12\tclr-col-md-10\tclr-col-lg-6\tclr-col-xl-5\"\n      *ngFor=\"let autoB of unlSpecial; trackBy:getAutoBuyId\">\n      <div class=\"card\">\n        <div class=\"card-block\">\n          <app-auto-buy [autoBuy]=\"autoB\"></app-auto-buy>\n        </div>\n      </div>\n    </div>\n  </div>\n\n</div>\n"
 
 /***/ }),
 
@@ -1082,7 +1082,7 @@ var AutoBuyTabComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngIf=\"bought\"\n     class=\"progress-static top\">\n  <div class=\"progress-meter\"\n       [attr.data-value]=\"progress\"></div>\n</div>\n<app-action-header [action]=\"autoBuy\"\n                   [quantity]=\"autoBuy.quantity\"></app-action-header>\n\n<div class=\"clr-row clr-align-items-start\"\n     *ngIf=\"bought\">\n  <div class=\"clr-col\">\n\n    <label>优先级:</label>\n    <input clrInput\n           placeholder=\"Priority\"\n           name=\"name\"\n           [(ngModel)]=\"autoBuy.priority\"\n           type=\"number\"\n           placeholder=\"1\"\n           step=\"1\"\n           min=\"1\"\n           size=\"3\"\n           (change)=\"reload()\" />\n\n  </div>\n  <div class=\"clr-col\">\n    <clr-checkbox [name]=\"autoBuy.id\"\n                  [id]=\"autoBuy.id\"\n                  [(clrChecked)]=\"autoBuy.active\"\n                  [clrInline]=\"true\">\n      激活\n    </clr-checkbox>\n  </div>\n\n</div>\n<div class=\"clr-row clr-align-items-start\"\n     *ngIf=\"bought\">\n  <div class=\"clr-col\">\n    <span>\n      时间间隔:\n      <span class=\"monospace\">{{autoBuy.max}} </span>\n      秒\n    </span>\n    <span *ngIf=\"autoBuy.multiBuy.gt(1)\">\n      多重购买:\n      <span class=\"monospace\">{{autoBuy.multiBuy | format:true}} </span>\n    </span>\n  </div>\n</div>\n\n<app-buttons [action]=\"autoBuy\"></app-buttons>\n"
+module.exports = "<div *ngIf=\"bought\"\n  class=\"progress-static top\">\n  <div class=\"progress-meter\"\n    [attr.data-value]=\"progress\"></div>\n</div>\n<app-action-header [action]=\"autoBuy\"\n  [quantity]=\"autoBuy.quantity\"></app-action-header>\n\n<div class=\"clr-row clr-align-items-start\"\n  *ngIf=\"bought\">\n  <div class=\"clr-col\">\n\n    <label>优先级:</label>\n    <input placeholder=\"Priority\"\n      name=\"name\"\n      [(ngModel)]=\"autoBuy.priority\"\n      type=\"number\"\n      placeholder=\"1\"\n      step=\"1\"\n      size=\"3\"\n      (change)=\"reload()\" />\n\n  </div>\n  <div class=\"clr-col\">\n    <clr-checkbox [name]=\"autoBuy.id\"\n      [id]=\"autoBuy.id\"\n      [(clrChecked)]=\"autoBuy.active\"\n      [clrInline]=\"true\">\n      激活\n    </clr-checkbox>\n  </div>\n\n</div>\n<div class=\"clr-row clr-align-items-start\"\n  *ngIf=\"bought\">\n  <div class=\"clr-col\">\n    <span>\n      时间间隔:\n      <span class=\"monospace\">{{autoBuy.max}} </span>\n      秒\n    </span>\n    <span *ngIf=\"autoBuy.multiBuy.gt(1)\">\n      多重购买:\n      <span class=\"monospace\">{{autoBuy.multiBuy | format:true}} </span>\n    </span>\n  </div>\n</div>\n\n<app-buttons [action]=\"autoBuy\"></app-buttons>\n"
 
 /***/ }),
 
@@ -3435,9 +3435,7 @@ var BuyResearch = /** @class */ (function (_super) {
     }
     BuyResearch.prototype.buy = function (toBuy) {
         if (toBuy === void 0) { toBuy = new Decimal(1); }
-        var buyList = this.researches.toDo.filter(function (r) {
-            return r.quantity.lt(r.maxAutoBuyLevel);
-        });
+        var buyList = this.researches.toDo.filter(function (r) { return r.autoBuyable && r.quantity.lt(r.maxAutoBuyLevel); });
         if (buyList.length < 1)
             return false;
         buyList.sort(function (res1, res2) {
@@ -3676,7 +3674,7 @@ var AutoBuyManager = /** @class */ (function () {
         this.allAutoBuyer.push(this.minuteAutoBuy);
         //  Research
         this.researchAutoBuy = new _auto_buy__WEBPACK_IMPORTED_MODULE_1__["AutoBuy"](new _actions_buy_research__WEBPACK_IMPORTED_MODULE_0__["BuyResearch"](game.researches), game.genExperiencePrice(200), this);
-        this.researchAutoBuy.startMax = 60 * 15;
+        this.researchAutoBuy.startMax = 60 * 10;
         this.allAutoBuyer.push(this.researchAutoBuy);
         this.allAutoBuyer.forEach(function (a) { return a.reloadLevel(); });
     };
@@ -6241,6 +6239,7 @@ var Research = /** @class */ (function (_super) {
         _this.toUnlock = new Array();
         _this.maxAutoBuyLevel = 10;
         _this.bugType = _bugsTypes__WEBPACK_IMPORTED_MODULE_1__["BugTypes"].ANT;
+        _this.autoBuyable = true;
         _this.name = "";
         _this.description = "";
         if (id in _strings__WEBPACK_IMPORTED_MODULE_3__["STRINGS"].researches) {
@@ -7923,8 +7922,12 @@ var Researches = /** @class */ (function () {
         this.free1hWarp = new _research__WEBPACK_IMPORTED_MODULE_2__["Research"]("1", this);
         this.free2hWarp = new _research__WEBPACK_IMPORTED_MODULE_2__["Research"]("2", this);
         this.free3hWarp = new _research__WEBPACK_IMPORTED_MODULE_2__["Research"]("3", this);
+        this.free1hWarp.autoBuyable = false;
+        this.free2hWarp.autoBuyable = false;
+        this.free3hWarp.autoBuyable = false;
         this.spawn = new _research__WEBPACK_IMPORTED_MODULE_2__["Research"]("SP", this, true);
         this.overNineThousand = new _research__WEBPACK_IMPORTED_MODULE_2__["Research"]("ont", this);
+        this.overNineThousand.autoBuyable = false;
         this.team1.unlocked = true;
         this.reloadLists();
     };

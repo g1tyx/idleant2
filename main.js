@@ -205,7 +205,7 @@ var ActionHeaderComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<app-action-header [action]=\"action\"\n                   [quantity]=\"action.quantity\"></app-action-header>\n<div class=\"p\">\n  <span *ngIf=\"action.description !==''\">\n    {{action.description}}\n    <br>\n  </span>\n</div>\n<app-buttons [action]=\"action\"></app-buttons>\n"
+module.exports = "<app-action-header [action]=\"action\"\n                   [quantity]=\"action.quantity\"></app-action-header>\n<div class=\"p\">\n  <span *ngIf=\"action.description !==''\">\n    {{action.description}}\n    <br>\n  </span>\n</div>\n<app-buttons [action]=\"action\"\n             [skippable]=\"skippable\"></app-buttons>\n"
 
 /***/ }),
 
@@ -232,6 +232,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ActionComponent", function() { return ActionComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _model_action__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../model/action */ "./src/app/model/action.ts");
+/* harmony import */ var _model_actions_warp_action__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../model/actions/warp-action */ "./src/app/model/actions/warp-action.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -243,10 +244,15 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 };
 
 
+
 var ActionComponent = /** @class */ (function () {
     function ActionComponent() {
+        this.skippable = true;
         //Nothing
     }
+    ActionComponent.prototype.ngOnInit = function () {
+        this.skippable = this.action instanceof _model_actions_warp_action__WEBPACK_IMPORTED_MODULE_2__["WarpAction"];
+    };
     __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
         __metadata("design:type", _model_action__WEBPACK_IMPORTED_MODULE_1__["Action"])
@@ -274,7 +280,7 @@ var ActionComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngIf=\"!action.complete\">\n  <input *ngIf=\"!action.isLimited || action.limit.gte(2); else one\"\n         id=\"userNum\"\n         [(ngModel)]=\"action.userNum\"\n         (change)=\"action.reloadUserPrices()\"\n         type=\"number\"\n         placeholder=\"1\"\n         step=\"1\"\n         min=\"1\"\n         size=\"3\">\n  <ng-template #one>1</ng-template>\n  <span>将会花费: </span>\n  <app-price-line *ngFor=\"let price of action.prices; trackBy:getPriceId\"\n                  [unit]=\"price.base\"\n                  [canBuy]=\"price.userCanBuy\"\n                  [price]=\"price.priceUser\"></app-price-line>\n</div>\n\n<div *ngIf=\"!action.complete\"\n     class=\"btn-group\">\n  <button *ngIf=\"!action.canBuy && !canSkip\"\n          class=\"btn btn-sm w-100\"\n          disabled>\n    不能购买\n    <span *ngIf=\"showTime\">\n      距离可以购买还差 {{action.availableIn | endIn}}\n    </span>\n  </button>\n  <button *ngIf=\"!action.canBuy && skippable && showTime && canSkip\"\n          class=\"btn btn-danger btn-sm w-100\"\n          (click)=\"skip()\">\n    不能购买。 跳过 {{minuteSkip}} 分钟\n  </button>\n  <app-cant-buy-signposts *ngIf=\"showTime && !action.canBuy\"\n                          [action]=\"action\"></app-cant-buy-signposts>\n  <button *ngIf=\"action.canBuy\"\n          class=\"btn btn-sm w-100\"\n          (click)=\"buy(action.realNum)\"\n          [disabled]=\"!action.canUserBuy\">\n    购买\n    <span *ngIf=\"!action.isLimited || action.limit.gte(2)\">{{action.realNum | format: true}}</span>\n  </button>\n  <button *ngIf=\"action.maxBuy.gt(3)\"\n          class=\"btn btn-sm w-100\"\n          (click)=\"buy(action.maxBuy.div(2).floor())\">\n    购买 {{action.maxBuy.div(2).floor() | format: true}}\n  </button>\n  <button *ngIf=\"action.maxBuy.gte(2)\"\n          class=\"btn btn-sm w-100\"\n          (click)=\"buy(action.maxBuy)\">\n    购买 {{action.maxBuy | format: true}}\n  </button>\n</div>\n"
+module.exports = "<div *ngIf=\"!action.complete\">\n  <input *ngIf=\"!action.isLimited || action.limit.gte(2); else one\"\n         id=\"userNum\"\n         [(ngModel)]=\"action.userNum\"\n         (change)=\"action.reloadUserPrices()\"\n         type=\"number\"\n         placeholder=\"1\"\n         step=\"1\"\n         min=\"1\"\n         size=\"3\">\n  <ng-template #one>1</ng-template>\n  <span>将会花费: </span>\n  <app-price-line *ngFor=\"let price of action.prices; trackBy:getPriceId\"\n                  [unit]=\"price.base\"\n                  [canBuy]=\"price.userCanBuy\"\n                  [price]=\"price.priceUser\"></app-price-line>\n</div>\n\n<div *ngIf=\"!action.complete\"\n     class=\"btn-group\">\n  <button *ngIf=\"!action.canBuy && !canSkip\"\n          class=\"btn btn-sm w-100\"\n          disabled>\n    不能购买\n    <span *ngIf=\"showTime\">\n      距离可以购买还差 {{action.availableIn | endIn}}\n    </span>\n  </button>\n  <button *ngIf=\"!action.canBuy && skippable && showTime && canSkip\"\n          class=\"btn btn-primary btn-sm w-100\"\n          (click)=\"skip()\">\n    不能购买。 跳过 {{minuteSkip}} 分钟\n  </button>\n  <app-cant-buy-signposts *ngIf=\"showTime && !action.canBuy\"\n                          [action]=\"action\"></app-cant-buy-signposts>\n  <button *ngIf=\"action.canBuy\"\n          class=\"btn btn-sm w-100\"\n          (click)=\"buy(action.realNum)\"\n          [disabled]=\"!action.canUserBuy\">\n    购买\n    <span *ngIf=\"!action.isLimited || action.limit.gte(2)\">{{action.realNum | format: true}}</span>\n  </button>\n  <button *ngIf=\"action.maxBuy.gt(3)\"\n          class=\"btn btn-sm w-100\"\n          (click)=\"buy(action.maxBuy.div(2).floor())\">\n    购买 {{action.maxBuy.div(2).floor() | format: true}}\n  </button>\n  <button *ngIf=\"action.maxBuy.gte(2)\"\n          class=\"btn btn-sm w-100\"\n          (click)=\"buy(action.maxBuy)\">\n    购买 {{action.maxBuy | format: true}}\n  </button>\n</div>\n"
 
 /***/ }),
 
@@ -1676,6 +1682,9 @@ var UnitGroupComponent = /** @class */ (function () {
         this.unitsSpan = this.unitGroup.unlocked
             .map(function (u) { return u.name; })
             .reduce(function (p, c) { return p + ", " + c; });
+        this.hatchActionGrp = null;
+        this.teamActionGrp = null;
+        this.twinActionGrp = null;
         if (this.unitGroup.unlocked[0].buyAction) {
             this.hatchActionGrp = new _model_actions_action_group__WEBPACK_IMPORTED_MODULE_2__["ActionGroup"]("孵化", this.unitGroup.selected.filter(function (u) { return u.buyAction; }).map(function (u) { return u.buyAction; }), this.ms.game);
             if (this.ms.game.researches.team2.done &&
@@ -4367,7 +4376,7 @@ var Game = /** @class */ (function () {
         this.researches.overNineThousand.onBuy = function () {
             var malus = [
                 _this.worldMalus.foodMalus1,
-                _this.worldMalus.woodMalus1,
+                _this.worldMalus.soilMalus1,
                 _this.worldMalus.crystalMalus1,
                 _this.worldMalus.scienceMalus1
             ].filter(function (m) { return !_this.currentWorld.notWinConditions.includes(m); });
@@ -4470,6 +4479,9 @@ var Game = /** @class */ (function () {
             .times(1 +
             0.3 * this.allMateries.getSum(_masteries_mastery__WEBPACK_IMPORTED_MODULE_8__["MasteryTypes"].TIME_GEN) +
             2 * this.allMateries.getSum(_masteries_mastery__WEBPACK_IMPORTED_MODULE_8__["MasteryTypes"].TIME_GEN_AND_BANK));
+        if (isNaN(this.time.quantity.toNumber())) {
+            this.time.quantity = new Decimal(0);
+        }
         this.time.quantity = this.time.quantity
             .plus(timePerSec.times(delta / 1000))
             .min(this.maxTimeBank);
@@ -4578,7 +4590,9 @@ var Game = /** @class */ (function () {
                     }
                 }
                 else {
-                    this.ms.toastr.warning(unitZero.name + " 消耗光了!");
+                    if (!this.ms.options.noResourceEndPopUp) {
+                        this.ms.toastr.warning(unitZero.name + " 消耗光了!");
+                    }
                 }
             }
             var remaning = delta - maxTime;
@@ -4612,7 +4626,7 @@ var Game = /** @class */ (function () {
     Game.prototype.postUpdate = function (time) {
         this.upNumber = 0;
         this.worldMalus.foodMalus1.reloadPriceMulti();
-        this.worldMalus.woodMalus1.reloadPriceMulti();
+        this.worldMalus.soilMalus1.reloadPriceMulti();
         this.worldMalus.crystalMalus1.reloadPriceMulti();
         this.worldMalus.scienceMalus1.reloadPriceMulti();
         this.unlockedUnits.forEach(function (u) {
@@ -5114,10 +5128,10 @@ var AllMasteries = /** @class */ (function () {
         game.materials.science.productionsBonus.push(new _production_bonus__WEBPACK_IMPORTED_MODULE_2__["ProductionBonus"](this.scienceBonus, new Decimal(0.1)));
         this.foodBonus = new _baseUnit__WEBPACK_IMPORTED_MODULE_1__["BaseUnit"]("fooMast");
         game.materials.food.productionsBonus.push(new _production_bonus__WEBPACK_IMPORTED_MODULE_2__["ProductionBonus"](this.foodBonus, new Decimal(0.1)));
-        this.woodBonus = new _baseUnit__WEBPACK_IMPORTED_MODULE_1__["BaseUnit"]("wooMast");
-        game.materials.soil.productionsBonus.push(new _production_bonus__WEBPACK_IMPORTED_MODULE_2__["ProductionBonus"](this.woodBonus, new Decimal(0.1)));
-        this.crystallBonus = new _baseUnit__WEBPACK_IMPORTED_MODULE_1__["BaseUnit"]("cryMast");
-        game.materials.crystal.productionsBonus.push(new _production_bonus__WEBPACK_IMPORTED_MODULE_2__["ProductionBonus"](this.crystallBonus, new Decimal(0.1)));
+        this.soilBonus = new _baseUnit__WEBPACK_IMPORTED_MODULE_1__["BaseUnit"]("wooMast");
+        game.materials.soil.productionsBonus.push(new _production_bonus__WEBPACK_IMPORTED_MODULE_2__["ProductionBonus"](this.soilBonus, new Decimal(0.1)));
+        this.crystalBonus = new _baseUnit__WEBPACK_IMPORTED_MODULE_1__["BaseUnit"]("cryMast");
+        game.materials.crystal.productionsBonus.push(new _production_bonus__WEBPACK_IMPORTED_MODULE_2__["ProductionBonus"](this.crystalBonus, new Decimal(0.1)));
         this.harvestBonus = new _baseUnit__WEBPACK_IMPORTED_MODULE_1__["BaseUnit"]("harvMast");
         var harvBon = new _production_bonus__WEBPACK_IMPORTED_MODULE_2__["ProductionBonus"](this.harvestBonus, new Decimal(0.2));
         game.gatherers.list.forEach(function (u) {
@@ -5246,8 +5260,8 @@ var AllMasteries = /** @class */ (function () {
     AllMasteries.prototype.reloadBonus = function () {
         this.scienceBonus.quantity = new Decimal(this.getSum(_mastery__WEBPACK_IMPORTED_MODULE_3__["MasteryTypes"].SCIENCE_BONUS));
         this.foodBonus.quantity = new Decimal(this.getSum(_mastery__WEBPACK_IMPORTED_MODULE_3__["MasteryTypes"].FOOD_BONUS));
-        this.woodBonus.quantity = new Decimal(this.getSum(_mastery__WEBPACK_IMPORTED_MODULE_3__["MasteryTypes"].SOIL_BONUS));
-        this.crystallBonus.quantity = new Decimal(this.getSum(_mastery__WEBPACK_IMPORTED_MODULE_3__["MasteryTypes"].CRYSTALL_BONUS));
+        this.soilBonus.quantity = new Decimal(this.getSum(_mastery__WEBPACK_IMPORTED_MODULE_3__["MasteryTypes"].SOIL_BONUS));
+        this.crystalBonus.quantity = new Decimal(this.getSum(_mastery__WEBPACK_IMPORTED_MODULE_3__["MasteryTypes"].CRYSTALL_BONUS));
         this.harvestBonus.quantity = new Decimal(this.getSum(_mastery__WEBPACK_IMPORTED_MODULE_3__["MasteryTypes"].HARVEST_BONUS));
         this.materialBonus.quantity = new Decimal(this.getSum(_mastery__WEBPACK_IMPORTED_MODULE_3__["MasteryTypes"].MATERIAL_GAIN));
         this.armyBonus.quantity = new Decimal(this.getSum(_mastery__WEBPACK_IMPORTED_MODULE_3__["MasteryTypes"].DOUBLE_ARMY));
@@ -5533,10 +5547,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _auto_buy_unlock__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./auto-buy-unlock */ "./src/app/model/prestige/auto-buy-unlock.ts");
 /* harmony import */ var _followers__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./followers */ "./src/app/model/prestige/followers.ts");
 /* harmony import */ var _followers2__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./followers2 */ "./src/app/model/prestige/followers2.ts");
-/* harmony import */ var _team__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./team */ "./src/app/model/prestige/team.ts");
-/* harmony import */ var _technology__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./technology */ "./src/app/model/prestige/technology.ts");
-/* harmony import */ var _time__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./time */ "./src/app/model/prestige/time.ts");
-/* harmony import */ var _world_prestige__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./world-prestige */ "./src/app/model/prestige/world-prestige.ts");
+/* harmony import */ var _swarm__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./swarm */ "./src/app/model/prestige/swarm.ts");
+/* harmony import */ var _team__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./team */ "./src/app/model/prestige/team.ts");
+/* harmony import */ var _technology__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./technology */ "./src/app/model/prestige/technology.ts");
+/* harmony import */ var _time__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./time */ "./src/app/model/prestige/time.ts");
+/* harmony import */ var _world_prestige__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./world-prestige */ "./src/app/model/prestige/world-prestige.ts");
+
 
 
 
@@ -5550,12 +5566,13 @@ var AllPrestige = /** @class */ (function () {
         this.prestigeList = new Array();
         this.followers = new _followers__WEBPACK_IMPORTED_MODULE_1__["Followers"]();
         this.followers2 = new _followers2__WEBPACK_IMPORTED_MODULE_2__["Followers2"]();
-        this.time = new _time__WEBPACK_IMPORTED_MODULE_5__["Time"]();
+        this.time = new _time__WEBPACK_IMPORTED_MODULE_6__["Time"]();
         this.autoBuyUnlock = new _auto_buy_unlock__WEBPACK_IMPORTED_MODULE_0__["AutoBuyUnlock"]();
-        this.technology = new _technology__WEBPACK_IMPORTED_MODULE_4__["Technology"]();
-        this.team = new _team__WEBPACK_IMPORTED_MODULE_3__["Team"]();
-        this.worldPrestige = new _world_prestige__WEBPACK_IMPORTED_MODULE_6__["WorldPrestige"]();
-        this.prestigeGroups.push(this.followers, this.followers2, this.technology, this.team, this.time, this.worldPrestige, this.autoBuyUnlock);
+        this.technology = new _technology__WEBPACK_IMPORTED_MODULE_5__["Technology"]();
+        this.team = new _team__WEBPACK_IMPORTED_MODULE_4__["Team"]();
+        this.worldPrestige = new _world_prestige__WEBPACK_IMPORTED_MODULE_7__["WorldPrestige"]();
+        this.swarm = new _swarm__WEBPACK_IMPORTED_MODULE_3__["Swarm"]();
+        this.prestigeGroups.push(this.followers, this.followers2, this.swarm, this.technology, this.team, this.time, this.worldPrestige, this.autoBuyUnlock);
     }
     AllPrestige.prototype.declareStuff = function (game) {
         var _this = this;
@@ -5805,6 +5822,59 @@ var Prestige = /** @class */ (function (_super) {
 
 /***/ }),
 
+/***/ "./src/app/model/prestige/swarm.ts":
+/*!*****************************************!*\
+  !*** ./src/app/model/prestige/swarm.ts ***!
+  \*****************************************/
+/*! exports provided: Swarm */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Swarm", function() { return Swarm; });
+/* harmony import */ var _bugsTypes__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../bugsTypes */ "./src/app/model/bugsTypes.ts");
+/* harmony import */ var _production_bonus__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../production-bonus */ "./src/app/model/production-bonus.ts");
+/* harmony import */ var _prestige__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./prestige */ "./src/app/model/prestige/prestige.ts");
+/* harmony import */ var _prestige_group__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./prestige-group */ "./src/app/model/prestige/prestige-group.ts");
+var __extends = (undefined && undefined.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+
+
+
+
+var Swarm = /** @class */ (function (_super) {
+    __extends(Swarm, _super);
+    function Swarm() {
+        return _super.call(this, "swarmPrest", "虫群") || this;
+    }
+    Swarm.prototype.declareStuff = function (game) {
+        this.larvaBonus = new _prestige__WEBPACK_IMPORTED_MODULE_2__["Prestige"]("sl", game.genExperiencePrice(10));
+        this.queenBonus = new _prestige__WEBPACK_IMPORTED_MODULE_2__["Prestige"]("sq", game.genExperiencePrice(10));
+        this.list = [this.larvaBonus, this.queenBonus];
+        var lb = new _production_bonus__WEBPACK_IMPORTED_MODULE_1__["ProductionBonus"](this.larvaBonus, new Decimal(0.1));
+        game.units
+            .filter(function (u) { return u.tags.includes(_bugsTypes__WEBPACK_IMPORTED_MODULE_0__["Tags"].LARVA); })
+            .forEach(function (u) { return u.productionsBonus.push(lb); });
+        var qb = new _production_bonus__WEBPACK_IMPORTED_MODULE_1__["ProductionBonus"](this.queenBonus, new Decimal(0.1));
+        game.units
+            .filter(function (u) { return u.tags.includes(_bugsTypes__WEBPACK_IMPORTED_MODULE_0__["Tags"].QUEEN); })
+            .forEach(function (u) { return u.productionsBonus.push(qb); });
+    };
+    return Swarm;
+}(_prestige_group__WEBPACK_IMPORTED_MODULE_3__["PrestigeGroup"]));
+
+
+
+/***/ }),
+
 /***/ "./src/app/model/prestige/team.ts":
 /*!****************************************!*\
   !*** ./src/app/model/prestige/team.ts ***!
@@ -5886,13 +5956,13 @@ var Technology = /** @class */ (function (_super) {
         this.list = [this.farming, this.carpentry, this.mining, this.studing];
         var foodBon = new _production_bonus__WEBPACK_IMPORTED_MODULE_1__["ProductionBonus"](this.farming, new Decimal(0.1));
         game.materials.food.productionsBonus.push(foodBon);
-        var woodBon = new _production_bonus__WEBPACK_IMPORTED_MODULE_1__["ProductionBonus"](this.carpentry, new Decimal(0.1));
-        game.materials.soil.productionsBonus.push(woodBon);
+        var soilBon = new _production_bonus__WEBPACK_IMPORTED_MODULE_1__["ProductionBonus"](this.carpentry, new Decimal(0.1));
+        game.materials.soil.productionsBonus.push(soilBon);
         var cryBon = new _production_bonus__WEBPACK_IMPORTED_MODULE_1__["ProductionBonus"](this.mining, new Decimal(0.1));
         game.materials.crystal.productionsBonus.push(cryBon);
         var scieBon = new _production_bonus__WEBPACK_IMPORTED_MODULE_1__["ProductionBonus"](this.studing, new Decimal(0.1));
         game.materials.science.productionsBonus.push(scieBon);
-        [foodBon, woodBon, cryBon, scieBon].forEach(function (b) {
+        [foodBon, soilBon, cryBon, scieBon].forEach(function (b) {
             b.getMultiplier = function () {
                 return new Decimal(1 + game.allMateries.getSum(_masteries_mastery__WEBPACK_IMPORTED_MODULE_0__["MasteryTypes"].THECNOLOGY_PRESTIGE));
             };
@@ -6740,7 +6810,10 @@ var STRINGS = {
         //  Worlds
         w: ["更好的世界", "+10% 世界加成"],
         r: ["更好的军队", "+10% 军队杀人物资"],
-        L: ["最高等级", "+10% 最高世界等级"]
+        L: ["最高等级", "+10% 最高世界等级"],
+        //  Swarm
+        sl: ["幼虫加成", "+10% 幼虫产量"],
+        sq: ["女王加成", "+10% 女王产量"]
     },
     actions: {
         warp60: ["扭曲分钟", "时间扭曲以分钟计算"],
@@ -7320,12 +7393,12 @@ var Buildings = /** @class */ (function (_super) {
                 new _price__WEBPACK_IMPORTED_MODULE_1__["Price"](product, _CONSTATS__WEBPACK_IMPORTED_MODULE_0__["CONSTS"].PRICE_0),
                 new _price__WEBPACK_IMPORTED_MODULE_1__["Price"](product.buyAction.prices[product.buyAction.prices.length - 1].base, _CONSTATS__WEBPACK_IMPORTED_MODULE_0__["CONSTS"].PRICE_2)
             ]);
-            var woodPrice = producer.buyAction.prices.find(function (p) { return p.base === _this.game.materials.soil; });
-            if (!woodPrice) {
-                woodPrice = new _price__WEBPACK_IMPORTED_MODULE_1__["Price"](this_1.game.materials.soil, 0);
-                producer.buyAction.prices.push(woodPrice);
+            var soilPrice = producer.buyAction.prices.find(function (p) { return p.base === _this.game.materials.soil; });
+            if (!soilPrice) {
+                soilPrice = new _price__WEBPACK_IMPORTED_MODULE_1__["Price"](this_1.game.materials.soil, 0);
+                producer.buyAction.prices.push(soilPrice);
             }
-            woodPrice.price = woodPrice.price.plus(_CONSTATS__WEBPACK_IMPORTED_MODULE_0__["CONSTS"].PRICE_2);
+            soilPrice.price = soilPrice.price.plus(_CONSTATS__WEBPACK_IMPORTED_MODULE_0__["CONSTS"].PRICE_2);
             product.addProducer(producer);
             product.buyAction.prices.forEach(function (p) {
                 return p.base.addProducer(producer, p.price.times(-1));
@@ -7764,12 +7837,12 @@ var MalusKiller = /** @class */ (function (_super) {
     }
     MalusKiller.prototype.declareStuff = function () {
         this.foodMalusKiller = new _full_unit__WEBPACK_IMPORTED_MODULE_1__["FullUnit"]("F");
-        this.woodMalusKiller = new _full_unit__WEBPACK_IMPORTED_MODULE_1__["FullUnit"]("W");
+        this.soilMalusKiller = new _full_unit__WEBPACK_IMPORTED_MODULE_1__["FullUnit"]("W");
         this.crystalMalusKiller = new _full_unit__WEBPACK_IMPORTED_MODULE_1__["FullUnit"]("C");
         this.scienceMalusKiller = new _full_unit__WEBPACK_IMPORTED_MODULE_1__["FullUnit"]("S");
         this.addUnits([
             this.foodMalusKiller,
-            this.woodMalusKiller,
+            this.soilMalusKiller,
             this.crystalMalusKiller,
             this.scienceMalusKiller
         ]);
@@ -7779,14 +7852,14 @@ var MalusKiller = /** @class */ (function (_super) {
         var _this = this;
         //  Production
         this.game.worldMalus.foodMalus1.addProducer(this.foodMalusKiller, new Decimal(-0.1));
-        this.game.worldMalus.woodMalus1.addProducer(this.woodMalusKiller, new Decimal(-0.1));
+        this.game.worldMalus.soilMalus1.addProducer(this.soilMalusKiller, new Decimal(-0.1));
         this.game.worldMalus.crystalMalus1.addProducer(this.crystalMalusKiller, new Decimal(-0.1));
         this.game.worldMalus.scienceMalus1.addProducer(this.scienceMalusKiller, new Decimal(-0.1));
         //  Buy actions
         this.foodMalusKiller.generateBuyAction([
             new _price__WEBPACK_IMPORTED_MODULE_2__["Price"](this.game.materials.food, this.price, 1.1)
         ]);
-        this.woodMalusKiller.generateBuyAction([
+        this.soilMalusKiller.generateBuyAction([
             new _price__WEBPACK_IMPORTED_MODULE_2__["Price"](this.game.materials.food, this.price, 1.1)
         ]);
         this.crystalMalusKiller.generateBuyAction([
@@ -8428,13 +8501,13 @@ var WorldBonus = /** @class */ (function () {
     }
     WorldBonus.prototype.declareStuff = function () {
         this.foodBonus = new _baseUnit__WEBPACK_IMPORTED_MODULE_0__["BaseUnit"]("1");
-        this.woodBonus = new _baseUnit__WEBPACK_IMPORTED_MODULE_0__["BaseUnit"]("2");
+        this.soilBonus = new _baseUnit__WEBPACK_IMPORTED_MODULE_0__["BaseUnit"]("2");
         this.crystalBonus = new _baseUnit__WEBPACK_IMPORTED_MODULE_0__["BaseUnit"]("3");
         this.scienceBonus = new _baseUnit__WEBPACK_IMPORTED_MODULE_0__["BaseUnit"]("4");
         this.killBonus = new _baseUnit__WEBPACK_IMPORTED_MODULE_0__["BaseUnit"]("5");
         this.bonusList = [
             this.foodBonus,
-            this.woodBonus,
+            this.soilBonus,
             this.crystalBonus,
             this.scienceBonus,
             this.killBonus
@@ -8442,7 +8515,7 @@ var WorldBonus = /** @class */ (function () {
     };
     WorldBonus.prototype.setRelations = function (game) {
         game.materials.food.productionsBonus.push(new _production_bonus__WEBPACK_IMPORTED_MODULE_1__["ProductionBonus"](this.foodBonus, WorldBonus.bonusValue));
-        game.materials.soil.productionsBonus.push(new _production_bonus__WEBPACK_IMPORTED_MODULE_1__["ProductionBonus"](this.woodBonus, WorldBonus.bonusValue));
+        game.materials.soil.productionsBonus.push(new _production_bonus__WEBPACK_IMPORTED_MODULE_1__["ProductionBonus"](this.soilBonus, WorldBonus.bonusValue));
         game.materials.crystal.productionsBonus.push(new _production_bonus__WEBPACK_IMPORTED_MODULE_1__["ProductionBonus"](this.crystalBonus, WorldBonus.bonusValue));
         game.materials.science.productionsBonus.push(new _production_bonus__WEBPACK_IMPORTED_MODULE_1__["ProductionBonus"](this.scienceBonus, WorldBonus.bonusValue));
     };
@@ -8455,7 +8528,7 @@ var WorldBonus = /** @class */ (function () {
     WorldBonus.prototype.addWorlds = function () {
         [
             this.foodBonus,
-            this.woodBonus,
+            this.soilBonus,
             this.crystalBonus,
             this.scienceBonus
         ].forEach(function (b) {
@@ -8508,9 +8581,9 @@ var WorldMalus = /** @class */ (function (_super) {
         this.foodMalus1 = new _malus__WEBPACK_IMPORTED_MODULE_0__["Malus"]("Mf1");
         this.foodMalus2 = new _malus__WEBPACK_IMPORTED_MODULE_0__["Malus"]("Mf2");
         this.foodMalus3 = new _malus__WEBPACK_IMPORTED_MODULE_0__["Malus"]("Mf3");
-        this.woodMalus1 = new _malus__WEBPACK_IMPORTED_MODULE_0__["Malus"]("Mw1");
-        this.woodMalus2 = new _malus__WEBPACK_IMPORTED_MODULE_0__["Malus"]("Mw2");
-        this.woodMalus3 = new _malus__WEBPACK_IMPORTED_MODULE_0__["Malus"]("Mw3");
+        this.soilMalus1 = new _malus__WEBPACK_IMPORTED_MODULE_0__["Malus"]("Mw1");
+        this.soilMalus2 = new _malus__WEBPACK_IMPORTED_MODULE_0__["Malus"]("Mw2");
+        this.soilMalus3 = new _malus__WEBPACK_IMPORTED_MODULE_0__["Malus"]("Mw3");
         this.crystalMalus1 = new _malus__WEBPACK_IMPORTED_MODULE_0__["Malus"]("Mc1");
         this.crystalMalus2 = new _malus__WEBPACK_IMPORTED_MODULE_0__["Malus"]("Mc2");
         this.crystalMalus3 = new _malus__WEBPACK_IMPORTED_MODULE_0__["Malus"]("Mc3");
@@ -8518,16 +8591,16 @@ var WorldMalus = /** @class */ (function (_super) {
         this.scienceMalus2 = new _malus__WEBPACK_IMPORTED_MODULE_0__["Malus"]("Ms2");
         this.scienceMalus3 = new _malus__WEBPACK_IMPORTED_MODULE_0__["Malus"]("Ms3");
         this.foodMalus1.first = true;
-        this.woodMalus1.first = true;
+        this.soilMalus1.first = true;
         this.crystalMalus1.first = true;
         this.scienceMalus1.first = true;
         this.addUnits([
             this.foodMalus3,
             this.foodMalus2,
             this.foodMalus1,
-            this.woodMalus3,
-            this.woodMalus2,
-            this.woodMalus1,
+            this.soilMalus3,
+            this.soilMalus2,
+            this.soilMalus1,
             this.crystalMalus3,
             this.crystalMalus2,
             this.crystalMalus1,
@@ -8539,18 +8612,18 @@ var WorldMalus = /** @class */ (function (_super) {
     WorldMalus.prototype.setRelations = function () {
         this.foodMalus1.addProducer(this.foodMalus2, new Decimal(0.01));
         this.foodMalus2.addProducer(this.foodMalus3, new Decimal(0.01));
-        this.woodMalus1.addProducer(this.woodMalus2, new Decimal(0.01));
-        this.woodMalus2.addProducer(this.woodMalus3, new Decimal(0.01));
+        this.soilMalus1.addProducer(this.soilMalus2, new Decimal(0.01));
+        this.soilMalus2.addProducer(this.soilMalus3, new Decimal(0.01));
         this.crystalMalus1.addProducer(this.crystalMalus2, new Decimal(0.01));
         this.crystalMalus2.addProducer(this.crystalMalus3, new Decimal(0.01));
         this.scienceMalus1.addProducer(this.scienceMalus2, new Decimal(0.01));
         this.scienceMalus2.addProducer(this.scienceMalus3, new Decimal(0.01));
         this.foodMalus1.malusType = this.game.materials.food;
-        this.woodMalus1.malusType = this.game.materials.soil;
+        this.soilMalus1.malusType = this.game.materials.soil;
         this.crystalMalus1.malusType = this.game.materials.crystal;
         this.scienceMalus1.malusType = this.game.materials.science;
         this.game.materials.food.malus = this.foodMalus1;
-        this.game.materials.soil.malus = this.woodMalus1;
+        this.game.materials.soil.malus = this.soilMalus1;
         this.game.materials.crystal.malus = this.crystalMalus1;
         this.game.materials.science.malus = this.scienceMalus1;
     };
@@ -8927,7 +9000,7 @@ var World = /** @class */ (function () {
         if (this.level.gte(5) && this.notWinConditions.length < 1) {
             var malus = [
                 game.worldMalus.foodMalus1,
-                game.worldMalus.woodMalus1,
+                game.worldMalus.soilMalus1,
                 game.worldMalus.crystalMalus1,
                 game.worldMalus.scienceMalus1
             ];
@@ -9713,7 +9786,7 @@ var StatsComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<h1>选项</h1>\n<form clrForm\n      class=\"clr-form clr-form-compact\">\n\n  <div class=\"form-group\">\n    <label for=\"t1\">主题:</label>\n    <div class=\"toggle-switch\">\n      <input name=\"dark\"\n             type=\"checkbox\"\n             id=\"dark\"\n             [(ngModel)]=\"ms.options.dark\"\n             (change)=\"ms.setTheme()\">\n      <label for=\"dark\">黑色</label>\n    </div>\n  </div>\n\n  <div class=\"form-group\">\n    <label for=\"selects_1\">顶部颜色</label>\n    <div class=\"select\">\n      <select name=\"header\"\n              id=\"selects_1\"\n              [(ngModel)]=\"ms.options.header\"\n              (change)=\"ms.options.headerEmitter.emit(ms.options.header)\">\n        <option>1</option>\n        <option>2</option>\n        <option>3</option>\n        <option>4</option>\n        <option>5</option>\n        <option>6</option>\n        <option>7</option>\n      </select>\n    </div>\n  </div>\n\n  <div class=\"form-group\">\n    <label for=\"t1\">使用另一种数字格式:</label>\n    <div class=\"toggle-switch\">\n      <input type=\"checkbox\"\n             id=\"format\"\n             name=\"format\"\n             [(ngModel)]=\"ms.options.usaFormat\"\n             (change)=\"ms.options.generateFormatter()\">\n      <label for=\"format\">开</label>\n    </div>\n  </div>\n\n  <div class=\"form-group\">\n    <label for=\"numFormat\">数字格式:</label>\n    <div class=\"select\">\n      <select id=\"numFormat\"\n              name=\"numFormat\"\n              [(ngModel)]=\"ms.options.numFormat\"\n              (change)=\"ms.options.generateFormatter()\">\n        <option value=\"standard\">默认</option>\n        <option value=\"scientific\">科学计数法</option>\n        <option value=\"engineering\">工程计数法</option>\n        <option value=\"longScale\">长比例尺</option>\n      </select>\n    </div>\n  </div>\n\n  <div class=\"form-group\">\n    <label for=\"matPos\">材料位置:</label>\n    <div class=\"select\">\n      <select id=\"matPos\"\n              name=\"matPos\"\n              [(ngModel)]=\"os.materialPosition\"\n              (change)=\"onChangeMaterialPos()\">\n        <option value=\"1\">全部</option>\n        <option value=\"2\">顶部</option>\n        <option value=\"3\">侧边</option>\n      </select>\n    </div>\n  </div>\n\n  <div class=\"form-group\">\n    <label for=\"si\">显示我的新单位:</label>\n    <div class=\"toggle-switch\">\n      <input name=\"si\"\n             type=\"checkbox\"\n             id=\"si\"\n             [(ngModel)]=\"ms.options.showI\">\n      <label for=\"si\"></label>\n    </div>\n  </div>\n\n</form>\n"
+module.exports = "<h1>选项</h1>\n<form clrForm\n      class=\"clr-form clr-form-compact\">\n\n  <div class=\"form-group\">\n    <label for=\"t1\">主题:</label>\n    <div class=\"toggle-switch\">\n      <input name=\"dark\"\n             type=\"checkbox\"\n             id=\"dark\"\n             [(ngModel)]=\"ms.options.dark\"\n             (change)=\"ms.setTheme()\">\n      <label for=\"dark\">黑色</label>\n    </div>\n  </div>\n\n  <div class=\"form-group\">\n    <label for=\"selects_1\">顶部颜色</label>\n    <div class=\"select\">\n      <select name=\"header\"\n              id=\"selects_1\"\n              [(ngModel)]=\"ms.options.header\"\n              (change)=\"ms.options.headerEmitter.emit(ms.options.header)\">\n        <option>1</option>\n        <option>2</option>\n        <option>3</option>\n        <option>4</option>\n        <option>5</option>\n        <option>6</option>\n        <option>7</option>\n      </select>\n    </div>\n  </div>\n\n  <div class=\"form-group\">\n    <label for=\"t1\">使用另一种数字格式:</label>\n    <div class=\"toggle-switch\">\n      <input type=\"checkbox\"\n             id=\"format\"\n             name=\"format\"\n             [(ngModel)]=\"ms.options.usaFormat\"\n             (change)=\"ms.options.generateFormatter()\">\n      <label for=\"format\">开</label>\n    </div>\n  </div>\n\n  <div class=\"form-group\">\n    <label for=\"numFormat\">数字格式:</label>\n    <div class=\"select\">\n      <select id=\"numFormat\"\n              name=\"numFormat\"\n              [(ngModel)]=\"ms.options.numFormat\"\n              (change)=\"ms.options.generateFormatter()\">\n        <option value=\"standard\">默认</option>\n        <option value=\"scientific\">科学计数法</option>\n        <option value=\"engineering\">工程计数法</option>\n        <option value=\"longScale\">长比例尺</option>\n      </select>\n    </div>\n  </div>\n\n  <div class=\"form-group\">\n    <label for=\"matPos\">材料位置:</label>\n    <div class=\"select\">\n      <select id=\"matPos\"\n              name=\"matPos\"\n              [(ngModel)]=\"os.materialPosition\"\n              (change)=\"onChangeMaterialPos()\">\n        <option value=\"1\">全部</option>\n        <option value=\"2\">顶部</option>\n        <option value=\"3\">侧边</option>\n      </select>\n    </div>\n  </div>\n\n  <div class=\"form-group\">\n    <label for=\"si\">显示我的新单位:</label>\n    <div class=\"toggle-switch\">\n      <input name=\"si\"\n             type=\"checkbox\"\n             id=\"si\"\n             [(ngModel)]=\"ms.options.showI\">\n      <label for=\"si\"></label>\n    </div>\n  </div>\n\n  <div class=\"form-group\">\n    <label for=\"si\">Disable notification for unit ending:</label>\n    <div class=\"toggle-switch\">\n      <input name=\"nr\"\n             type=\"checkbox\"\n             id=\"nr\"\n             [(ngModel)]=\"os.noResourceEndPopUp\">\n      <label for=\"nr\"></label>\n    </div>\n  </div>\n\n</form>\n"
 
 /***/ }),
 
@@ -9818,6 +9891,7 @@ var OptionsService = /** @class */ (function () {
         this.header = 6;
         this.materialPosition = 1;
         this.showI = true;
+        this.noResourceEndPopUp = false;
         this.formatEmitter = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
         this.headerEmitter = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
         try {
@@ -9851,7 +9925,8 @@ var OptionsService = /** @class */ (function () {
             d: this.dark,
             h: this.header,
             m: this.materialPosition,
-            i: this.showI
+            i: this.showI,
+            p: this.noResourceEndPopUp
         };
     };
     OptionsService.prototype.restore = function (data) {
@@ -9869,6 +9944,8 @@ var OptionsService = /** @class */ (function () {
             this.materialPosition = data.m;
         if ("i" in data)
             this.showI = data.i;
+        if ("p" in data)
+            this.noResourceEndPopUp = data.p;
         this.generateFormatter();
     };
     OptionsService = __decorate([

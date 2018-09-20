@@ -251,7 +251,7 @@ var ActionComponent = /** @class */ (function () {
         //Nothing
     }
     ActionComponent.prototype.ngOnInit = function () {
-        this.skippable = this.action instanceof _model_actions_warp_action__WEBPACK_IMPORTED_MODULE_2__["WarpAction"];
+        this.skippable = !(this.action instanceof _model_actions_warp_action__WEBPACK_IMPORTED_MODULE_2__["WarpAction"]);
     };
     __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
@@ -1006,7 +1006,7 @@ var APPROUTES = [
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"content-area\">\n  <h1>自动购买者</h1>\n  <p>\n    其他自动购买者可以在单个单位页面找到。\n    自动购买者执行是按优先级排序的，升序(es: -5优先级在100优先级之前执行)。\n    最小间隔为1秒，之后您将获得最高购买。\n  </p>\n  <form>\n    <section class=\"form-block\">\n      <div class=\"form-group\">\n        <label>选项:</label>\n        <clr-checkbox [name]=\"'on'\"\n          [id]=\"'on1'\"\n          [(clrChecked)]=\"ms.game.autoBuyManager.enabled\"\n          [clrInline]=\"true\">\n          开启\n        </clr-checkbox>\n        <clr-checkbox [name]=\"'multi'\"\n          [id]=\"'multi1'\"\n          [(clrChecked)]=\"ms.game.autoBuyManager.multiBuy\"\n          [clrInline]=\"true\">\n          多重购买\n        </clr-checkbox>\n      </div>\n    </section>\n  </form>\n\n  <div class=\"clr-row\">\n    <div class=\"clr-col-12\tclr-col-sm-12\tclr-col-md-10\tclr-col-lg-6\tclr-col-xl-5\"\n      *ngFor=\"let autoB of unlSpecial; trackBy:getAutoBuyId\">\n      <div class=\"card\">\n        <div class=\"card-block\">\n          <app-auto-buy [autoBuy]=\"autoB\"></app-auto-buy>\n        </div>\n      </div>\n    </div>\n  </div>\n\n</div>\n"
+module.exports = "<div class=\"content-area\">\n  <h1>自动购买者</h1>\n  <p>\n    其他自动购买者可以在单个单位的页面找到。\n    自动购买者执行是按优先级排序的，升序(例如: -5优先级在100优先级之前执行)。\n    最小间隔为1秒，之后您将获得最高购买。\n  </p>\n  <form>\n    <section class=\"form-block\">\n      <div class=\"form-group\">\n        <label>选项:</label>\n        <clr-checkbox [name]=\"'on'\"\n                      [id]=\"'on1'\"\n                      [(clrChecked)]=\"ms.game.autoBuyManager.enabled\"\n                      [clrInline]=\"true\">\n          开启\n        </clr-checkbox>\n        <clr-checkbox [name]=\"'multi'\"\n                      [id]=\"'multi1'\"\n                      [(clrChecked)]=\"ms.game.autoBuyManager.multiBuy\"\n                      [clrInline]=\"true\">\n          多重购买\n        </clr-checkbox>\n      </div>\n    </section>\n  </form>\n\n  <div class=\"clr-row\">\n    <div class=\"clr-col-12\tclr-col-sm-12\tclr-col-md-10\tclr-col-lg-6\tclr-col-xl-5\"\n         *ngFor=\"let autoB of unlSpecial; trackBy:getAutoBuyId\">\n      <div class=\"card\">\n        <div class=\"card-block\">\n          <app-auto-buy [autoBuy]=\"autoB\"></app-auto-buy>\n        </div>\n      </div>\n    </div>\n  </div>\n\n</div>\n"
 
 /***/ }),
 
@@ -1778,7 +1778,7 @@ var UnitGroupComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<clr-header class=\"header\"\n            [ngClass]=\"headerClass\">\n\n  <div class=\"header-nav\"\n       [clr-nav-level]=\"1\">\n    <a [routerLink]='\"nav\"'\n       class=\"nav-link\"\n       [routerLinkActive]=\"'active'\"\n       (click)=\"navigateLast()\">\n      <span class=\"nav-text\">\n        <clr-icon shape=\"bug\"></clr-icon>\n      </span>\n    </a>\n    <a [routerLink]='\"lab\"'\n       class=\"nav-link\"\n       *ngIf=\"lab\"\n       [routerLinkActive]=\"'active'\">\n      <span class=\"nav-text\">\n        <clr-icon shape=\"lightbulb\"\n                  [ngClass]=\"{'has-badge': labBadge}\"></clr-icon>\n      </span>\n    </a>\n    <a [routerLink]='\"home\"'\n       class=\"nav-link\"\n       [routerLinkActive]=\"'active'\">\n      <span class=\"nav-text\">\n        <clr-icon shape=\"dashboard\"></clr-icon>\n      </span>\n    </a>\n    <a [routerLink]='\"travel\"'\n       class=\"nav-link\"\n       *ngIf=\"travel\"\n       [routerLinkActive]=\"'active'\">\n      <span class=\"nav-text\">\n        <clr-icon shape=\"world\"\n                  [ngClass]=\"{'has-badge': travelBadge}\"></clr-icon>\n      </span>\n    </a>\n    <a [routerLink]='\"auto\"'\n       class=\"nav-link\"\n       *ngIf=\"autoBuy\"\n       [routerLinkActive]=\"'active'\">\n      <span class=\"nav-text\">\n        <clr-icon shape=\"star\"></clr-icon>\n      </span>\n    </a>\n    <a [routerLink]='\"pre\"'\n       class=\"nav-link\"\n       *ngIf=\"prestige\"\n       [routerLinkActive]=\"'active'\">\n      <span class=\"nav-text\">\n        <clr-icon shape=\"store\"></clr-icon>\n      </span>\n    </a>\n    <a [routerLink]='\"mast\"'\n       class=\"nav-link\"\n       *ngIf=\"mastery\"\n       [routerLinkActive]=\"'active'\">\n      <span class=\"nav-text\">\n        <clr-icon shape=\"star\"></clr-icon>\n      </span>\n    </a>\n  </div>\n\n  <div class=\"header-actions\">\n\n    <form class=\"search\">\n      <label id=\"multiLabel\"\n             for=\"multi\">N:&nbsp;</label>\n      <input class=\"multiBuy\"\n             min=\"1\"\n             id=\"multi\"\n             type=\"number\"\n             name=\"buyMulti\"\n             placeholder=\"Buy multiplier\"\n             [(ngModel)]=\"buyMulti\">\n    </form>\n\n    <clr-dropdown  style=\"padding-left: 15px;\">\n      <button class=\"nav-icon\"\n              clrDropdownTrigger>\n        <clr-icon shape=\"tools\"></clr-icon>\n        <clr-icon shape=\"caret down\"></clr-icon>\n      </button>\n      <clr-dropdown-menu *clrIfOpen\n                         clrPosition=\"bottom-right\">\n\n        <clr-dropdown *ngIf=\"ms.game.allPrestige.time.timeProducer.quantity.gt(0)\">\n          <button type=\"button\"\n                  clrDropdownTrigger>时间扭曲</button>\n          <clr-dropdown-menu clrPosition=\"left-top\">\n            <a clrDropdownItem\n               (click)=\"warp(p)\"\n               *ngFor=\"let p of minuteWarps\"\n               [ngClass]=\"{'disabled': !warpAv(p)}\">\n              扭曲 {{p}} 分钟\n            </a>\n          </clr-dropdown-menu>\n        </clr-dropdown>\n\n        <a clrDropdownItem\n           (click)=\"all100()\">全部 100%</a>\n\n        <clr-dropdown *ngFor=\"let list of groupNoEnemy; trackBy:getListId\">\n          <button type=\"button\"\n                  clrDropdownTrigger>{{list.name}}</button>\n          <clr-dropdown-menu clrPosition=\"left-top\"\n                             *clrIfOpen>\n            <a clrDropdownItem\n               (click)=\"list.buyN(buyMulti)\">购买 n</a>\n            <a clrDropdownItem\n               (click)=\"list.buyTeam(buyMulti)\"\n               *ngIf=\"ms.game.researches.team2.done\">团队 n</a>\n            <a clrDropdownItem\n               (click)=\"list.buyTwins(buyMulti)\"\n               *ngIf=\"ms.game.researches.twin.done\">双胞胎 n</a>\n            <div class=\"dropdown-divider\"></div>\n            <clr-dropdown *ngIf=\"ms.game.tabs.autoBuy.unlocked && list.hasAutoBuy()\">\n              <button type=\"button\"\n                      clrDropdownTrigger>AutoBuyer</button>\n              <clr-dropdown-menu *clrIfOpen>\n                <a clrDropdownItem\n                   (click)=\"list.autoBuy(true)\">全部开启</a>\n                <a clrDropdownItem\n                   (click)=\"list.autoBuy(false)\">全部关闭</a>\n                <a clrDropdownItem\n                   *ngIf=\"list.hasAutoBuyBuy()\"\n                   (click)=\"list.autoBuyBuy(true)\">孵化开启</a>\n                <a clrDropdownItem\n                   *ngIf=\"list.hasAutoBuyBuy()\"\n                   (click)=\"list.autoBuyBuy(false)\">孵化关闭</a>\n                <a clrDropdownItem\n                   *ngIf=\"list.hasAutoBuyTeam()\"\n                   (click)=\"list.autoBuyTeam(true)\">团队开启</a>\n                <a clrDropdownItem\n                   *ngIf=\"list.hasAutoBuyTeam()\"\n                   (click)=\"list.autoBuyTeam(false)\">团队关闭</a>\n                <a clrDropdownItem\n                   *ngIf=\"list.hasAutoBuyTwin()\"\n                   (click)=\"list.autoBuyTwin(true)\">双胞胎开启</a>\n                <a clrDropdownItem\n                   *ngIf=\"list.hasAutoBuyTwin()\"\n                   (click)=\"list.autoBuyTwin(false)\">双胞胎关闭</a>\n              </clr-dropdown-menu>\n            </clr-dropdown>\n            <div class=\"dropdown-divider\"\n                 *ngIf=\"ms.game.tabs.autoBuy.unlocked && list.hasAutoBuy()\"></div>\n            <a clrDropdownItem\n               (click)=\"allCustom(p, list)\"\n               *ngFor=\"let p of percentPreset\">\n              {{p}}%\n            </a>\n          </clr-dropdown-menu>\n        </clr-dropdown>\n\n      </clr-dropdown-menu>\n    </clr-dropdown>\n\n    <a href=\"javascript://\"\n       class=\"nav-link nav-icon\">\n      <clr-icon shape=\"clock\"\n                (click)=\"openTimeModal()\"></clr-icon>\n    </a>\n    <a href=\"javascript://\"\n       class=\"nav-link nav-icon\">\n      <clr-icon [attr.shape]=\"ms.game.isPaused ? 'play' : 'pause'\"\n                (click)=\"ms.game.isPaused = ! ms.game.isPaused\"></clr-icon>\n    </a>\n    <a [routerLink]=\"'opt/save/'\"\n       class=\"nav-link nav-icon\"\n       [routerLinkActive]=\"'active'\">\n      <clr-icon shape=\"cog\"></clr-icon>\n    </a>\n  </div>\n\n</clr-header>\n\n<clr-modal [(clrModalOpen)]=\"timeModal\"\n           [clrModalSize]=\"'lg'\">\n  <h3 class=\"modal-title\">时间扭曲</h3>\n  <div class=\"modal-body actMinH\"\n       *ngIf=\"ms.game.actMin && ms.game.actHour\">\n    <span> 你可以跳过 {{ms.game.time.quantity.toNumber() *1000| endIn}}:\n      <span class=\"monospace\">\n        {{ms.game.time.quantity | format}}\n      </span>\n    </span>\n    <br />\n    <span>\n      你得到了\n      <span class=\"monospace\">\n        {{ms.game.time.c | format }}</span>\n      /秒 最大: <span class=\"monospace\">{{ms.game.maxTimeBank | format}}</span>\n    </span>\n    <div class=\"clr-row\">\n      <div class=\"clr-col-6\">\n        <app-action [action]=\"ms.game.actMin\"></app-action>\n      </div>\n      <div class=\"clr-col-6\">\n        <app-action [action]=\"ms.game.actHour\"></app-action>\n      </div>\n    </div>\n  </div>\n</clr-modal>\n"
+module.exports = "<clr-header class=\"header\"\n            [ngClass]=\"headerClass\">\n\n  <div class=\"header-nav\"\n       [clr-nav-level]=\"1\">\n    <a [routerLink]='\"nav\"'\n       class=\"nav-link\"\n       [routerLinkActive]=\"'active'\"\n       (click)=\"navigateLast()\">\n      <span class=\"nav-text\">\n        <clr-icon shape=\"bug\"></clr-icon>\n      </span>\n    </a>\n    <a [routerLink]='\"lab\"'\n       class=\"nav-link\"\n       *ngIf=\"lab\"\n       [routerLinkActive]=\"'active'\">\n      <span class=\"nav-text\">\n        <clr-icon shape=\"lightbulb\"\n                  [ngClass]=\"{'has-badge': labBadge}\"></clr-icon>\n      </span>\n    </a>\n    <a [routerLink]='\"home\"'\n       class=\"nav-link\"\n       [routerLinkActive]=\"'active'\">\n      <span class=\"nav-text\">\n        <clr-icon shape=\"dashboard\"></clr-icon>\n      </span>\n    </a>\n    <a [routerLink]='\"travel\"'\n       class=\"nav-link\"\n       *ngIf=\"travel\"\n       [routerLinkActive]=\"'active'\">\n      <span class=\"nav-text\">\n        <clr-icon shape=\"world\"\n                  [ngClass]=\"{'has-badge': travelBadge}\"></clr-icon>\n      </span>\n    </a>\n    <a [routerLink]='\"auto\"'\n       class=\"nav-link\"\n       *ngIf=\"autoBuy\"\n       [routerLinkActive]=\"'active'\">\n      <span class=\"nav-text\">\n        <clr-icon shape=\"star\"></clr-icon>\n      </span>\n    </a>\n    <a [routerLink]='\"pre\"'\n       class=\"nav-link\"\n       *ngIf=\"prestige\"\n       [routerLinkActive]=\"'active'\">\n      <span class=\"nav-text\">\n        <clr-icon shape=\"store\"></clr-icon>\n      </span>\n    </a>\n    <a [routerLink]='\"mast\"'\n       class=\"nav-link\"\n       *ngIf=\"mastery\"\n       [routerLinkActive]=\"'active'\">\n      <span class=\"nav-text\">\n        <clr-icon shape=\"star\"></clr-icon>\n      </span>\n    </a>\n  </div>\n\n  <div class=\"header-actions\">\n\n    <form class=\"search\">\n      <label id=\"multiLabel\"\n             for=\"multi\">数量(N):&nbsp;</label>\n      <input class=\"multiBuy\"\n             min=\"1\"\n             id=\"multi\"\n             type=\"number\"\n             name=\"buyMulti\"\n             placeholder=\"Buy multiplier\"\n             [(ngModel)]=\"buyMulti\">\n    </form>\n\n    <clr-dropdown  style=\"padding-left: 15px;\">\n      <button class=\"nav-icon\"\n              clrDropdownTrigger>\n        <clr-icon shape=\"tools\"></clr-icon>\n        <clr-icon shape=\"caret down\"></clr-icon>\n      </button>\n      <clr-dropdown-menu *clrIfOpen\n                         clrPosition=\"bottom-right\">\n\n        <clr-dropdown *ngIf=\"ms.game.allPrestige.time.timeProducer.quantity.gt(0)\">\n          <button type=\"button\"\n                  clrDropdownTrigger>时间扭曲</button>\n          <clr-dropdown-menu clrPosition=\"left-top\">\n            <a clrDropdownItem\n               (click)=\"warp(p)\"\n               *ngFor=\"let p of minuteWarps\"\n               [ngClass]=\"{'disabled': !warpAv(p)}\">\n              扭曲 {{p}} 分钟\n            </a>\n          </clr-dropdown-menu>\n        </clr-dropdown>\n\n        <a clrDropdownItem\n           (click)=\"all100()\">全部 100%</a>\n\n        <clr-dropdown *ngFor=\"let list of groupNoEnemy; trackBy:getListId\">\n          <button type=\"button\"\n                  clrDropdownTrigger>{{list.name}}</button>\n          <clr-dropdown-menu clrPosition=\"left-top\"\n                             *clrIfOpen>\n            <a clrDropdownItem\n               (click)=\"list.buyN(buyMulti)\">购买 n</a>\n            <a clrDropdownItem\n               (click)=\"list.buyTeam(buyMulti)\"\n               *ngIf=\"ms.game.researches.team2.done\">团队 n</a>\n            <a clrDropdownItem\n               (click)=\"list.buyTwins(buyMulti)\"\n               *ngIf=\"ms.game.researches.twin.done\">双胞胎 n</a>\n            <div class=\"dropdown-divider\"></div>\n            <clr-dropdown *ngIf=\"ms.game.tabs.autoBuy.unlocked && list.hasAutoBuy()\">\n              <button type=\"button\"\n                      clrDropdownTrigger>自动购买者</button>\n              <clr-dropdown-menu *clrIfOpen>\n                <a clrDropdownItem\n                   (click)=\"list.autoBuy(true)\">全部开启</a>\n                <a clrDropdownItem\n                   (click)=\"list.autoBuy(false)\">全部关闭</a>\n                <a clrDropdownItem\n                   *ngIf=\"list.hasAutoBuyBuy()\"\n                   (click)=\"list.autoBuyBuy(true)\">孵化开启</a>\n                <a clrDropdownItem\n                   *ngIf=\"list.hasAutoBuyBuy()\"\n                   (click)=\"list.autoBuyBuy(false)\">孵化关闭</a>\n                <a clrDropdownItem\n                   *ngIf=\"list.hasAutoBuyTeam()\"\n                   (click)=\"list.autoBuyTeam(true)\">团队开启</a>\n                <a clrDropdownItem\n                   *ngIf=\"list.hasAutoBuyTeam()\"\n                   (click)=\"list.autoBuyTeam(false)\">团队关闭</a>\n                <a clrDropdownItem\n                   *ngIf=\"list.hasAutoBuyTwin()\"\n                   (click)=\"list.autoBuyTwin(true)\">双胞胎开启</a>\n                <a clrDropdownItem\n                   *ngIf=\"list.hasAutoBuyTwin()\"\n                   (click)=\"list.autoBuyTwin(false)\">双胞胎关闭</a>\n              </clr-dropdown-menu>\n            </clr-dropdown>\n            <div class=\"dropdown-divider\"\n                 *ngIf=\"ms.game.tabs.autoBuy.unlocked && list.hasAutoBuy()\"></div>\n            <a clrDropdownItem\n               (click)=\"allCustom(p, list)\"\n               *ngFor=\"let p of percentPreset\">\n              {{p}}%\n            </a>\n          </clr-dropdown-menu>\n        </clr-dropdown>\n\n      </clr-dropdown-menu>\n    </clr-dropdown>\n\n    <a href=\"javascript://\"\n       class=\"nav-link nav-icon\">\n      <clr-icon shape=\"clock\"\n                (click)=\"openTimeModal()\"></clr-icon>\n    </a>\n    <a href=\"javascript://\"\n       class=\"nav-link nav-icon\">\n      <clr-icon [attr.shape]=\"ms.game.isPaused ? 'play' : 'pause'\"\n                (click)=\"ms.game.isPaused = ! ms.game.isPaused\"></clr-icon>\n    </a>\n    <a [routerLink]=\"'opt/save/'\"\n       class=\"nav-link nav-icon\"\n       [routerLinkActive]=\"'active'\">\n      <clr-icon shape=\"cog\"></clr-icon>\n    </a>\n  </div>\n\n</clr-header>\n\n<clr-modal [(clrModalOpen)]=\"timeModal\"\n           [clrModalSize]=\"'lg'\">\n  <h3 class=\"modal-title\">时间扭曲</h3>\n  <div class=\"modal-body actMinH\"\n       *ngIf=\"ms.game.actMin && ms.game.actHour\">\n    <span> 你可以跳过 {{ms.game.time.quantity.toNumber() *1000| endIn}}:\n      <span class=\"monospace\">\n        {{ms.game.time.quantity | format}}\n      </span>\n    </span>\n    <br />\n    <span>\n      你得到了\n      <span class=\"monospace\">\n        {{ms.game.time.c | format }}</span>\n      /秒 最大: <span class=\"monospace\">{{ms.game.maxTimeBank | format}}</span>\n    </span>\n    <div class=\"clr-row\">\n      <div class=\"clr-col-6\">\n        <app-action [action]=\"ms.game.actMin\"></app-action>\n      </div>\n      <div class=\"clr-col-6\">\n        <app-action [action]=\"ms.game.actHour\"></app-action>\n      </div>\n    </div>\n  </div>\n</clr-modal>\n"
 
 /***/ }),
 
@@ -4382,7 +4382,7 @@ var Game = /** @class */ (function () {
             ].filter(function (m) { return !_this.currentWorld.notWinConditions.includes(m); });
             _this.currentWorld.notWinConditions.push(Object(lodash_es_sample__WEBPACK_IMPORTED_MODULE_0__["default"])(malus));
             _this.currentWorld.setMalus();
-            _this.currentWorld.name = "Extreme " + _this.currentWorld.name;
+            _this.currentWorld.name = "极端的 " + _this.currentWorld.name;
             _this.currentWorld.prestige = _this.currentWorld.prestige
                 .times(1.1)
                 .floor();
@@ -4658,7 +4658,9 @@ var Game = /** @class */ (function () {
      */
     Game.prototype.warp = function (delta) {
         if (delta > 0) {
-            this.ms.toastr.info(this.ms.endInPipe.transform(delta), "时间扭曲");
+            if (!this.ms.options.noWarpNotification) {
+                this.ms.toastr.info(this.ms.endInPipe.transform(delta), "时间扭曲");
+            }
             this.update(delta, true);
             //this.autoBuyManager.update(delta);
         }
@@ -4868,8 +4870,8 @@ var Game = /** @class */ (function () {
             .times(0.1)
             .times(1 + 0.5 * this.allMateries.getSum(_masteries_mastery__WEBPACK_IMPORTED_MODULE_8__["MasteryTypes"].WORLD_LEVEL_PRESTIGE))
             .plus(1));
-        var masteryMulti = this.allMateries.getSum(_masteries_mastery__WEBPACK_IMPORTED_MODULE_8__["MasteryTypes"].WORLD_LEVEL);
-        this.realMaxLevel = this.realMaxLevel.times(1 + masteryMulti / 2).floor();
+        // const masteryMulti = this.allMateries.getSum(MasteryTypes.WORLD_LEVEL);
+        // this.realMaxLevel = this.realMaxLevel.times(1 + masteryMulti / 2).floor();
     };
     //#endregion
     //#endregion
@@ -5486,7 +5488,7 @@ var Mastery = /** @class */ (function () {
                 break;
             }
             case MasteryTypes.WORLD_LEVEL: {
-                ret = "+50% 最高世界等级";
+                ret = "减少世界旅行需求";
                 break;
             }
             case MasteryTypes.BETTER_WORLD: {
@@ -7328,7 +7330,7 @@ var Bees = /** @class */ (function (_super) {
         var beeSuff = new _world__WEBPACK_IMPORTED_MODULE_5__["World"]("beeSuff");
         [beeBio, beePre, beeSuff].forEach(function (w) {
             w.additionalBugs.push(_bugsTypes__WEBPACK_IMPORTED_MODULE_0__["BugTypes"].BEE);
-            w.winContidions.push(new _price__WEBPACK_IMPORTED_MODULE_3__["Price"](_this.nest, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].BASE_WIN_CONDITION_OTHER));
+            w.winContidions.push(new _price__WEBPACK_IMPORTED_MODULE_3__["Price"](_this.nest, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].BASE_WIN_CONDITION_OTHER.times(0.8)));
         });
         _world__WEBPACK_IMPORTED_MODULE_5__["World"].prefix.push(beePre);
         _world__WEBPACK_IMPORTED_MODULE_5__["World"].suffix.push(beeSuff);
@@ -7913,11 +7915,9 @@ var MalusKiller = /** @class */ (function (_super) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Materials", function() { return Materials; });
-/* harmony import */ var _CONSTATS__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../CONSTATS */ "./src/app/model/CONSTATS.ts");
-/* harmony import */ var _full_unit__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../full-unit */ "./src/app/model/full-unit.ts");
-/* harmony import */ var _price__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../price */ "./src/app/model/price.ts");
-/* harmony import */ var _unit_group__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../unit-group */ "./src/app/model/unit-group.ts");
-/* harmony import */ var _world__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../world */ "./src/app/model/world.ts");
+/* harmony import */ var _full_unit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../full-unit */ "./src/app/model/full-unit.ts");
+/* harmony import */ var _unit_group__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../unit-group */ "./src/app/model/unit-group.ts");
+/* harmony import */ var _world__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../world */ "./src/app/model/world.ts");
 var __extends = (undefined && undefined.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
@@ -7931,18 +7931,16 @@ var __extends = (undefined && undefined.__extends) || (function () {
 
 
 
-
-
 var Materials = /** @class */ (function (_super) {
     __extends(Materials, _super);
     function Materials(game) {
         return _super.call(this, "材料", game) || this;
     }
     Materials.prototype.declareStuff = function () {
-        this.food = new _full_unit__WEBPACK_IMPORTED_MODULE_1__["FullUnit"]("f");
-        this.soil = new _full_unit__WEBPACK_IMPORTED_MODULE_1__["FullUnit"]("w");
-        this.crystal = new _full_unit__WEBPACK_IMPORTED_MODULE_1__["FullUnit"]("c");
-        this.science = new _full_unit__WEBPACK_IMPORTED_MODULE_1__["FullUnit"]("s");
+        this.food = new _full_unit__WEBPACK_IMPORTED_MODULE_0__["FullUnit"]("f");
+        this.soil = new _full_unit__WEBPACK_IMPORTED_MODULE_0__["FullUnit"]("w");
+        this.crystal = new _full_unit__WEBPACK_IMPORTED_MODULE_0__["FullUnit"]("c");
+        this.science = new _full_unit__WEBPACK_IMPORTED_MODULE_0__["FullUnit"]("s");
         this.food.unlocked = true;
         this.addUnits([this.food, this.soil, this.crystal, this.science]);
         this.list.forEach(function (m) { return (m.winNonLiner = false); });
@@ -7950,13 +7948,12 @@ var Materials = /** @class */ (function (_super) {
     Materials.prototype.addWorlds = function () {
         var lenght = this.list.length;
         for (var i = 0; i < lenght; i++) {
-            var world = new _world__WEBPACK_IMPORTED_MODULE_4__["World"](this.list[i].id + "Bio");
-            world.winContidions.push(new _price__WEBPACK_IMPORTED_MODULE_2__["Price"](this.list[i], _CONSTATS__WEBPACK_IMPORTED_MODULE_0__["CONSTS"].BASE_WIN_CONDITION_MATERIALS));
-            _world__WEBPACK_IMPORTED_MODULE_4__["World"].biome.push(world);
+            var world = new _world__WEBPACK_IMPORTED_MODULE_2__["World"](this.list[i].id + "Bio");
+            _world__WEBPACK_IMPORTED_MODULE_2__["World"].biome.push(world);
         }
     };
     return Materials;
-}(_unit_group__WEBPACK_IMPORTED_MODULE_3__["UnitGroup"]));
+}(_unit_group__WEBPACK_IMPORTED_MODULE_1__["UnitGroup"]));
 
 
 
@@ -8145,17 +8142,17 @@ var Special = /** @class */ (function (_super) {
     };
     Special.prototype.setRelations = function () {
         this.foodSupply.generateBuyAction([
-            new _price__WEBPACK_IMPORTED_MODULE_1__["Price"](this.game.materials.food, new Decimal(1e3), 2)
+            new _price__WEBPACK_IMPORTED_MODULE_1__["Price"](this.game.materials.food, new Decimal(1e3), 1.5)
         ]);
         this.soilSupply.generateBuyAction([
-            new _price__WEBPACK_IMPORTED_MODULE_1__["Price"](this.game.materials.soil, new Decimal(1e3), 2)
+            new _price__WEBPACK_IMPORTED_MODULE_1__["Price"](this.game.materials.soil, new Decimal(1e3), 1.5)
         ]);
         this.crystallSupply.generateBuyAction([
-            new _price__WEBPACK_IMPORTED_MODULE_1__["Price"](this.game.materials.crystal, new Decimal(1e3), 2)
+            new _price__WEBPACK_IMPORTED_MODULE_1__["Price"](this.game.materials.crystal, new Decimal(1e3), 1.5)
         ]);
-        this.game.materials.food.addProducer(this.foodSupply, new Decimal(20));
-        this.game.materials.soil.addProducer(this.soilSupply, new Decimal(20));
-        this.game.materials.crystal.addProducer(this.crystallSupply, new Decimal(20));
+        this.game.materials.food.addProducer(this.foodSupply, new Decimal(30));
+        this.game.materials.soil.addProducer(this.soilSupply, new Decimal(30));
+        this.game.materials.crystal.addProducer(this.crystallSupply, new Decimal(30));
     };
     Special.prototype.addWorlds = function () {
         [this.foodSupply, this.soilSupply, this.crystallSupply].forEach(function (supp) {
@@ -8247,7 +8244,7 @@ var Wasps = /** @class */ (function (_super) {
         var waspSuff = new _world__WEBPACK_IMPORTED_MODULE_5__["World"]("waspSuff");
         [waspBio, waspPre, waspSuff].forEach(function (w) {
             w.additionalBugs.push(_bugsTypes__WEBPACK_IMPORTED_MODULE_0__["BugTypes"].WASP);
-            w.winContidions.push(new _price__WEBPACK_IMPORTED_MODULE_3__["Price"](_this.nest, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].BASE_WIN_CONDITION_OTHER.times(2)));
+            w.winContidions.push(new _price__WEBPACK_IMPORTED_MODULE_3__["Price"](_this.nest, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].BASE_WIN_CONDITION_OTHER.times(1.75)));
         });
         _world__WEBPACK_IMPORTED_MODULE_5__["World"].prefix.push(waspPre);
         _world__WEBPACK_IMPORTED_MODULE_5__["World"].suffix.push(waspSuff);
@@ -8986,10 +8983,11 @@ var World = /** @class */ (function () {
         this.productionsEfficienty.forEach(function (b) { return (b[1] = b[1].times(multi)); });
         this.productionsAll.forEach(function (b) { return (b[1] = b[1].times(multi)); });
         this.startingUnit.forEach(function (b) { return (b[1] = b[1].times(multi)); });
+        var masteryReduction = game.allMateries.getSum(_masteries_mastery__WEBPACK_IMPORTED_MODULE_4__["MasteryTypes"].WORLD_LEVEL) * 0.015;
         this.winContidions.forEach(function (w) {
             w.price = w.price.times(multi);
             w.price = w.base.winNonLiner
-                ? w.price.pow(0.7)
+                ? w.price.pow(0.7 - masteryReduction)
                 : w.price.times(Decimal.pow(4, multi)).pow(0.95);
             w.price = w.price.floor();
         });
@@ -9786,7 +9784,7 @@ var StatsComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<h1>选项</h1>\n<form clrForm\n      class=\"clr-form clr-form-compact\">\n\n  <div class=\"form-group\">\n    <label for=\"t1\">主题:</label>\n    <div class=\"toggle-switch\">\n      <input name=\"dark\"\n             type=\"checkbox\"\n             id=\"dark\"\n             [(ngModel)]=\"ms.options.dark\"\n             (change)=\"ms.setTheme()\">\n      <label for=\"dark\">黑色</label>\n    </div>\n  </div>\n\n  <div class=\"form-group\">\n    <label for=\"selects_1\">顶部颜色</label>\n    <div class=\"select\">\n      <select name=\"header\"\n              id=\"selects_1\"\n              [(ngModel)]=\"ms.options.header\"\n              (change)=\"ms.options.headerEmitter.emit(ms.options.header)\">\n        <option>1</option>\n        <option>2</option>\n        <option>3</option>\n        <option>4</option>\n        <option>5</option>\n        <option>6</option>\n        <option>7</option>\n      </select>\n    </div>\n  </div>\n\n  <div class=\"form-group\">\n    <label for=\"t1\">使用另一种数字格式:</label>\n    <div class=\"toggle-switch\">\n      <input type=\"checkbox\"\n             id=\"format\"\n             name=\"format\"\n             [(ngModel)]=\"ms.options.usaFormat\"\n             (change)=\"ms.options.generateFormatter()\">\n      <label for=\"format\">开</label>\n    </div>\n  </div>\n\n  <div class=\"form-group\">\n    <label for=\"numFormat\">数字格式:</label>\n    <div class=\"select\">\n      <select id=\"numFormat\"\n              name=\"numFormat\"\n              [(ngModel)]=\"ms.options.numFormat\"\n              (change)=\"ms.options.generateFormatter()\">\n        <option value=\"standard\">默认</option>\n        <option value=\"scientific\">科学计数法</option>\n        <option value=\"engineering\">工程计数法</option>\n        <option value=\"longScale\">长比例尺</option>\n      </select>\n    </div>\n  </div>\n\n  <div class=\"form-group\">\n    <label for=\"matPos\">材料位置:</label>\n    <div class=\"select\">\n      <select id=\"matPos\"\n              name=\"matPos\"\n              [(ngModel)]=\"os.materialPosition\"\n              (change)=\"onChangeMaterialPos()\">\n        <option value=\"1\">全部</option>\n        <option value=\"2\">顶部</option>\n        <option value=\"3\">侧边</option>\n      </select>\n    </div>\n  </div>\n\n  <div class=\"form-group\">\n    <label for=\"si\">显示我的新单位:</label>\n    <div class=\"toggle-switch\">\n      <input name=\"si\"\n             type=\"checkbox\"\n             id=\"si\"\n             [(ngModel)]=\"ms.options.showI\">\n      <label for=\"si\"></label>\n    </div>\n  </div>\n\n  <div class=\"form-group\">\n    <label for=\"si\">Disable notification for unit ending:</label>\n    <div class=\"toggle-switch\">\n      <input name=\"nr\"\n             type=\"checkbox\"\n             id=\"nr\"\n             [(ngModel)]=\"os.noResourceEndPopUp\">\n      <label for=\"nr\"></label>\n    </div>\n  </div>\n\n</form>\n"
+module.exports = "<h1>选项</h1>\n<form clrForm\n      class=\"clr-form clr-form-compact\">\n\n  <div class=\"form-group\">\n    <label for=\"t1\">主题:</label>\n    <div class=\"toggle-switch\">\n      <input name=\"dark\"\n             type=\"checkbox\"\n             id=\"dark\"\n             [(ngModel)]=\"ms.options.dark\"\n             (change)=\"ms.setTheme()\">\n      <label for=\"dark\">黑色</label>\n    </div>\n  </div>\n\n  <div class=\"form-group\">\n    <label for=\"selects_1\">顶部颜色</label>\n    <div class=\"select\">\n      <select name=\"header\"\n              id=\"selects_1\"\n              [(ngModel)]=\"ms.options.header\"\n              (change)=\"ms.options.headerEmitter.emit(ms.options.header)\">\n        <option>1</option>\n        <option>2</option>\n        <option>3</option>\n        <option>4</option>\n        <option>5</option>\n        <option>6</option>\n        <option>7</option>\n      </select>\n    </div>\n  </div>\n\n  <div class=\"form-group\">\n    <label for=\"t1\">使用另一种数字格式:</label>\n    <div class=\"toggle-switch\">\n      <input type=\"checkbox\"\n             id=\"format\"\n             name=\"format\"\n             [(ngModel)]=\"ms.options.usaFormat\"\n             (change)=\"ms.options.generateFormatter()\">\n      <label for=\"format\">开</label>\n    </div>\n  </div>\n\n  <div class=\"form-group\">\n    <label for=\"numFormat\">数字格式:</label>\n    <div class=\"select\">\n      <select id=\"numFormat\"\n              name=\"numFormat\"\n              [(ngModel)]=\"ms.options.numFormat\"\n              (change)=\"ms.options.generateFormatter()\">\n        <option value=\"standard\">默认</option>\n        <option value=\"scientific\">科学计数法</option>\n        <option value=\"engineering\">工程计数法</option>\n        <option value=\"longScale\">长比例尺</option>\n      </select>\n    </div>\n  </div>\n\n  <div class=\"form-group\">\n    <label for=\"matPos\">材料位置:</label>\n    <div class=\"select\">\n      <select id=\"matPos\"\n              name=\"matPos\"\n              [(ngModel)]=\"os.materialPosition\"\n              (change)=\"onChangeMaterialPos()\">\n        <option value=\"1\">全部</option>\n        <option value=\"2\">顶部</option>\n        <option value=\"3\">侧边</option>\n      </select>\n    </div>\n  </div>\n\n  <div class=\"form-group\">\n    <label for=\"si\">显示我的新单位:</label>\n    <div class=\"toggle-switch\">\n      <input name=\"si\"\n             type=\"checkbox\"\n             id=\"si\"\n             [(ngModel)]=\"ms.options.showI\">\n      <label for=\"si\"></label>\n    </div>\n  </div>\n\n  <div class=\"form-group\">\n    <label for=\"nr\">禁用单位消耗完的通知:</label>\n    <div class=\"toggle-switch\">\n      <input name=\"nr\"\n             type=\"checkbox\"\n             id=\"nr\"\n             [(ngModel)]=\"os.noResourceEndPopUp\">\n      <label for=\"nr\"></label>\n    </div>\n  </div>\n\n  <div class=\"form-group\">\n    <label for=\"wn\">禁用时间扭曲通知:</label>\n    <div class=\"toggle-switch\">\n      <input name=\"wn\"\n             type=\"checkbox\"\n             id=\"wn\"\n             [(ngModel)]=\"os.noWarpNotification\">\n      <label for=\"wn\"></label>\n    </div>\n  </div>\n\n</form>\n"
 
 /***/ }),
 
@@ -9892,6 +9890,7 @@ var OptionsService = /** @class */ (function () {
         this.materialPosition = 1;
         this.showI = true;
         this.noResourceEndPopUp = false;
+        this.noWarpNotification = true;
         this.formatEmitter = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
         this.headerEmitter = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
         try {
@@ -9926,7 +9925,8 @@ var OptionsService = /** @class */ (function () {
             h: this.header,
             m: this.materialPosition,
             i: this.showI,
-            p: this.noResourceEndPopUp
+            p: this.noResourceEndPopUp,
+            w: this.noWarpNotification
         };
     };
     OptionsService.prototype.restore = function (data) {
@@ -9946,6 +9946,8 @@ var OptionsService = /** @class */ (function () {
             this.showI = data.i;
         if ("p" in data)
             this.noResourceEndPopUp = data.p;
+        if ("w" in data)
+            this.noWarpNotification = data.w;
         this.generateFormatter();
     };
     OptionsService = __decorate([
@@ -10581,7 +10583,7 @@ var NameComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"card-block\">\n  <div class=\"card-title\">\n    <app-name [name]=\"research.name\"\n              [unlimited]=\"research.unlimited\"\n              [quantity]=\"research.quantity\"></app-name>\n  </div>\n  <div class=\"card-text p\">\n    {{research.description}}\n    <br />\n    <div *ngIf=\"!research.complete\">\n      <span>花费: </span>\n      <app-price-line *ngFor=\"let price of research.prices; trackBy:getPriceId\"\n                      [unit]=\"price.base\"\n                      [canBuy]=\"price.canBuy\"\n                      [price]=\"price.priceUser\">\n      </app-price-line>\n\n      <div *ngIf=\"research.unlimited \">\n        <label for=\"max\">最高等级:</label>\n        <input type=\"number\"\n               id=\"max\"\n               class=\"clr-input\"\n               [(ngModel)]=\"research.maxAutoBuyLevel\"\n               (change)=\"ms.game.researches.reloadLists()\"\n               min=\"0\"\n               size=\"3\">\n      </div>\n\n    </div>\n  </div>\n</div>\n<div class=\"card-footer\"\n     *ngIf=\"!research.complete\">\n  <button *ngIf=\"!research.canBuy && !canSkip\"\n          class=\"btn btn-sm btn-link\"\n          disabled>\n    不能购买. 距离可购买还有 {{research.availableIn | endIn}} \n  </button>\n  <button *ngIf=\"!research.canBuy &&  canSkip\"\n          class=\"btn btn-danger btn-sm\"\n          (click)=\"skip()\">\n    不能购买. 跳过 {{minuteSkip}} 分钟\n  </button>\n  <button *ngIf=\"research.canBuy\"\n          class=\"btn btn-sm btn-link\"\n          (click)=\"research.buy(research.realNum)\">\n    研究\n  </button>\n</div>\n"
+module.exports = "<div class=\"card-block\">\n  <div class=\"card-title\">\n    <app-name [name]=\"research.name\"\n              [unlimited]=\"research.unlimited\"\n              [quantity]=\"research.quantity\"></app-name>\n  </div>\n  <div class=\"card-text p\">\n    {{research.description}}\n    <br />\n    <div *ngIf=\"!research.complete\">\n      <span>花费: </span>\n      <app-price-line *ngFor=\"let price of research.prices; trackBy:getPriceId\"\n                      [unit]=\"price.base\"\n                      [canBuy]=\"price.canBuy\"\n                      [price]=\"price.priceUser\">\n      </app-price-line>\n\n      <div *ngIf=\"research.unlimited \">\n        <label for=\"max\">最高等级:</label>\n        <input type=\"number\"\n               id=\"max\"\n               class=\"clr-input\"\n               [(ngModel)]=\"research.maxAutoBuyLevel\"\n               (change)=\"ms.game.researches.reloadLists()\"\n               min=\"0\"\n               size=\"3\">\n      </div>\n\n    </div>\n  </div>\n</div>\n<div class=\"card-footer\"\n     *ngIf=\"!research.complete\">\n  <button *ngIf=\"!research.canBuy && !canSkip\"\n          class=\"btn btn-sm btn-link\"\n          disabled>\n    不能购买. 距离可购买还有 {{research.availableIn | endIn}} \n  </button>\n  <button *ngIf=\"!research.canBuy &&  canSkip\"\n          class=\"btn btn-primary btn-sm\"\n          (click)=\"skip()\">\n    不能购买. 跳过 {{minuteSkip}} 分钟\n  </button>\n  <button *ngIf=\"research.canBuy\"\n          class=\"btn btn-sm btn-link\"\n          (click)=\"research.buy(research.realNum)\">\n    研究\n  </button>\n</div>\n"
 
 /***/ }),
 

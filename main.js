@@ -572,7 +572,7 @@ var PriceLineComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<clr-main-container *ngIf=\"ms.show\"\n                    [@fadeInOut]>\n  <app-header [lab]=\"ms.game.tabs.lab.unlocked\"\n              [labBadge]=\"ms.game.canBuyResearch\"\n              [travel]=\"ms.game.tabs.travel.unlocked\"\n              [autoBuy]=\"ms.game.tabs.autoBuy.unlocked\"\n              [travelBadge]=\"ms.game.canTravel\"\n              [prestige]=\"ms.game.tabs.prestige.unlocked\"\n              [mastery]=\"ms.game.tabs.mastery.unlocked\">\n  </app-header>\n  <app-material-nav *ngIf=\"os.materialPosition != 3\"></app-material-nav>\n\n  <router-outlet></router-outlet>\n\n</clr-main-container>\n"
+module.exports = "<clr-main-container *ngIf=\"ms.show\"\n                    [@fadeInOut]>\n  <app-header [lab]=\"ms.game.tabs.lab.unlocked\"\n              [labBadge]=\"ms.game.canBuyResearch\"\n              [travel]=\"ms.game.tabs.travel.unlocked\"\n              [autoBuy]=\"ms.game.tabs.autoBuy.unlocked\"\n              [travelBadge]=\"ms.game.canTravel\"\n              [prestige]=\"ms.game.tabs.prestige.unlocked\"\n              [mastery]=\"ms.game.tabs.mastery.unlocked\">\n  </app-header>\n  <app-material-nav *ngIf=\"os.materialPosition != 3\"></app-material-nav>\n\n  <router-outlet></router-outlet>\n\n\n</clr-main-container>\n"
 
 /***/ }),
 
@@ -677,6 +677,22 @@ var AppComponent = /** @class */ (function () {
             _this.ms.start();
         }, 1);
     };
+    AppComponent.prototype.onKey = function (event) {
+        // with type info
+        switch (event.key) {
+            case "m":
+                this.ms.game.actMin.buy();
+                break;
+            case "h":
+                this.ms.game.actHour.buy();
+        }
+    };
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["HostListener"])("window:keyup", ["$event"]),
+        __metadata("design:type", Function),
+        __metadata("design:paramtypes", [KeyboardEvent]),
+        __metadata("design:returntype", void 0)
+    ], AppComponent.prototype, "onKey", null);
     AppComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: "app-root",
@@ -2648,11 +2664,15 @@ var MainService = /** @class */ (function () {
         if (chunks.length > 10) {
             this.toastr.error("size limit exceeded", "Error saving to cloud");
         }
+        // convert array into object with numbers as keys
+        // const data = $.extend({}, chunks);
+        var data = {};
+        for (var i = 0; i < chunks.length; i++)
+            data[i] = chunks[i];
         var requestData = {
             TitleId: this.titleId,
             PlayFabId: this.playFabId,
-            // convert array into object with numbers as keys
-            Data: $.extend({}, chunks)
+            Data: data
         };
         try {
             PlayFab.ClientApi.UpdateUserData(requestData, this.saveToPlayFabCallback.bind(this));
@@ -2740,7 +2760,7 @@ var MainService = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"content-area\">\n  <div id=\"network\"\n       #network></div>\n</div>\n<clr-vertical-nav [clrVerticalNavCollapsible]=\"true\"\n                  class=\"nav-trigger--bottom\">\n\n  <a clrVerticalNavLink>\n    <h6>专精\n      <span class=\"monospace\"\n            *ngIf=\"ms.game.allMateries.masteryPoint > 0\">{{ms.game.allMateries.masteryPoint}}</span>\n    </h6>\n  </a>\n  <div *ngIf=\"!node; else buy\">\n    <a clrVerticalNavLink\n       *ngFor=\"let desc of list; trackBy:getDescId\">\n      {{desc}}\n    </a>\n  </div>\n  <ng-template #buy>\n    <p clrVerticalNavLink>{{node.label}}</p>\n    <button class=\"btn\"\n            *ngIf=\"node.avaiable && !node.owned\"\n            [disabled]=\"ms.game.allMateries.masteryPoint <1\"\n            (click)=\"buyMastery()\">\n      购买\n    </button>\n  </ng-template>\n\n  <!-- Debug Stuff -->\n  <!-- <button class=\"btn\"\n          (click)=\"export()\">\n    Export positions\n  </button>\n  <textarea name=\"raw\"\n            [(ngModel)]=\"exp\"\n            rows=\"1\"></textarea> -->\n\n</clr-vertical-nav>\n"
+module.exports = "<div class=\"content-area\">\n  <div id=\"network\"\n       #network></div>\n</div>\n<clr-vertical-nav [clrVerticalNavCollapsible]=\"true\"\n                  class=\"nav-trigger--bottom\">\n\n  <a clrVerticalNavLink>\n    <h6>专精\n      <span class=\"monospace\"\n            *ngIf=\"ms.game.allMateries.masteryPoint > 0\">{{ms.game.allMateries.masteryPoint}}</span>\n    </h6>\n  </a>\n  <div *ngIf=\"!node; else buy\">\n    <a clrVerticalNavLink\n       *ngFor=\"let desc of list; trackBy:getDescId\">\n      {{desc}}\n    </a>\n  </div>\n  <ng-template #buy>\n    <p clrVerticalNavLink>{{node.label}}</p>\n    <button class=\"btn\"\n            *ngIf=\"node.avaiable && !node.owned\"\n            [disabled]=\"ms.game.allMateries.masteryPoint <1\"\n            (click)=\"buyMastery()\">\n      购买\n    </button>\n  </ng-template>\n  <button class=\"btn\"\n          *ngIf=\"ms.game.allMateries.totalEarned > 0\"\n          (click)=\"showReset = true\" style=\"min-height: 38px;\">\n    重置\n  </button>\n\n\n\n  <!-- Debug Stuff -->\n  <!-- <button class=\"btn\"\n          (click)=\"export()\">\n    Export positions\n  </button>\n  <textarea name=\"raw\"\n            [(ngModel)]=\"exp\"\n            rows=\"1\"></textarea> -->\n\n</clr-vertical-nav>\n\n\n<clr-modal [(clrModalOpen)]=\"showReset\"\n           [clrModalClosable]=\"true\">\n  <h3 class=\"modal-title\">精通重置</h3>\n  <div class=\"modal-body\">\n    <p>\n      重置精通升级，你可以获得精通点数 {{ms.game.allMateries.totalEarned}}\n      <br />\n      你将移动到基础世界而没有任何奖励。\n    </p>\n  </div>\n  <div class=\"modal-footer\">\n    <button type=\"button\"\n            class=\"btn btn-outline\"\n            (click)=\"showReset = false\">取消</button>\n    <button type=\"button\"\n            class=\"btn btn-primary\"\n            (click)=\"reset()\">重置</button>\n  </div>\n</clr-modal>\n"
 
 /***/ }),
 
@@ -2751,7 +2771,7 @@ module.exports = "<div class=\"content-area\">\n  <div id=\"network\"\n       #n
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "#network {\n  height: 100%;\n  width: 100%; }\n\n.clr-vertical-nav {\n  width: 15rem; }\n\n.btn {\n  color: #007cbb;\n  margin: 1rem; }\n\n.clr-vertical-nav.is-collapsed .btn {\n  display: none; }\n\n.clr-vertical-nav .nav-link.active,\n.clr-vertical-nav .nav-link:hover {\n  background-color: transparent; }\n"
+module.exports = "#network {\n  height: 100%;\n  width: 100%; }\n\n.clr-vertical-nav {\n  width: 15rem; }\n\nclr-vertical-nav .btn {\n  color: #007cbb;\n  margin: 1rem; }\n\n.clr-vertical-nav.is-collapsed .btn {\n  display: none; }\n\n.clr-vertical-nav .nav-link.active,\n.clr-vertical-nav .nav-link:hover {\n  background-color: transparent; }\n"
 
 /***/ }),
 
@@ -2770,6 +2790,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vis__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vis__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _main_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../main.service */ "./src/app/main.service.ts");
 /* harmony import */ var _model_masteries_mastery__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../model/masteries/mastery */ "./src/app/model/masteries/mastery.ts");
+/* harmony import */ var _model_world__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../model/world */ "./src/app/model/world.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2783,12 +2804,14 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var MasteryComponent = /** @class */ (function () {
     function MasteryComponent(ms, cd) {
         this.ms = ms;
         this.cd = cd;
         this.list = new Array();
         this.exp = "";
+        this.showReset = false;
         //
     }
     MasteryComponent.prototype.rebuildList = function () {
@@ -2855,6 +2878,18 @@ var MasteryComponent = /** @class */ (function () {
     MasteryComponent.prototype.export = function () {
         this.networkVis.storePositions();
         this.exp = JSON.stringify(this.networkVis.getPositions());
+    };
+    MasteryComponent.prototype.reset = function () {
+        this.ms.game.allMateries.reset();
+        this.rebuildList();
+        this.cd.markForCheck();
+        var baseWorld = new _model_world__WEBPACK_IMPORTED_MODULE_4__["World"]("base");
+        baseWorld.setLevel(new Decimal(1), this.ms.game);
+        this.ms.game.generateWorlds();
+        baseWorld.name = "Home World";
+        this.ms.game.canTravel = false;
+        this.ms.game.goToWorld(baseWorld);
+        this.showReset = false;
     };
     __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"])("network"),
@@ -5163,6 +5198,7 @@ var AllMasteries = /** @class */ (function () {
         av3.color = _mastery__WEBPACK_IMPORTED_MODULE_3__["Mastery"].avaiableColor;
         av4.avaiable = true;
         av4.color = _mastery__WEBPACK_IMPORTED_MODULE_3__["Mastery"].avaiableColor;
+        this.starting = [av1, av2, av3, av4];
         var matGain = new _mastery__WEBPACK_IMPORTED_MODULE_3__["Mastery"](20, _mastery__WEBPACK_IMPORTED_MODULE_3__["MasteryTypes"].MATERIAL_GAIN);
         this.visMasteries = new vis__WEBPACK_IMPORTED_MODULE_0__["DataSet"]([av1, av2, av3, av4, matGain]);
         this.visEdge = new vis__WEBPACK_IMPORTED_MODULE_0__["DataSet"]([]);
@@ -5268,6 +5304,27 @@ var AllMasteries = /** @class */ (function () {
         this.materialBonus.quantity = new Decimal(this.getSum(_mastery__WEBPACK_IMPORTED_MODULE_3__["MasteryTypes"].MATERIAL_GAIN));
         this.armyBonus.quantity = new Decimal(this.getSum(_mastery__WEBPACK_IMPORTED_MODULE_3__["MasteryTypes"].DOUBLE_ARMY));
     };
+    AllMasteries.prototype.reset = function () {
+        this.masteryPoint = this.totalEarned;
+        for (var i = 0; i < this.totals.length; i++) {
+            this.totals[i] = 0;
+        }
+        this.reloadBonus();
+        var update = this.visMasteries.get();
+        update.forEach(function (m) {
+            m.owned = false;
+            m.avaiable = false;
+            m.color = _mastery__WEBPACK_IMPORTED_MODULE_3__["notable"].find(function (n) { return n === m.type; })
+                ? _mastery__WEBPACK_IMPORTED_MODULE_3__["Mastery"].notableColor
+                : _mastery__WEBPACK_IMPORTED_MODULE_3__["Mastery"].normalColor;
+        });
+        this.visMasteries.update(update);
+        this.starting.forEach(function (m) {
+            m.avaiable = true;
+            m.color = _mastery__WEBPACK_IMPORTED_MODULE_3__["Mastery"].avaiableColor;
+        });
+        this.visMasteries.update(this.starting);
+    };
     //#region Save and Load
     AllMasteries.prototype.getSave = function () {
         return {
@@ -5321,12 +5378,13 @@ var AllMasteries = /** @class */ (function () {
 /*!********************************************!*\
   !*** ./src/app/model/masteries/mastery.ts ***!
   \********************************************/
-/*! exports provided: MasteryTypes, Mastery */
+/*! exports provided: MasteryTypes, notable, Mastery */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MasteryTypes", function() { return MasteryTypes; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "notable", function() { return notable; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Mastery", function() { return Mastery; });
 /* harmony import */ var _positions_json__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./positions.json */ "./src/app/model/masteries/positions.json");
 var _positions_json__WEBPACK_IMPORTED_MODULE_0___namespace = /*#__PURE__*/Object.assign({}, _positions_json__WEBPACK_IMPORTED_MODULE_0__, {"default": _positions_json__WEBPACK_IMPORTED_MODULE_0__});

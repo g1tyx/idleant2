@@ -1104,7 +1104,7 @@ var AutoBuyTabComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngIf=\"bought\"\n  class=\"progress-static top\">\n  <div class=\"progress-meter\"\n    [attr.data-value]=\"progress\"></div>\n</div>\n<app-action-header [action]=\"autoBuy\"\n  [quantity]=\"autoBuy.quantity\"></app-action-header>\n\n<div class=\"clr-row clr-align-items-start\"\n  *ngIf=\"bought\">\n  <div class=\"clr-col\">\n\n    <label>优先级:</label>\n    <input placeholder=\"Priority\"\n      name=\"name\"\n      [(ngModel)]=\"autoBuy.priority\"\n      type=\"number\"\n      placeholder=\"1\"\n      step=\"1\"\n      size=\"3\"\n      (change)=\"reload()\" />\n\n  </div>\n  <div class=\"clr-col\">\n    <clr-checkbox [name]=\"autoBuy.id\"\n      [id]=\"autoBuy.id\"\n      [(clrChecked)]=\"autoBuy.active\"\n      [clrInline]=\"true\">\n      激活\n    </clr-checkbox>\n  </div>\n\n</div>\n<div class=\"clr-row clr-align-items-start\"\n  *ngIf=\"bought\">\n  <div class=\"clr-col\">\n    <span>\n      时间间隔:\n      <span class=\"monospace\">{{autoBuy.max}} </span>\n      秒\n    </span>\n    <span *ngIf=\"autoBuy.multiBuy.gt(1)\">\n      多重购买:\n      <span class=\"monospace\">{{autoBuy.multiBuy | format:true}} </span>\n    </span>\n  </div>\n</div>\n\n<app-buttons [action]=\"autoBuy\"></app-buttons>\n"
+module.exports = "<div *ngIf=\"bought\"\n     class=\"progress-static top\">\n  <div class=\"progress-meter\"\n       [attr.data-value]=\"progress\"></div>\n</div>\n<app-action-header [action]=\"autoBuy\"\n                   [quantity]=\"autoBuy.quantity\"></app-action-header>\n\n<div class=\"clr-row clr-align-items-start\"\n     *ngIf=\"bought\">\n  <div class=\"clr-col\">\n\n    <label>优先级:</label>\n    <input placeholder=\"Priority\"\n           name=\"name\"\n           [(ngModel)]=\"autoBuy.priority\"\n           type=\"number\"\n           placeholder=\"1\"\n           step=\"1\"\n           size=\"3\"\n           (change)=\"reload()\" />\n\n  </div>\n  <div class=\"clr-col\">\n    <clr-checkbox [name]=\"autoBuy.id\"\n                  [id]=\"autoBuy.id\"\n                  [(clrChecked)]=\"autoBuy.active\"\n                  (change)=\"reload()\"\n                  [clrInline]=\"true\">\n      激活\n    </clr-checkbox>\n  </div>\n\n</div>\n<div class=\"clr-row clr-align-items-start\"\n     *ngIf=\"bought\">\n  <div class=\"clr-col\">\n    <span>\n      时间间隔:\n      <span class=\"monospace\">{{autoBuy.max}} </span>\n      秒\n    </span>\n    <span *ngIf=\"autoBuy.multiBuy.gt(1)\">\n      多重购买:\n      <span class=\"monospace\">{{autoBuy.multiBuy | format:true}} </span>\n    </span>\n  </div>\n</div>\n\n<app-buttons [action]=\"autoBuy\"></app-buttons>\n"
 
 /***/ }),
 
@@ -2223,7 +2223,13 @@ var LabMenuComponent = /** @class */ (function () {
         toDo = repeating
             ? toDo.filter(function (r) { return !r.unlimited || r.quantity.lt(r.maxAutoBuyLevel); })
             : toDo.filter(function (r) { return !r.unlimited; });
-        return toDo.sort(function (r1, r2) { return r1.prices[0].price.cmp(r2.prices[0].price); });
+        toDo.forEach(function (r) {
+            r.reload();
+            r.reloadUserPrices();
+        });
+        return toDo.sort(function (r1, r2) {
+            return r1.prices[0].priceUser.cmp(r2.prices[0].priceUser);
+        });
     };
     LabMenuComponent.prototype.buy1 = function (rep) {
         if (rep === void 0) { rep = true; }
@@ -4863,6 +4869,7 @@ var Game = /** @class */ (function () {
         this.tabs.prestige.unlock();
         if (this.ms.kongregate)
             setTimeout(this.ms.sendKong.bind(this.ms), 10);
+        this.autoBuyManager.buildActiveList();
         return true;
     };
     Game.prototype.hasSecondMastery = function () {
@@ -6394,7 +6401,12 @@ var Research = /** @class */ (function (_super) {
             if (this.toUnlock) {
                 this.toUnlock.filter(function (i) { return !i.unlocked; }).forEach(function (u) { return u.unlock(); });
             }
+            this.reload();
             this.researches.reloadLists();
+            this.researches.game.autoBuyManager.buildActiveList();
+            this.researches.toDo.forEach(function (r) {
+                r.reloadAvailableTime();
+            });
             return true;
         }
         else {

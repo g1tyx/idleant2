@@ -339,12 +339,12 @@ var ButtonsComponent = /** @class */ (function () {
         if (this.action) {
             this.action.reloadUserPrices();
             this.action.reloadAvailableTime();
-            this.ceckSkip();
+            this.checkSkip();
         }
         this.sub = this.ms.updateEmitter.subscribe(function () {
             _this.action.reloadUserPrices();
             _this.action.reloadAvailableTime();
-            _this.ceckSkip();
+            _this.checkSkip();
             _this.cd.markForCheck();
         });
     };
@@ -358,7 +358,7 @@ var ButtonsComponent = /** @class */ (function () {
         this.action.buy(quantity);
         this.ms.updateEmitter.emit(1);
     };
-    ButtonsComponent.prototype.ceckSkip = function () {
+    ButtonsComponent.prototype.checkSkip = function () {
         this.canSkip = false;
         if (!this.action.canBuy && this.skippable && this.showTime) {
             this.minuteSkip = Math.ceil(Math.max(this.action.availableIn / 60000, 1));
@@ -492,7 +492,7 @@ var CantBuySignpostsComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<span [class.noEnought]=\"!canBuy\">\n  <span class=\"monospace\">{{price | format}}</span>\n  <!-- <a [routerLink]=\"'/nav/unit/'+unit.id\"> {{unit.name}}</a>, -->\n\n  <clr-signpost>\n    <a clrSignpostTrigger>\n      {{unit.name}},\n    </a>\n    <clr-signpost-content *clrIfOpen>\n      <h3 style=\"margin-top: 0\">{{unit.name}}</h3>\n      <p>\n        数量:\n        <span *ngIf=\"unit.quantity.abs().gt(0.001)\"\n              class=\"qta monospace\">\n          {{unit.quantity | format}}\n        </span>\n        <br />\n        <app-polynom [a]=\"unit.a\"\n                     [b]=\"unit.b\"\n                     [c]=\"unit.c\">\n        </app-polynom>\n      </p>\n      <a [routerLink]=\"'/nav/unit/'+unit.id\"\n         class=\"noRed\">\n        前往 {{unit.name}}\n      </a>\n    </clr-signpost-content>\n  </clr-signpost>\n\n</span>\n"
+module.exports = "<span [class.notEnough]=\"!canBuy\">\n  <span class=\"monospace\">{{price | format}}</span>\n  <!-- <a [routerLink]=\"'/nav/unit/'+unit.id\"> {{unit.name}}</a>, -->\n\n  <clr-signpost>\n    <a clrSignpostTrigger>\n      {{unit.name}},\n    </a>\n    <clr-signpost-content *clrIfOpen>\n      <h3 style=\"margin-top: 0\">{{unit.name}}</h3>\n      <p>\n        数量:\n        <span *ngIf=\"unit.quantity.abs().gt(0.001)\"\n              class=\"qta monospace\">\n          {{unit.quantity | format}}\n        </span>\n        <br />\n        <app-polynom [a]=\"unit.a\"\n                     [b]=\"unit.b\"\n                     [c]=\"unit.c\">\n        </app-polynom>\n      </p>\n      <a [routerLink]=\"'/nav/unit/'+unit.id\"\n         class=\"noRed\">\n        前往 {{unit.name}}\n      </a>\n    </clr-signpost-content>\n  </clr-signpost>\n\n</span>\n"
 
 /***/ }),
 
@@ -583,7 +583,7 @@ module.exports = "<clr-main-container *ngIf=\"ms.show\"\n                    [@f
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "app-material-nav {\n  min-height: -webkit-fit-content;\n  min-height: -moz-fit-content;\n  min-height: fit-content; }\n\n:host /deep/ .content-container .content-area {\n  padding: 0.225rem 0.45rem 0.45rem 0.45rem !important; }\n\n:host /deep/ .clr-row {\n  margin-left: -0.225rem !important;\n  margin-right: -0.225rem !important; }\n\n:host /deep/ h1 {\n  line-height: 1.6rem;\n  margin-top: 0; }\n\n:host /deep/ p {\n  margin-top: 0; }\n\n:host /deep/ .monospace {\n  font-family: RobotoMono, Consolas, Monaco, Courier, monospace !important;\n  font-size: 90%; }\n\n:host /deep/ .noEnought {\n  color: #c92100; }\n\n:host /deep/ .noEnought a:link :not(.noRed) {\n    color: #c92100; }\n\n:host /deep/ .noEnought a:visited :not(.noRed) {\n    color: #c92100; }\n\n:host /deep/ h6 {\n  margin-top: 0.6rem; }\n\n:host /deep/ .w-100 {\n  max-width: 100% !important; }\n\n:host /deep/ clr-signpost-content h3 {\n  margin-bottom: 0.3rem;\n  margin-top: 0; }\n\n:host /deep/ .nav-content {\n  padding-bottom: 1rem; }\n\n:host /deep/ .clr-vertical-nav {\n  padding-top: 0; }\n\n:host /deep/ clr-tree-node {\n  overflow-y: visible !important; }\n\n:host /deep/ .card {\n  margin-top: 0.4rem; }\n\n:host /deep/ .card h6 {\n    font-size: 0.75rem;\n    font-weight: 200;\n    letter-spacing: normal;\n    margin-bottom: 0.4rem;\n    margin-top: 0.1rem; }\n\n:host /deep/ .card .card-block .card-title {\n    margin-bottom: 0.4rem !important; }\n\n:host /deep/ .card :host /deep/ .card-block,\n  :host /deep/ .card .card-footer,\n  :host /deep/ .card .card-header,\n  :host /deep/ .card .card > .list,\n  :host /deep/ .card .card > .list-unstyled {\n    padding-bottom: 0.4rem;\n    padding-top: 0.4rem; }\n\n:host /deep/ .btn {\n  height: auto; }\n\n:host /deep/ app-cant-buy-signposts {\n  height: 1rem; }\n\n:host /deep/ clr-datagrid {\n  margin-top: 0;\n  padding-top: 0; }\n\n:host /deep/ .clr-vertical-nav .nav-trigger {\n  margin-top: 0; }\n\n@media screen and (max-width: 768px) {\n  app-material-nav {\n    display: none; } }\n\n@media screen and (max-width: 1050px) {\n  :host /deep/ .clr-col,\n  :host /deep/ .clr-col-1,\n  :host /deep/ .clr-col-2,\n  :host /deep/ .clr-col-3,\n  :host /deep/ .clr-col-4,\n  :host /deep/ .clr-col-5,\n  :host /deep/ .clr-col-6,\n  :host /deep/ .clr-col-7,\n  :host /deep/ .clr-col-8,\n  :host /deep/ .clr-col-9,\n  :host /deep/ .clr-col-10,\n  :host /deep/ .clr-col-11,\n  :host /deep/ .clr-col-12,\n  :host /deep/ .clr-col-xs,\n  :host /deep/ .clr-col-xs-1,\n  :host /deep/ .clr-col-xs-2,\n  :host /deep/ .clr-col-xs-3,\n  :host /deep/ .clr-col-xs-4,\n  :host /deep/ .clr-col-xs-5,\n  :host /deep/ .clr-col-xs-6,\n  :host /deep/ .clr-col-xs-7,\n  :host /deep/ .clr-col-xs-8,\n  :host /deep/ .clr-col-xs-9,\n  :host /deep/ .clr-col-xs-10,\n  :host /deep/ .clr-col-xs-11,\n  :host /deep/ .clr-col-xs-12,\n  :host /deep/ .clr-col-sm,\n  :host /deep/ .clr-col-sm-1,\n  :host /deep/ .clr-col-sm-2,\n  :host /deep/ .clr-col-sm-3,\n  :host /deep/ .clr-col-sm-4,\n  :host /deep/ .clr-col-sm-5,\n  :host /deep/ .clr-col-sm-6,\n  :host /deep/ .clr-col-sm-7,\n  :host /deep/ .clr-col-sm-8,\n  :host /deep/ .clr-col-sm-9,\n  :host /deep/ .clr-col-sm-10,\n  :host /deep/ .clr-col-sm-11,\n  :host /deep/ .clr-col-sm-12,\n  :host /deep/ .clr-col-md,\n  :host /deep/ .clr-col-md-1,\n  :host /deep/ .clr-col-md-2,\n  :host /deep/ .clr-col-md-3,\n  :host /deep/ .clr-col-md-4,\n  :host /deep/ .clr-col-md-5,\n  :host /deep/ .clr-col-md-6,\n  :host /deep/ .clr-col-md-7,\n  :host /deep/ .clr-col-md-8,\n  :host /deep/ .clr-col-md-9,\n  :host /deep/ .clr-col-md-10,\n  :host /deep/ .clr-col-md-11,\n  :host /deep/ .clr-col-md-12,\n  :host /deep/ .clr-col-lg,\n  :host /deep/ .clr-col-lg-1,\n  :host /deep/ .clr-col-lg-2,\n  :host /deep/ .clr-col-lg-3,\n  :host /deep/ .clr-col-lg-4,\n  :host /deep/ .clr-col-lg-5,\n  :host /deep/ .clr-col-lg-6,\n  :host /deep/ .clr-col-lg-7,\n  :host /deep/ .clr-col-lg-8,\n  :host /deep/ .clr-col-lg-9,\n  :host /deep/ .clr-col-lg-10,\n  :host /deep/ .clr-col-lg-11,\n  :host /deep/ .clr-col-lg-12,\n  :host /deep/ .clr-col-xl,\n  :host /deep/ .clr-col-xl-1,\n  :host /deep/ .clr-col-xl-2,\n  :host /deep/ .clr-col-xl-3,\n  :host /deep/ .clr-col-xl-4,\n  :host /deep/ .clr-col-xl-5,\n  :host /deep/ .clr-col-xl-6,\n  :host /deep/ .clr-col-xl-7,\n  :host /deep/ .clr-col-xl-8,\n  :host /deep/ .clr-col-xl-9,\n  :host /deep/ .clr-col-xl-10,\n  :host /deep/ .clr-col-xl-11,\n  :host /deep/ .clr-col-xl-12 {\n    padding-left: 0.2rem !important;\n    padding-right: 0.2rem !important; } }\n"
+module.exports = "app-material-nav {\n  min-height: -webkit-fit-content;\n  min-height: -moz-fit-content;\n  min-height: fit-content; }\n\n:host /deep/ .content-container .content-area {\n  padding: 0.225rem 0.45rem 0.45rem 0.45rem !important; }\n\n:host /deep/ .clr-row {\n  margin-left: -0.225rem !important;\n  margin-right: -0.225rem !important; }\n\n:host /deep/ h1 {\n  line-height: 1.6rem;\n  margin-top: 0; }\n\n:host /deep/ p {\n  margin-top: 0; }\n\n:host /deep/ .monospace {\n  font-family: RobotoMono, Consolas, Monaco, Courier, monospace !important;\n  font-size: 90%; }\n\n:host /deep/ .notEnough {\n  color: #c92100; }\n\n:host /deep/ .notEnough a:link :not(.noRed) {\n    color: #c92100; }\n\n:host /deep/ .notEnough a:visited :not(.noRed) {\n    color: #c92100; }\n\n:host /deep/ h6 {\n  margin-top: 0.6rem; }\n\n:host /deep/ .w-100 {\n  max-width: 100% !important; }\n\n:host /deep/ clr-signpost-content h3 {\n  margin-bottom: 0.3rem;\n  margin-top: 0; }\n\n:host /deep/ .nav-content {\n  padding-bottom: 1rem; }\n\n:host /deep/ .clr-vertical-nav {\n  padding-top: 0; }\n\n:host /deep/ clr-tree-node {\n  overflow-y: visible !important; }\n\n:host /deep/ .card {\n  margin-top: 0.4rem; }\n\n:host /deep/ .card h6 {\n    font-size: 0.75rem;\n    font-weight: 200;\n    letter-spacing: normal;\n    margin-bottom: 0.4rem;\n    margin-top: 0.1rem; }\n\n:host /deep/ .card .card-block .card-title {\n    margin-bottom: 0.4rem !important; }\n\n:host /deep/ .card :host /deep/ .card-block,\n  :host /deep/ .card .card-footer,\n  :host /deep/ .card .card-header,\n  :host /deep/ .card .card > .list,\n  :host /deep/ .card .card > .list-unstyled {\n    padding-bottom: 0.4rem;\n    padding-top: 0.4rem; }\n\n:host /deep/ .btn {\n  height: auto; }\n\n:host /deep/ app-cant-buy-signposts {\n  height: 1rem; }\n\n:host /deep/ clr-datagrid {\n  margin-top: 0;\n  padding-top: 0; }\n\n:host /deep/ .clr-vertical-nav .nav-trigger {\n  margin-top: 0; }\n\n@media screen and (max-width: 768px) {\n  app-material-nav {\n    display: none; } }\n\n@media screen and (max-width: 1050px) {\n  :host /deep/ .clr-col,\n  :host /deep/ .clr-col-1,\n  :host /deep/ .clr-col-2,\n  :host /deep/ .clr-col-3,\n  :host /deep/ .clr-col-4,\n  :host /deep/ .clr-col-5,\n  :host /deep/ .clr-col-6,\n  :host /deep/ .clr-col-7,\n  :host /deep/ .clr-col-8,\n  :host /deep/ .clr-col-9,\n  :host /deep/ .clr-col-10,\n  :host /deep/ .clr-col-11,\n  :host /deep/ .clr-col-12,\n  :host /deep/ .clr-col-xs,\n  :host /deep/ .clr-col-xs-1,\n  :host /deep/ .clr-col-xs-2,\n  :host /deep/ .clr-col-xs-3,\n  :host /deep/ .clr-col-xs-4,\n  :host /deep/ .clr-col-xs-5,\n  :host /deep/ .clr-col-xs-6,\n  :host /deep/ .clr-col-xs-7,\n  :host /deep/ .clr-col-xs-8,\n  :host /deep/ .clr-col-xs-9,\n  :host /deep/ .clr-col-xs-10,\n  :host /deep/ .clr-col-xs-11,\n  :host /deep/ .clr-col-xs-12,\n  :host /deep/ .clr-col-sm,\n  :host /deep/ .clr-col-sm-1,\n  :host /deep/ .clr-col-sm-2,\n  :host /deep/ .clr-col-sm-3,\n  :host /deep/ .clr-col-sm-4,\n  :host /deep/ .clr-col-sm-5,\n  :host /deep/ .clr-col-sm-6,\n  :host /deep/ .clr-col-sm-7,\n  :host /deep/ .clr-col-sm-8,\n  :host /deep/ .clr-col-sm-9,\n  :host /deep/ .clr-col-sm-10,\n  :host /deep/ .clr-col-sm-11,\n  :host /deep/ .clr-col-sm-12,\n  :host /deep/ .clr-col-md,\n  :host /deep/ .clr-col-md-1,\n  :host /deep/ .clr-col-md-2,\n  :host /deep/ .clr-col-md-3,\n  :host /deep/ .clr-col-md-4,\n  :host /deep/ .clr-col-md-5,\n  :host /deep/ .clr-col-md-6,\n  :host /deep/ .clr-col-md-7,\n  :host /deep/ .clr-col-md-8,\n  :host /deep/ .clr-col-md-9,\n  :host /deep/ .clr-col-md-10,\n  :host /deep/ .clr-col-md-11,\n  :host /deep/ .clr-col-md-12,\n  :host /deep/ .clr-col-lg,\n  :host /deep/ .clr-col-lg-1,\n  :host /deep/ .clr-col-lg-2,\n  :host /deep/ .clr-col-lg-3,\n  :host /deep/ .clr-col-lg-4,\n  :host /deep/ .clr-col-lg-5,\n  :host /deep/ .clr-col-lg-6,\n  :host /deep/ .clr-col-lg-7,\n  :host /deep/ .clr-col-lg-8,\n  :host /deep/ .clr-col-lg-9,\n  :host /deep/ .clr-col-lg-10,\n  :host /deep/ .clr-col-lg-11,\n  :host /deep/ .clr-col-lg-12,\n  :host /deep/ .clr-col-xl,\n  :host /deep/ .clr-col-xl-1,\n  :host /deep/ .clr-col-xl-2,\n  :host /deep/ .clr-col-xl-3,\n  :host /deep/ .clr-col-xl-4,\n  :host /deep/ .clr-col-xl-5,\n  :host /deep/ .clr-col-xl-6,\n  :host /deep/ .clr-col-xl-7,\n  :host /deep/ .clr-col-xl-8,\n  :host /deep/ .clr-col-xl-9,\n  :host /deep/ .clr-col-xl-10,\n  :host /deep/ .clr-col-xl-11,\n  :host /deep/ .clr-col-xl-12 {\n    padding-left: 0.2rem !important;\n    padding-right: 0.2rem !important; } }\n"
 
 /***/ }),
 
@@ -749,45 +749,47 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _change_world_change_world_component__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./change-world/change-world.component */ "./src/app/change-world/change-world.component.ts");
 /* harmony import */ var _end_in_pipe__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./end-in.pipe */ "./src/app/end-in.pipe.ts");
 /* harmony import */ var _format_pipe__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./format.pipe */ "./src/app/format.pipe.ts");
-/* harmony import */ var _group_tabs_group_tabs_component__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./group-tabs/group-tabs.component */ "./src/app/group-tabs/group-tabs.component.ts");
-/* harmony import */ var _group_tabs_unit_group_unit_group_component__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./group-tabs/unit-group/unit-group.component */ "./src/app/group-tabs/unit-group/unit-group.component.ts");
-/* harmony import */ var _header_header_component__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./header/header.component */ "./src/app/header/header.component.ts");
-/* harmony import */ var _home_bug_card_bug_card_component__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./home/bug-card/bug-card.component */ "./src/app/home/bug-card/bug-card.component.ts");
-/* harmony import */ var _home_home_component__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./home/home.component */ "./src/app/home/home.component.ts");
-/* harmony import */ var _laboratory_lab_menu_lab_menu_component__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./laboratory/lab-menu/lab-menu.component */ "./src/app/laboratory/lab-menu/lab-menu.component.ts");
-/* harmony import */ var _laboratory_laboratory_component__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./laboratory/laboratory.component */ "./src/app/laboratory/laboratory.component.ts");
-/* harmony import */ var _main_service__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./main.service */ "./src/app/main.service.ts");
-/* harmony import */ var _mastery_mastery_component__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ./mastery/mastery.component */ "./src/app/mastery/mastery.component.ts");
-/* harmony import */ var _material_nav_material_nav_component__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ./material-nav/material-nav.component */ "./src/app/material-nav/material-nav.component.ts");
-/* harmony import */ var _material_nav_tab_tab_component__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ./material-nav/tab/tab.component */ "./src/app/material-nav/tab/tab.component.ts");
-/* harmony import */ var _nav_nav_component__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ./nav/nav.component */ "./src/app/nav/nav.component.ts");
-/* harmony import */ var _nav_unit_line_unit_line_component__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ./nav/unit-line/unit-line.component */ "./src/app/nav/unit-line/unit-line.component.ts");
-/* harmony import */ var _options_nav_credits_credits_component__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! ./options-nav/credits/credits.component */ "./src/app/options-nav/credits/credits.component.ts");
-/* harmony import */ var _options_nav_options_nav_component__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! ./options-nav/options-nav.component */ "./src/app/options-nav/options-nav.component.ts");
-/* harmony import */ var _options_nav_save_save_component__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(/*! ./options-nav/save/save.component */ "./src/app/options-nav/save/save.component.ts");
-/* harmony import */ var _options_nav_stats_stats_component__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(/*! ./options-nav/stats/stats.component */ "./src/app/options-nav/stats/stats.component.ts");
-/* harmony import */ var _options_nav_ui_options_ui_options_component__WEBPACK_IMPORTED_MODULE_38__ = __webpack_require__(/*! ./options-nav/ui-options/ui-options.component */ "./src/app/options-nav/ui-options/ui-options.component.ts");
-/* harmony import */ var _options_service__WEBPACK_IMPORTED_MODULE_39__ = __webpack_require__(/*! ./options.service */ "./src/app/options.service.ts");
-/* harmony import */ var _polynom_polynom_component__WEBPACK_IMPORTED_MODULE_40__ = __webpack_require__(/*! ./polynom/polynom.component */ "./src/app/polynom/polynom.component.ts");
-/* harmony import */ var _prestige_buy_prestige_buy_component__WEBPACK_IMPORTED_MODULE_41__ = __webpack_require__(/*! ./prestige-buy/prestige-buy.component */ "./src/app/prestige-buy/prestige-buy.component.ts");
-/* harmony import */ var _prestige_group_prestige_group_component__WEBPACK_IMPORTED_MODULE_42__ = __webpack_require__(/*! ./prestige-group/prestige-group.component */ "./src/app/prestige-group/prestige-group.component.ts");
-/* harmony import */ var _prestige_nav_prestige_nav_component__WEBPACK_IMPORTED_MODULE_43__ = __webpack_require__(/*! ./prestige-nav/prestige-nav.component */ "./src/app/prestige-nav/prestige-nav.component.ts");
-/* harmony import */ var _prestige_prestige_component__WEBPACK_IMPORTED_MODULE_44__ = __webpack_require__(/*! ./prestige/prestige.component */ "./src/app/prestige/prestige.component.ts");
-/* harmony import */ var _production_signposts_production_signposts_component__WEBPACK_IMPORTED_MODULE_45__ = __webpack_require__(/*! ./production-signposts/production-signposts.component */ "./src/app/production-signposts/production-signposts.component.ts");
-/* harmony import */ var _research_name_name_component__WEBPACK_IMPORTED_MODULE_46__ = __webpack_require__(/*! ./research/name/name.component */ "./src/app/research/name/name.component.ts");
-/* harmony import */ var _research_research_component__WEBPACK_IMPORTED_MODULE_47__ = __webpack_require__(/*! ./research/research.component */ "./src/app/research/research.component.ts");
-/* harmony import */ var _roman_pipe__WEBPACK_IMPORTED_MODULE_48__ = __webpack_require__(/*! ./roman.pipe */ "./src/app/roman.pipe.ts");
-/* harmony import */ var _unit_tabs_made_by_chart_made_by_chart_component__WEBPACK_IMPORTED_MODULE_49__ = __webpack_require__(/*! ./unit-tabs/made-by-chart/made-by-chart.component */ "./src/app/unit-tabs/made-by-chart/made-by-chart.component.ts");
-/* harmony import */ var _unit_tabs_unit_auto_buy_unit_auto_buy_component__WEBPACK_IMPORTED_MODULE_50__ = __webpack_require__(/*! ./unit-tabs/unit-auto-buy/unit-auto-buy.component */ "./src/app/unit-tabs/unit-auto-buy/unit-auto-buy.component.ts");
-/* harmony import */ var _unit_tabs_unit_tabs_component__WEBPACK_IMPORTED_MODULE_51__ = __webpack_require__(/*! ./unit-tabs/unit-tabs.component */ "./src/app/unit-tabs/unit-tabs.component.ts");
-/* harmony import */ var _unit_tabs_unit_unit_component__WEBPACK_IMPORTED_MODULE_52__ = __webpack_require__(/*! ./unit-tabs/unit/unit.component */ "./src/app/unit-tabs/unit/unit.component.ts");
-/* harmony import */ var _world_world_component__WEBPACK_IMPORTED_MODULE_53__ = __webpack_require__(/*! ./world/world.component */ "./src/app/world/world.component.ts");
+/* harmony import */ var _group_tabs_group_auto_buy_group_auto_buy_component__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./group-tabs/group-auto-buy/group-auto-buy.component */ "./src/app/group-tabs/group-auto-buy/group-auto-buy.component.ts");
+/* harmony import */ var _group_tabs_group_tabs_component__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./group-tabs/group-tabs.component */ "./src/app/group-tabs/group-tabs.component.ts");
+/* harmony import */ var _group_tabs_unit_group_unit_group_component__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./group-tabs/unit-group/unit-group.component */ "./src/app/group-tabs/unit-group/unit-group.component.ts");
+/* harmony import */ var _header_header_component__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./header/header.component */ "./src/app/header/header.component.ts");
+/* harmony import */ var _home_bug_card_bug_card_component__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./home/bug-card/bug-card.component */ "./src/app/home/bug-card/bug-card.component.ts");
+/* harmony import */ var _home_home_component__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./home/home.component */ "./src/app/home/home.component.ts");
+/* harmony import */ var _laboratory_lab_menu_lab_menu_component__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./laboratory/lab-menu/lab-menu.component */ "./src/app/laboratory/lab-menu/lab-menu.component.ts");
+/* harmony import */ var _laboratory_laboratory_component__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./laboratory/laboratory.component */ "./src/app/laboratory/laboratory.component.ts");
+/* harmony import */ var _main_service__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ./main.service */ "./src/app/main.service.ts");
+/* harmony import */ var _mastery_mastery_component__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ./mastery/mastery.component */ "./src/app/mastery/mastery.component.ts");
+/* harmony import */ var _material_nav_material_nav_component__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ./material-nav/material-nav.component */ "./src/app/material-nav/material-nav.component.ts");
+/* harmony import */ var _material_nav_tab_tab_component__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ./material-nav/tab/tab.component */ "./src/app/material-nav/tab/tab.component.ts");
+/* harmony import */ var _nav_nav_component__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ./nav/nav.component */ "./src/app/nav/nav.component.ts");
+/* harmony import */ var _nav_unit_line_unit_line_component__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! ./nav/unit-line/unit-line.component */ "./src/app/nav/unit-line/unit-line.component.ts");
+/* harmony import */ var _options_nav_credits_credits_component__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! ./options-nav/credits/credits.component */ "./src/app/options-nav/credits/credits.component.ts");
+/* harmony import */ var _options_nav_options_nav_component__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(/*! ./options-nav/options-nav.component */ "./src/app/options-nav/options-nav.component.ts");
+/* harmony import */ var _options_nav_save_save_component__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(/*! ./options-nav/save/save.component */ "./src/app/options-nav/save/save.component.ts");
+/* harmony import */ var _options_nav_stats_stats_component__WEBPACK_IMPORTED_MODULE_38__ = __webpack_require__(/*! ./options-nav/stats/stats.component */ "./src/app/options-nav/stats/stats.component.ts");
+/* harmony import */ var _options_nav_ui_options_ui_options_component__WEBPACK_IMPORTED_MODULE_39__ = __webpack_require__(/*! ./options-nav/ui-options/ui-options.component */ "./src/app/options-nav/ui-options/ui-options.component.ts");
+/* harmony import */ var _options_service__WEBPACK_IMPORTED_MODULE_40__ = __webpack_require__(/*! ./options.service */ "./src/app/options.service.ts");
+/* harmony import */ var _polynom_polynom_component__WEBPACK_IMPORTED_MODULE_41__ = __webpack_require__(/*! ./polynom/polynom.component */ "./src/app/polynom/polynom.component.ts");
+/* harmony import */ var _prestige_buy_prestige_buy_component__WEBPACK_IMPORTED_MODULE_42__ = __webpack_require__(/*! ./prestige-buy/prestige-buy.component */ "./src/app/prestige-buy/prestige-buy.component.ts");
+/* harmony import */ var _prestige_group_prestige_group_component__WEBPACK_IMPORTED_MODULE_43__ = __webpack_require__(/*! ./prestige-group/prestige-group.component */ "./src/app/prestige-group/prestige-group.component.ts");
+/* harmony import */ var _prestige_nav_prestige_nav_component__WEBPACK_IMPORTED_MODULE_44__ = __webpack_require__(/*! ./prestige-nav/prestige-nav.component */ "./src/app/prestige-nav/prestige-nav.component.ts");
+/* harmony import */ var _prestige_prestige_component__WEBPACK_IMPORTED_MODULE_45__ = __webpack_require__(/*! ./prestige/prestige.component */ "./src/app/prestige/prestige.component.ts");
+/* harmony import */ var _production_signposts_production_signposts_component__WEBPACK_IMPORTED_MODULE_46__ = __webpack_require__(/*! ./production-signposts/production-signposts.component */ "./src/app/production-signposts/production-signposts.component.ts");
+/* harmony import */ var _research_name_name_component__WEBPACK_IMPORTED_MODULE_47__ = __webpack_require__(/*! ./research/name/name.component */ "./src/app/research/name/name.component.ts");
+/* harmony import */ var _research_research_component__WEBPACK_IMPORTED_MODULE_48__ = __webpack_require__(/*! ./research/research.component */ "./src/app/research/research.component.ts");
+/* harmony import */ var _roman_pipe__WEBPACK_IMPORTED_MODULE_49__ = __webpack_require__(/*! ./roman.pipe */ "./src/app/roman.pipe.ts");
+/* harmony import */ var _unit_tabs_made_by_chart_made_by_chart_component__WEBPACK_IMPORTED_MODULE_50__ = __webpack_require__(/*! ./unit-tabs/made-by-chart/made-by-chart.component */ "./src/app/unit-tabs/made-by-chart/made-by-chart.component.ts");
+/* harmony import */ var _unit_tabs_unit_auto_buy_unit_auto_buy_component__WEBPACK_IMPORTED_MODULE_51__ = __webpack_require__(/*! ./unit-tabs/unit-auto-buy/unit-auto-buy.component */ "./src/app/unit-tabs/unit-auto-buy/unit-auto-buy.component.ts");
+/* harmony import */ var _unit_tabs_unit_tabs_component__WEBPACK_IMPORTED_MODULE_52__ = __webpack_require__(/*! ./unit-tabs/unit-tabs.component */ "./src/app/unit-tabs/unit-tabs.component.ts");
+/* harmony import */ var _unit_tabs_unit_unit_component__WEBPACK_IMPORTED_MODULE_53__ = __webpack_require__(/*! ./unit-tabs/unit/unit.component */ "./src/app/unit-tabs/unit/unit.component.ts");
+/* harmony import */ var _world_world_component__WEBPACK_IMPORTED_MODULE_54__ = __webpack_require__(/*! ./world/world.component */ "./src/app/world/world.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -849,48 +851,49 @@ var AppModule = /** @class */ (function () {
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["NgModule"])({
             declarations: [
                 _app_component__WEBPACK_IMPORTED_MODULE_14__["AppComponent"],
-                _header_header_component__WEBPACK_IMPORTED_MODULE_23__["HeaderComponent"],
-                _nav_nav_component__WEBPACK_IMPORTED_MODULE_32__["NavComponent"],
-                _unit_tabs_unit_unit_component__WEBPACK_IMPORTED_MODULE_52__["UnitComponent"],
+                _header_header_component__WEBPACK_IMPORTED_MODULE_24__["HeaderComponent"],
+                _nav_nav_component__WEBPACK_IMPORTED_MODULE_33__["NavComponent"],
+                _unit_tabs_unit_unit_component__WEBPACK_IMPORTED_MODULE_53__["UnitComponent"],
                 _format_pipe__WEBPACK_IMPORTED_MODULE_20__["FormatPipe"],
                 _action_action_component__WEBPACK_IMPORTED_MODULE_10__["ActionComponent"],
-                _nav_unit_line_unit_line_component__WEBPACK_IMPORTED_MODULE_33__["UnitLineComponent"],
+                _nav_unit_line_unit_line_component__WEBPACK_IMPORTED_MODULE_34__["UnitLineComponent"],
                 _action_price_line_price_line_component__WEBPACK_IMPORTED_MODULE_13__["PriceLineComponent"],
-                _polynom_polynom_component__WEBPACK_IMPORTED_MODULE_40__["PolynomComponent"],
-                _options_nav_options_nav_component__WEBPACK_IMPORTED_MODULE_35__["OptionsNavComponent"],
-                _options_nav_save_save_component__WEBPACK_IMPORTED_MODULE_36__["SaveComponent"],
-                _laboratory_laboratory_component__WEBPACK_IMPORTED_MODULE_27__["LaboratoryComponent"],
+                _polynom_polynom_component__WEBPACK_IMPORTED_MODULE_41__["PolynomComponent"],
+                _options_nav_options_nav_component__WEBPACK_IMPORTED_MODULE_36__["OptionsNavComponent"],
+                _options_nav_save_save_component__WEBPACK_IMPORTED_MODULE_37__["SaveComponent"],
+                _laboratory_laboratory_component__WEBPACK_IMPORTED_MODULE_28__["LaboratoryComponent"],
                 _end_in_pipe__WEBPACK_IMPORTED_MODULE_19__["EndInPipe"],
-                _research_research_component__WEBPACK_IMPORTED_MODULE_47__["ResearchComponent"],
-                _material_nav_material_nav_component__WEBPACK_IMPORTED_MODULE_30__["MaterialNavComponent"],
-                _production_signposts_production_signposts_component__WEBPACK_IMPORTED_MODULE_45__["ProductionSignpostsComponent"],
+                _research_research_component__WEBPACK_IMPORTED_MODULE_48__["ResearchComponent"],
+                _material_nav_material_nav_component__WEBPACK_IMPORTED_MODULE_31__["MaterialNavComponent"],
+                _production_signposts_production_signposts_component__WEBPACK_IMPORTED_MODULE_46__["ProductionSignpostsComponent"],
                 _action_cant_buy_signposts_cant_buy_signposts_component__WEBPACK_IMPORTED_MODULE_12__["CantBuySignpostsComponent"],
-                _group_tabs_unit_group_unit_group_component__WEBPACK_IMPORTED_MODULE_22__["UnitGroupComponent"],
+                _group_tabs_unit_group_unit_group_component__WEBPACK_IMPORTED_MODULE_23__["UnitGroupComponent"],
                 _action_group_action_group_component__WEBPACK_IMPORTED_MODULE_8__["ActionGroupComponent"],
-                _material_nav_tab_tab_component__WEBPACK_IMPORTED_MODULE_31__["TabComponent"],
-                _world_world_component__WEBPACK_IMPORTED_MODULE_53__["WorldComponent"],
+                _material_nav_tab_tab_component__WEBPACK_IMPORTED_MODULE_32__["TabComponent"],
+                _world_world_component__WEBPACK_IMPORTED_MODULE_54__["WorldComponent"],
                 _change_world_change_world_component__WEBPACK_IMPORTED_MODULE_18__["ChangeWorldComponent"],
-                _prestige_prestige_component__WEBPACK_IMPORTED_MODULE_44__["PrestigeComponent"],
-                _options_nav_ui_options_ui_options_component__WEBPACK_IMPORTED_MODULE_38__["UiOptionsComponent"],
-                _prestige_nav_prestige_nav_component__WEBPACK_IMPORTED_MODULE_43__["PrestigeNavComponent"],
-                _prestige_group_prestige_group_component__WEBPACK_IMPORTED_MODULE_42__["PrestigeGroupComponent"],
-                _prestige_buy_prestige_buy_component__WEBPACK_IMPORTED_MODULE_41__["PrestigeBuyComponent"],
+                _prestige_prestige_component__WEBPACK_IMPORTED_MODULE_45__["PrestigeComponent"],
+                _options_nav_ui_options_ui_options_component__WEBPACK_IMPORTED_MODULE_39__["UiOptionsComponent"],
+                _prestige_nav_prestige_nav_component__WEBPACK_IMPORTED_MODULE_44__["PrestigeNavComponent"],
+                _prestige_group_prestige_group_component__WEBPACK_IMPORTED_MODULE_43__["PrestigeGroupComponent"],
+                _prestige_buy_prestige_buy_component__WEBPACK_IMPORTED_MODULE_42__["PrestigeBuyComponent"],
                 _auto_buy_auto_buy_component__WEBPACK_IMPORTED_MODULE_17__["AutoBuyComponent"],
-                _unit_tabs_unit_auto_buy_unit_auto_buy_component__WEBPACK_IMPORTED_MODULE_50__["UnitAutoBuyComponent"],
-                _unit_tabs_unit_tabs_component__WEBPACK_IMPORTED_MODULE_51__["UnitTabsComponent"],
+                _unit_tabs_unit_auto_buy_unit_auto_buy_component__WEBPACK_IMPORTED_MODULE_51__["UnitAutoBuyComponent"],
+                _unit_tabs_unit_tabs_component__WEBPACK_IMPORTED_MODULE_52__["UnitTabsComponent"],
                 _action_buttons_buttons_component__WEBPACK_IMPORTED_MODULE_11__["ButtonsComponent"],
                 _action_action_header_action_header_component__WEBPACK_IMPORTED_MODULE_9__["ActionHeaderComponent"],
-                _options_nav_stats_stats_component__WEBPACK_IMPORTED_MODULE_37__["StatsComponent"],
-                _mastery_mastery_component__WEBPACK_IMPORTED_MODULE_29__["MasteryComponent"],
-                _research_name_name_component__WEBPACK_IMPORTED_MODULE_46__["NameComponent"],
-                _roman_pipe__WEBPACK_IMPORTED_MODULE_48__["RomanPipe"],
+                _options_nav_stats_stats_component__WEBPACK_IMPORTED_MODULE_38__["StatsComponent"],
+                _mastery_mastery_component__WEBPACK_IMPORTED_MODULE_30__["MasteryComponent"],
+                _research_name_name_component__WEBPACK_IMPORTED_MODULE_47__["NameComponent"],
+                _roman_pipe__WEBPACK_IMPORTED_MODULE_49__["RomanPipe"],
                 _auto_buy_tab_auto_buy_tab_component__WEBPACK_IMPORTED_MODULE_16__["AutoBuyTabComponent"],
-                _home_home_component__WEBPACK_IMPORTED_MODULE_25__["HomeComponent"],
-                _group_tabs_group_tabs_component__WEBPACK_IMPORTED_MODULE_21__["GroupTabsComponent"],
-                _laboratory_lab_menu_lab_menu_component__WEBPACK_IMPORTED_MODULE_26__["LabMenuComponent"],
-                _home_bug_card_bug_card_component__WEBPACK_IMPORTED_MODULE_24__["BugCardComponent"],
-                _unit_tabs_made_by_chart_made_by_chart_component__WEBPACK_IMPORTED_MODULE_49__["MadeByChartComponent"],
-                _options_nav_credits_credits_component__WEBPACK_IMPORTED_MODULE_34__["CreditsComponent"]
+                _home_home_component__WEBPACK_IMPORTED_MODULE_26__["HomeComponent"],
+                _group_tabs_group_tabs_component__WEBPACK_IMPORTED_MODULE_22__["GroupTabsComponent"],
+                _laboratory_lab_menu_lab_menu_component__WEBPACK_IMPORTED_MODULE_27__["LabMenuComponent"],
+                _home_bug_card_bug_card_component__WEBPACK_IMPORTED_MODULE_25__["BugCardComponent"],
+                _unit_tabs_made_by_chart_made_by_chart_component__WEBPACK_IMPORTED_MODULE_50__["MadeByChartComponent"],
+                _options_nav_credits_credits_component__WEBPACK_IMPORTED_MODULE_35__["CreditsComponent"],
+                _group_tabs_group_auto_buy_group_auto_buy_component__WEBPACK_IMPORTED_MODULE_21__["GroupAutoBuyComponent"]
             ],
             imports: [
                 _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_3__["BrowserAnimationsModule"],
@@ -906,9 +909,9 @@ var AppModule = /** @class */ (function () {
                 primeng_slider__WEBPACK_IMPORTED_MODULE_7__["SliderModule"],
                 _clr_angular__WEBPACK_IMPORTED_MODULE_5__["ClrFormsNextModule"]
             ],
-            providers: [ngx_toastr__WEBPACK_IMPORTED_MODULE_6__["ToastrService"], _options_service__WEBPACK_IMPORTED_MODULE_39__["OptionsService"], _main_service__WEBPACK_IMPORTED_MODULE_28__["MainService"]],
+            providers: [ngx_toastr__WEBPACK_IMPORTED_MODULE_6__["ToastrService"], _options_service__WEBPACK_IMPORTED_MODULE_40__["OptionsService"], _main_service__WEBPACK_IMPORTED_MODULE_29__["MainService"]],
             bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_14__["AppComponent"]],
-            exports: [_options_nav_credits_credits_component__WEBPACK_IMPORTED_MODULE_34__["CreditsComponent"]]
+            exports: [_options_nav_credits_credits_component__WEBPACK_IMPORTED_MODULE_35__["CreditsComponent"]]
         })
     ], AppModule);
     return AppModule;
@@ -1104,7 +1107,7 @@ var AutoBuyTabComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngIf=\"bought\"\n     class=\"progress-static top\">\n  <div class=\"progress-meter\"\n       [attr.data-value]=\"progress\"></div>\n</div>\n<app-action-header [action]=\"autoBuy\"\n                   [quantity]=\"autoBuy.quantity\"></app-action-header>\n\n<div class=\"clr-row clr-align-items-start\"\n     *ngIf=\"bought\">\n  <div class=\"clr-col\">\n\n    <label>优先级:</label>\n    <input placeholder=\"Priority\"\n           name=\"name\"\n           [(ngModel)]=\"autoBuy.priority\"\n           type=\"number\"\n           placeholder=\"1\"\n           step=\"1\"\n           size=\"3\"\n           (change)=\"reload()\" />\n\n  </div>\n  <div class=\"clr-col\">\n    <clr-checkbox [name]=\"autoBuy.id\"\n                  [id]=\"autoBuy.id\"\n                  [(clrChecked)]=\"autoBuy.active\"\n                  (change)=\"reload()\"\n                  [clrInline]=\"true\">\n      激活\n    </clr-checkbox>\n  </div>\n\n</div>\n<div class=\"clr-row clr-align-items-start\"\n     *ngIf=\"bought\">\n  <div class=\"clr-col\">\n    <span>\n      时间间隔:\n      <span class=\"monospace\">{{autoBuy.max}} </span>\n      秒\n    </span>\n    <span *ngIf=\"autoBuy.multiBuy.gt(1)\">\n      多重购买:\n      <span class=\"monospace\">{{autoBuy.multiBuy | format:true}} </span>\n    </span>\n  </div>\n</div>\n\n<app-buttons [action]=\"autoBuy\"></app-buttons>\n"
+module.exports = "<div *ngIf=\"bought\"\n     class=\"progress-static top\">\n  <div class=\"progress-meter\"\n       [attr.data-value]=\"progress\"></div>\n</div>\n<app-action-header [action]=\"autoBuy\"\n                   [quantity]=\"autoBuy.quantity\"></app-action-header>\n\n<div class=\"clr-row clr-justify-content-between\"\n     *ngIf=\"bought\">\n  <div>\n    <label>优先级:</label>\n    <input placeholder=\"Priority\"\n           name=\"name\"\n           [(ngModel)]=\"autoBuy.priority\"\n           type=\"number\"\n           placeholder=\"1\"\n           step=\"1\"\n           size=\"2\"\n           (change)=\"reload()\" />\n\n  </div>\n  <div>\n    <label>最大购买多个:</label>\n    <clr-signpost>\n      <clr-signpost-content *clrIfOpen>\n        <h3 style=\"margin-top: 0\">最大购买倍数</h3>\n        <p>\n          乘以最大可用购买。 (例如: 0.5 => 最大的一半)。\n          使用它可以防止生产失败和/或节省宝贵的资源。\n          范围是 0 - 1\n        </p>\n      </clr-signpost-content>\n    </clr-signpost>\n    <div class=\"clr-control-container\"\n         [ngClass]=\"{'clr-error' : autoBuy.priceSavePercent <0 || autoBuy.priceSavePercent >1}\">\n      <input class=\"clr-input\"\n             placeholder=\"Priority\"\n             name=\"price_m\"\n             [(ngModel)]=\"autoBuy.priceSavePercent\"\n             type=\"number\"\n             placeholder=\"1\"\n             min=\"0\"\n             max=\"1\"\n             step=\"0.01\"\n             size=\"2\" />\n      <clr-icon class=\"clr-validate-icon\"\n                shape=\"exclamation-circle\"></clr-icon>\n    </div>\n  </div>\n  <div>\n    <clr-checkbox [name]=\"autoBuy.id\"\n                  [id]=\"autoBuy.id\"\n                  [(clrChecked)]=\"autoBuy.active\"\n                  (change)=\"reload()\"\n                  [clrInline]=\"true\">\n      激活\n    </clr-checkbox>\n  </div>\n\n</div>\n<div class=\"clr-row clr-align-items-start\"\n     *ngIf=\"bought\">\n  <div class=\"clr-col\">\n    <span>\n      时间间隔:\n      <span class=\"monospace\">{{autoBuy.max}} </span>\n      秒\n    </span>\n    <span *ngIf=\"autoBuy.multiBuy.gt(1)\">\n      多重购买:\n      <span class=\"monospace\">{{autoBuy.multiBuy | format:true}} </span>\n    </span>\n  </div>\n</div>\n\n<app-buttons [action]=\"autoBuy\"></app-buttons>\n"
 
 /***/ }),
 
@@ -1115,7 +1118,7 @@ module.exports = "<div *ngIf=\"bought\"\n     class=\"progress-static top\">\n  
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "input {\n  max-width: 4rem; }\n"
+module.exports = "input {\n  max-width: 3rem; }\n"
 
 /***/ }),
 
@@ -1199,7 +1202,7 @@ var AutoBuyComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<h1>从这里你可以旅行到新的世界.</h1>\n\n\n<clr-alert [clrAlertType]=\"'alert-success'\"\n           [clrAlertClosable]=\"false\"\n           *ngIf=\"ms.game.canTravel; else warn\">\n  <div class=\"alert-item\">\n    <span class=\"alert-text\">\n      你将会得到\n      <span class=\"monospace\">{{ms.game.currentWorld.prestige}} </span>\n      经验\n\n            <span *ngIf=\"ms.game.hasSecondMastery()\">\n        和 1 精通点\n      </span>\n    </span>\n  </div>\n</clr-alert>\n\n<ng-template #warn>\n  <clr-alert [clrAlertType]=\"'alert-danger'\"\n             [clrAlertClosable]=\"false\">\n    <div class=\"alert-item\">\n      <span class=\"alert-text\">\n        如果您选择跳过，你将得不到经验奖励!\n      </span>\n    </div>\n  </clr-alert>\n</ng-template>\n\n\n<clr-alert [clrAlertType]=\"'alert-warning'\"\n           [clrAlertClosable]=\"false\"\n           *ngIf=\"!ms.game.researches.mastery.done\">\n  <div class=\"alert-item \">\n    <span class=\"alert-text\">\n      精通研究未完成。\n    </span>\n  </div>\n</clr-alert>\n\n<button class=\"btn\"\n        (click)=\"randomize()\">随机</button>\n\n<span>\n  最低等级:\n  <span class=\"monospace\">\n    {{minLevel | format:true}}\n  </span>\n</span>\n<span>\n  最高等级:\n  <span class=\"monospace\">\n    {{maxLevel | format:true}}\n  </span>\n</span>\n\n<p-slider [(ngModel)]=\"rangeValues\"\n          [range]=\"true\"\n          [min]=\"1\"\n          [max]=\"maxSafeInt\"\n          (onChange)=\"setLevels()\"></p-slider>\n\n<!-- <div class=\"card-columns\">\n    <app-world [world]=\"world\"\n               *ngFor=\"let world of ms.game.nextWorlds; trackBy:getWorldId\"></app-world>\n  </div> -->\n\n<div class=\"clr-row clr-justify-content-center\">\n  <div *ngFor=\"let world of ms.game.nextWorlds; trackBy:getWorldId\"\n       class=\"worldMaxWidt clr-col-sm-12 clr-col-md-4\">\n    <app-world [world]=\"world\"></app-world>\n  </div>\n</div>\n\n\n<clr-modal [(clrModalOpen)]=\"travelMessage\">\n  <h3 class=\"modal-title\">更换世界 ?</h3>\n  <div class=\"modal-body\">\n    <p>你将失去一切，除了声望升级，继续 ?</p>\n  </div>\n  <div class=\"modal-footer\">\n    <button type=\"button\"\n            class=\"btn btn-outline\"\n            (click)=\"travelMessage = false\">取消</button>\n    <button type=\"button\"\n            class=\"btn btn-primary\"\n            (click)=\"travel()\">确定</button>\n  </div>\n</clr-modal>\n"
+module.exports = "<h1>从这里你可以旅行到新的世界.</h1>\n\n\n<clr-alert [clrAlertType]=\"'alert-success'\"\n           [clrAlertClosable]=\"false\"\n           *ngIf=\"ms.game.canTravel; else warn\">\n  <div class=\"alert-item\">\n    <span class=\"alert-text\">\n      你将会得到\n      <span class=\"monospace\">{{ms.game.currentWorld.prestige}} </span>\n      经验\n\n            <span *ngIf=\"ms.game.hasSecondMastery()\">\n        和 1 专精点\n      </span>\n    </span>\n  </div>\n</clr-alert>\n\n<ng-template #warn>\n  <clr-alert [clrAlertType]=\"'alert-danger'\"\n             [clrAlertClosable]=\"false\">\n    <div class=\"alert-item\">\n      <span class=\"alert-text\">\n        如果您选择跳过，你将得不到经验奖励!\n      </span>\n    </div>\n  </clr-alert>\n</ng-template>\n\n\n<clr-alert [clrAlertType]=\"'alert-warning'\"\n           [clrAlertClosable]=\"false\"\n           *ngIf=\"!ms.game.researches.mastery.done\">\n  <div class=\"alert-item \">\n    <span class=\"alert-text\">\n      专精研究未完成。\n    </span>\n  </div>\n</clr-alert>\n\n<button class=\"btn\"\n        (click)=\"randomize()\">随机</button>\n\n<span>\n  最低等级:\n  <span class=\"monospace\">\n    {{minLevel | format:true}}\n  </span>\n</span>\n<span>\n  最高等级:\n  <span class=\"monospace\">\n    {{maxLevel | format:true}}\n  </span>\n</span>\n\n<p-slider [(ngModel)]=\"rangeValues\"\n          [range]=\"true\"\n          [min]=\"1\"\n          [max]=\"maxSafeInt\"\n          (onChange)=\"setLevels()\"></p-slider>\n\n<!-- <div class=\"card-columns\">\n    <app-world [world]=\"world\"\n               *ngFor=\"let world of ms.game.nextWorlds; trackBy:getWorldId\"></app-world>\n  </div> -->\n\n<div class=\"clr-row clr-justify-content-center\">\n  <div *ngFor=\"let world of ms.game.nextWorlds; trackBy:getWorldId\"\n       class=\"worldMaxWidt clr-col-sm-12 clr-col-md-4\">\n    <app-world [world]=\"world\"></app-world>\n  </div>\n</div>\n\n\n<clr-modal [(clrModalOpen)]=\"travelMessage\">\n  <h3 class=\"modal-title\">更换世界 ?</h3>\n  <div class=\"modal-body\">\n    <p>你将失去一切，除了声望升级，继续 ?</p>\n  </div>\n  <div class=\"modal-footer\">\n    <button type=\"button\"\n            class=\"btn btn-outline\"\n            (click)=\"travelMessage = false\">取消</button>\n    <button type=\"button\"\n            class=\"btn btn-primary\"\n            (click)=\"travel()\">确定</button>\n  </div>\n</clr-modal>\n"
 
 /***/ }),
 
@@ -1317,12 +1320,14 @@ var ChangeWorldComponent = /** @class */ (function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EndInPipe", function() { return EndInPipe; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var date_fns_distance_in_words_to_now__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! date-fns/distance_in_words_to_now */ "./node_modules/date-fns/distance_in_words_to_now/index.js");
-/* harmony import */ var date_fns_distance_in_words_to_now__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(date_fns_distance_in_words_to_now__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var date_fns_is_valid__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! date-fns/is_valid */ "./node_modules/date-fns/is_valid/index.js");
-/* harmony import */ var date_fns_is_valid__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(date_fns_is_valid__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _format_pipe__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./format.pipe */ "./src/app/format.pipe.ts");
-/* harmony import */ var _options_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./options.service */ "./src/app/options.service.ts");
+/* harmony import */ var date_fns_distance_in_words_strict__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! date-fns/distance_in_words_strict */ "./node_modules/date-fns/distance_in_words_strict/index.js");
+/* harmony import */ var date_fns_distance_in_words_strict__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(date_fns_distance_in_words_strict__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var date_fns_distance_in_words_to_now__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! date-fns/distance_in_words_to_now */ "./node_modules/date-fns/distance_in_words_to_now/index.js");
+/* harmony import */ var date_fns_distance_in_words_to_now__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(date_fns_distance_in_words_to_now__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var date_fns_is_valid__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! date-fns/is_valid */ "./node_modules/date-fns/is_valid/index.js");
+/* harmony import */ var date_fns_is_valid__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(date_fns_is_valid__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _format_pipe__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./format.pipe */ "./src/app/format.pipe.ts");
+/* harmony import */ var _options_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./options.service */ "./src/app/options.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1337,17 +1342,20 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var SECONDS_IN_YEAR = 3.154e7;
 var EndInPipe = /** @class */ (function () {
     function EndInPipe(options) {
         this.options = options;
-        this.pipeFormat = new _format_pipe__WEBPACK_IMPORTED_MODULE_3__["FormatPipe"](options);
+        this.pipeFormat = new _format_pipe__WEBPACK_IMPORTED_MODULE_4__["FormatPipe"](options);
     }
     EndInPipe.prototype.transform = function (value, args) {
         if (!isNaN(value) && value > 0 && value < Number.POSITIVE_INFINITY) {
             var dateEnd = new Date(Date.now() + value);
-            if (date_fns_is_valid__WEBPACK_IMPORTED_MODULE_2__(dateEnd)) {
-                return date_fns_distance_in_words_to_now__WEBPACK_IMPORTED_MODULE_1__(new Date(Date.now() + value));
+            if (date_fns_is_valid__WEBPACK_IMPORTED_MODULE_3__(dateEnd)) {
+                return this.options.timeFormatDetail
+                    ? date_fns_distance_in_words_strict__WEBPACK_IMPORTED_MODULE_1__(0, value)
+                    : date_fns_distance_in_words_to_now__WEBPACK_IMPORTED_MODULE_2__(new Date(Date.now() + value));
             }
             else {
                 return ("在 " + this.pipeFormat.transform(value / SECONDS_IN_YEAR) + " 年");
@@ -1361,7 +1369,7 @@ var EndInPipe = /** @class */ (function () {
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Pipe"])({
             name: "endIn"
         }),
-        __metadata("design:paramtypes", [_options_service__WEBPACK_IMPORTED_MODULE_4__["OptionsService"]])
+        __metadata("design:paramtypes", [_options_service__WEBPACK_IMPORTED_MODULE_5__["OptionsService"]])
     ], EndInPipe);
     return EndInPipe;
 }());
@@ -1445,6 +1453,133 @@ var FormatPipe = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/group-tabs/group-auto-buy/group-auto-buy.component.html":
+/*!*************************************************************************!*\
+  !*** ./src/app/group-tabs/group-auto-buy/group-auto-buy.component.html ***!
+  \*************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"clr-row\">\n  <div *ngIf=\"unitGroup\"\n       class=\"clr-col-xs-12\tclr-col-sm-6\tclr-col-md-6\tclr-col-lg-6\tclr-col-xl-6\">\n\n    <app-action-group *ngIf=\"hatchActionGrp\"\n                      [actGr]=\"hatchActionGrp\"></app-action-group>\n    <app-action-group *ngIf=\"teamActionGrp && ms.game.researches.team2.done\"\n                      [actGr]=\"teamActionGrp\"></app-action-group>\n    <app-action-group *ngIf=\"twinActionGrp && ms.game.researches.twin.done\"\n                      [actGr]=\"twinActionGrp\"></app-action-group>\n\n  </div>\n  <div *ngIf=\"unitGroup\"\n       class=\"clr-col-xs-12\tclr-col-sm-6\tclr-col-md-6\tclr-col-lg-6\tclr-col-xl-6\">\n\n    <clr-datagrid *ngIf=\"unitGroup\"\n                  class=\"datagrid-compact\"\n                  [(clrDgSelected)]=\"unitGroup.selected\"\n                  (clrDgSelectedChange)=\"selectedChanged($event)\">\n\n\n    </clr-datagrid>\n\n  </div>\n</div>\n"
+
+/***/ }),
+
+/***/ "./src/app/group-tabs/group-auto-buy/group-auto-buy.component.scss":
+/*!*************************************************************************!*\
+  !*** ./src/app/group-tabs/group-auto-buy/group-auto-buy.component.scss ***!
+  \*************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/group-tabs/group-auto-buy/group-auto-buy.component.ts":
+/*!***********************************************************************!*\
+  !*** ./src/app/group-tabs/group-auto-buy/group-auto-buy.component.ts ***!
+  \***********************************************************************/
+/*! exports provided: GroupAutoBuyComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GroupAutoBuyComponent", function() { return GroupAutoBuyComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _main_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../main.service */ "./src/app/main.service.ts");
+/* harmony import */ var _model_actions_action_group__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../model/actions/action-group */ "./src/app/model/actions/action-group.ts");
+/* harmony import */ var _model_unit_group__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../model/unit-group */ "./src/app/model/unit-group.ts");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+var GroupAutoBuyComponent = /** @class */ (function () {
+    function GroupAutoBuyComponent(ms, cd) {
+        this.ms = ms;
+        this.cd = cd;
+    }
+    GroupAutoBuyComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.sub = this.ms.updateEmitter.subscribe(function (m) {
+            _this.cd.markForCheck();
+        });
+    };
+    GroupAutoBuyComponent.prototype.ngOnDestroy = function () {
+        this.sub.unsubscribe();
+    };
+    GroupAutoBuyComponent.prototype.ngOnChanges = function (changes) {
+        this.getGroup();
+    };
+    GroupAutoBuyComponent.prototype.selectedChanged = function (event) {
+        this.getGroup();
+    };
+    GroupAutoBuyComponent.prototype.getGroup = function () {
+        this.hatchActionGrp = null;
+        this.teamActionGrp = null;
+        this.twinActionGrp = null;
+        if (this.unitGroup.unlocked[0].buyAction) {
+            if (this.ms.game.allPrestige.autoBuyUnlock.autoBuyQuantity.done) {
+                this.hatchActionGrp = new _model_actions_action_group__WEBPACK_IMPORTED_MODULE_2__["ActionGroup"]("Hatch", this.unitGroup.selected
+                    .filter(function (u) { return u.buyAction; })
+                    .map(function (u) { return u.buyAction; })
+                    .filter(function (b) { return b.autoBuyer; })
+                    .map(function (a) { return a.autoBuyer; }), this.ms.game);
+                this.hatchActionGrp.actionList.forEach(function (a) { return a.reload(); });
+            }
+            if (this.ms.game.allPrestige.autoBuyUnlock.autoBuyTeam.done &&
+                this.unitGroup.unlocked[0].teamAction) {
+                this.teamActionGrp = new _model_actions_action_group__WEBPACK_IMPORTED_MODULE_2__["ActionGroup"]("Teamwork", this.unitGroup.selected
+                    .filter(function (u) { return u.teamAction; })
+                    .map(function (u) { return u.teamAction; })
+                    .filter(function (b) { return b.autoBuyer; })
+                    .map(function (a) { return a.autoBuyer; }), this.ms.game);
+                this.teamActionGrp.actionList.forEach(function (a) { return a.reload(); });
+            }
+            if (this.ms.game.allPrestige.autoBuyUnlock.autoBuyTwin.done &&
+                this.unitGroup.unlocked[0].twinAction) {
+                this.twinActionGrp = new _model_actions_action_group__WEBPACK_IMPORTED_MODULE_2__["ActionGroup"]("Twin", this.unitGroup.selected
+                    .filter(function (u) { return u.twinAction; })
+                    .map(function (u) { return u.twinAction; })
+                    .filter(function (b) { return b.autoBuyer; })
+                    .map(function (a) { return a.autoBuyer; }), this.ms.game);
+                this.twinActionGrp.actionList.forEach(function (a) { return a.reload(); });
+            }
+        }
+        else {
+            this.hatchActionGrp = null;
+            this.teamActionGrp = null;
+            this.twinActionGrp = null;
+        }
+    };
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
+        __metadata("design:type", _model_unit_group__WEBPACK_IMPORTED_MODULE_3__["UnitGroup"])
+    ], GroupAutoBuyComponent.prototype, "unitGroup", void 0);
+    GroupAutoBuyComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: "app-group-auto-buy",
+            template: __webpack_require__(/*! ./group-auto-buy.component.html */ "./src/app/group-tabs/group-auto-buy/group-auto-buy.component.html"),
+            styles: [__webpack_require__(/*! ./group-auto-buy.component.scss */ "./src/app/group-tabs/group-auto-buy/group-auto-buy.component.scss")],
+            changeDetection: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ChangeDetectionStrategy"].OnPush
+        }),
+        __metadata("design:paramtypes", [_main_service__WEBPACK_IMPORTED_MODULE_1__["MainService"], _angular_core__WEBPACK_IMPORTED_MODULE_0__["ChangeDetectorRef"]])
+    ], GroupAutoBuyComponent);
+    return GroupAutoBuyComponent;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/group-tabs/group-tabs.component.html":
 /*!******************************************************!*\
   !*** ./src/app/group-tabs/group-tabs.component.html ***!
@@ -1452,7 +1587,7 @@ var FormatPipe = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<h1>{{unitGroup.name}}\n\n  <clr-dropdown>\n    <button type=\"button\"\n            class=\"btn btn-outline-primary btn-link\"\n            clrDropdownTrigger>\n      操作\n      <clr-icon shape=\"caret down\"></clr-icon>\n    </button>\n    <clr-dropdown-menu *clrIfOpen>\n      <label class=\"dropdown-header\">选项</label>\n      <clr-dropdown>\n        <button type=\"button\"\n                clrDropdownTrigger>选择</button>\n        <clr-dropdown-menu>\n          <button type=\"button\"\n                  (click)=\"select(bug)\"\n                  clrDropdownItem\n                  *ngFor=\"let bug of bugs;trackBy getBugId\">\n            {{utility.getBugName(bug) }}\n          </button>\n        </clr-dropdown-menu>\n      </clr-dropdown>\n      <clr-dropdown>\n        <button type=\"button\"\n                clrDropdownTrigger>添加到选项</button>\n        <clr-dropdown-menu>\n          <button type=\"button\"\n                  (click)=\"selectAdd(bug)\"\n                  clrDropdownItem\n                  *ngFor=\"let bug of bugs;trackBy getBugId\">\n            {{utility.getBugName(bug) }}\n          </button>\n        </clr-dropdown-menu>\n      </clr-dropdown>\n      <clr-dropdown>\n        <button type=\"button\"\n                clrDropdownTrigger>取消选择</button>\n        <clr-dropdown-menu>\n          <button type=\"button\"\n                  (click)=\"selectRemove(bug)\"\n                  clrDropdownItem\n                  *ngFor=\"let bug of bugs;trackBy getBugId\">\n            {{utility.getBugName(bug) }}\n          </button>\n        </clr-dropdown-menu>\n      </clr-dropdown>\n\n    </clr-dropdown-menu>\n  </clr-dropdown>\n\n</h1>\n<clr-tabs>\n\n  <clr-tab>\n    <button clrTabLink\n            id=\"link1\">概览</button>\n    <clr-tab-content id=\"content1\"\n                     *clrIfActive=\"ms.overviewTaActive\">\n      <app-unit-group *ngIf=\"unitGroup\"\n                      [unitGroup]=\"unitGroup\"></app-unit-group>\n    </clr-tab-content>\n  </clr-tab>\n\n  <!-- <clr-tab *ngIf=\"ms.game.tabs.autoBuy.unlocked && unit.hasAutoBuyer\">\n    <button clrTabLink>Auto Buyers</button>\n    <clr-tab-content *clrIfActive=\"ms.prestigeTaActive\">\n      <app-group-autobuy [unitGroup]=\"unitGroup\"></app-group-autobuy>\n    </clr-tab-content>\n  </clr-tab>-->\n\n</clr-tabs>\n"
+module.exports = "<h1>{{unitGroup.name}}\n\n  <clr-dropdown>\n    <button type=\"button\"\n            class=\"btn btn-outline-primary btn-link\"\n            clrDropdownTrigger>\n      操作\n      <clr-icon shape=\"caret down\"></clr-icon>\n    </button>\n    <clr-dropdown-menu *clrIfOpen>\n      <label class=\"dropdown-header\">选项</label>\n      <clr-dropdown>\n        <button type=\"button\"\n                clrDropdownTrigger>选择</button>\n        <clr-dropdown-menu>\n          <button type=\"button\"\n                  (click)=\"select(bug)\"\n                  clrDropdownItem\n                  *ngFor=\"let bug of bugs;trackBy getBugId\">\n            {{utility.getBugName(bug) }}\n          </button>\n        </clr-dropdown-menu>\n      </clr-dropdown>\n      <clr-dropdown>\n        <button type=\"button\"\n                clrDropdownTrigger>添加到选项</button>\n        <clr-dropdown-menu>\n          <button type=\"button\"\n                  (click)=\"selectAdd(bug)\"\n                  clrDropdownItem\n                  *ngFor=\"let bug of bugs;trackBy getBugId\">\n            {{utility.getBugName(bug) }}\n          </button>\n        </clr-dropdown-menu>\n      </clr-dropdown>\n      <clr-dropdown>\n        <button type=\"button\"\n                clrDropdownTrigger>取消选择</button>\n        <clr-dropdown-menu>\n          <button type=\"button\"\n                  (click)=\"selectRemove(bug)\"\n                  clrDropdownItem\n                  *ngFor=\"let bug of bugs;trackBy getBugId\">\n            {{utility.getBugName(bug) }}\n          </button>\n        </clr-dropdown-menu>\n      </clr-dropdown>\n\n    </clr-dropdown-menu>\n  </clr-dropdown>\n\n</h1>\n<clr-tabs>\n\n  <clr-tab>\n    <button clrTabLink\n            id=\"link1\">概览</button>\n    <clr-tab-content id=\"content1\"\n                     *clrIfActive=\"ms.overviewTaActive\">\n      <app-unit-group *ngIf=\"unitGroup\"\n                      [unitGroup]=\"unitGroup\"></app-unit-group>\n    </clr-tab-content>\n  </clr-tab>\n\n  <!-- <clr-tab *ngIf=\"ms.game.tabs.autoBuy.unlocked\">\n    <button clrTabLink>Auto Buyers</button>\n    <clr-tab-content *clrIfActive=\"ms.prestigeTaActive\">\n      <app-group-auto-buy [unitGroup]=\"unitGroup\"></app-group-auto-buy>\n    </clr-tab-content>\n  </clr-tab> -->\n\n</clr-tabs>\n"
 
 /***/ }),
 
@@ -1596,7 +1731,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _main_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../main.service */ "./src/app/main.service.ts");
 /* harmony import */ var _model_actions_action_group__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../model/actions/action-group */ "./src/app/model/actions/action-group.ts");
-/* harmony import */ var _model_CONSTATS__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../model/CONSTATS */ "./src/app/model/CONSTATS.ts");
+/* harmony import */ var _model_CONSTANTS__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../model/CONSTANTS */ "./src/app/model/CONSTANTS.ts");
 /* harmony import */ var _model_unit_group__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../model/unit-group */ "./src/app/model/unit-group.ts");
 /* harmony import */ var _model_utility__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../model/utility */ "./src/app/model/utility.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
@@ -1654,8 +1789,8 @@ var UnitGroupComponent = /** @class */ (function () {
                 datasets: [
                     {
                         data: [],
-                        backgroundColor: _model_CONSTATS__WEBPACK_IMPORTED_MODULE_3__["CONSTS"].CHART_COLORS.backgroundColor,
-                        borderColor: _model_CONSTATS__WEBPACK_IMPORTED_MODULE_3__["CONSTS"].CHART_COLORS.borderColor,
+                        backgroundColor: _model_CONSTANTS__WEBPACK_IMPORTED_MODULE_3__["CONSTS"].CHART_COLORS.backgroundColor,
+                        borderColor: _model_CONSTANTS__WEBPACK_IMPORTED_MODULE_3__["CONSTS"].CHART_COLORS.borderColor,
                         borderWidth: 0
                     }
                 ]
@@ -1805,7 +1940,7 @@ module.exports = "<clr-header class=\"header\"\n            [ngClass]=\"headerCl
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ":host /deep/ .header-hamburger-trigger,\n:host /deep/ .header-overflow-trigger {\n  height: 1.5rem !important; }\n\nheader,\n.header {\n  height: 1.5rem; }\n\nheader .header-nav .nav-link .fa,\nheader .header-nav .nav-link .nav-icon,\nheader .header-nav .nav-link .nav-text,\nheader .header-nav .nav-link.nav-icon,\nheader .header-nav .nav-link.nav-text,\n.header .header-nav .nav-link .fa,\n.header .header-nav .nav-link .nav-icon,\n.header .header-nav .nav-link .nav-text,\n.header .header-nav .nav-link.nav-icon,\n.header .header-nav .nav-link.nav-text {\n  line-height: 1.5rem; }\n\nheader .branding > a,\nheader .branding > .nav-link,\n.header .branding > a,\n.header .branding > .nav-link {\n  height: 1.5rem;\n  line-height: 1.5rem; }\n\nheader .branding .title,\n.header .branding .title {\n  line-height: 1.5rem; }\n\nheader .settings .nav-link .fa,\nheader .settings .nav-link .nav-icon,\nheader .settings .nav-link .nav-text,\nheader .settings .nav-link.nav-icon,\nheader .settings .nav-link.nav-text,\nheader .header-actions .nav-link .fa,\nheader .header-actions .nav-link .nav-icon,\nheader .header-actions .nav-link .nav-text,\nheader .header-actions .nav-link.nav-icon,\nheader .header-actions .nav-link.nav-text,\n.header .settings .nav-link .fa,\n.header .settings .nav-link .nav-icon,\n.header .settings .nav-link .nav-text,\n.header .settings .nav-link.nav-icon,\n.header .settings .nav-link.nav-text,\n.header .header-actions .nav-link .fa,\n.header .header-actions .nav-link .nav-icon,\n.header .header-actions .nav-link .nav-text,\n.header .header-actions .nav-link.nav-icon,\n.header .header-actions .nav-link.nav-text {\n  line-height: 1.5rem; }\n\nheader .settings .nav-icon,\nheader .header-actions .nav-icon,\n.header .settings .nav-icon,\n.header .header-actions .nav-icon {\n  height: 1.5rem;\n  width: 1.5rem; }\n\nheader .branding,\nheader .header-nav,\nheader .search-box,\nheader .search,\nheader .settings,\nheader .header-actions,\nheader .divider,\n.header .branding,\n.header .header-nav,\n.header .search-box,\n.header .search,\n.header .settings,\n.header .header-actions,\n.header .divider {\n  height: 1.5rem; }\n\n.actMinH {\n  min-height: 8.5rem; }\n\n.multiBuy {\n  background: none;\n  border: 0;\n  color: #fafafa;\n  max-width: 2.5rem;\n  padding: 0;\n  vertical-align: middle; }\n\n#multiLabel:before {\n  display: none; }\n"
+module.exports = ":host /deep/ .header-hamburger-trigger,\n:host /deep/ .header-overflow-trigger {\n  height: 1.5rem !important; }\n\nheader,\n.header {\n  height: 1.5rem; }\n\nheader .header-nav .nav-link .fa,\nheader .header-nav .nav-link .nav-icon,\nheader .header-nav .nav-link .nav-text,\nheader .header-nav .nav-link.nav-icon,\nheader .header-nav .nav-link.nav-text,\n.header .header-nav .nav-link .fa,\n.header .header-nav .nav-link .nav-icon,\n.header .header-nav .nav-link .nav-text,\n.header .header-nav .nav-link.nav-icon,\n.header .header-nav .nav-link.nav-text {\n  line-height: 1.5rem; }\n\nheader .branding > a,\nheader .branding > .nav-link,\n.header .branding > a,\n.header .branding > .nav-link {\n  height: 1.5rem;\n  line-height: 1.5rem; }\n\nheader .branding .title,\n.header .branding .title {\n  line-height: 1.5rem; }\n\nheader .settings .nav-link .fa,\nheader .settings .nav-link .nav-icon,\nheader .settings .nav-link .nav-text,\nheader .settings .nav-link.nav-icon,\nheader .settings .nav-link.nav-text,\nheader .header-actions .nav-link .fa,\nheader .header-actions .nav-link .nav-icon,\nheader .header-actions .nav-link .nav-text,\nheader .header-actions .nav-link.nav-icon,\nheader .header-actions .nav-link.nav-text,\n.header .settings .nav-link .fa,\n.header .settings .nav-link .nav-icon,\n.header .settings .nav-link .nav-text,\n.header .settings .nav-link.nav-icon,\n.header .settings .nav-link.nav-text,\n.header .header-actions .nav-link .fa,\n.header .header-actions .nav-link .nav-icon,\n.header .header-actions .nav-link .nav-text,\n.header .header-actions .nav-link.nav-icon,\n.header .header-actions .nav-link.nav-text {\n  line-height: 1.5rem; }\n\nheader .settings .nav-icon,\nheader .header-actions .nav-icon,\n.header .settings .nav-icon,\n.header .header-actions .nav-icon {\n  height: 1.5rem;\n  width: 1.5rem; }\n\nheader .branding,\nheader .header-nav,\nheader .search-box,\nheader .search,\nheader .settings,\nheader .header-actions,\nheader .divider,\n.header .branding,\n.header .header-nav,\n.header .search-box,\n.header .search,\n.header .settings,\n.header .header-actions,\n.header .divider {\n  height: 1.5rem; }\n\n.actMinH {\n  min-height: 8.5rem; }\n\n.multiBuy {\n  background: none;\n  border: 0;\n  color: #fafafa;\n  max-width: 2rem;\n  padding: 0;\n  vertical-align: middle; }\n\n#multiLabel:before {\n  display: none; }\n\n.search {\n  margin-right: 1.2rem; }\n"
 
 /***/ }),
 
@@ -2508,7 +2643,7 @@ var MainService = /** @class */ (function () {
             return lz_string__WEBPACK_IMPORTED_MODULE_3__["compressToBase64"](JSON.stringify(save));
         }
         catch (ex) {
-            this.toastr.error(ex && ex.message ? ex.message : "unknow error", "Save Error");
+            this.toastr.error(ex && ex.message ? ex.message : "unknown error", "Save Error");
         }
     };
     MainService.prototype.save = function (autosave) {
@@ -2528,7 +2663,7 @@ var MainService = /** @class */ (function () {
                 this.toastr.error("未知错误 1", "保存失败");
         }
         catch (ex) {
-            this.toastr.error(ex && ex.message ? ex.message : "unknow error", "Save Error");
+            this.toastr.error(ex && ex.message ? ex.message : "unknown error", "Save Error");
         }
     };
     MainService.prototype.import = function (raw, first, playFab) {
@@ -2570,7 +2705,7 @@ var MainService = /** @class */ (function () {
             // tslint:disable-next-line:no-console
             console.log(ex);
             setTimeout(function () {
-                return _this.toastr.error(ex && ex.message ? ex.message : "unknow error", "Load Error");
+                return _this.toastr.error(ex && ex.message ? ex.message : "unknown error", "Load Error");
             }, 0);
             return false;
         }
@@ -2583,7 +2718,7 @@ var MainService = /** @class */ (function () {
         }
         catch (ex) {
             setTimeout(function () {
-                return _this.toastr.error(ex && ex.message ? ex.message : "unknow error", "Load Error");
+                return _this.toastr.error(ex && ex.message ? ex.message : "unknown error", "Load Error");
             }, 0);
             return false;
         }
@@ -2766,7 +2901,7 @@ var MainService = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"content-area\">\n  <div id=\"network\"\n       #network></div>\n</div>\n<clr-vertical-nav [clrVerticalNavCollapsible]=\"true\"\n                  class=\"nav-trigger--bottom\">\n\n  <a clrVerticalNavLink>\n    <h6>专精\n      <span class=\"monospace\"\n            *ngIf=\"ms.game.allMateries.masteryPoint > 0\">{{ms.game.allMateries.masteryPoint}}</span>\n    </h6>\n  </a>\n  <div *ngIf=\"!node; else buy\">\n    <a clrVerticalNavLink\n       *ngFor=\"let desc of list; trackBy:getDescId\">\n      {{desc}}\n    </a>\n  </div>\n  <ng-template #buy>\n    <p clrVerticalNavLink>{{node.label}}</p>\n    <button class=\"btn\"\n            *ngIf=\"node.avaiable && !node.owned\"\n            [disabled]=\"ms.game.allMateries.masteryPoint <1\"\n            (click)=\"buyMastery()\">\n      购买\n    </button>\n  </ng-template>\n  <button class=\"btn\"\n          *ngIf=\"ms.game.allMateries.totalEarned > 0\"\n          (click)=\"showReset = true\" style=\"min-height: 38px;\">\n    重置\n  </button>\n\n\n\n  <!-- Debug Stuff -->\n  <!-- <button class=\"btn\"\n          (click)=\"export()\">\n    Export positions\n  </button>\n  <textarea name=\"raw\"\n            [(ngModel)]=\"exp\"\n            rows=\"1\"></textarea> -->\n\n</clr-vertical-nav>\n\n\n<clr-modal [(clrModalOpen)]=\"showReset\"\n           [clrModalClosable]=\"true\">\n  <h3 class=\"modal-title\">精通重置</h3>\n  <div class=\"modal-body\">\n    <p>\n      重置精通升级，你可以获得精通点数 {{ms.game.allMateries.totalEarned}}\n      <br />\n      你将移动到基础世界而没有任何奖励。\n    </p>\n  </div>\n  <div class=\"modal-footer\">\n    <button type=\"button\"\n            class=\"btn btn-outline\"\n            (click)=\"showReset = false\">取消</button>\n    <button type=\"button\"\n            class=\"btn btn-primary\"\n            (click)=\"reset()\">重置</button>\n  </div>\n</clr-modal>\n"
+module.exports = "<div class=\"content-area\">\n  <div id=\"network\"\n       #network></div>\n</div>\n<clr-vertical-nav [clrVerticalNavCollapsible]=\"true\"\n                  class=\"nav-trigger--bottom\">\n\n  <a clrVerticalNavLink>\n    <h6>专精\n      <span class=\"monospace\"\n            *ngIf=\"ms.game.allMateries.masteryPoint > 0\">{{ms.game.allMateries.masteryPoint}}</span>\n    </h6>\n  </a>\n  <div *ngIf=\"!node; else buy\">\n    <a clrVerticalNavLink\n       *ngFor=\"let desc of list; trackBy:getDescId\">\n      {{desc}}\n    </a>\n  </div>\n  <ng-template #buy>\n    <p clrVerticalNavLink>{{node.label}}</p>\n    <button class=\"btn\"\n            *ngIf=\"node.available && !node.owned\"\n            [disabled]=\"ms.game.allMateries.masteryPoint <1\"\n            (click)=\"buyMastery()\">\n      购买\n    </button>\n  </ng-template>\n  <button class=\"btn\"\n          *ngIf=\"ms.game.allMateries.totalEarned > 0\"\n          (click)=\"showReset = true\" style=\"min-height: 38px;\">\n    重置\n  </button>\n\n\n\n  <!-- Debug Stuff -->\n  <!-- <button class=\"btn\"\n          (click)=\"export()\">\n    Export positions\n  </button>\n  <textarea name=\"raw\"\n            [(ngModel)]=\"exp\"\n            rows=\"1\"></textarea> -->\n\n</clr-vertical-nav>\n\n\n<clr-modal [(clrModalOpen)]=\"showReset\"\n           [clrModalClosable]=\"true\">\n  <h3 class=\"modal-title\">专精重置</h3>\n  <div class=\"modal-body\">\n    <p>\n      重置专精升级，你可以获得专精点数 {{ms.game.allMateries.totalEarned}}\n      <br />\n      你将移动到基础世界而没有任何奖励。\n    </p>\n  </div>\n  <div class=\"modal-footer\">\n    <button type=\"button\"\n            class=\"btn btn-outline\"\n            (click)=\"showReset = false\">取消</button>\n    <button type=\"button\"\n            class=\"btn btn-primary\"\n            (click)=\"reset()\">重置</button>\n  </div>\n</clr-modal>\n"
 
 /***/ }),
 
@@ -2822,8 +2957,8 @@ var MasteryComponent = /** @class */ (function () {
     }
     MasteryComponent.prototype.rebuildList = function () {
         this.list = [];
-        var lenght = Object.keys(_model_masteries_mastery__WEBPACK_IMPORTED_MODULE_3__["MasteryTypes"]).length / 2;
-        for (var i = 0; i < lenght; i++) {
+        var length = Object.keys(_model_masteries_mastery__WEBPACK_IMPORTED_MODULE_3__["MasteryTypes"]).length / 2;
+        for (var i = 0; i < length; i++) {
             var sum = this.ms.game.allMateries.getSum(i);
             if (sum > 0) {
                 var desc = _model_masteries_mastery__WEBPACK_IMPORTED_MODULE_3__["Mastery"].getDescription(i, sum);
@@ -2927,7 +3062,7 @@ var MasteryComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ul class=\"nav navMat\"\n    role=\"tablist\">\n  <li class=\"nav-item\"\n      class=\"matTab\"\n      *ngFor=\"let g of ms.game.materials.unlocked ; trackBy:getUnitId\">\n\n    <app-tab [id]=\"g.id\"\n             [isEnding]=\"g.isEnding\"\n             [name]=\"g.name\"\n             [quantity]=\"g.quantity\"\n             [perSec]=\"g.c\"></app-tab>\n\n  </li>\n  <li *ngIf=\"ms.game.firstEndigUnit\">\n\n    <clr-alert [clrAlertClosable]=\"false\"\n               [clrAlertType]=\"ms.game.firstEndigUnit.endIn < 3600000 ? 'alert-danger':'alert-warning'\">\n      <div clr-alert-item\n           class=\"alert-item\">\n        <span class=\"alert-text\">\n          {{ms.game.firstEndigUnit.name}} 将在 {{ms.game.firstEndigUnit.endIn | endIn}} 后消耗完\n        </span>\n      </div>\n    </clr-alert>\n\n  </li>\n</ul>\n"
+module.exports = "<ul class=\"nav navMat\"\n    role=\"tablist\">\n  <li class=\"nav-item\"\n      class=\"matTab\"\n      *ngFor=\"let g of ms.game.materials.unlocked ; trackBy:getUnitId\">\n\n    <app-tab [id]=\"g.id\"\n             [isEnding]=\"g.isEnding\"\n             [name]=\"g.name\"\n             [quantity]=\"g.quantity\"\n             [perSec]=\"g.c\"></app-tab>\n\n  </li>\n  <li *ngIf=\"ms.game.firstEndingUnit\">\n\n    <clr-alert [clrAlertClosable]=\"false\"\n               [clrAlertType]=\"ms.game.firstEndingUnit.endIn < 3600000 ? 'alert-danger':'alert-warning'\">\n      <div clr-alert-item\n           class=\"alert-item\">\n        <span class=\"alert-text\">\n          {{ms.game.firstEndingUnit.name}} 将在 {{ms.game.firstEndingUnit.endIn | endIn}} 后消耗完\n        </span>\n      </div>\n    </clr-alert>\n\n  </li>\n</ul>\n"
 
 /***/ }),
 
@@ -3013,7 +3148,7 @@ var MaterialNavComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<a [routerLink]=\"['/nav/unit/'+id]\"\n   class=\"nav-link matLink clr-row clr-justify-content-between\"\n   routerLinkActive=\"active\"\n   [ngClass]=\"{'red': isEnding}\">\n\n  <span>\n    <clr-icon class=\"is-error is-solid\"\n              shape=\"exclamation-triangle\"\n              *ngIf=\"isEnding\"></clr-icon>\n    <span class=\"first small\">{{name}}</span>\n    <br/>\n    <span class=\"monospace\">{{quantity | format:false:ms.options.formatter}}</span>\n  </span>\n\n  <span class=\"perSecTab  monospace clr-col clr-align-self-end\">\n    <span *ngIf=\"perSec.abs().gt(0.001)\"\n          [ngClass]=\"{'noEnought': perSec.lt(0)}\">\n      {{perSec | format:false:ms.options.formatter}}/秒\n    </span>\n  </span>\n\n</a>\n"
+module.exports = "<a [routerLink]=\"['/nav/unit/'+id]\"\n   class=\"nav-link matLink clr-row clr-justify-content-between\"\n   routerLinkActive=\"active\"\n   [ngClass]=\"{'red': isEnding}\">\n\n  <span>\n    <clr-icon class=\"is-error is-solid\"\n              shape=\"exclamation-triangle\"\n              *ngIf=\"isEnding\"></clr-icon>\n    <span class=\"first small\">{{name}}</span>\n    <br/>\n    <span class=\"monospace\">{{quantity | format:false:ms.options.formatter}}</span>\n  </span>\n\n  <span class=\"perSecTab  monospace clr-col clr-align-self-end\">\n    <span *ngIf=\"perSec.abs().gt(0.001)\"\n          [ngClass]=\"{'notEnough': perSec.lt(0)}\">\n      {{perSec | format:false:ms.options.formatter}}/s\n    </span>\n  </span>\n\n</a>\n"
 
 /***/ }),
 
@@ -3107,10 +3242,10 @@ var TabComponent = /** @class */ (function () {
 
 /***/ }),
 
-/***/ "./src/app/model/CONSTATS.ts":
-/*!***********************************!*\
-  !*** ./src/app/model/CONSTATS.ts ***!
-  \***********************************/
+/***/ "./src/app/model/CONSTANTS.ts":
+/*!************************************!*\
+  !*** ./src/app/model/CONSTANTS.ts ***!
+  \************************************/
 /*! exports provided: CONSTS */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -3775,7 +3910,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DELAY_LEVEL", function() { return DELAY_LEVEL; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MIN_DELAY", function() { return MIN_DELAY; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AutoBuy", function() { return AutoBuy; });
-/* harmony import */ var _prestige_prestige__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../prestige/prestige */ "./src/app/model/prestige/prestige.ts");
+/* harmony import */ var lodash_es__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lodash-es */ "./node_modules/lodash-es/lodash.js");
+/* harmony import */ var _prestige_prestige__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../prestige/prestige */ "./src/app/model/prestige/prestige.ts");
 var __extends = (undefined && undefined.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
@@ -3786,6 +3922,7 @@ var __extends = (undefined && undefined.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+
 
 var DELAY_LEVEL = 0.6;
 var MIN_DELAY = 1;
@@ -3803,6 +3940,7 @@ var AutoBuy = /** @class */ (function (_super) {
         _this.startMax = 5;
         _this.max = 5;
         _this.multiBuy = new Decimal(1);
+        _this.priceSavePercent = 1;
         return _this;
     }
     AutoBuy.prototype.isActive = function () {
@@ -3846,8 +3984,17 @@ var AutoBuy = /** @class */ (function (_super) {
             return;
         this.current = this.current + time / 1000;
         this.action.reload();
+        if (Object(lodash_es__WEBPACK_IMPORTED_MODULE_0__["isNumber"])(this.priceSavePercent) &&
+            this.priceSavePercent <= 1 &&
+            this.priceSavePercent > 0) {
+            this.action.maxBuy = this.action.maxBuy.times(this.priceSavePercent);
+            this.canBuy = this.action.maxBuy.gte(1);
+        }
+        else {
+            this.canBuy = false;
+        }
         var max = this.multiBuy.min(this.action.maxBuy);
-        if (this.current >= this.max && this.action.buy(max)) {
+        if (this.current >= this.max && this.canBuy && this.action.buy(max)) {
             this.current = 0;
         }
     };
@@ -3857,6 +4004,8 @@ var AutoBuy = /** @class */ (function (_super) {
         save.a_p = this.active;
         save.a_i = this.priority;
         save.a_c = this.current;
+        if (this.priceSavePercent > 0)
+            save.a_s = this.priceSavePercent;
         return save;
     };
     AutoBuy.prototype.restore = function (data) {
@@ -3866,6 +4015,8 @@ var AutoBuy = /** @class */ (function (_super) {
                 this.priority = data.a_i;
             if ("a_c" in data)
                 this.current = data.a_c;
+            if ("a_s" in data)
+                this.priceSavePercent = data.a_s;
             this.reloadLevel();
             return true;
         }
@@ -3874,7 +4025,7 @@ var AutoBuy = /** @class */ (function (_super) {
         }
     };
     return AutoBuy;
-}(_prestige_prestige__WEBPACK_IMPORTED_MODULE_0__["Prestige"]));
+}(_prestige_prestige__WEBPACK_IMPORTED_MODULE_1__["Prestige"]));
 
 
 
@@ -4053,7 +4204,7 @@ var FullUnit = /** @class */ (function (_super) {
         _this.bonus = new Decimal(0);
         //  Increase production of this unit by other unit
         _this.productionsBonus = new Array();
-        _this.productionsEfficienty = new Array();
+        _this.productionsEfficiency = new Array();
         _this.productionsAll = new Array();
         _this.malus = null;
         _this.winNonLiner = true;
@@ -4099,10 +4250,10 @@ var FullUnit = /** @class */ (function (_super) {
     FullUnit.prototype.isStopped = function () {
         return this.efficiency < 0.01;
     };
-    FullUnit.prototype.addProducer = function (producer, rateo) {
-        if (rateo === void 0) { rateo = 1; }
-        rateo = new Decimal(rateo);
-        var prod = new _production__WEBPACK_IMPORTED_MODULE_6__["Production"](producer, this, rateo);
+    FullUnit.prototype.addProducer = function (producer, ratio) {
+        if (ratio === void 0) { ratio = 1; }
+        ratio = new Decimal(ratio);
+        var prod = new _production__WEBPACK_IMPORTED_MODULE_6__["Production"](producer, this, ratio);
         this.producedBy.push(prod);
         producer.produces.push(prod);
     };
@@ -4143,12 +4294,12 @@ var FullUnit = /** @class */ (function (_super) {
         }
         if (this.produces.length > 0 && bugClass.prodMulti !== 1) {
             this.produces.forEach(function (p) {
-                p.rateo = p.rateo.times(bugClass.prodMulti);
+                p.ratio = p.ratio.times(bugClass.prodMulti);
             });
         }
         if (this.produces.length > 0 && bugClass.efficiencyMulti !== 1) {
-            this.produces.filter(function (p) { return p.rateo.gt(0); }).forEach(function (p) {
-                p.rateo = p.rateo.times(bugClass.efficiencyMulti);
+            this.produces.filter(function (p) { return p.ratio.gt(0); }).forEach(function (p) {
+                p.ratio = p.ratio.times(bugClass.efficiencyMulti);
             });
         }
         if (this.teamAction && bugClass.teamPriceMulti !== 1) {
@@ -4220,7 +4371,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_warp_action__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./actions/warp-action */ "./src/app/model/actions/warp-action.ts");
 /* harmony import */ var _autoBuy_auto_buy_manager__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./autoBuy/auto-buy-manager */ "./src/app/model/autoBuy/auto-buy-manager.ts");
 /* harmony import */ var _bugsTypes__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./bugsTypes */ "./src/app/model/bugsTypes.ts");
-/* harmony import */ var _CONSTATS__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./CONSTATS */ "./src/app/model/CONSTATS.ts");
+/* harmony import */ var _CONSTANTS__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./CONSTANTS */ "./src/app/model/CONSTANTS.ts");
 /* harmony import */ var _full_unit__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./full-unit */ "./src/app/model/full-unit.ts");
 /* harmony import */ var _malus__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./malus */ "./src/app/model/malus.ts");
 /* harmony import */ var _masteries_all_masteries__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./masteries/all-masteries */ "./src/app/model/masteries/all-masteries.ts");
@@ -4395,7 +4546,7 @@ var Game = /** @class */ (function () {
         this.currentWorld = new _world__WEBPACK_IMPORTED_MODULE_29__["World"]("home");
         this.currentWorld.name = "初始世界";
         this.currentWorld.level = new Decimal(1);
-        this.currentWorld.winContidions.push(new _price__WEBPACK_IMPORTED_MODULE_10__["Price"](this.materials.food, _CONSTATS__WEBPACK_IMPORTED_MODULE_4__["CONSTS"].BASE_WIN_CONDITION_MATERIALS));
+        this.currentWorld.winConditions.push(new _price__WEBPACK_IMPORTED_MODULE_10__["Price"](this.materials.food, _CONSTANTS__WEBPACK_IMPORTED_MODULE_4__["CONSTS"].BASE_WIN_CONDITION_MATERIALS));
         this.currentWorld.setLevel(new Decimal(1), this);
         this.setStartingStuff();
         //#endregion
@@ -4427,7 +4578,7 @@ var Game = /** @class */ (function () {
             _this.currentWorld.prestige = _this.currentWorld.prestige
                 .times(1.1)
                 .floor();
-            _this.currentWorld.winContidions.forEach(function (w) {
+            _this.currentWorld.winConditions.forEach(function (w) {
                 w.price = w.price.times(1.2).floor();
             });
             _this.worldMalus.unlocked.forEach(function (m) {
@@ -4531,7 +4682,7 @@ var Game = /** @class */ (function () {
     };
     /**
      * Update function.
-     * Works only with resource groving at max rate of x^3
+     * Works only with resource growing at max rate of x^3
      * When something reach zero consumers are stopped and it will update again
      * @param delta in milliseconds
      * @param force force update, used for warp in pause
@@ -4545,7 +4696,7 @@ var Game = /** @class */ (function () {
         }
         var maxTime = delta;
         var unitZero = null;
-        this.firstEndigUnit = null;
+        this.firstEndingUnit = null;
         this.unlockedUnits.forEach(function (u) {
             u.isEnding = false;
             u.endIn = Number.POSITIVE_INFINITY;
@@ -4600,8 +4751,8 @@ var Game = /** @class */ (function () {
                     unit.endIn = Math.min(min.times(1000).toNumber(), unit.endIn);
                     unit.isEnding = true;
                     if (!(unit instanceof _malus__WEBPACK_IMPORTED_MODULE_6__["Malus"]) &&
-                        (!this.firstEndigUnit || this.firstEndigUnit.endIn > unit.endIn)) {
-                        this.firstEndigUnit = unit;
+                        (!this.firstEndingUnit || this.firstEndingUnit.endIn > unit.endIn)) {
+                        this.firstEndingUnit = unit;
                     }
                 }
             }
@@ -4616,11 +4767,11 @@ var Game = /** @class */ (function () {
             // Something has ended
             if (unitZero) {
                 //  Stop consumers
-                unitZero.producedBy.filter(function (p) { return p.rateo.lt(0); }).forEach(function (p) {
+                unitZero.producedBy.filter(function (p) { return p.ratio.lt(0); }).forEach(function (p) {
                     p.producer.efficiency = 0;
                 });
-                unitZero.producedBy.filter(function (p) { return p.rateo.gt(0); }).forEach(function (p) {
-                    p.producer.producedBy.filter(function (p2) { return p2.rateo.lt(0); }).forEach(function (p2) {
+                unitZero.producedBy.filter(function (p) { return p.ratio.gt(0); }).forEach(function (p) {
+                    p.producer.producedBy.filter(function (p2) { return p2.ratio.lt(0); }).forEach(function (p2) {
                         p2.producer.efficiency = 0;
                     });
                 });
@@ -4636,10 +4787,10 @@ var Game = /** @class */ (function () {
                     }
                 }
             }
-            var remaning = delta - maxTime;
-            if (remaning > 10) {
+            var remaining = delta - maxTime;
+            if (remaining > 10) {
                 // this.reloadProduction();
-                this.update(remaning);
+                this.update(remaining);
             }
         }
     };
@@ -4733,7 +4884,7 @@ var Game = /** @class */ (function () {
             b[0].quantity = new Decimal(b[1]);
             b[0].unlocked = true;
         });
-        this.currentWorld.productionsEfficienty.forEach(function (b) {
+        this.currentWorld.productionsEfficiency.forEach(function (b) {
             b[0].quantity = new Decimal(b[1]);
             b[0].unlocked = true;
         });
@@ -4751,7 +4902,7 @@ var Game = /** @class */ (function () {
     /**
      * Prestige, reset everything except prestige stuff
      * and move to another world
-     * @param world choosen world
+     * @param world chosen world
      */
     Game.prototype.goToWorld = function (world) {
         this.stats.logWorldCompleted(this.currentWorld, !this.canTravel);
@@ -4780,11 +4931,11 @@ var Game = /** @class */ (function () {
         this.applyWorldBonus();
         this.researches.reset(this.materials.science);
         //#region Followers
-        var flollowerMulti = this.allMateries.getSum(_masteries_mastery__WEBPACK_IMPORTED_MODULE_8__["MasteryTypes"].MORE_FOLLOWERS) + 1;
-        var flollowerMultiGa = this.allMateries.getSum(_masteries_mastery__WEBPACK_IMPORTED_MODULE_8__["MasteryTypes"].MORE_FOLLOWERS_GA) * 3;
-        var flollowerMultiWo = this.allMateries.getSum(_masteries_mastery__WEBPACK_IMPORTED_MODULE_8__["MasteryTypes"].MORE_FOLLOWERS_WO) * 3;
+        var followerMulti = this.allMateries.getSum(_masteries_mastery__WEBPACK_IMPORTED_MODULE_8__["MasteryTypes"].MORE_FOLLOWERS) + 1;
+        var followerMultiGa = this.allMateries.getSum(_masteries_mastery__WEBPACK_IMPORTED_MODULE_8__["MasteryTypes"].MORE_FOLLOWERS_GA) * 3;
+        var followerMultiWo = this.allMateries.getSum(_masteries_mastery__WEBPACK_IMPORTED_MODULE_8__["MasteryTypes"].MORE_FOLLOWERS_WO) * 3;
         this.units.filter(function (u) { return u.follower; }).forEach(function (u) {
-            u.quantity = u.quantity.plus(u.follower.quantity.times(u.followerQuantity).times(flollowerMulti));
+            u.quantity = u.quantity.plus(u.follower.quantity.times(u.followerQuantity).times(followerMulti));
             if (u.quantity.gt(0.5)) {
                 u.unlock();
                 if (u.buyAction && u.buyAction.toUnlock) {
@@ -4793,10 +4944,10 @@ var Game = /** @class */ (function () {
             }
         });
         this.gatherers.list.filter(function (u) { return u.follower; }).forEach(function (u) {
-            u.quantity = u.quantity.plus(u.follower.quantity.times(u.followerQuantity).times(flollowerMultiGa));
+            u.quantity = u.quantity.plus(u.follower.quantity.times(u.followerQuantity).times(followerMultiGa));
         });
         this.advWorkers.list.filter(function (u) { return u.follower; }).forEach(function (u) {
-            u.quantity = u.quantity.plus(u.follower.quantity.times(u.followerQuantity).times(flollowerMultiWo));
+            u.quantity = u.quantity.plus(u.follower.quantity.times(u.followerQuantity).times(followerMultiWo));
         });
         //#endregion
         //#region Starting Team && TWin
@@ -5037,10 +5188,10 @@ var __extends = (undefined && undefined.__extends) || (function () {
 
 var Helper = /** @class */ (function (_super) {
     __extends(Helper, _super);
-    function Helper(id, rateo, game) {
+    function Helper(id, ratio, game) {
         var _this = _super.call(this, id) || this;
         _this.game = game;
-        _this.helpBonus = new _production_bonus__WEBPACK_IMPORTED_MODULE_2__["ProductionBonus"](_this, new Decimal(rateo));
+        _this.helpBonus = new _production_bonus__WEBPACK_IMPORTED_MODULE_2__["ProductionBonus"](_this, new Decimal(ratio));
         _this.helpBonus.getMultiplier = function () {
             if (_this.efficiency <= 0)
                 return new Decimal(0);
@@ -5179,7 +5330,7 @@ var AllMasteries = /** @class */ (function () {
         this.harvestBonus = new _baseUnit__WEBPACK_IMPORTED_MODULE_1__["BaseUnit"]("harvMast");
         var harvBon = new _production_bonus__WEBPACK_IMPORTED_MODULE_2__["ProductionBonus"](this.harvestBonus, new Decimal(0.2));
         game.gatherers.list.forEach(function (u) {
-            u.productionsEfficienty.push(harvBon);
+            u.productionsEfficiency.push(harvBon);
         });
         this.materialBonus = new _baseUnit__WEBPACK_IMPORTED_MODULE_1__["BaseUnit"]("matMast");
         var matBon = new _production_bonus__WEBPACK_IMPORTED_MODULE_2__["ProductionBonus"](this.materialBonus, new Decimal(0.1));
@@ -5191,20 +5342,20 @@ var AllMasteries = /** @class */ (function () {
         game.killers.list.forEach(function (u) {
             u.productionsAll.push(armyBon);
         });
-        var lenght = Object.keys(_mastery__WEBPACK_IMPORTED_MODULE_3__["MasteryTypes"]).length / 2;
-        this.totals = new Array(lenght).fill(0);
+        var length = Object.keys(_mastery__WEBPACK_IMPORTED_MODULE_3__["MasteryTypes"]).length / 2;
+        this.totals = new Array(length).fill(0);
         var av1 = new _mastery__WEBPACK_IMPORTED_MODULE_3__["Mastery"](0, _mastery__WEBPACK_IMPORTED_MODULE_3__["MasteryTypes"].MORE_FOLLOWERS);
         var av2 = new _mastery__WEBPACK_IMPORTED_MODULE_3__["Mastery"](5, _mastery__WEBPACK_IMPORTED_MODULE_3__["MasteryTypes"].MORE_IDLE_8H);
         var av3 = new _mastery__WEBPACK_IMPORTED_MODULE_3__["Mastery"](10, _mastery__WEBPACK_IMPORTED_MODULE_3__["MasteryTypes"].HARVEST_BONUS);
         var av4 = new _mastery__WEBPACK_IMPORTED_MODULE_3__["Mastery"](15, _mastery__WEBPACK_IMPORTED_MODULE_3__["MasteryTypes"].SCIENCE_BONUS);
-        av1.avaiable = true;
-        av1.color = _mastery__WEBPACK_IMPORTED_MODULE_3__["Mastery"].avaiableColor;
-        av2.avaiable = true;
-        av2.color = _mastery__WEBPACK_IMPORTED_MODULE_3__["Mastery"].avaiableColor;
-        av3.avaiable = true;
-        av3.color = _mastery__WEBPACK_IMPORTED_MODULE_3__["Mastery"].avaiableColor;
-        av4.avaiable = true;
-        av4.color = _mastery__WEBPACK_IMPORTED_MODULE_3__["Mastery"].avaiableColor;
+        av1.available = true;
+        av1.color = _mastery__WEBPACK_IMPORTED_MODULE_3__["Mastery"].availableColor;
+        av2.available = true;
+        av2.color = _mastery__WEBPACK_IMPORTED_MODULE_3__["Mastery"].availableColor;
+        av3.available = true;
+        av3.color = _mastery__WEBPACK_IMPORTED_MODULE_3__["Mastery"].availableColor;
+        av4.available = true;
+        av4.color = _mastery__WEBPACK_IMPORTED_MODULE_3__["Mastery"].availableColor;
         this.starting = [av1, av2, av3, av4];
         var matGain = new _mastery__WEBPACK_IMPORTED_MODULE_3__["Mastery"](20, _mastery__WEBPACK_IMPORTED_MODULE_3__["MasteryTypes"].MATERIAL_GAIN);
         this.visMasteries = new vis__WEBPACK_IMPORTED_MODULE_0__["DataSet"]([av1, av2, av3, av4, matGain]);
@@ -5231,13 +5382,13 @@ var AllMasteries = /** @class */ (function () {
         this.addMasteryLine(64, 100, _mastery__WEBPACK_IMPORTED_MODULE_3__["MasteryTypes"].START_TWIN, 1, 69);
         //  Science && Technology
         this.addMasteryLine(15, 70, _mastery__WEBPACK_IMPORTED_MODULE_3__["MasteryTypes"].SCIENTIFIC_METHOD, 5);
-        this.addMasteryLine(15, 75, _mastery__WEBPACK_IMPORTED_MODULE_3__["MasteryTypes"].THECNOLOGY_PRESTIGE, 5);
+        this.addMasteryLine(15, 75, _mastery__WEBPACK_IMPORTED_MODULE_3__["MasteryTypes"].TECHNOLOGY_PRESTIGE, 5);
         this.addMasteryLine(74, 103, _mastery__WEBPACK_IMPORTED_MODULE_3__["MasteryTypes"].START_RESEARCHS, 1, 79);
         //  Single material bonus
         this.addMasteryLine(matGain.id, 80, _mastery__WEBPACK_IMPORTED_MODULE_3__["MasteryTypes"].SCIENCE_BONUS, 3);
         this.addMasteryLine(matGain.id, 85, _mastery__WEBPACK_IMPORTED_MODULE_3__["MasteryTypes"].FOOD_BONUS, 3);
         this.addMasteryLine(matGain.id, 90, _mastery__WEBPACK_IMPORTED_MODULE_3__["MasteryTypes"].SOIL_BONUS, 3);
-        this.addMasteryLine(matGain.id, 95, _mastery__WEBPACK_IMPORTED_MODULE_3__["MasteryTypes"].CRYSTALL_BONUS, 3);
+        this.addMasteryLine(matGain.id, 95, _mastery__WEBPACK_IMPORTED_MODULE_3__["MasteryTypes"].CRYSTAL_BONUS, 3);
         //  World Bonus
         this.addMasteryLine(17, 105, _mastery__WEBPACK_IMPORTED_MODULE_3__["MasteryTypes"].BETTER_WORLD, 4);
         this.addMasteryLine(108, 110, _mastery__WEBPACK_IMPORTED_MODULE_3__["MasteryTypes"].DOUBLE_PREFIX, 1);
@@ -5259,7 +5410,7 @@ var AllMasteries = /** @class */ (function () {
             return false;
         }
         var node = this.visMasteries.get(id);
-        if ((node && node.avaiable && !node.owned) || loading) {
+        if ((node && node.available && !node.owned) || loading) {
             if (!loading) {
                 this.masteryPoint--;
             }
@@ -5273,15 +5424,15 @@ var AllMasteries = /** @class */ (function () {
                 var nodes = _this.visMasteries.get({
                     filter: function (item) {
                         return ((item.id === avEdge.from || item.id === avEdge.to) &&
-                            !item.avaiable &&
+                            !item.available &&
                             !item.owned);
                     }
                 });
                 if (nodes.length > 0) {
                     nodes.forEach(function (n) {
                         {
-                            n.avaiable = true;
-                            n.color = _mastery__WEBPACK_IMPORTED_MODULE_3__["Mastery"].avaiableColor;
+                            n.available = true;
+                            n.color = _mastery__WEBPACK_IMPORTED_MODULE_3__["Mastery"].availableColor;
                         }
                     });
                     _this.visMasteries.update(nodes);
@@ -5290,7 +5441,7 @@ var AllMasteries = /** @class */ (function () {
             var update = {
                 id: id,
                 owned: true,
-                avaiable: true,
+                available: true,
                 color: _mastery__WEBPACK_IMPORTED_MODULE_3__["Mastery"].ownedColor
             };
             this.visMasteries.update(update);
@@ -5306,7 +5457,7 @@ var AllMasteries = /** @class */ (function () {
         this.scienceBonus.quantity = new Decimal(this.getSum(_mastery__WEBPACK_IMPORTED_MODULE_3__["MasteryTypes"].SCIENCE_BONUS));
         this.foodBonus.quantity = new Decimal(this.getSum(_mastery__WEBPACK_IMPORTED_MODULE_3__["MasteryTypes"].FOOD_BONUS));
         this.soilBonus.quantity = new Decimal(this.getSum(_mastery__WEBPACK_IMPORTED_MODULE_3__["MasteryTypes"].SOIL_BONUS));
-        this.crystalBonus.quantity = new Decimal(this.getSum(_mastery__WEBPACK_IMPORTED_MODULE_3__["MasteryTypes"].CRYSTALL_BONUS));
+        this.crystalBonus.quantity = new Decimal(this.getSum(_mastery__WEBPACK_IMPORTED_MODULE_3__["MasteryTypes"].CRYSTAL_BONUS));
         this.harvestBonus.quantity = new Decimal(this.getSum(_mastery__WEBPACK_IMPORTED_MODULE_3__["MasteryTypes"].HARVEST_BONUS));
         this.materialBonus.quantity = new Decimal(this.getSum(_mastery__WEBPACK_IMPORTED_MODULE_3__["MasteryTypes"].MATERIAL_GAIN));
         this.armyBonus.quantity = new Decimal(this.getSum(_mastery__WEBPACK_IMPORTED_MODULE_3__["MasteryTypes"].DOUBLE_ARMY));
@@ -5320,15 +5471,15 @@ var AllMasteries = /** @class */ (function () {
         var update = this.visMasteries.get();
         update.forEach(function (m) {
             m.owned = false;
-            m.avaiable = false;
+            m.available = false;
             m.color = _mastery__WEBPACK_IMPORTED_MODULE_3__["notable"].find(function (n) { return n === m.type; })
                 ? _mastery__WEBPACK_IMPORTED_MODULE_3__["Mastery"].notableColor
                 : _mastery__WEBPACK_IMPORTED_MODULE_3__["Mastery"].normalColor;
         });
         this.visMasteries.update(update);
         this.starting.forEach(function (m) {
-            m.avaiable = true;
-            m.color = _mastery__WEBPACK_IMPORTED_MODULE_3__["Mastery"].avaiableColor;
+            m.available = true;
+            m.color = _mastery__WEBPACK_IMPORTED_MODULE_3__["Mastery"].availableColor;
         });
         this.visMasteries.update(this.starting);
     };
@@ -5402,7 +5553,7 @@ var MasteryTypes;
     MasteryTypes[MasteryTypes["MORE_IDLE_8H"] = 1] = "MORE_IDLE_8H";
     MasteryTypes[MasteryTypes["FOOD_BONUS"] = 2] = "FOOD_BONUS";
     MasteryTypes[MasteryTypes["SCIENCE_BONUS"] = 3] = "SCIENCE_BONUS";
-    MasteryTypes[MasteryTypes["CRYSTALL_BONUS"] = 4] = "CRYSTALL_BONUS";
+    MasteryTypes[MasteryTypes["CRYSTAL_BONUS"] = 4] = "CRYSTAL_BONUS";
     MasteryTypes[MasteryTypes["SOIL_BONUS"] = 5] = "SOIL_BONUS";
     MasteryTypes[MasteryTypes["HARVEST_BONUS"] = 6] = "HARVEST_BONUS";
     MasteryTypes[MasteryTypes["MATERIAL_GAIN"] = 7] = "MATERIAL_GAIN";
@@ -5413,7 +5564,7 @@ var MasteryTypes;
     MasteryTypes[MasteryTypes["TEAM_START"] = 12] = "TEAM_START";
     MasteryTypes[MasteryTypes["TEAM_PRESTIGE"] = 13] = "TEAM_PRESTIGE";
     MasteryTypes[MasteryTypes["SCIENTIFIC_METHOD"] = 14] = "SCIENTIFIC_METHOD";
-    MasteryTypes[MasteryTypes["THECNOLOGY_PRESTIGE"] = 15] = "THECNOLOGY_PRESTIGE";
+    MasteryTypes[MasteryTypes["TECHNOLOGY_PRESTIGE"] = 15] = "TECHNOLOGY_PRESTIGE";
     MasteryTypes[MasteryTypes["START_TWIN"] = 16] = "START_TWIN";
     MasteryTypes[MasteryTypes["FREE_WARP_RES"] = 17] = "FREE_WARP_RES";
     MasteryTypes[MasteryTypes["TIME_GEN_AND_BANK"] = 18] = "TIME_GEN_AND_BANK";
@@ -5449,7 +5600,7 @@ var Mastery = /** @class */ (function () {
         this.y = y;
         this.label = "";
         this.color = "blue";
-        this.avaiable = false;
+        this.available = false;
         this.owned = false;
         this.label = Mastery.getDescription(type);
         this.color = notable.find(function (n) { return n === _this.type; })
@@ -5484,7 +5635,7 @@ var Mastery = /** @class */ (function () {
                 ret = "+" + 10 * num + "%\n土壤";
                 break;
             }
-            case MasteryTypes.CRYSTALL_BONUS: {
+            case MasteryTypes.CRYSTAL_BONUS: {
                 ret = "+" + 10 * num + "%\n水晶";
                 break;
             }
@@ -5528,7 +5679,7 @@ var Mastery = /** @class */ (function () {
                 ret = "科学方法研究\n" + 100 * num + "% 更高效率";
                 break;
             }
-            case MasteryTypes.THECNOLOGY_PRESTIGE: {
+            case MasteryTypes.TECHNOLOGY_PRESTIGE: {
                 ret = "技术经验升级\n" + 100 * num + "% 更高效率";
                 break;
             }
@@ -5580,7 +5731,7 @@ var Mastery = /** @class */ (function () {
         return ret;
     };
     Mastery.normalColor = "#4286f4dd";
-    Mastery.avaiableColor = "#008000dd";
+    Mastery.availableColor = "#008000dd";
     Mastery.ownedColor = "#ff0000dd";
     Mastery.notableColor = "#ffa500dd";
     return Mastery;
@@ -6019,19 +6170,19 @@ var Technology = /** @class */ (function (_super) {
         this.farming = new _prestige__WEBPACK_IMPORTED_MODULE_2__["Prestige"]("F", game.genExperiencePrice(10));
         this.carpentry = new _prestige__WEBPACK_IMPORTED_MODULE_2__["Prestige"]("C", game.genExperiencePrice(10));
         this.mining = new _prestige__WEBPACK_IMPORTED_MODULE_2__["Prestige"]("n", game.genExperiencePrice(10));
-        this.studing = new _prestige__WEBPACK_IMPORTED_MODULE_2__["Prestige"]("s", game.genExperiencePrice(10));
-        this.list = [this.farming, this.carpentry, this.mining, this.studing];
+        this.studying = new _prestige__WEBPACK_IMPORTED_MODULE_2__["Prestige"]("s", game.genExperiencePrice(10));
+        this.list = [this.farming, this.carpentry, this.mining, this.studying];
         var foodBon = new _production_bonus__WEBPACK_IMPORTED_MODULE_1__["ProductionBonus"](this.farming, new Decimal(0.1));
         game.materials.food.productionsBonus.push(foodBon);
         var soilBon = new _production_bonus__WEBPACK_IMPORTED_MODULE_1__["ProductionBonus"](this.carpentry, new Decimal(0.1));
         game.materials.soil.productionsBonus.push(soilBon);
         var cryBon = new _production_bonus__WEBPACK_IMPORTED_MODULE_1__["ProductionBonus"](this.mining, new Decimal(0.1));
         game.materials.crystal.productionsBonus.push(cryBon);
-        var scieBon = new _production_bonus__WEBPACK_IMPORTED_MODULE_1__["ProductionBonus"](this.studing, new Decimal(0.1));
+        var scieBon = new _production_bonus__WEBPACK_IMPORTED_MODULE_1__["ProductionBonus"](this.studying, new Decimal(0.1));
         game.materials.science.productionsBonus.push(scieBon);
         [foodBon, soilBon, cryBon, scieBon].forEach(function (b) {
             b.getMultiplier = function () {
-                return new Decimal(1 + game.allMateries.getSum(_masteries_mastery__WEBPACK_IMPORTED_MODULE_0__["MasteryTypes"].THECNOLOGY_PRESTIGE));
+                return new Decimal(1 + game.allMateries.getSum(_masteries_mastery__WEBPACK_IMPORTED_MODULE_0__["MasteryTypes"].TECHNOLOGY_PRESTIGE));
             };
         });
     };
@@ -6284,11 +6435,11 @@ var ProductionBonus = /** @class */ (function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Production", function() { return Production; });
 var Production = /** @class */ (function () {
-    function Production(producer, product, rateo) {
-        if (rateo === void 0) { rateo = new Decimal(1); }
+    function Production(producer, product, ratio) {
+        if (ratio === void 0) { ratio = new Decimal(1); }
         this.producer = producer;
         this.product = product;
-        this.rateo = rateo;
+        this.ratio = ratio;
         this.prodPerSec = new Decimal(1);
         this.reloadProdPerSec();
     }
@@ -6300,7 +6451,7 @@ var Production = /** @class */ (function () {
         else {
             var bonus = new Decimal(1);
             //  Base Production
-            this.prodPerSec = new Decimal(this.rateo);
+            this.prodPerSec = new Decimal(this.ratio);
             // Team Bonus
             if (teamBonus && this.producer.buyAction) {
                 this.prodPerSec = this.prodPerSec.times(this.producer.bonus.plus(1));
@@ -6311,9 +6462,9 @@ var Production = /** @class */ (function () {
                 .map(function (prod) { return prod.getBonus(); })
                 .reduce(function (p, n) { return p.plus(n); }, new Decimal(0));
             bonus = bonus.plus(producerAllBonus);
-            // Producer Efficienty Bonus
-            if (this.rateo.gt(0)) {
-                var producerBonus = this.producer.productionsEfficienty
+            // Producer Efficiency Bonus
+            if (this.ratio.gt(0)) {
+                var producerBonus = this.producer.productionsEfficiency
                     .filter(function (bn) { return bn.isActive(); })
                     .map(function (prod) { return prod.getBonus(); })
                     .reduce(function (p, n) { return p.plus(n); }, new Decimal(0));
@@ -6326,7 +6477,7 @@ var Production = /** @class */ (function () {
                 bonus = bonus.plus(productBonus);
             }
             this.prodPerSec = this.prodPerSec.times(bonus);
-            // Efficienty slider
+            // Efficiency slider
             this.prodPerSec = this.prodPerSec.times(this.producer.efficiency / 100);
         }
     };
@@ -6594,10 +6745,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "STRINGS", function() { return STRINGS; });
 var STRINGS = {
     units: {
+        prest: ["经验", ""],
+        time: ["时间", ""],
         //  Materials
         f: ["食物", "食物用于维持所有单位。"],
         w: ["土壤", "土壤用于构建更好的巢。"],
-        c: ["水晶", "水晶是用来制造科学。"],
+        c: ["水晶", "水晶是用来生产科学。"],
         s: ["科学", "科学是用来发现新事物的。"],
         //  Ants
         l: ["幼虫", "幼虫"],
@@ -6609,8 +6762,8 @@ var STRINGS = {
         i: [
             "学生",
             [
-                "学生将努力获得科学。",
-                "学生们习惯喝水晶酒。"
+                "学生将尝试研究科学。",
+                "学生需要喝水晶。"
             ]
         ],
         //  Workers
@@ -6622,20 +6775,20 @@ var STRINGS = {
                 "公元前10000年开始耕种。"
             ]
         ],
-        b: ["木匠", "木匠在土壤中筑巢。"],
+        b: ["木匠", "木匠蚂蚁在土壤中筑巢。"],
         m: [
             "矿工",
             [
                 "矿工通过采矿提取水晶。",
-                "不出所料，又是一场与矿工的无聊游戏。"
+                "不出所料，又是一个关于矿工的放置游戏。"
             ]
         ],
         d: [
             "科学家",
             [
                 "科学家收集的科学。",
-                "科学家过去常喝水晶酒。",
-                "科学家蚂蚁和学生蚂蚁一样,但他们是长辈。"
+                "科学家需要饮用水晶。",
+                "科学家和学生一样,但他们更厉害。"
             ]
         ],
         // Buildings
@@ -6677,13 +6830,13 @@ var STRINGS = {
         HB: ["常规", "+10% 杀敌."],
         HQ: ["总部", "+10% 杀敌."],
         //  Mastery Bonus
-        scieMast: ["科学精通"],
-        fooMast: ["食物精通"],
-        wooMast: ["土壤精通"],
-        cryMast: ["水晶精通"],
-        harvMast: ["收获精通"],
-        matMast: ["材料精通"],
-        armyMast: ["军队精通"],
+        scieMast: ["科学专精"],
+        fooMast: ["食物专精"],
+        wooMast: ["土壤专精"],
+        cryMast: ["水晶专精"],
+        harvMast: ["收获专精"],
+        matMast: ["材料专精"],
+        armyMast: ["军队专精"],
         //  Supply
         fS: ["食物供应", "永不停息的食物供应"],
         wS: ["土壤供应", "永不停息的土壤供应"],
@@ -6710,9 +6863,9 @@ var STRINGS = {
         //  Wasp
         x: ["觅食黄蜂", "觅食黄蜂"],
         hw: ["大黄蜂", ["大黄蜂", "一只服用类固醇的黄蜂。"]],
-        sw: ["聪明的黄蜂", "市场黄蜂"],
+        sw: ["聪明的黄蜂", "聪明黄蜂"],
         y: ["黄蜂幼虫", "黄蜂幼虫"],
-        z: ["黄蜂女王", "W黄蜂女王"],
+        z: ["黄蜂女王", "黄蜂女王"],
         r: ["黄蜂巢穴", "黄蜂巢穴"],
         v: ["黄蜂农民", "一个农民黄蜂."],
         V: ["黄蜂木匠", "一个木匠黄蜂."],
@@ -6722,12 +6875,12 @@ var STRINGS = {
         VG: ["黄蜂土壤营地", "黄蜂土壤营地."],
         oG: ["黄蜂矿山", "黄蜂矿山."],
         pG: ["黄蜂大学", "黄蜂大学"],
-        vGG: ["黄蜂水利工程师", "黄蜂水利工程师生产农场"],
-        VGG: ["黄蜂土壤工程师", "黄蜂土壤工程师生产土壤营地"],
-        oGG: ["黄蜂矿山工程师", "黄蜂矿山工程师生产矿山"],
+        vGG: ["黄蜂水利工程师", "黄蜂水利工程师生产黄蜂农场"],
+        VGG: ["黄蜂土壤工程师", "黄蜂土壤工程师生产黄蜂土壤营地"],
+        oGG: ["黄蜂矿山工程师", "黄蜂矿山工程师生产黄蜂矿山"],
         pGG: [
             "黄蜂教育部门",
-            "黄蜂教育部门生产大学。"
+            "黄蜂教育部门生产黄蜂大学。"
         ],
         //  Helpers
         lf: ["切叶蚁", "改善农业。"],
@@ -6741,7 +6894,7 @@ var STRINGS = {
         T: ["团队合作2", "提高团队合作的加成"],
         W: ["双胞胎", "同样的价格购买更多的单位"],
         r: ["旅行", "前往一个新的世界!"],
-        M: ["精通", "获得1个精通点数"],
+        M: ["专精", "获得1个专精点数"],
         h: ["收获", "+100% 来自采集者的资源。"],
         1: ["1小时 扭曲", "免费的时间扭曲."],
         2: ["2小时 扭曲", "免费的时间扭曲."],
@@ -6749,7 +6902,7 @@ var STRINGS = {
         SP: ["产卵", "+50% 幼虫产量."],
         ont: [
             "极端",
-            "+10% 世界等级和经验;+20% 需求; 增加随机敌人，以及提高敌人;如果当前世界等级高于15并且高于50%最大等级, 在旅行时会给予你1个精通点"
+            "+10% 世界等级和经验;+20% 需求; 增加随机敌人，以及提高敌人;如果当前世界等级高于15并且高于50%最大等级, 在旅行时会给予你1个专精点"
         ],
         //  Workers
         wo: ["更好的工人", "+30% 来自工人的资源产量."],
@@ -6757,7 +6910,7 @@ var STRINGS = {
         w: ["工人", "工人"],
         a: [
             "农民",
-            "水培法农民使用晶体生长真菌没有土壤。"
+            "水培农民使用水晶在没有土壤的情况下种植真菌。"
         ],
         b: ["木匠", "木匠蚂蚁建造由画廊组成的巢."],
         m: ["矿工", "矿工"],
@@ -6768,7 +6921,7 @@ var STRINGS = {
         aG: ["水培农场", "水培真菌农场."],
         bG: ["土壤营地", "肥沃的土壤源."],
         mG: ["矿山", "一个水晶矿."],
-        dG: ["大学", "大学生产学生."],
+        dG: ["大学", "大学培养科学家."],
         //  Engineers
         e: ["工程师", "工程师建造建筑物."],
         aGG: ["水利工程师", "水利工程师生产农场."],
@@ -6797,12 +6950,12 @@ var STRINGS = {
         VG: ["黄蜂土壤营地", "黄蜂土壤营地."],
         oG: ["黄蜂矿山", "黄蜂矿山."],
         pG: ["黄蜂大学", "黄蜂大学"],
-        vGG: ["黄蜂水利工程师", "黄蜂水利工程师生产农场."],
+        vGG: ["黄蜂水利工程师", "黄蜂水利工程师生产黄蜂农场."],
         VGG: ["黄蜂土壤工程师", "黄蜂土壤工程师生产黄蜂土壤营地."],
         oGG: ["黄蜂矿山工程师", "黄蜂矿山工程师生产黄蜂矿山."],
         pGG: [
             "黄蜂教育部门",
-            "黄蜂教育部门生产大学."
+            "黄蜂教育部门生产黄蜂大学."
         ],
         //  Super Major
         sm: ["主宰助手", ""],
@@ -6810,7 +6963,7 @@ var STRINGS = {
         mh: ["大矿工", "改善采矿。"],
         sh: ["大木匠", "改善土壤收集。"],
         //  Kill World
-        aow: ["战争的艺术", "杀手提高10%"]
+        aow: ["战争的艺术", "杀敌提高10%"]
     },
     worlds: {
         "1Pre": "炽热的",
@@ -7229,7 +7382,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Ants", function() { return Ants; });
 /* harmony import */ var _baseUnit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../baseUnit */ "./src/app/model/baseUnit.ts");
 /* harmony import */ var _bugsTypes__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../bugsTypes */ "./src/app/model/bugsTypes.ts");
-/* harmony import */ var _CONSTATS__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../CONSTATS */ "./src/app/model/CONSTATS.ts");
+/* harmony import */ var _CONSTANTS__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../CONSTANTS */ "./src/app/model/CONSTANTS.ts");
 /* harmony import */ var _full_unit__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../full-unit */ "./src/app/model/full-unit.ts");
 /* harmony import */ var _price__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../price */ "./src/app/model/price.ts");
 /* harmony import */ var _production_bonus__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../production-bonus */ "./src/app/model/production-bonus.ts");
@@ -7273,23 +7426,23 @@ var Ants = /** @class */ (function (_super) {
     };
     Ants.prototype.setRelations = function () {
         this.larva.generateBuyAction([
-            new _price__WEBPACK_IMPORTED_MODULE_4__["Price"](this.game.materials.food, _CONSTATS__WEBPACK_IMPORTED_MODULE_2__["CONSTS"].PRICE_0, _CONSTATS__WEBPACK_IMPORTED_MODULE_2__["CONSTS"].SWARM_PRICE_GROWRATE)
+            new _price__WEBPACK_IMPORTED_MODULE_4__["Price"](this.game.materials.food, _CONSTANTS__WEBPACK_IMPORTED_MODULE_2__["CONSTS"].PRICE_0, _CONSTANTS__WEBPACK_IMPORTED_MODULE_2__["CONSTS"].SWARM_PRICE_GROWRATE)
         ], [this.queen]);
         this.queen.generateBuyAction([
-            new _price__WEBPACK_IMPORTED_MODULE_4__["Price"](this.larva, _CONSTATS__WEBPACK_IMPORTED_MODULE_2__["CONSTS"].PRICE_LARVAE_1.div(2), _CONSTATS__WEBPACK_IMPORTED_MODULE_2__["CONSTS"].SWARM_PRICE_GROWRATE),
-            new _price__WEBPACK_IMPORTED_MODULE_4__["Price"](this.game.materials.food, _CONSTATS__WEBPACK_IMPORTED_MODULE_2__["CONSTS"].PRICE_QUEEN)
+            new _price__WEBPACK_IMPORTED_MODULE_4__["Price"](this.larva, _CONSTANTS__WEBPACK_IMPORTED_MODULE_2__["CONSTS"].PRICE_LARVAE_1.div(2), _CONSTANTS__WEBPACK_IMPORTED_MODULE_2__["CONSTS"].SWARM_PRICE_GROWRATE),
+            new _price__WEBPACK_IMPORTED_MODULE_4__["Price"](this.game.materials.food, _CONSTANTS__WEBPACK_IMPORTED_MODULE_2__["CONSTS"].PRICE_QUEEN)
         ], [this.nest]);
         this.nest.generateBuyAction([
-            new _price__WEBPACK_IMPORTED_MODULE_4__["Price"](this.queen, _CONSTATS__WEBPACK_IMPORTED_MODULE_2__["CONSTS"].PRICE_LARVAE_2, _CONSTATS__WEBPACK_IMPORTED_MODULE_2__["CONSTS"].SWARM_PRICE_GROWRATE),
-            new _price__WEBPACK_IMPORTED_MODULE_4__["Price"](this.game.materials.food, _CONSTATS__WEBPACK_IMPORTED_MODULE_2__["CONSTS"].PRICE_NEST),
-            new _price__WEBPACK_IMPORTED_MODULE_4__["Price"](this.game.materials.soil, _CONSTATS__WEBPACK_IMPORTED_MODULE_2__["CONSTS"].PRICE_NEST)
+            new _price__WEBPACK_IMPORTED_MODULE_4__["Price"](this.queen, _CONSTANTS__WEBPACK_IMPORTED_MODULE_2__["CONSTS"].PRICE_LARVAE_2, _CONSTANTS__WEBPACK_IMPORTED_MODULE_2__["CONSTS"].SWARM_PRICE_GROWRATE),
+            new _price__WEBPACK_IMPORTED_MODULE_4__["Price"](this.game.materials.food, _CONSTANTS__WEBPACK_IMPORTED_MODULE_2__["CONSTS"].PRICE_NEST),
+            new _price__WEBPACK_IMPORTED_MODULE_4__["Price"](this.game.materials.soil, _CONSTANTS__WEBPACK_IMPORTED_MODULE_2__["CONSTS"].PRICE_NEST)
         ]);
-        this.larva.addProducer(this.queen, _CONSTATS__WEBPACK_IMPORTED_MODULE_2__["CONSTS"].PROD_LARVAE);
-        this.queen.addProducer(this.nest, _CONSTATS__WEBPACK_IMPORTED_MODULE_2__["CONSTS"].PROD_LARVAE);
-        this.game.addTeamAction(this.queen, _CONSTATS__WEBPACK_IMPORTED_MODULE_2__["CONSTS"].TEAM_PRICE_2);
-        this.game.addTeamAction(this.nest, _CONSTATS__WEBPACK_IMPORTED_MODULE_2__["CONSTS"].TEAM_PRICE_3);
-        this.game.addTwinAction(this.queen, _CONSTATS__WEBPACK_IMPORTED_MODULE_2__["CONSTS"].TWIN_PRICE_2);
-        this.game.addTwinAction(this.nest, _CONSTATS__WEBPACK_IMPORTED_MODULE_2__["CONSTS"].TWIN_PRICE_3);
+        this.larva.addProducer(this.queen, _CONSTANTS__WEBPACK_IMPORTED_MODULE_2__["CONSTS"].PROD_LARVAE);
+        this.queen.addProducer(this.nest, _CONSTANTS__WEBPACK_IMPORTED_MODULE_2__["CONSTS"].PROD_LARVAE);
+        this.game.addTeamAction(this.queen, _CONSTANTS__WEBPACK_IMPORTED_MODULE_2__["CONSTS"].TEAM_PRICE_2);
+        this.game.addTeamAction(this.nest, _CONSTANTS__WEBPACK_IMPORTED_MODULE_2__["CONSTS"].TEAM_PRICE_3);
+        this.game.addTwinAction(this.queen, _CONSTANTS__WEBPACK_IMPORTED_MODULE_2__["CONSTS"].TWIN_PRICE_2);
+        this.game.addTwinAction(this.nest, _CONSTANTS__WEBPACK_IMPORTED_MODULE_2__["CONSTS"].TWIN_PRICE_3);
     };
     Ants.prototype.addWorlds = function () {
         var larvaPre = new _world__WEBPACK_IMPORTED_MODULE_7__["World"]("larvaPre");
@@ -7337,7 +7490,7 @@ var Ants = /** @class */ (function (_super) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Bees", function() { return Bees; });
 /* harmony import */ var _bugsTypes__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../bugsTypes */ "./src/app/model/bugsTypes.ts");
-/* harmony import */ var _CONSTATS__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../CONSTATS */ "./src/app/model/CONSTATS.ts");
+/* harmony import */ var _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../CONSTANTS */ "./src/app/model/CONSTANTS.ts");
 /* harmony import */ var _full_unit__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../full-unit */ "./src/app/model/full-unit.ts");
 /* harmony import */ var _price__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../price */ "./src/app/model/price.ts");
 /* harmony import */ var _unit_group__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../unit-group */ "./src/app/model/unit-group.ts");
@@ -7374,23 +7527,23 @@ var Bees = /** @class */ (function (_super) {
     };
     Bees.prototype.setRelations = function () {
         this.larva.generateBuyAction([
-            new _price__WEBPACK_IMPORTED_MODULE_3__["Price"](this.game.materials.food, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_0, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].SWARM_PRICE_GROWRATE)
+            new _price__WEBPACK_IMPORTED_MODULE_3__["Price"](this.game.materials.food, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_0, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].SWARM_PRICE_GROWRATE)
         ], [this.queen]);
         this.queen.generateBuyAction([
-            new _price__WEBPACK_IMPORTED_MODULE_3__["Price"](this.larva, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_LARVAE_1, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].SWARM_PRICE_GROWRATE),
-            new _price__WEBPACK_IMPORTED_MODULE_3__["Price"](this.game.materials.food, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_QUEEN)
+            new _price__WEBPACK_IMPORTED_MODULE_3__["Price"](this.larva, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_LARVAE_1, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].SWARM_PRICE_GROWRATE),
+            new _price__WEBPACK_IMPORTED_MODULE_3__["Price"](this.game.materials.food, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_QUEEN)
         ], [this.nest]);
         this.nest.generateBuyAction([
-            new _price__WEBPACK_IMPORTED_MODULE_3__["Price"](this.queen, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_LARVAE_2, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].SWARM_PRICE_GROWRATE),
-            new _price__WEBPACK_IMPORTED_MODULE_3__["Price"](this.game.materials.food, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_NEST),
-            new _price__WEBPACK_IMPORTED_MODULE_3__["Price"](this.game.materials.soil, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_NEST)
+            new _price__WEBPACK_IMPORTED_MODULE_3__["Price"](this.queen, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_LARVAE_2, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].SWARM_PRICE_GROWRATE),
+            new _price__WEBPACK_IMPORTED_MODULE_3__["Price"](this.game.materials.food, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_NEST),
+            new _price__WEBPACK_IMPORTED_MODULE_3__["Price"](this.game.materials.soil, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_NEST)
         ]);
-        this.larva.addProducer(this.queen, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PROD_LARVAE);
-        this.queen.addProducer(this.nest, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PROD_LARVAE);
-        this.game.addTeamAction(this.queen, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].TEAM_PRICE_2);
-        this.game.addTeamAction(this.nest, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].TEAM_PRICE_3);
-        this.game.addTwinAction(this.queen, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].TWIN_PRICE_2);
-        this.game.addTwinAction(this.nest, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].TWIN_PRICE_3);
+        this.larva.addProducer(this.queen, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PROD_LARVAE);
+        this.queen.addProducer(this.nest, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PROD_LARVAE);
+        this.game.addTeamAction(this.queen, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].TEAM_PRICE_2);
+        this.game.addTeamAction(this.nest, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].TEAM_PRICE_3);
+        this.game.addTwinAction(this.queen, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].TWIN_PRICE_2);
+        this.game.addTwinAction(this.nest, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].TWIN_PRICE_3);
         this.list.forEach(function (u) { return u.setBugType(_bugsTypes__WEBPACK_IMPORTED_MODULE_0__["BugTypes"].BEE); });
     };
     Bees.prototype.addWorlds = function () {
@@ -7400,7 +7553,7 @@ var Bees = /** @class */ (function (_super) {
         var beeSuff = new _world__WEBPACK_IMPORTED_MODULE_5__["World"]("beeSuff");
         [beeBio, beePre, beeSuff].forEach(function (w) {
             w.additionalBugs.push(_bugsTypes__WEBPACK_IMPORTED_MODULE_0__["BugTypes"].BEE);
-            w.winContidions.push(new _price__WEBPACK_IMPORTED_MODULE_3__["Price"](_this.nest, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].BASE_WIN_CONDITION_OTHER.times(0.8)));
+            w.winConditions.push(new _price__WEBPACK_IMPORTED_MODULE_3__["Price"](_this.nest, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].BASE_WIN_CONDITION_OTHER.times(0.8)));
         });
         _world__WEBPACK_IMPORTED_MODULE_5__["World"].prefix.push(beePre);
         _world__WEBPACK_IMPORTED_MODULE_5__["World"].suffix.push(beeSuff);
@@ -7423,7 +7576,7 @@ var Bees = /** @class */ (function (_super) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Buildings", function() { return Buildings; });
-/* harmony import */ var _CONSTATS__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../CONSTATS */ "./src/app/model/CONSTATS.ts");
+/* harmony import */ var _CONSTANTS__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../CONSTANTS */ "./src/app/model/CONSTANTS.ts");
 /* harmony import */ var _price__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../price */ "./src/app/model/price.ts");
 /* harmony import */ var _research__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../research */ "./src/app/model/research.ts");
 /* harmony import */ var _unit_group__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../unit-group */ "./src/app/model/unit-group.ts");
@@ -7453,30 +7606,30 @@ var Buildings = /** @class */ (function (_super) {
     Buildings.prototype.setRelations = function () {
         var _this = this;
         this.game.advWorkers.firstResearch.toUnlock.push(this.firstResearch);
-        this.firstResearch.prices = this.game.genSciencePrice(_CONSTATS__WEBPACK_IMPORTED_MODULE_0__["CONSTS"].RES_PRICE_2.div(50));
+        this.firstResearch.prices = this.game.genSciencePrice(_CONSTANTS__WEBPACK_IMPORTED_MODULE_0__["CONSTS"].RES_PRICE_2.div(50));
         var len = this.list.length;
         var _loop_1 = function (i) {
             var product = this_1.game.advWorkers.list[i];
             var producer = this_1.list[i];
             var research = this_1.researchList[i];
-            research.prices = this_1.game.genSciencePrice(_CONSTATS__WEBPACK_IMPORTED_MODULE_0__["CONSTS"].RES_PRICE_2);
+            research.prices = this_1.game.genSciencePrice(_CONSTANTS__WEBPACK_IMPORTED_MODULE_0__["CONSTS"].RES_PRICE_2);
             this_1.firstResearch.toUnlock.push(research);
             producer.generateBuyAction([
-                new _price__WEBPACK_IMPORTED_MODULE_1__["Price"](product, _CONSTATS__WEBPACK_IMPORTED_MODULE_0__["CONSTS"].PRICE_0),
-                new _price__WEBPACK_IMPORTED_MODULE_1__["Price"](product.buyAction.prices[product.buyAction.prices.length - 1].base, _CONSTATS__WEBPACK_IMPORTED_MODULE_0__["CONSTS"].PRICE_2)
+                new _price__WEBPACK_IMPORTED_MODULE_1__["Price"](product, _CONSTANTS__WEBPACK_IMPORTED_MODULE_0__["CONSTS"].PRICE_0),
+                new _price__WEBPACK_IMPORTED_MODULE_1__["Price"](product.buyAction.prices[product.buyAction.prices.length - 1].base, _CONSTANTS__WEBPACK_IMPORTED_MODULE_0__["CONSTS"].PRICE_2)
             ]);
             var soilPrice = producer.buyAction.prices.find(function (p) { return p.base === _this.game.materials.soil; });
             if (!soilPrice) {
                 soilPrice = new _price__WEBPACK_IMPORTED_MODULE_1__["Price"](this_1.game.materials.soil, 0);
                 producer.buyAction.prices.push(soilPrice);
             }
-            soilPrice.price = soilPrice.price.plus(_CONSTATS__WEBPACK_IMPORTED_MODULE_0__["CONSTS"].PRICE_2);
+            soilPrice.price = soilPrice.price.plus(_CONSTANTS__WEBPACK_IMPORTED_MODULE_0__["CONSTS"].PRICE_2);
             product.addProducer(producer);
             product.buyAction.prices.forEach(function (p) {
                 return p.base.addProducer(producer, p.price.times(-1));
             });
-            this_1.game.addTeamAction(producer, _CONSTATS__WEBPACK_IMPORTED_MODULE_0__["CONSTS"].TEAM_PRICE_2);
-            this_1.game.addTwinAction(producer, _CONSTATS__WEBPACK_IMPORTED_MODULE_0__["CONSTS"].TWIN_PRICE_2);
+            this_1.game.addTeamAction(producer, _CONSTANTS__WEBPACK_IMPORTED_MODULE_0__["CONSTS"].TEAM_PRICE_2);
+            this_1.game.addTwinAction(producer, _CONSTANTS__WEBPACK_IMPORTED_MODULE_0__["CONSTS"].TWIN_PRICE_2);
         };
         var this_1 = this;
         for (var i = 0; i < len; i++) {
@@ -7501,7 +7654,7 @@ var Buildings = /** @class */ (function (_super) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Engineers", function() { return Engineers; });
-/* harmony import */ var _CONSTATS__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../CONSTATS */ "./src/app/model/CONSTATS.ts");
+/* harmony import */ var _CONSTANTS__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../CONSTANTS */ "./src/app/model/CONSTANTS.ts");
 /* harmony import */ var _price__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../price */ "./src/app/model/price.ts");
 /* harmony import */ var _research__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../research */ "./src/app/model/research.ts");
 /* harmony import */ var _unit_group__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../unit-group */ "./src/app/model/unit-group.ts");
@@ -7531,30 +7684,30 @@ var Engineers = /** @class */ (function (_super) {
     Engineers.prototype.setRelations = function () {
         var _this = this;
         this.game.buildings.firstResearch.toUnlock.push(this.firstResearch);
-        this.firstResearch.prices = this.game.genSciencePrice(_CONSTATS__WEBPACK_IMPORTED_MODULE_0__["CONSTS"].RES_PRICE_3.div(50));
+        this.firstResearch.prices = this.game.genSciencePrice(_CONSTANTS__WEBPACK_IMPORTED_MODULE_0__["CONSTS"].RES_PRICE_3.div(50));
         var len = this.list.length;
         var _loop_1 = function (i) {
             var product = this_1.game.buildings.list[i];
             var producer = this_1.list[i];
             var research = this_1.researchList[i];
-            research.prices = this_1.game.genSciencePrice(_CONSTATS__WEBPACK_IMPORTED_MODULE_0__["CONSTS"].RES_PRICE_3);
+            research.prices = this_1.game.genSciencePrice(_CONSTANTS__WEBPACK_IMPORTED_MODULE_0__["CONSTS"].RES_PRICE_3);
             this_1.firstResearch.toUnlock.push(research);
             producer.generateBuyAction([
-                new _price__WEBPACK_IMPORTED_MODULE_1__["Price"](product, _CONSTATS__WEBPACK_IMPORTED_MODULE_0__["CONSTS"].PRICE_ENG),
-                new _price__WEBPACK_IMPORTED_MODULE_1__["Price"](product.buyAction.prices[product.buyAction.prices.length - 1].base, _CONSTATS__WEBPACK_IMPORTED_MODULE_0__["CONSTS"].PRICE_3)
+                new _price__WEBPACK_IMPORTED_MODULE_1__["Price"](product, _CONSTANTS__WEBPACK_IMPORTED_MODULE_0__["CONSTS"].PRICE_ENG),
+                new _price__WEBPACK_IMPORTED_MODULE_1__["Price"](product.buyAction.prices[product.buyAction.prices.length - 1].base, _CONSTANTS__WEBPACK_IMPORTED_MODULE_0__["CONSTS"].PRICE_3)
             ]);
             var cryPrice = producer.buyAction.prices.find(function (p) { return p.base === _this.game.materials.crystal; });
             if (!cryPrice) {
                 cryPrice = new _price__WEBPACK_IMPORTED_MODULE_1__["Price"](this_1.game.materials.crystal, 0);
                 producer.buyAction.prices.push(cryPrice);
             }
-            cryPrice.price = cryPrice.price.plus(_CONSTATS__WEBPACK_IMPORTED_MODULE_0__["CONSTS"].PRICE_3);
+            cryPrice.price = cryPrice.price.plus(_CONSTANTS__WEBPACK_IMPORTED_MODULE_0__["CONSTS"].PRICE_3);
             product.addProducer(producer);
             product.buyAction.prices.forEach(function (p) {
                 return p.base.addProducer(producer, p.price.times(-1));
             });
-            this_1.game.addTeamAction(producer, _CONSTATS__WEBPACK_IMPORTED_MODULE_0__["CONSTS"].TEAM_PRICE_3);
-            this_1.game.addTwinAction(producer, _CONSTATS__WEBPACK_IMPORTED_MODULE_0__["CONSTS"].TWIN_PRICE_3);
+            this_1.game.addTeamAction(producer, _CONSTANTS__WEBPACK_IMPORTED_MODULE_0__["CONSTS"].TEAM_PRICE_3);
+            this_1.game.addTwinAction(producer, _CONSTANTS__WEBPACK_IMPORTED_MODULE_0__["CONSTS"].TWIN_PRICE_3);
         };
         var this_1 = this;
         for (var i = 0; i < len; i++) {
@@ -7580,7 +7733,7 @@ var Engineers = /** @class */ (function (_super) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Gatherers", function() { return Gatherers; });
 /* harmony import */ var _bugsTypes__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../bugsTypes */ "./src/app/model/bugsTypes.ts");
-/* harmony import */ var _CONSTATS__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../CONSTATS */ "./src/app/model/CONSTATS.ts");
+/* harmony import */ var _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../CONSTANTS */ "./src/app/model/CONSTANTS.ts");
 /* harmony import */ var _full_unit__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../full-unit */ "./src/app/model/full-unit.ts");
 /* harmony import */ var _price__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../price */ "./src/app/model/price.ts");
 /* harmony import */ var _unit_group__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../unit-group */ "./src/app/model/unit-group.ts");
@@ -7634,8 +7787,8 @@ var Gatherers = /** @class */ (function (_super) {
         var _this = this;
         this.list.forEach(function (u) {
             if (u instanceof _full_unit__WEBPACK_IMPORTED_MODULE_2__["FullUnit"]) {
-                _this.game.addTeamAction(u, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].TEAM_PRICE_0);
-                _this.game.addTwinAction(u, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].TWIN_PRICE_0);
+                _this.game.addTeamAction(u, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].TEAM_PRICE_0);
+                _this.game.addTwinAction(u, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].TWIN_PRICE_0);
             }
         });
         this.setAntsRelations();
@@ -7646,84 +7799,84 @@ var Gatherers = /** @class */ (function (_super) {
     };
     Gatherers.prototype.setAntsRelations = function () {
         this.drone.generateBuyAction([
-            new _price__WEBPACK_IMPORTED_MODULE_3__["Price"](this.game.ants.larva, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_LARVAE_0, 1),
-            new _price__WEBPACK_IMPORTED_MODULE_3__["Price"](this.game.materials.food, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_0)
+            new _price__WEBPACK_IMPORTED_MODULE_3__["Price"](this.game.ants.larva, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_LARVAE_0, 1),
+            new _price__WEBPACK_IMPORTED_MODULE_3__["Price"](this.game.materials.food, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_0)
         ], [this.geologist]);
         this.drone.unlocked = true;
         this.geologist.generateBuyAction([
-            new _price__WEBPACK_IMPORTED_MODULE_3__["Price"](this.game.ants.larva, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_LARVAE_0, 1),
-            new _price__WEBPACK_IMPORTED_MODULE_3__["Price"](this.game.materials.food, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_0)
+            new _price__WEBPACK_IMPORTED_MODULE_3__["Price"](this.game.ants.larva, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_LARVAE_0, 1),
+            new _price__WEBPACK_IMPORTED_MODULE_3__["Price"](this.game.materials.food, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_0)
         ], [this.student]);
-        this.game.materials.food.addProducer(this.drone, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PROD_GAN);
-        this.game.materials.crystal.addProducer(this.geologist, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PROD_GAN);
-        this.game.materials.food.addProducer(this.geologist, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].CONSUME_GAN);
+        this.game.materials.food.addProducer(this.drone, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PROD_GAN);
+        this.game.materials.crystal.addProducer(this.geologist, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PROD_GAN);
+        this.game.materials.food.addProducer(this.geologist, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].CONSUME_GAN);
         this.student.generateBuyAction([
-            new _price__WEBPACK_IMPORTED_MODULE_3__["Price"](this.game.ants.larva, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_LARVAE_0, 1),
-            new _price__WEBPACK_IMPORTED_MODULE_3__["Price"](this.game.materials.food, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_0)
+            new _price__WEBPACK_IMPORTED_MODULE_3__["Price"](this.game.ants.larva, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_LARVAE_0, 1),
+            new _price__WEBPACK_IMPORTED_MODULE_3__["Price"](this.game.materials.food, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_0)
         ], [this.game.tabs.lab, this.game.researches.team1]);
-        this.game.materials.science.addProducer(this.student, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PROD_GAN);
-        this.game.materials.crystal.addProducer(this.student, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].CONSUME_GAN);
+        this.game.materials.science.addProducer(this.student, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PROD_GAN);
+        this.game.materials.crystal.addProducer(this.student, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].CONSUME_GAN);
     };
     Gatherers.prototype.setBeeRelations = function () {
         this.foraggingBee.generateBuyAction([
-            new _price__WEBPACK_IMPORTED_MODULE_3__["Price"](this.game.bees.larva, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_LARVAE_0, 1),
-            new _price__WEBPACK_IMPORTED_MODULE_3__["Price"](this.game.materials.food, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_0)
+            new _price__WEBPACK_IMPORTED_MODULE_3__["Price"](this.game.bees.larva, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_LARVAE_0, 1),
+            new _price__WEBPACK_IMPORTED_MODULE_3__["Price"](this.game.materials.food, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_0)
         ], [this.carpenterBee]);
         this.game.materials.food.addProducer(this.foraggingBee);
         this.foraggingBee.setBugType(_bugsTypes__WEBPACK_IMPORTED_MODULE_0__["BugTypes"].BEE);
         this.carpenterBee.generateBuyAction([
-            new _price__WEBPACK_IMPORTED_MODULE_3__["Price"](this.game.bees.larva, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_LARVAE_0, 1),
-            new _price__WEBPACK_IMPORTED_MODULE_3__["Price"](this.game.materials.food, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_0)
+            new _price__WEBPACK_IMPORTED_MODULE_3__["Price"](this.game.bees.larva, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_LARVAE_0, 1),
+            new _price__WEBPACK_IMPORTED_MODULE_3__["Price"](this.game.materials.food, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_0)
         ], [this.studentBee]);
-        this.game.materials.food.addProducer(this.carpenterBee, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].CONSUME_GAN);
-        this.game.materials.soil.addProducer(this.carpenterBee, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PROD_GAN.times(0.4));
-        this.game.materials.crystal.addProducer(this.carpenterBee, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PROD_GAN.times(0.6));
+        this.game.materials.food.addProducer(this.carpenterBee, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].CONSUME_GAN);
+        this.game.materials.soil.addProducer(this.carpenterBee, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PROD_GAN.times(0.4));
+        this.game.materials.crystal.addProducer(this.carpenterBee, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PROD_GAN.times(0.6));
         this.carpenterBee.setBugType(_bugsTypes__WEBPACK_IMPORTED_MODULE_0__["BugTypes"].BEE);
         this.studentBee.generateBuyAction([
-            new _price__WEBPACK_IMPORTED_MODULE_3__["Price"](this.game.bees.larva, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_LARVAE_0, 1),
-            new _price__WEBPACK_IMPORTED_MODULE_3__["Price"](this.game.materials.food, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_0)
+            new _price__WEBPACK_IMPORTED_MODULE_3__["Price"](this.game.bees.larva, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_LARVAE_0, 1),
+            new _price__WEBPACK_IMPORTED_MODULE_3__["Price"](this.game.materials.food, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_0)
         ], [this.game.tabs.lab, this.game.researches.team1]);
-        this.game.materials.science.addProducer(this.studentBee, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PROD_GAN);
-        this.game.materials.crystal.addProducer(this.studentBee, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].CONSUME_GAN);
+        this.game.materials.science.addProducer(this.studentBee, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PROD_GAN);
+        this.game.materials.crystal.addProducer(this.studentBee, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].CONSUME_GAN);
         this.studentBee.setBugType(_bugsTypes__WEBPACK_IMPORTED_MODULE_0__["BugTypes"].BEE);
     };
     Gatherers.prototype.setWaspRelations = function () {
         this.foraggingWasp.generateBuyAction([
-            new _price__WEBPACK_IMPORTED_MODULE_3__["Price"](this.game.wasps.larva, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_LARVAE_0, 1),
-            new _price__WEBPACK_IMPORTED_MODULE_3__["Price"](this.game.materials.food, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_0)
+            new _price__WEBPACK_IMPORTED_MODULE_3__["Price"](this.game.wasps.larva, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_LARVAE_0, 1),
+            new _price__WEBPACK_IMPORTED_MODULE_3__["Price"](this.game.materials.food, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_0)
         ], [this.hornetWasp]);
-        this.game.materials.food.addProducer(this.foraggingWasp, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PROD_GAN);
+        this.game.materials.food.addProducer(this.foraggingWasp, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PROD_GAN);
         this.foraggingWasp.setBugType(_bugsTypes__WEBPACK_IMPORTED_MODULE_0__["BugTypes"].WASP);
         this.hornetWasp.generateBuyAction([
-            new _price__WEBPACK_IMPORTED_MODULE_3__["Price"](this.game.wasps.larva, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_LARVAE_0, 1),
-            new _price__WEBPACK_IMPORTED_MODULE_3__["Price"](this.game.materials.food, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_0)
+            new _price__WEBPACK_IMPORTED_MODULE_3__["Price"](this.game.wasps.larva, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_LARVAE_0, 1),
+            new _price__WEBPACK_IMPORTED_MODULE_3__["Price"](this.game.materials.food, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_0)
         ], [this.smartWasp]);
-        this.game.materials.crystal.addProducer(this.hornetWasp, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PROD_GAN);
-        this.game.materials.food.addProducer(this.hornetWasp, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].CONSUME_GAN);
+        this.game.materials.crystal.addProducer(this.hornetWasp, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PROD_GAN);
+        this.game.materials.food.addProducer(this.hornetWasp, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].CONSUME_GAN);
         this.hornetWasp.setBugType(_bugsTypes__WEBPACK_IMPORTED_MODULE_0__["BugTypes"].WASP);
         this.smartWasp.generateBuyAction([
-            new _price__WEBPACK_IMPORTED_MODULE_3__["Price"](this.game.wasps.larva, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_LARVAE_0, 1),
-            new _price__WEBPACK_IMPORTED_MODULE_3__["Price"](this.game.materials.food, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_0)
+            new _price__WEBPACK_IMPORTED_MODULE_3__["Price"](this.game.wasps.larva, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_LARVAE_0, 1),
+            new _price__WEBPACK_IMPORTED_MODULE_3__["Price"](this.game.materials.food, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_0)
         ]);
-        this.game.materials.science.addProducer(this.smartWasp, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PROD_GAN);
-        this.game.materials.crystal.addProducer(this.smartWasp, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].CONSUME_GAN);
+        this.game.materials.science.addProducer(this.smartWasp, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PROD_GAN);
+        this.game.materials.crystal.addProducer(this.smartWasp, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].CONSUME_GAN);
         this.smartWasp.setBugType(_bugsTypes__WEBPACK_IMPORTED_MODULE_0__["BugTypes"].WASP);
     };
     Gatherers.prototype.setMajorRelations = function () {
         this.hunter.generateBuyAction([
-            new _price__WEBPACK_IMPORTED_MODULE_3__["Price"](this.game.ants.larva, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_LARVAE_0, 1),
-            new _price__WEBPACK_IMPORTED_MODULE_3__["Price"](this.game.materials.food, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_0)
+            new _price__WEBPACK_IMPORTED_MODULE_3__["Price"](this.game.ants.larva, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_LARVAE_0, 1),
+            new _price__WEBPACK_IMPORTED_MODULE_3__["Price"](this.game.materials.food, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_0)
         ], [this.majorWorker]);
-        this.game.materials.food.addProducer(this.hunter, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PROD_GAN);
+        this.game.materials.food.addProducer(this.hunter, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PROD_GAN);
         this.hunter.setBugType(_bugsTypes__WEBPACK_IMPORTED_MODULE_0__["BugTypes"].SUPER_MAJOR);
         this.majorWorker.generateBuyAction([
-            new _price__WEBPACK_IMPORTED_MODULE_3__["Price"](this.game.ants.larva, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_LARVAE_0, 1),
-            new _price__WEBPACK_IMPORTED_MODULE_3__["Price"](this.game.materials.food, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_0)
+            new _price__WEBPACK_IMPORTED_MODULE_3__["Price"](this.game.ants.larva, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_LARVAE_0, 1),
+            new _price__WEBPACK_IMPORTED_MODULE_3__["Price"](this.game.materials.food, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_0)
         ]);
         this.majorWorker.setBugType(_bugsTypes__WEBPACK_IMPORTED_MODULE_0__["BugTypes"].SUPER_MAJOR);
-        this.game.materials.soil.addProducer(this.majorWorker, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PROD_GAN.times(0.7));
-        this.game.materials.crystal.addProducer(this.majorWorker, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PROD_GAN.times(0.3));
-        this.game.materials.food.addProducer(this.majorWorker, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].CONSUME_GAN);
+        this.game.materials.soil.addProducer(this.majorWorker, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PROD_GAN.times(0.7));
+        this.game.materials.crystal.addProducer(this.majorWorker, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PROD_GAN.times(0.3));
+        this.game.materials.food.addProducer(this.majorWorker, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].CONSUME_GAN);
     };
     return Gatherers;
 }(_unit_group__WEBPACK_IMPORTED_MODULE_4__["UnitGroup"]));
@@ -7743,7 +7896,7 @@ var Gatherers = /** @class */ (function (_super) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Helpers", function() { return Helpers; });
 /* harmony import */ var _bugsTypes__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../bugsTypes */ "./src/app/model/bugsTypes.ts");
-/* harmony import */ var _CONSTATS__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../CONSTATS */ "./src/app/model/CONSTATS.ts");
+/* harmony import */ var _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../CONSTANTS */ "./src/app/model/CONSTANTS.ts");
 /* harmony import */ var _helper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../helper */ "./src/app/model/helper.ts");
 /* harmony import */ var _price__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../price */ "./src/app/model/price.ts");
 /* harmony import */ var _research__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../research */ "./src/app/model/research.ts");
@@ -7790,61 +7943,61 @@ var Helpers = /** @class */ (function (_super) {
         var _this = this;
         //#region Leaf Cutter
         this.leafCutter.generateBuyAction([
-            new _price__WEBPACK_IMPORTED_MODULE_3__["Price"](this.game.ants.larva, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_LARVAE_0, 1),
-            new _price__WEBPACK_IMPORTED_MODULE_3__["Price"](this.game.materials.food, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_1),
-            new _price__WEBPACK_IMPORTED_MODULE_3__["Price"](this.game.materials.soil, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_1)
+            new _price__WEBPACK_IMPORTED_MODULE_3__["Price"](this.game.ants.larva, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_LARVAE_0, 1),
+            new _price__WEBPACK_IMPORTED_MODULE_3__["Price"](this.game.materials.food, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_1),
+            new _price__WEBPACK_IMPORTED_MODULE_3__["Price"](this.game.materials.soil, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_1)
         ]);
-        this.game.addTwinAction(this.leafCutter, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].TWIN_PRICE_1);
-        this.game.materials.food.addProducer(this.leafCutter, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].CONSUME_1);
-        this.game.materials.soil.addProducer(this.leafCutter, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].CONSUME_1);
+        this.game.addTwinAction(this.leafCutter, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].TWIN_PRICE_1);
+        this.game.materials.food.addProducer(this.leafCutter, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].CONSUME_1);
+        this.game.materials.soil.addProducer(this.leafCutter, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].CONSUME_1);
         this.game.units
             .filter(function (u) { return u.tags.includes(_bugsTypes__WEBPACK_IMPORTED_MODULE_0__["Tags"].FARMER); })
-            .forEach(function (u) { return u.productionsEfficienty.push(_this.leafCutter.helpBonus); });
+            .forEach(function (u) { return u.productionsEfficiency.push(_this.leafCutter.helpBonus); });
         this.leafCutter.setBugType(_bugsTypes__WEBPACK_IMPORTED_MODULE_0__["BugTypes"].SUPER_MAJOR);
         //#endregion
         //#region Miner Helper
         this.minerHelper.generateBuyAction([
-            new _price__WEBPACK_IMPORTED_MODULE_3__["Price"](this.game.ants.larva, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_LARVAE_0, 1),
-            new _price__WEBPACK_IMPORTED_MODULE_3__["Price"](this.game.materials.food, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_1),
-            new _price__WEBPACK_IMPORTED_MODULE_3__["Price"](this.game.materials.soil, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_1)
+            new _price__WEBPACK_IMPORTED_MODULE_3__["Price"](this.game.ants.larva, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_LARVAE_0, 1),
+            new _price__WEBPACK_IMPORTED_MODULE_3__["Price"](this.game.materials.food, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_1),
+            new _price__WEBPACK_IMPORTED_MODULE_3__["Price"](this.game.materials.soil, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_1)
         ]);
-        this.game.addTwinAction(this.minerHelper, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].TWIN_PRICE_1);
-        this.game.materials.food.addProducer(this.minerHelper, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].CONSUME_1);
-        this.game.materials.soil.addProducer(this.minerHelper, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].CONSUME_1);
+        this.game.addTwinAction(this.minerHelper, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].TWIN_PRICE_1);
+        this.game.materials.food.addProducer(this.minerHelper, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].CONSUME_1);
+        this.game.materials.soil.addProducer(this.minerHelper, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].CONSUME_1);
         this.game.units
             .filter(function (u) { return u.tags.includes(_bugsTypes__WEBPACK_IMPORTED_MODULE_0__["Tags"].MINER); })
-            .forEach(function (u) { return u.productionsEfficienty.push(_this.minerHelper.helpBonus); });
+            .forEach(function (u) { return u.productionsEfficiency.push(_this.minerHelper.helpBonus); });
         this.minerHelper.setBugType(_bugsTypes__WEBPACK_IMPORTED_MODULE_0__["BugTypes"].SUPER_MAJOR);
         //#endregion
         //#region Soil Helper
         this.soilHelper.generateBuyAction([
-            new _price__WEBPACK_IMPORTED_MODULE_3__["Price"](this.game.ants.larva, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_LARVAE_0, 1),
-            new _price__WEBPACK_IMPORTED_MODULE_3__["Price"](this.game.materials.food, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_1),
-            new _price__WEBPACK_IMPORTED_MODULE_3__["Price"](this.game.materials.soil, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_1)
+            new _price__WEBPACK_IMPORTED_MODULE_3__["Price"](this.game.ants.larva, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_LARVAE_0, 1),
+            new _price__WEBPACK_IMPORTED_MODULE_3__["Price"](this.game.materials.food, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_1),
+            new _price__WEBPACK_IMPORTED_MODULE_3__["Price"](this.game.materials.soil, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_1)
         ]);
-        this.game.addTwinAction(this.soilHelper, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].TWIN_PRICE_1);
-        this.game.materials.food.addProducer(this.soilHelper, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].CONSUME_1);
-        this.game.materials.soil.addProducer(this.soilHelper, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].CONSUME_1);
+        this.game.addTwinAction(this.soilHelper, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].TWIN_PRICE_1);
+        this.game.materials.food.addProducer(this.soilHelper, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].CONSUME_1);
+        this.game.materials.soil.addProducer(this.soilHelper, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].CONSUME_1);
         this.game.units
             .filter(function (u) { return u.tags.includes(_bugsTypes__WEBPACK_IMPORTED_MODULE_0__["Tags"].SOIL_G); })
-            .forEach(function (u) { return u.productionsEfficienty.push(_this.soilHelper.helpBonus); });
+            .forEach(function (u) { return u.productionsEfficiency.push(_this.soilHelper.helpBonus); });
         this.soilHelper.setBugType(_bugsTypes__WEBPACK_IMPORTED_MODULE_0__["BugTypes"].SUPER_MAJOR);
         //#endregion
         this.game.buildings.firstResearch.toUnlock.push(this.majorHelperRes);
-        this.majorHelperRes.prices = this.game.genSciencePrice(_CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].RES_PRICE_2.times(5));
+        this.majorHelperRes.prices = this.game.genSciencePrice(_CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].RES_PRICE_2.times(5));
         this.majorHelperRes.bugType = _bugsTypes__WEBPACK_IMPORTED_MODULE_0__["BugTypes"].SUPER_MAJOR;
         [this.leafCutter, this.minerHelper, this.soilHelper].forEach(function (u) {
             var res = new _research__WEBPACK_IMPORTED_MODULE_4__["Research"](u.id, _this.game.researches);
             res.toUnlock.push(u);
-            res.prices = _this.game.genSciencePrice(_CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].RES_PRICE_2.times(10));
+            res.prices = _this.game.genSciencePrice(_CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].RES_PRICE_2.times(10));
             _this.majorHelperRes.toUnlock.push(res);
         });
         this.general.generateBuyAction([
-            new _price__WEBPACK_IMPORTED_MODULE_3__["Price"](this.game.ants.larva, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_LARVAE_0, 1),
-            new _price__WEBPACK_IMPORTED_MODULE_3__["Price"](this.game.materials.food, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_2)
+            new _price__WEBPACK_IMPORTED_MODULE_3__["Price"](this.game.ants.larva, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_LARVAE_0, 1),
+            new _price__WEBPACK_IMPORTED_MODULE_3__["Price"](this.game.materials.food, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_2)
         ]);
         this.headquarter.generateBuyAction([
-            new _price__WEBPACK_IMPORTED_MODULE_3__["Price"](this.game.materials.soil, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_2)
+            new _price__WEBPACK_IMPORTED_MODULE_3__["Price"](this.game.materials.soil, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_2)
         ]);
         this.game.killers.list.forEach(function (k) {
             return k.productionsAll.push(_this.general.helpBonus, _this.headquarter.helpBonus);
@@ -7876,7 +8029,7 @@ var Helpers = /** @class */ (function (_super) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MalusKiller", function() { return MalusKiller; });
-/* harmony import */ var _CONSTATS__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../CONSTATS */ "./src/app/model/CONSTATS.ts");
+/* harmony import */ var _CONSTANTS__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../CONSTANTS */ "./src/app/model/CONSTANTS.ts");
 /* harmony import */ var _full_unit__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../full-unit */ "./src/app/model/full-unit.ts");
 /* harmony import */ var _price__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../price */ "./src/app/model/price.ts");
 /* harmony import */ var _production_bonus__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../production-bonus */ "./src/app/model/production-bonus.ts");
@@ -7942,12 +8095,12 @@ var MalusKiller = /** @class */ (function (_super) {
         ]);
         var prodBon = new _production_bonus__WEBPACK_IMPORTED_MODULE_3__["ProductionBonus"](this.game.worldBonus.killBonus, new Decimal(0.1));
         var prodBon2 = new _production_bonus__WEBPACK_IMPORTED_MODULE_3__["ProductionBonus"](this.bonusRes, new Decimal(0.1));
-        this.bonusRes.prices = this.game.genSciencePrice(_CONSTATS__WEBPACK_IMPORTED_MODULE_0__["CONSTS"].PRICE_2);
+        this.bonusRes.prices = this.game.genSciencePrice(_CONSTANTS__WEBPACK_IMPORTED_MODULE_0__["CONSTS"].PRICE_2);
         //  Team and Twin
         this.list.forEach(function (u) {
             if (u instanceof _full_unit__WEBPACK_IMPORTED_MODULE_1__["FullUnit"]) {
-                _this.game.addTeamAction(u, _CONSTATS__WEBPACK_IMPORTED_MODULE_0__["CONSTS"].TEAM_PRICE_2);
-                _this.game.addTwinAction(u, _CONSTATS__WEBPACK_IMPORTED_MODULE_0__["CONSTS"].TWIN_PRICE_2);
+                _this.game.addTeamAction(u, _CONSTANTS__WEBPACK_IMPORTED_MODULE_0__["CONSTS"].TEAM_PRICE_2);
+                _this.game.addTwinAction(u, _CONSTANTS__WEBPACK_IMPORTED_MODULE_0__["CONSTS"].TWIN_PRICE_2);
                 u.productionsAll.push(prodBon);
                 u.productionsAll.push(prodBon2);
             }
@@ -8016,8 +8169,8 @@ var Materials = /** @class */ (function (_super) {
         this.list.forEach(function (m) { return (m.winNonLiner = false); });
     };
     Materials.prototype.addWorlds = function () {
-        var lenght = this.list.length;
-        for (var i = 0; i < lenght; i++) {
+        var length = this.list.length;
+        for (var i = 0; i < length; i++) {
             var world = new _world__WEBPACK_IMPORTED_MODULE_2__["World"](this.list[i].id + "Bio");
             _world__WEBPACK_IMPORTED_MODULE_2__["World"].biome.push(world);
         }
@@ -8088,7 +8241,7 @@ var Researches = /** @class */ (function () {
         game.advWorkers.firstResearch.toUnlock.push(this.harvesting);
         var bonus = new _production_bonus__WEBPACK_IMPORTED_MODULE_1__["ProductionBonus"](this.harvesting, new Decimal(1));
         game.gatherers.list.forEach(function (u) {
-            u.productionsEfficienty.push(bonus);
+            u.productionsEfficiency.push(bonus);
         });
         this.game.buildings.firstResearch.toUnlock.push(this.spawn);
         this.game.engineers.firstResearch.toUnlock.push(this.travel);
@@ -8207,8 +8360,8 @@ var Special = /** @class */ (function (_super) {
     Special.prototype.declareStuff = function () {
         this.foodSupply = new _full_unit__WEBPACK_IMPORTED_MODULE_0__["FullUnit"]("fS");
         this.soilSupply = new _full_unit__WEBPACK_IMPORTED_MODULE_0__["FullUnit"]("wS");
-        this.crystallSupply = new _full_unit__WEBPACK_IMPORTED_MODULE_0__["FullUnit"]("cS");
-        this.addUnits([this.foodSupply, this.soilSupply, this.crystallSupply]);
+        this.crystalSupply = new _full_unit__WEBPACK_IMPORTED_MODULE_0__["FullUnit"]("cS");
+        this.addUnits([this.foodSupply, this.soilSupply, this.crystalSupply]);
     };
     Special.prototype.setRelations = function () {
         this.foodSupply.generateBuyAction([
@@ -8217,15 +8370,15 @@ var Special = /** @class */ (function (_super) {
         this.soilSupply.generateBuyAction([
             new _price__WEBPACK_IMPORTED_MODULE_1__["Price"](this.game.materials.soil, new Decimal(1e3), 1.5)
         ]);
-        this.crystallSupply.generateBuyAction([
+        this.crystalSupply.generateBuyAction([
             new _price__WEBPACK_IMPORTED_MODULE_1__["Price"](this.game.materials.crystal, new Decimal(1e3), 1.5)
         ]);
         this.game.materials.food.addProducer(this.foodSupply, new Decimal(30));
         this.game.materials.soil.addProducer(this.soilSupply, new Decimal(30));
-        this.game.materials.crystal.addProducer(this.crystallSupply, new Decimal(30));
+        this.game.materials.crystal.addProducer(this.crystalSupply, new Decimal(30));
     };
     Special.prototype.addWorlds = function () {
-        [this.foodSupply, this.soilSupply, this.crystallSupply].forEach(function (supp) {
+        [this.foodSupply, this.soilSupply, this.crystalSupply].forEach(function (supp) {
             var pre = new _world__WEBPACK_IMPORTED_MODULE_3__["World"](supp.id + "Pre");
             var suff = new _world__WEBPACK_IMPORTED_MODULE_3__["World"](supp.id + "Suff");
             [pre, suff].forEach(function (w) { return w.startingUnit.push([supp, new Decimal(1)]); });
@@ -8251,7 +8404,7 @@ var Special = /** @class */ (function (_super) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Wasps", function() { return Wasps; });
 /* harmony import */ var _bugsTypes__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../bugsTypes */ "./src/app/model/bugsTypes.ts");
-/* harmony import */ var _CONSTATS__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../CONSTATS */ "./src/app/model/CONSTATS.ts");
+/* harmony import */ var _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../CONSTANTS */ "./src/app/model/CONSTANTS.ts");
 /* harmony import */ var _full_unit__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../full-unit */ "./src/app/model/full-unit.ts");
 /* harmony import */ var _price__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../price */ "./src/app/model/price.ts");
 /* harmony import */ var _unit_group__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../unit-group */ "./src/app/model/unit-group.ts");
@@ -8288,23 +8441,23 @@ var Wasps = /** @class */ (function (_super) {
     };
     Wasps.prototype.setRelations = function () {
         this.larva.generateBuyAction([
-            new _price__WEBPACK_IMPORTED_MODULE_3__["Price"](this.game.materials.food, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_0, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].SWARM_PRICE_GROWRATE)
+            new _price__WEBPACK_IMPORTED_MODULE_3__["Price"](this.game.materials.food, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_0, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].SWARM_PRICE_GROWRATE)
         ], [this.queen]);
         this.queen.generateBuyAction([
-            new _price__WEBPACK_IMPORTED_MODULE_3__["Price"](this.larva, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_LARVAE_1, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].SWARM_PRICE_GROWRATE),
-            new _price__WEBPACK_IMPORTED_MODULE_3__["Price"](this.game.materials.food, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_QUEEN)
+            new _price__WEBPACK_IMPORTED_MODULE_3__["Price"](this.larva, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_LARVAE_1, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].SWARM_PRICE_GROWRATE),
+            new _price__WEBPACK_IMPORTED_MODULE_3__["Price"](this.game.materials.food, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_QUEEN)
         ], [this.nest]);
         this.nest.generateBuyAction([
-            new _price__WEBPACK_IMPORTED_MODULE_3__["Price"](this.queen, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_LARVAE_2, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].SWARM_PRICE_GROWRATE),
-            new _price__WEBPACK_IMPORTED_MODULE_3__["Price"](this.game.materials.food, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_NEST),
-            new _price__WEBPACK_IMPORTED_MODULE_3__["Price"](this.game.materials.soil, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_NEST)
+            new _price__WEBPACK_IMPORTED_MODULE_3__["Price"](this.queen, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_LARVAE_2, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].SWARM_PRICE_GROWRATE),
+            new _price__WEBPACK_IMPORTED_MODULE_3__["Price"](this.game.materials.food, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_NEST),
+            new _price__WEBPACK_IMPORTED_MODULE_3__["Price"](this.game.materials.soil, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_NEST)
         ]);
-        this.larva.addProducer(this.queen, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PROD_LARVAE);
-        this.queen.addProducer(this.nest, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PROD_LARVAE);
-        this.game.addTeamAction(this.queen, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].TEAM_PRICE_2);
-        this.game.addTeamAction(this.nest, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].TEAM_PRICE_3);
-        this.game.addTwinAction(this.queen, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].TWIN_PRICE_2);
-        this.game.addTwinAction(this.nest, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].TWIN_PRICE_3);
+        this.larva.addProducer(this.queen, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PROD_LARVAE);
+        this.queen.addProducer(this.nest, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PROD_LARVAE);
+        this.game.addTeamAction(this.queen, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].TEAM_PRICE_2);
+        this.game.addTeamAction(this.nest, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].TEAM_PRICE_3);
+        this.game.addTwinAction(this.queen, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].TWIN_PRICE_2);
+        this.game.addTwinAction(this.nest, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].TWIN_PRICE_3);
         this.list.forEach(function (u) { return u.setBugType(_bugsTypes__WEBPACK_IMPORTED_MODULE_0__["BugTypes"].WASP); });
     };
     Wasps.prototype.addWorlds = function () {
@@ -8314,7 +8467,7 @@ var Wasps = /** @class */ (function (_super) {
         var waspSuff = new _world__WEBPACK_IMPORTED_MODULE_5__["World"]("waspSuff");
         [waspBio, waspPre, waspSuff].forEach(function (w) {
             w.additionalBugs.push(_bugsTypes__WEBPACK_IMPORTED_MODULE_0__["BugTypes"].WASP);
-            w.winContidions.push(new _price__WEBPACK_IMPORTED_MODULE_3__["Price"](_this.nest, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].BASE_WIN_CONDITION_OTHER.times(1.75)));
+            w.winConditions.push(new _price__WEBPACK_IMPORTED_MODULE_3__["Price"](_this.nest, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].BASE_WIN_CONDITION_OTHER.times(1.75)));
         });
         _world__WEBPACK_IMPORTED_MODULE_5__["World"].prefix.push(waspPre);
         _world__WEBPACK_IMPORTED_MODULE_5__["World"].suffix.push(waspSuff);
@@ -8338,7 +8491,7 @@ var Wasps = /** @class */ (function (_super) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Workers", function() { return Workers; });
 /* harmony import */ var _bugsTypes__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../bugsTypes */ "./src/app/model/bugsTypes.ts");
-/* harmony import */ var _CONSTATS__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../CONSTATS */ "./src/app/model/CONSTATS.ts");
+/* harmony import */ var _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../CONSTANTS */ "./src/app/model/CONSTANTS.ts");
 /* harmony import */ var _full_unit__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../full-unit */ "./src/app/model/full-unit.ts");
 /* harmony import */ var _masteries_mastery__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../masteries/mastery */ "./src/app/model/masteries/mastery.ts");
 /* harmony import */ var _price__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../price */ "./src/app/model/price.ts");
@@ -8427,98 +8580,98 @@ var Workers = /** @class */ (function (_super) {
     Workers.prototype.setRelations = function () {
         var _this = this;
         this.farmer.generateBuyAction([
-            new _price__WEBPACK_IMPORTED_MODULE_4__["Price"](this.game.ants.larva, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_LARVAE_0, 1),
-            new _price__WEBPACK_IMPORTED_MODULE_4__["Price"](this.game.materials.food, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_1),
-            new _price__WEBPACK_IMPORTED_MODULE_4__["Price"](this.game.materials.crystal, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_1)
+            new _price__WEBPACK_IMPORTED_MODULE_4__["Price"](this.game.ants.larva, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_LARVAE_0, 1),
+            new _price__WEBPACK_IMPORTED_MODULE_4__["Price"](this.game.materials.food, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_1),
+            new _price__WEBPACK_IMPORTED_MODULE_4__["Price"](this.game.materials.crystal, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_1)
         ]);
         this.carpenter.generateBuyAction([
-            new _price__WEBPACK_IMPORTED_MODULE_4__["Price"](this.game.ants.larva, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_LARVAE_0, 1),
-            new _price__WEBPACK_IMPORTED_MODULE_4__["Price"](this.game.materials.food, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_1.times(2))
+            new _price__WEBPACK_IMPORTED_MODULE_4__["Price"](this.game.ants.larva, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_LARVAE_0, 1),
+            new _price__WEBPACK_IMPORTED_MODULE_4__["Price"](this.game.materials.food, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_1.times(2))
         ]);
         this.miner.generateBuyAction([
-            new _price__WEBPACK_IMPORTED_MODULE_4__["Price"](this.game.ants.larva, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_LARVAE_0, 1),
-            new _price__WEBPACK_IMPORTED_MODULE_4__["Price"](this.game.materials.food, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_1),
-            new _price__WEBPACK_IMPORTED_MODULE_4__["Price"](this.game.materials.soil, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_1)
+            new _price__WEBPACK_IMPORTED_MODULE_4__["Price"](this.game.ants.larva, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_LARVAE_0, 1),
+            new _price__WEBPACK_IMPORTED_MODULE_4__["Price"](this.game.materials.food, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_1),
+            new _price__WEBPACK_IMPORTED_MODULE_4__["Price"](this.game.materials.soil, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_1)
         ]);
         this.scientist.generateBuyAction([
-            new _price__WEBPACK_IMPORTED_MODULE_4__["Price"](this.game.ants.larva, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_LARVAE_0, 1),
-            new _price__WEBPACK_IMPORTED_MODULE_4__["Price"](this.game.materials.food, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_1),
-            new _price__WEBPACK_IMPORTED_MODULE_4__["Price"](this.game.materials.crystal, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_1)
+            new _price__WEBPACK_IMPORTED_MODULE_4__["Price"](this.game.ants.larva, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_LARVAE_0, 1),
+            new _price__WEBPACK_IMPORTED_MODULE_4__["Price"](this.game.materials.food, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_1),
+            new _price__WEBPACK_IMPORTED_MODULE_4__["Price"](this.game.materials.crystal, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_1)
         ]);
-        this.game.materials.food.addProducer(this.farmer, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PROD_1);
-        this.game.materials.crystal.addProducer(this.farmer, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].CONSUME_1);
-        this.game.materials.soil.addProducer(this.carpenter, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PROD_1);
-        this.game.materials.food.addProducer(this.carpenter, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].CONSUME_1);
-        this.game.materials.crystal.addProducer(this.miner, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PROD_1);
-        this.game.materials.soil.addProducer(this.miner, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].CONSUME_1);
-        this.game.materials.science.addProducer(this.scientist, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PROD_1);
-        this.game.materials.crystal.addProducer(this.scientist, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].CONSUME_1);
+        this.game.materials.food.addProducer(this.farmer, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PROD_1);
+        this.game.materials.crystal.addProducer(this.farmer, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].CONSUME_1);
+        this.game.materials.soil.addProducer(this.carpenter, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PROD_1);
+        this.game.materials.food.addProducer(this.carpenter, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].CONSUME_1);
+        this.game.materials.crystal.addProducer(this.miner, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PROD_1);
+        this.game.materials.soil.addProducer(this.miner, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].CONSUME_1);
+        this.game.materials.science.addProducer(this.scientist, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PROD_1);
+        this.game.materials.crystal.addProducer(this.scientist, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].CONSUME_1);
         //#region Bees
         this.beeFarmer.generateBuyAction([
-            new _price__WEBPACK_IMPORTED_MODULE_4__["Price"](this.game.bees.larva, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_LARVAE_0, 1),
-            new _price__WEBPACK_IMPORTED_MODULE_4__["Price"](this.game.materials.food, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_1),
-            new _price__WEBPACK_IMPORTED_MODULE_4__["Price"](this.game.materials.crystal, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_1)
+            new _price__WEBPACK_IMPORTED_MODULE_4__["Price"](this.game.bees.larva, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_LARVAE_0, 1),
+            new _price__WEBPACK_IMPORTED_MODULE_4__["Price"](this.game.materials.food, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_1),
+            new _price__WEBPACK_IMPORTED_MODULE_4__["Price"](this.game.materials.crystal, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_1)
         ]);
         this.beeCarpenter.generateBuyAction([
-            new _price__WEBPACK_IMPORTED_MODULE_4__["Price"](this.game.bees.larva, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_LARVAE_0, 1),
-            new _price__WEBPACK_IMPORTED_MODULE_4__["Price"](this.game.materials.food, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_1.times(2))
+            new _price__WEBPACK_IMPORTED_MODULE_4__["Price"](this.game.bees.larva, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_LARVAE_0, 1),
+            new _price__WEBPACK_IMPORTED_MODULE_4__["Price"](this.game.materials.food, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_1.times(2))
         ]);
         this.beeMiner.generateBuyAction([
-            new _price__WEBPACK_IMPORTED_MODULE_4__["Price"](this.game.bees.larva, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_LARVAE_0, 1),
-            new _price__WEBPACK_IMPORTED_MODULE_4__["Price"](this.game.materials.food, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_1),
-            new _price__WEBPACK_IMPORTED_MODULE_4__["Price"](this.game.materials.soil, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_1)
+            new _price__WEBPACK_IMPORTED_MODULE_4__["Price"](this.game.bees.larva, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_LARVAE_0, 1),
+            new _price__WEBPACK_IMPORTED_MODULE_4__["Price"](this.game.materials.food, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_1),
+            new _price__WEBPACK_IMPORTED_MODULE_4__["Price"](this.game.materials.soil, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_1)
         ]);
         this.beeScientist.generateBuyAction([
-            new _price__WEBPACK_IMPORTED_MODULE_4__["Price"](this.game.bees.larva, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_LARVAE_0, 1),
-            new _price__WEBPACK_IMPORTED_MODULE_4__["Price"](this.game.materials.food, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_1),
-            new _price__WEBPACK_IMPORTED_MODULE_4__["Price"](this.game.materials.crystal, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_1)
+            new _price__WEBPACK_IMPORTED_MODULE_4__["Price"](this.game.bees.larva, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_LARVAE_0, 1),
+            new _price__WEBPACK_IMPORTED_MODULE_4__["Price"](this.game.materials.food, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_1),
+            new _price__WEBPACK_IMPORTED_MODULE_4__["Price"](this.game.materials.crystal, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_1)
         ]);
-        this.game.materials.food.addProducer(this.beeFarmer, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PROD_1);
-        this.game.materials.soil.addProducer(this.beeFarmer, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].CONSUME_1);
-        this.game.materials.soil.addProducer(this.beeCarpenter, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PROD_1);
-        this.game.materials.food.addProducer(this.beeCarpenter, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].CONSUME_1);
-        this.game.materials.crystal.addProducer(this.beeMiner, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PROD_1);
-        this.game.materials.food.addProducer(this.beeMiner, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].CONSUME_1);
-        this.game.materials.science.addProducer(this.beeScientist, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PROD_1);
-        this.game.materials.crystal.addProducer(this.beeScientist, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].CONSUME_1);
+        this.game.materials.food.addProducer(this.beeFarmer, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PROD_1);
+        this.game.materials.soil.addProducer(this.beeFarmer, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].CONSUME_1);
+        this.game.materials.soil.addProducer(this.beeCarpenter, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PROD_1);
+        this.game.materials.food.addProducer(this.beeCarpenter, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].CONSUME_1);
+        this.game.materials.crystal.addProducer(this.beeMiner, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PROD_1);
+        this.game.materials.food.addProducer(this.beeMiner, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].CONSUME_1);
+        this.game.materials.science.addProducer(this.beeScientist, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PROD_1);
+        this.game.materials.crystal.addProducer(this.beeScientist, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].CONSUME_1);
         //#endregion
         //#region Wasps
         this.waspFarmer.generateBuyAction([
-            new _price__WEBPACK_IMPORTED_MODULE_4__["Price"](this.game.wasps.larva, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_LARVAE_0, 1),
-            new _price__WEBPACK_IMPORTED_MODULE_4__["Price"](this.game.materials.food, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_1),
-            new _price__WEBPACK_IMPORTED_MODULE_4__["Price"](this.game.materials.crystal, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_1)
+            new _price__WEBPACK_IMPORTED_MODULE_4__["Price"](this.game.wasps.larva, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_LARVAE_0, 1),
+            new _price__WEBPACK_IMPORTED_MODULE_4__["Price"](this.game.materials.food, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_1),
+            new _price__WEBPACK_IMPORTED_MODULE_4__["Price"](this.game.materials.crystal, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_1)
         ]);
         this.waspCarpenter.generateBuyAction([
-            new _price__WEBPACK_IMPORTED_MODULE_4__["Price"](this.game.wasps.larva, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_LARVAE_0, 1),
-            new _price__WEBPACK_IMPORTED_MODULE_4__["Price"](this.game.materials.food, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_1.times(2))
+            new _price__WEBPACK_IMPORTED_MODULE_4__["Price"](this.game.wasps.larva, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_LARVAE_0, 1),
+            new _price__WEBPACK_IMPORTED_MODULE_4__["Price"](this.game.materials.food, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_1.times(2))
         ]);
         this.waspMiner.generateBuyAction([
-            new _price__WEBPACK_IMPORTED_MODULE_4__["Price"](this.game.wasps.larva, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_LARVAE_0, 1),
-            new _price__WEBPACK_IMPORTED_MODULE_4__["Price"](this.game.materials.food, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_1),
-            new _price__WEBPACK_IMPORTED_MODULE_4__["Price"](this.game.materials.soil, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_1)
+            new _price__WEBPACK_IMPORTED_MODULE_4__["Price"](this.game.wasps.larva, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_LARVAE_0, 1),
+            new _price__WEBPACK_IMPORTED_MODULE_4__["Price"](this.game.materials.food, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_1),
+            new _price__WEBPACK_IMPORTED_MODULE_4__["Price"](this.game.materials.soil, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_1)
         ]);
         this.waspScientist.generateBuyAction([
-            new _price__WEBPACK_IMPORTED_MODULE_4__["Price"](this.game.wasps.larva, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_LARVAE_0, 1),
-            new _price__WEBPACK_IMPORTED_MODULE_4__["Price"](this.game.materials.food, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_1),
-            new _price__WEBPACK_IMPORTED_MODULE_4__["Price"](this.game.materials.crystal, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_1)
+            new _price__WEBPACK_IMPORTED_MODULE_4__["Price"](this.game.wasps.larva, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_LARVAE_0, 1),
+            new _price__WEBPACK_IMPORTED_MODULE_4__["Price"](this.game.materials.food, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_1),
+            new _price__WEBPACK_IMPORTED_MODULE_4__["Price"](this.game.materials.crystal, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PRICE_1)
         ]);
-        this.game.materials.food.addProducer(this.waspFarmer, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PROD_1);
-        this.game.materials.soil.addProducer(this.waspFarmer, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].CONSUME_1);
-        this.game.materials.soil.addProducer(this.waspCarpenter, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PROD_1);
-        this.game.materials.food.addProducer(this.waspCarpenter, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].CONSUME_1);
-        this.game.materials.crystal.addProducer(this.waspMiner, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PROD_1);
-        this.game.materials.food.addProducer(this.waspMiner, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].CONSUME_1);
-        this.game.materials.science.addProducer(this.waspScientist, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PROD_1);
-        this.game.materials.crystal.addProducer(this.waspScientist, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].CONSUME_1);
+        this.game.materials.food.addProducer(this.waspFarmer, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PROD_1);
+        this.game.materials.soil.addProducer(this.waspFarmer, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].CONSUME_1);
+        this.game.materials.soil.addProducer(this.waspCarpenter, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PROD_1);
+        this.game.materials.food.addProducer(this.waspCarpenter, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].CONSUME_1);
+        this.game.materials.crystal.addProducer(this.waspMiner, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PROD_1);
+        this.game.materials.food.addProducer(this.waspMiner, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].CONSUME_1);
+        this.game.materials.science.addProducer(this.waspScientist, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].PROD_1);
+        this.game.materials.crystal.addProducer(this.waspScientist, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].CONSUME_1);
         //#endregion
         this.list.forEach(function (u) {
             if (u instanceof _full_unit__WEBPACK_IMPORTED_MODULE_2__["FullUnit"]) {
-                _this.game.addTeamAction(u, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].TEAM_PRICE_1);
-                _this.game.addTwinAction(u, _CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].TWIN_PRICE_2);
+                _this.game.addTeamAction(u, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].TEAM_PRICE_1);
+                _this.game.addTwinAction(u, _CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].TWIN_PRICE_2);
             }
         });
         this.firstResearch.prices = this.game.genSciencePrice(new Decimal(1e3));
-        this.researchList.forEach(function (r) { return (r.prices = _this.game.genSciencePrice(_CONSTATS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].RES_PRICE_1)); });
+        this.researchList.forEach(function (r) { return (r.prices = _this.game.genSciencePrice(_CONSTANTS__WEBPACK_IMPORTED_MODULE_1__["CONSTS"].RES_PRICE_1)); });
         this.firstResearch.toUnlock = this.researchList;
         this.scientificMethod1.prices = this.game.genSciencePrice(1e4, 10);
         this.researchList[3].toUnlock.push(this.scientificMethod1);
@@ -8535,7 +8688,7 @@ var Workers = /** @class */ (function (_super) {
         });
         var bonusEff = new _production_bonus__WEBPACK_IMPORTED_MODULE_5__["ProductionBonus"](this.efficientWorkers, new Decimal(0.1));
         this.list.forEach(function (u) {
-            u.productionsEfficienty.push(bonusEff);
+            u.productionsEfficiency.push(bonusEff);
         });
         this.firstResearch.toUnlock.push(this.betterWorkers, this.efficientWorkers);
         this.setBugType();
@@ -8861,7 +9014,7 @@ var Utility = /** @class */ (function () {
                 var first = q.times(-0.5);
                 var second = D.sqrt();
                 var q3 = first.minus(second);
-                //  workaround for aprossimation
+                //  workaround for aproximation
                 if (q3.toNumber() === 0) {
                     // q3 = new Decimal(1).div(
                     //   Decimal.max(a.abs(), b.abs())
@@ -8880,11 +9033,11 @@ var Utility = /** @class */ (function () {
                 acos = acos.div(p);
                 acos = acos.div(u);
                 acos = acos.times(3);
-                //  workaround for aprossimation
+                //  workaround for aproximation
                 if (acos.lt(-1)) {
                     return [];
                 }
-                //  workaround for aprossimation 2
+                //  workaround for aproximation 2
                 var acos2 = Decimal.max(Decimal.min(acos, 1), -1).toNumber();
                 var t = new Decimal(Math.acos(acos2) / 3);
                 // const t = Math.acos(3 * q / p / u) / 3;  // D < 0 implies p < 0 and acos argument in [-1..1]
@@ -9006,7 +9159,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var lodash_es_sample__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lodash-es/sample */ "./node_modules/lodash-es/sample.js");
 /* harmony import */ var lodash_es_uniq__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lodash-es/uniq */ "./node_modules/lodash-es/uniq.js");
 /* harmony import */ var _bugsTypes__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./bugsTypes */ "./src/app/model/bugsTypes.ts");
-/* harmony import */ var _CONSTATS__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./CONSTATS */ "./src/app/model/CONSTATS.ts");
+/* harmony import */ var _CONSTANTS__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./CONSTANTS */ "./src/app/model/CONSTANTS.ts");
 /* harmony import */ var _masteries_mastery__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./masteries/mastery */ "./src/app/model/masteries/mastery.ts");
 /* harmony import */ var _price__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./price */ "./src/app/model/price.ts");
 /* harmony import */ var _strings__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./strings */ "./src/app/model/strings.ts");
@@ -9028,7 +9181,7 @@ var World = /** @class */ (function () {
         this.prestige = new Decimal(10);
         //  Productions Bonus/Malus
         this.productionsBonus = new Array();
-        this.productionsEfficienty = new Array();
+        this.productionsEfficiency = new Array();
         this.productionsAll = new Array();
         // Unlocked stuff
         this.startingUnlocked = new Array();
@@ -9036,7 +9189,7 @@ var World = /** @class */ (function () {
         //  Unit, Quantity
         this.startingUnit = new Array();
         //  Wining condition
-        this.winContidions = new Array();
+        this.winConditions = new Array();
         //  This resources must be zero
         this.notWinConditions = new Array();
         //  Additional bug
@@ -9045,16 +9198,16 @@ var World = /** @class */ (function () {
             this.name = _strings__WEBPACK_IMPORTED_MODULE_6__["STRINGS"].worlds[this.id];
     }
     World.prototype.setLevel = function (level, game) {
-        this.winContidions.push(new _price__WEBPACK_IMPORTED_MODULE_5__["Price"](game.ants.nest, _CONSTATS__WEBPACK_IMPORTED_MODULE_3__["CONSTS"].BASE_WIN_CONDITION_OTHER));
+        this.winConditions.push(new _price__WEBPACK_IMPORTED_MODULE_5__["Price"](game.ants.nest, _CONSTANTS__WEBPACK_IMPORTED_MODULE_3__["CONSTS"].BASE_WIN_CONDITION_OTHER));
         this.additionalBugs.push(_bugsTypes__WEBPACK_IMPORTED_MODULE_2__["BugTypes"].ANT);
         this.level = new Decimal(level).floor();
         var multi = this.level.div(5).plus(1);
         this.productionsBonus.forEach(function (b) { return (b[1] = b[1].times(multi)); });
-        this.productionsEfficienty.forEach(function (b) { return (b[1] = b[1].times(multi)); });
+        this.productionsEfficiency.forEach(function (b) { return (b[1] = b[1].times(multi)); });
         this.productionsAll.forEach(function (b) { return (b[1] = b[1].times(multi)); });
         this.startingUnit.forEach(function (b) { return (b[1] = b[1].times(multi)); });
         var masteryReduction = game.allMateries.getSum(_masteries_mastery__WEBPACK_IMPORTED_MODULE_4__["MasteryTypes"].WORLD_LEVEL) * 0.015;
-        this.winContidions.forEach(function (w) {
+        this.winConditions.forEach(function (w) {
             w.price = w.price.times(multi);
             w.price = w.base.winNonLiner
                 ? w.price.pow(0.7 - masteryReduction)
@@ -9081,7 +9234,7 @@ var World = /** @class */ (function () {
         if (multiBonus.gt(1)) {
             [
                 this.productionsBonus,
-                this.productionsEfficienty,
+                this.productionsEfficiency,
                 this.productionsAll
             ].forEach(function (prod) {
                 prod.forEach(function (p) {
@@ -9091,19 +9244,19 @@ var World = /** @class */ (function () {
         }
     };
     World.prototype.canTravel = function () {
-        this.winContidions.forEach(function (p) {
+        this.winConditions.forEach(function (p) {
             p.canBuy = p.base.quantity.gte(p.price);
         });
-        return !(this.winContidions.findIndex(function (p) { return !p.canBuy; }) > -1 ||
+        return !(this.winConditions.findIndex(function (p) { return !p.canBuy; }) > -1 ||
             this.notWinConditions.findIndex(function (n) { return !n.isKilled; }) > -1);
     };
     World.prototype.setMalus = function () {
         var _this = this;
         this.notWinConditions.forEach(function (n) {
             n.quantity = new Decimal(_this.level.times(5));
-            n.producedBy.find(function (u) { return u.rateo.lt(0); }).producer.unlock();
-            var n2 = n.producedBy.find(function (u) { return u.rateo.gt(0); }).producer;
-            var n3 = n2.producedBy.find(function (u) { return u.rateo.gt(0); }).producer;
+            n.producedBy.find(function (u) { return u.ratio.lt(0); }).producer.unlock();
+            var n2 = n.producedBy.find(function (u) { return u.ratio.gt(0); }).producer;
+            var n3 = n2.producedBy.find(function (u) { return u.ratio.gt(0); }).producer;
             n2.quantity = n.quantity.div(3.5);
             if (n2.quantity.gt(0.1)) {
                 n2.unlock();
@@ -9134,9 +9287,9 @@ var World = /** @class */ (function () {
             n: this.name,
             l: this.level,
             pb: this.productionsBonus.map(function (b) { return [b[0].id, b[1]]; }),
-            pe: this.productionsEfficienty.map(function (b) { return [b[0].id, b[1]]; }),
+            pe: this.productionsEfficiency.map(function (b) { return [b[0].id, b[1]]; }),
             pa: this.productionsAll.map(function (b) { return [b[0].id, b[1]]; }),
-            wc: this.winContidions.map(function (w) { return [w.base.id, w.price]; }),
+            wc: this.winConditions.map(function (w) { return [w.base.id, w.price]; }),
             nwc: this.notWinConditions.map(function (n) { return n.id; }),
             adb: this.additionalBugs,
             k: this.prestige
@@ -9155,7 +9308,7 @@ var World = /** @class */ (function () {
             ]; });
         }
         if ("pe" in data) {
-            this.productionsEfficienty = data.pe.map(function (b) { return [
+            this.productionsEfficiency = data.pe.map(function (b) { return [
                 _this.findBonus(b[0], game),
                 new Decimal(b[1])
             ]; });
@@ -9167,7 +9320,7 @@ var World = /** @class */ (function () {
             ]; });
         }
         if ("wc" in data) {
-            this.winContidions = data.wc.map(function (w) {
+            this.winConditions = data.wc.map(function (w) {
                 return new _price__WEBPACK_IMPORTED_MODULE_5__["Price"](game.units.find(function (u) { return u.id === w[0]; }), new Decimal(w[1]), 1);
             });
         }
@@ -9203,10 +9356,10 @@ var World = /** @class */ (function () {
                 else
                     prod[1] = prod[1].plus(a[1]);
             });
-            w.productionsEfficienty.forEach(function (a) {
-                var prod = retWorld.productionsEfficienty.find(function (p) { return p[0].id === a[0].id; });
+            w.productionsEfficiency.forEach(function (a) {
+                var prod = retWorld.productionsEfficiency.find(function (p) { return p[0].id === a[0].id; });
                 if (!prod) {
-                    retWorld.productionsEfficienty.push([a[0], new Decimal(a[1])]);
+                    retWorld.productionsEfficiency.push([a[0], new Decimal(a[1])]);
                 }
                 else
                     prod[1] = prod[1].plus(a[1]);
@@ -9227,10 +9380,10 @@ var World = /** @class */ (function () {
                     un[1] = un[1].plus(a[1]);
             });
             //  Win
-            w.winContidions.forEach(function (a) {
-                var win = retWorld.winContidions.find(function (p) { return p.base.id === a.base.id; });
+            w.winConditions.forEach(function (a) {
+                var win = retWorld.winConditions.find(function (p) { return p.base.id === a.base.id; });
                 if (!win)
-                    retWorld.winContidions.push(new _price__WEBPACK_IMPORTED_MODULE_5__["Price"](a.base, a.price, 1));
+                    retWorld.winConditions.push(new _price__WEBPACK_IMPORTED_MODULE_5__["Price"](a.base, a.price, 1));
                 else
                     win.price = win.price.plus(a.price.div(3));
             });
@@ -9367,7 +9520,7 @@ var NavComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<a [routerLink]=\"['./unit/'+id]\"\n   clrVerticalNavLink\n   routerLinkActive=\"active\">\n\n  <span class=\"clr-row clr-justify-content-between\">\n    <span class=\"resName\">\n      {{name}}\n      <clr-icon class=\"is-info is-solid\"\n                shape=\"angle\"\n                *ngIf=\"!isMalus && team\"\n                (click)=\"unit.teamAction.buy()\"></clr-icon>\n      <clr-icon class=\"is-info is-solid\"\n                shape=\"angle-double\"\n                *ngIf=\"!isMalus && twin\"\n                (click)=\"unit.twinAction.buy()\"></clr-icon>\n      <clr-icon class=\"is-warning is-solid\"\n                shape=\"pause\"\n                *ngIf=\"!isMalus && isStopped\"\n                (click)=\"unit.efficiency = 100\"></clr-icon>\n      <clr-icon class=\"is-error is-error is-solid\"\n                shape=\"exclamation-triangle\"\n                *ngIf=\"isEnding\"></clr-icon>\n      <clr-icon class=\"is-info is-solid\"\n                shape=\"info-standard\"\n                *ngIf=\"os.showI && isNew\"></clr-icon>\n\n    </span>\n    <span *ngIf=\"quantity.abs().gt(0.001)\"\n          class=\"qta monospace\">\n      {{quantity | format}}\n    </span>\n    <span class=\"perSec monospace\">\n      <span *ngIf=\"perSec.abs().gt(0.001)\"\n            [class.noEnought]=\"isEnding\">\n        {{perSec | format}}/s\n      </span>\n      &nbsp;\n    </span>\n  </span>\n</a>\n"
+module.exports = "<a [routerLink]=\"['./unit/'+id]\"\n   clrVerticalNavLink\n   routerLinkActive=\"active\">\n\n  <span class=\"clr-row clr-justify-content-between\">\n    <span class=\"resName\">\n      {{name}}\n      <clr-icon class=\"is-info is-solid\"\n                shape=\"angle\"\n                *ngIf=\"!isMalus && team\"\n                (click)=\"unit.teamAction.buy()\"></clr-icon>\n      <clr-icon class=\"is-info is-solid\"\n                shape=\"angle-double\"\n                *ngIf=\"!isMalus && twin\"\n                (click)=\"unit.twinAction.buy()\"></clr-icon>\n      <clr-icon class=\"is-warning is-solid\"\n                shape=\"pause\"\n                *ngIf=\"!isMalus && isStopped\"\n                (click)=\"unit.efficiency = 100\"></clr-icon>\n      <clr-icon class=\"is-error is-error is-solid\"\n                shape=\"exclamation-triangle\"\n                *ngIf=\"isEnding\"></clr-icon>\n      <clr-icon class=\"is-info is-solid\"\n                shape=\"info-standard\"\n                *ngIf=\"os.showI && isNew\"></clr-icon>\n\n    </span>\n    <span *ngIf=\"quantity.abs().gt(0.001)\"\n          class=\"qta monospace\">\n      {{quantity | format}}\n    </span>\n    <span class=\"perSec monospace\">\n      <span *ngIf=\"perSec.abs().gt(0.001)\"\n            [class.notEnough]=\"isEnding\">\n        {{perSec | format}}/s\n      </span>\n      &nbsp;\n    </span>\n  </span>\n</a>\n"
 
 /***/ }),
 
@@ -9590,14 +9743,14 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 var OptionsNavComponent = /** @class */ (function () {
     function OptionsNavComponent() {
-        //Nothig
+        //Nothing
     }
     OptionsNavComponent.prototype.ngAfterViewInit = function () {
         if (typeof preventScroll === typeof Function)
             preventScroll();
     };
     OptionsNavComponent.prototype.ngOnInit = function () {
-        //Nothig
+        //Nothing
     };
     OptionsNavComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -9669,7 +9822,7 @@ var SaveComponent = /** @class */ (function () {
         this.cd = cd;
         this.clearModal = false;
         this.exp = "";
-        //Nothig
+        //Nothing
     }
     SaveComponent.prototype.ngAfterViewInit = function () {
         if (typeof preventScroll === typeof Function)
@@ -9854,7 +10007,7 @@ var StatsComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<h1>选项</h1>\n<form clrForm\n      class=\"clr-form clr-form-compact\">\n\n  <div class=\"form-group\">\n    <label for=\"t1\">主题:</label>\n    <div class=\"toggle-switch\">\n      <input name=\"dark\"\n             type=\"checkbox\"\n             id=\"dark\"\n             [(ngModel)]=\"ms.options.dark\"\n             (change)=\"ms.setTheme()\">\n      <label for=\"dark\">黑色</label>\n    </div>\n  </div>\n\n  <div class=\"form-group\">\n    <label for=\"selects_1\">顶部颜色</label>\n    <div class=\"select\">\n      <select name=\"header\"\n              id=\"selects_1\"\n              [(ngModel)]=\"ms.options.header\"\n              (change)=\"ms.options.headerEmitter.emit(ms.options.header)\">\n        <option>1</option>\n        <option>2</option>\n        <option>3</option>\n        <option>4</option>\n        <option>5</option>\n        <option>6</option>\n        <option>7</option>\n      </select>\n    </div>\n  </div>\n\n  <div class=\"form-group\">\n    <label for=\"t1\">使用另一种数字格式:</label>\n    <div class=\"toggle-switch\">\n      <input type=\"checkbox\"\n             id=\"format\"\n             name=\"format\"\n             [(ngModel)]=\"ms.options.usaFormat\"\n             (change)=\"ms.options.generateFormatter()\">\n      <label for=\"format\">开</label>\n    </div>\n  </div>\n\n  <div class=\"form-group\">\n    <label for=\"numFormat\">数字格式:</label>\n    <div class=\"select\">\n      <select id=\"numFormat\"\n              name=\"numFormat\"\n              [(ngModel)]=\"ms.options.numFormat\"\n              (change)=\"ms.options.generateFormatter()\">\n        <option value=\"standard\">默认</option>\n        <option value=\"scientific\">科学计数法</option>\n        <option value=\"engineering\">工程计数法</option>\n        <option value=\"longScale\">长比例尺</option>\n      </select>\n    </div>\n  </div>\n\n  <div class=\"form-group\">\n    <label for=\"matPos\">材料位置:</label>\n    <div class=\"select\">\n      <select id=\"matPos\"\n              name=\"matPos\"\n              [(ngModel)]=\"os.materialPosition\"\n              (change)=\"onChangeMaterialPos()\">\n        <option value=\"1\">全部</option>\n        <option value=\"2\">顶部</option>\n        <option value=\"3\">侧边</option>\n      </select>\n    </div>\n  </div>\n\n  <div class=\"form-group\">\n    <label for=\"si\">显示我的新单位:</label>\n    <div class=\"toggle-switch\">\n      <input name=\"si\"\n             type=\"checkbox\"\n             id=\"si\"\n             [(ngModel)]=\"ms.options.showI\">\n      <label for=\"si\"></label>\n    </div>\n  </div>\n\n  <div class=\"form-group\">\n    <label for=\"nr\">禁用单位消耗完的通知:</label>\n    <div class=\"toggle-switch\">\n      <input name=\"nr\"\n             type=\"checkbox\"\n             id=\"nr\"\n             [(ngModel)]=\"os.noResourceEndPopUp\">\n      <label for=\"nr\"></label>\n    </div>\n  </div>\n\n  <div class=\"form-group\">\n    <label for=\"wn\">禁用时间扭曲通知:</label>\n    <div class=\"toggle-switch\">\n      <input name=\"wn\"\n             type=\"checkbox\"\n             id=\"wn\"\n             [(ngModel)]=\"os.noWarpNotification\">\n      <label for=\"wn\"></label>\n    </div>\n  </div>\n\n</form>\n"
+module.exports = "<h1>选项</h1>\n<form clrForm\n      class=\"clr-form clr-form-compact\">\n\n  <div class=\"form-group\">\n    <label for=\"t1\">主题:</label>\n    <div class=\"toggle-switch\">\n      <input name=\"dark\"\n             type=\"checkbox\"\n             id=\"dark\"\n             [(ngModel)]=\"ms.options.dark\"\n             (change)=\"ms.setTheme()\">\n      <label for=\"dark\">黑色</label>\n    </div>\n  </div>\n\n  <div class=\"form-group\">\n    <label for=\"selects_1\">顶部颜色</label>\n    <div class=\"select\">\n      <select name=\"header\"\n              id=\"selects_1\"\n              [(ngModel)]=\"ms.options.header\"\n              (change)=\"ms.options.headerEmitter.emit(ms.options.header)\">\n        <option>1</option>\n        <option>2</option>\n        <option>3</option>\n        <option>4</option>\n        <option>5</option>\n        <option>6</option>\n        <option>7</option>\n      </select>\n    </div>\n  </div>\n\n  <div class=\"form-group\">\n    <label for=\"t1\">使用另一种数字格式:</label>\n    <div class=\"toggle-switch\">\n      <input type=\"checkbox\"\n             id=\"format\"\n             name=\"format\"\n             [(ngModel)]=\"ms.options.usaFormat\"\n             (change)=\"ms.options.generateFormatter()\">\n      <label for=\"format\">开</label>\n    </div>\n  </div>\n\n  <div class=\"form-group\">\n    <label for=\"numFormat\">数字格式:</label>\n    <div class=\"select\">\n      <select id=\"numFormat\"\n              name=\"numFormat\"\n              [(ngModel)]=\"ms.options.numFormat\"\n              (change)=\"ms.options.generateFormatter()\">\n        <option value=\"standard\">默认</option>\n        <option value=\"scientific\">科学计数法</option>\n        <option value=\"engineering\">工程计数法</option>\n        <option value=\"longScale\">长比例尺</option>\n      </select>\n    </div>\n  </div>\n\n  <div class=\"form-group\">\n    <label for=\"matPos\">材料位置:</label>\n    <div class=\"select\">\n      <select id=\"matPos\"\n              name=\"matPos\"\n              [(ngModel)]=\"os.materialPosition\"\n              (change)=\"onChangeMaterialPos()\">\n        <option value=\"1\">全部</option>\n        <option value=\"2\">顶部</option>\n        <option value=\"3\">侧边</option>\n      </select>\n    </div>\n  </div>\n\n  <div class=\"form-group\">\n    <label for=\"si\">显示我的新单位:</label>\n    <div class=\"toggle-switch\">\n      <input name=\"si\"\n             type=\"checkbox\"\n             id=\"si\"\n             [(ngModel)]=\"ms.options.showI\">\n      <label for=\"si\"></label>\n    </div>\n  </div>\n\n  <div class=\"form-group\">\n    <label for=\"nr\">禁用单位消耗完的通知:</label>\n    <div class=\"toggle-switch\">\n      <input name=\"nr\"\n             type=\"checkbox\"\n             id=\"nr\"\n             [(ngModel)]=\"os.noResourceEndPopUp\">\n      <label for=\"nr\"></label>\n    </div>\n  </div>\n\n  <div class=\"form-group\">\n    <label for=\"wn\">禁用时间扭曲通知:</label>\n    <div class=\"toggle-switch\">\n      <input name=\"wn\"\n             type=\"checkbox\"\n             id=\"wn\"\n             [(ngModel)]=\"os.noWarpNotification\">\n      <label for=\"wn\"></label>\n    </div>\n  </div>\n\n  <div class=\"form-group\">\n    <label for=\"wn\">严格单位时间:</label>\n    <div class=\"toggle-switch\">\n      <input name=\"time\"\n             type=\"checkbox\"\n             id=\"time\"\n             [(ngModel)]=\"os.timeFormatDetail\">\n      <label for=\"time\"></label>\n    </div>\n  </div>\n\n</form>\n"
 
 /***/ }),
 
@@ -9961,6 +10114,7 @@ var OptionsService = /** @class */ (function () {
         this.showI = true;
         this.noResourceEndPopUp = false;
         this.noWarpNotification = true;
+        this.timeFormatDetail = false;
         this.formatEmitter = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
         this.headerEmitter = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
         try {
@@ -9996,7 +10150,8 @@ var OptionsService = /** @class */ (function () {
             m: this.materialPosition,
             i: this.showI,
             p: this.noResourceEndPopUp,
-            w: this.noWarpNotification
+            w: this.noWarpNotification,
+            t: this.timeFormatDetail
         };
     };
     OptionsService.prototype.restore = function (data) {
@@ -10018,6 +10173,8 @@ var OptionsService = /** @class */ (function () {
             this.noResourceEndPopUp = data.p;
         if ("w" in data)
             this.noWarpNotification = data.w;
+        if ("t" in data)
+            this.timeFormatDetail = data.t;
         this.generateFormatter();
     };
     OptionsService = __decorate([
@@ -10040,7 +10197,7 @@ var OptionsService = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<span class=\"monospace\">\n  <span *ngIf=\"a.abs().gt(0.01)\"\n        [class.noEnought]=\"a.lt(0)\">\n    {{a | format}}/s\n    <sup>3</sup>\n  </span>\n  <span *ngIf=\"!b.eq(0)\"\n        [class.noEnought]=\"b.lt(0)\">\n    <span *ngIf=\" b.gt(0)\">+</span>\n    {{b | format}}/s\n    <sup>2</sup>\n  </span>\n  <span *ngIf=\"!c.eq(0)\"\n        [class.noEnought]=\"c.lt(0)\">\n    <span *ngIf=\" c.gt(0)\">+</span>\n    {{c | format}}/s </span>\n</span>\n"
+module.exports = "<span class=\"monospace\">\n  <span *ngIf=\"a.abs().gt(0.01)\"\n        [class.notEnough]=\"a.lt(0)\">\n    {{a | format}}/s\n    <sup>3</sup>\n  </span>\n  <span *ngIf=\"!b.eq(0)\"\n        [class.notEnough]=\"b.lt(0)\">\n    <span *ngIf=\" b.gt(0)\">+</span>\n    {{b | format}}/s\n    <sup>2</sup>\n  </span>\n  <span *ngIf=\"!c.eq(0)\"\n        [class.notEnough]=\"c.lt(0)\">\n    <span *ngIf=\" c.gt(0)\">+</span>\n    {{c | format}}/s </span>\n</span>\n"
 
 /***/ }),
 
@@ -10389,7 +10546,7 @@ var PrestigeNavComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"content-area\">\n\n  <app-change-world *ngIf=\"skip || ms.game.canTravel; else noTravel\"></app-change-world>\n  <ng-template #noTravel>\n\n    <h1>旅行到一个新世界\n      <button class=\"btn btn-danger-outline btn-link\"\n              (click)=\"skip = true\">跳过</button>\n    </h1>\n\n    <clr-alert [clrAlertType]=\"'alert-danger'\"\n               [clrAlertClosable]=\"false\"\n               *ngIf=\"!ms.game.researches.travel.done\">\n      <div class=\"alert-item\">\n        <span class=\"alert-text\">\n          旅行需要先完成研究旅行科技。\n        </span>\n      </div>\n    </clr-alert>\n\n    <div class=\"clr-row\">\n      <div class=\"clr-col-12 clr-col-sm-12 clr-col-md-6 clr-col-lg-6 clr-col-xl-6\">\n        <div class=\"card\">\n          <div class=\"card-block\">\n            <h3 class=\"card-title\">\n              你需要:\n            </h3>\n            <div *ngFor=\"let price of ms.game.currentWorld.winContidions; trackBy:getPriceId\">\n              <div class=\"winLabel\">\n                {{price.base.name}}\n                <span class=\"monospace\">\n                  {{price.base.quantity | format:true}}/{{price.price | format:true}}\n                </span>\n              </div>\n\n              <div class=\"progress-static\"\n                   [ngClass]=\"{'success': price.canBuy,'danger': !price.canBuy}\">\n                <div class=\"progress-meter\"\n                     [attr.data-value]=\"price.completedPercent\"\n                     [attr.data-displayval]=\"price.completedPercent\"></div>\n              </div>\n\n            </div>\n          </div>\n        </div>\n      </div>\n\n      <div class=\"clr-col-12 clr-col-sm-12 clr-col-md-6 clr-col-lg-6 clr-col-xl-6\"\n           *ngIf=\"ms.game.currentWorld.notWinConditions?.length > 0\">\n        <div class=\"card\">\n          <div class=\"card-block\">\n            <h3 class=\"card-title\">\n              你必须杀死:\n            </h3>\n            <ul class=\"list-unstyled\">\n              <li *ngFor=\"let malus of ms.game.currentWorld.notWinConditions; trackBy:getMalusId\">\n                <span>\n                  <clr-icon class=\"malusIcon\"\n                            [ngClass]=\"malus.isKilled ? 'ok':'no'\"\n                            [attr.shape]=\"malus.isKilled ? 'check' : 'times'\"></clr-icon>\n                  {{malus.name}}\n                </span>\n              </li>\n            </ul>\n          </div>\n        </div>\n      </div>\n\n    </div>\n\n  </ng-template>\n</div>\n"
+module.exports = "<div class=\"content-area\">\n\n  <app-change-world *ngIf=\"skip || ms.game.canTravel; else noTravel\"></app-change-world>\n  <ng-template #noTravel>\n\n    <h1>旅行到一个新世界\n      <button class=\"btn btn-danger-outline btn-link\"\n              (click)=\"skip = true\">跳过</button>\n    </h1>\n\n    <clr-alert [clrAlertType]=\"'alert-danger'\"\n               [clrAlertClosable]=\"false\"\n               *ngIf=\"!ms.game.researches.travel.done\">\n      <div class=\"alert-item\">\n        <span class=\"alert-text\">\n          旅行需要先完成研究旅行科技。\n        </span>\n      </div>\n    </clr-alert>\n\n    <div class=\"clr-row\">\n      <div class=\"clr-col-12 clr-col-sm-12 clr-col-md-6 clr-col-lg-6 clr-col-xl-6\">\n        <div class=\"card\">\n          <div class=\"card-block\">\n            <h3 class=\"card-title\">\n              你需要:\n            </h3>\n            <div *ngFor=\"let price of ms.game.currentWorld.winConditions; trackBy:getPriceId\">\n              <div class=\"winLabel\">\n                {{price.base.name}}\n                <span class=\"monospace\">\n                  {{price.base.quantity | format:true}}/{{price.price | format:true}}\n                </span>\n              </div>\n\n              <div class=\"progress-static\"\n                   [ngClass]=\"{'success': price.canBuy,'danger': !price.canBuy}\">\n                <div class=\"progress-meter\"\n                     [attr.data-value]=\"price.completedPercent\"\n                     [attr.data-displayval]=\"price.completedPercent\"></div>\n              </div>\n\n            </div>\n          </div>\n        </div>\n      </div>\n\n      <div class=\"clr-col-12 clr-col-sm-12 clr-col-md-6 clr-col-lg-6 clr-col-xl-6\"\n           *ngIf=\"ms.game.currentWorld.notWinConditions?.length > 0\">\n        <div class=\"card\">\n          <div class=\"card-block\">\n            <h3 class=\"card-title\">\n              你必须杀死:\n            </h3>\n            <ul class=\"list-unstyled\">\n              <li *ngFor=\"let malus of ms.game.currentWorld.notWinConditions; trackBy:getMalusId\">\n                <span>\n                  <clr-icon class=\"malusIcon\"\n                            [ngClass]=\"malus.isKilled ? 'ok':'no'\"\n                            [attr.shape]=\"malus.isKilled ? 'check' : 'times'\"></clr-icon>\n                  {{malus.name}}\n                </span>\n              </li>\n            </ul>\n          </div>\n        </div>\n      </div>\n\n    </div>\n\n  </ng-template>\n</div>\n"
 
 /***/ }),
 
@@ -10440,7 +10597,7 @@ var PrestigeComponent = /** @class */ (function () {
     PrestigeComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.sub = this.ms.updateEmitter.subscribe(function () {
-            _this.ms.game.currentWorld.winContidions.forEach(function (w) { return w.reloadPercent(); });
+            _this.ms.game.currentWorld.winConditions.forEach(function (w) { return w.reloadPercent(); });
             _this.cd.markForCheck();
         });
     };
@@ -10479,7 +10636,7 @@ var PrestigeComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<clr-signpost>\n  <clr-signpost-content *clrIfOpen=\"open\"\n                        [clrPosition]=\"'left-middle'\">\n    <h3>{{production.product.name}}:</h3>\n    <ul class=\"list\">\n      <li [class.noEnought]=\"production.rateo.lt(0)\">\n        基础产量: {{production.rateo | format}}\n      </li>\n      <li>\n        可操作性: {{production.producer.efficiency}}%\n      </li>\n      <li *ngIf=\"ms.game.researches.team1.done && production.producer.buyAction\">\n        团队加成: +{{production.producer.bonus.times(100) | format}}%\n      </li>\n    </ul>\n    <div *ngIf=\"productionsAll.length +productionsEfficienty.length +  productionsBonus.length >0\">\n      <h6>附加奖励:</h6>\n      <ul class=\"list\">\n        <li *ngFor=\"let bon of productionsAll; trackBy getProdID\">\n          {{bon.unit.name}}: +{{bon.getBonusPercent() | format }}%\n        </li>\n        <li *ngFor=\"let bon of productionsEfficienty; trackBy getProdID\">\n          {{bon.unit.name}}: +{{bon.getBonusPercent() | format }}%\n        </li>\n        <li *ngFor=\"let bon of productionsBonus; trackBy getProdID\">\n          {{bon.unit.name}}: +{{bon.getBonusPercent() | format }}%\n        </li>\n      </ul>\n    </div>\n  </clr-signpost-content>\n</clr-signpost>\n"
+module.exports = "<clr-signpost>\n  <clr-signpost-content *clrIfOpen=\"open\"\n                        [clrPosition]=\"'left-middle'\">\n    <h3>{{production.product.name}}:</h3>\n    <ul class=\"list\">\n      <li [class.notEnough]=\"production.ratio.lt(0)\">\n        基础产量: {{production.ratio | format}}\n      </li>\n      <li>\n        可操作性: {{production.producer.efficiency}}%\n      </li>\n      <li *ngIf=\"ms.game.researches.team1.done && production.producer.buyAction\">\n        团队加成: +{{production.producer.bonus.times(100) | format}}%\n      </li>\n    </ul>\n    <div *ngIf=\"productionsAll.length +productionsEfficiency.length +  productionsBonus.length >0\">\n      <h6>附加奖励:</h6>\n      <ul class=\"list\">\n        <li *ngFor=\"let bon of productionsAll; trackBy getProdID\">\n          {{bon.unit.name}}: +{{bon.getBonusPercent() | format }}%\n        </li>\n        <li *ngFor=\"let bon of productionsEfficiency; trackBy getProdID\">\n          {{bon.unit.name}}: +{{bon.getBonusPercent() | format }}%\n        </li>\n        <li *ngFor=\"let bon of productionsBonus; trackBy getProdID\">\n          {{bon.unit.name}}: +{{bon.getBonusPercent() | format }}%\n        </li>\n      </ul>\n    </div>\n  </clr-signpost-content>\n</clr-signpost>\n"
 
 /***/ }),
 
@@ -10524,20 +10681,20 @@ var ProductionSignpostsComponent = /** @class */ (function () {
         this.ms = ms;
         this.open = false;
         this.productionsAll = new Array();
-        this.productionsEfficienty = new Array();
+        this.productionsEfficiency = new Array();
         this.productionsBonus = new Array();
         //
     }
     ProductionSignpostsComponent.prototype.ngOnInit = function () {
         this.productionsAll = new Array();
-        this.productionsEfficienty = new Array();
+        this.productionsEfficiency = new Array();
         this.productionsBonus = new Array();
         if (this.production) {
             this.productionsAll = this.production.producer.productionsAll.filter(function (bn) {
                 return bn.isActive();
             });
-            if (this.production.rateo.gt(0)) {
-                this.productionsEfficienty = this.production.producer.productionsEfficienty.filter(function (bn) { return bn.isActive(); });
+            if (this.production.ratio.gt(0)) {
+                this.productionsEfficiency = this.production.producer.productionsEfficiency.filter(function (bn) { return bn.isActive(); });
                 this.productionsBonus = this.production.product.productionsBonus.filter(function (bn) { return bn.isActive(); });
             }
         }
@@ -10703,11 +10860,11 @@ var ResearchComponent = /** @class */ (function () {
     }
     ResearchComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.ceckSkip();
+        this.checkSkip();
         this.sub = this.ms.updateEmitter.subscribe(function (m) {
             _this.research.reloadUserPrices();
             _this.research.reloadAvailableTime();
-            _this.ceckSkip();
+            _this.checkSkip();
             _this.cd.markForCheck();
         });
     };
@@ -10717,7 +10874,7 @@ var ResearchComponent = /** @class */ (function () {
     ResearchComponent.prototype.getPriceId = function (index, price) {
         return price.base.id;
     };
-    ResearchComponent.prototype.ceckSkip = function () {
+    ResearchComponent.prototype.checkSkip = function () {
         this.canSkip = false;
         if (!this.research.canBuy) {
             this.minuteSkip = Math.ceil(Math.max(this.research.availableIn / 60000, 1));
@@ -10824,7 +10981,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MadeByChartComponent", function() { return MadeByChartComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _main_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../main.service */ "./src/app/main.service.ts");
-/* harmony import */ var _model_CONSTATS__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../model/CONSTATS */ "./src/app/model/CONSTATS.ts");
+/* harmony import */ var _model_CONSTANTS__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../model/CONSTANTS */ "./src/app/model/CONSTANTS.ts");
 /* harmony import */ var _model_full_unit__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../model/full-unit */ "./src/app/model/full-unit.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -10876,8 +11033,8 @@ var MadeByChartComponent = /** @class */ (function () {
                 datasets: [
                     {
                         data: [],
-                        backgroundColor: _model_CONSTATS__WEBPACK_IMPORTED_MODULE_2__["CONSTS"].CHART_COLORS.backgroundColor,
-                        borderColor: _model_CONSTATS__WEBPACK_IMPORTED_MODULE_2__["CONSTS"].CHART_COLORS.borderColor,
+                        backgroundColor: _model_CONSTANTS__WEBPACK_IMPORTED_MODULE_2__["CONSTS"].CHART_COLORS.backgroundColor,
+                        borderColor: _model_CONSTANTS__WEBPACK_IMPORTED_MODULE_2__["CONSTS"].CHART_COLORS.borderColor,
                         borderWidth: 0
                     }
                 ]
@@ -10897,11 +11054,11 @@ var MadeByChartComponent = /** @class */ (function () {
         var activeProducer = this.unit.producedBy.filter(function (p) {
             return p.producer.unlocked &&
                 p.producer.quantity.gt(0) &&
-                ((!_this.consumers && p.rateo.gt(0)) ||
-                    (_this.consumers && p.rateo.lt(0)));
+                ((!_this.consumers && p.ratio.gt(0)) ||
+                    (_this.consumers && p.ratio.lt(0)));
         });
         var labels = activeProducer.map(function (p) { return p.producer.name; });
-        if (this.chart.data.labels.lenght !== labels.length) {
+        if (this.chart.data.labels.length !== labels.length) {
             this.chart.data.labels = labels;
         }
         var total = activeProducer
@@ -11174,7 +11331,7 @@ var UnitTabsComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngIf=\"unit\">\n  <div class=\"clr-row\">\n    <div class=\"clr-col-xs-12\tclr-col-sm-6\tclr-col-md-6\tclr-col-lg-6\tclr-col-xl-6\">\n\n      <h5>{{unit.description}}</h5>\n\n      <p *ngIf=\"ms.game.researches.team1.done && unit.buyAction && unit.bonus.gt(0)\">\n        你购买了 {{unit.buyAction.quantity | format}} 次; 奖励加成: + {{unit.bonus.times(100) | format}}%\n      </p>\n\n      <p *ngIf=\"unit.c.abs().gt(0.01)\">\n        产量:\n        <app-polynom [a]=\"unit.a\"\n                     [b]=\"unit.b\"\n                     [c]=\"unit.c\"></app-polynom>\n      </p>\n\n      <clr-alert *ngIf=\"unit.isEnding\"\n                 [clrAlertType]=\"malus ? 'alert-sucess': (ms.game.firstEndigUnit.endIn < 3600000 ? 'alert-danger':'alert-warning')\"\n                 [clrAlertClosable]=\"false\"\n                 [clrAlertSizeSmall]=\"false\">\n        <clr-alert-item>\n          <span class=\"alert-text\">\n            耗尽: {{unit.endIn | endIn}}\n          </span>\n        </clr-alert-item>\n      </clr-alert>\n\n      <clr-alert *ngIf=\"malus && malus.first && malus.isActive()\"\n                 [clrAlertType]=\"'alert-danger'\"\n                 [clrAlertSizeSmall]=\"false\"\n                 [clrAlertClosable]=\"false\">\n        <clr-alert-item>\n          <span>\n            {{malus.name}} 正在导致\n            <span class=\"monospace\"> {{malus.priceMultiplier.minus(1).times(100) | format}} %\n            </span>\n            \n            <a [routerLink]=\"'/nav/unit/'+malus.malusType.id\">\n              {{malus.malusType.name}}\n            </a>\n            价格增长.\n          </span>\n        </clr-alert-item>\n      </clr-alert>\n\n      <div *ngIf=\"unit.produces.length > 0 && !malus\">\n        <span>工作者比例: {{unit.efficiency | format}} %</span>\n\n        <p-slider [min]=\"0\"\n                  [max]=\"100\"\n                  [step]=\"0.01\"\n                  [(ngModel)]=\"unit.efficiency\"\n                  animate=\"true\"></p-slider>\n      </div>\n\n      <app-action *ngIf=\"unit.buyAction\"\n                  [action]=\"unit.buyAction\"></app-action>\n      <app-action *ngIf=\"unit.teamAction && ms.game.researches.team2.done\"\n                  [action]=\"unit.teamAction\"></app-action>\n      <app-action *ngIf=\"unit.twinAction && ms.game.researches.twin.done\"\n                  [action]=\"unit.twinAction\"></app-action>\n\n      <div *ngIf=\"madeChart\"\n           class=\"chartDiv\">\n        <app-made-by-chart [unit]=\"unit\"></app-made-by-chart>\n        <app-made-by-chart [unit]=\"unit\"\n                           [consumers]=\"true\"></app-made-by-chart>\n      </div>\n\n    </div>\n    <div class=\"clr-col-xs-12\tclr-col-sm-6 clr-col-md-6\tclr-col-lg-6 clr-col-xl-6\">\n      <div *ngIf=\"activeProduct?.length > 0\">\n        <h6>\n          {{unit.name}} 生产:\n        </h6>\n        <clr-datagrid class=\"datagrid-compact\">\n          <clr-dg-column [clrDgField]=\"'product.name'\">名称</clr-dg-column>\n          <clr-dg-column [clrDgSortBy]=\"prodSorter\">每个单位的产量/秒</clr-dg-column>\n          <clr-dg-column [clrDgSortBy]=\"totalProdSorter\">总产量</clr-dg-column>\n\n          <clr-dg-row *clrDgItems=\"let product of activeProduct\">\n            <clr-dg-cell>\n              <a [routerLink]=\"'/nav/unit/'+product.product.id\">\n                {{product.product.name}}\n              </a>\n            </clr-dg-cell>\n            <clr-dg-cell>\n              <span [class.noEnought]=\"product.rateo.lt(0)\"\n                    class=\"monospace\">\n                {{product.prodPerSec | format}}</span>\n              <app-production-signposts [production]=\"product\"></app-production-signposts>\n            </clr-dg-cell>\n            <clr-dg-cell>\n              <span [class.noEnought]=\"product.rateo.lt(0)\"\n                    class=\"monospace\">\n                {{product.prodPerSec.times(unit.quantity) | format}}\n              </span>\n            </clr-dg-cell>\n          </clr-dg-row>\n\n          <clr-dg-footer>\n            <clr-dg-pagination #pagination\n                               [clrDgPageSize]=\"10\">\n              {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}} of {{pagination.totalItems}}\n            </clr-dg-pagination>\n          </clr-dg-footer>\n\n        </clr-datagrid>\n      </div>\n\n      <div *ngIf=\"activeProducer?.length > 0\">\n        <h6>\n          {{unit.name}} 产量来自:\n        </h6>\n        <clr-datagrid class=\"datagrid-compact\">\n          <clr-dg-column [clrDgField]=\"'producer.name'\">名字</clr-dg-column>\n          <clr-dg-column [clrDgSortBy]=\"prodSorter\">每个单位的产量/秒</clr-dg-column>\n          <clr-dg-column [clrDgSortBy]=\"totalProdSorter\">总产量</clr-dg-column>\n\n          <clr-dg-row *clrDgItems=\"let producer of activeProducer\">\n            <clr-dg-cell>\n              <a [routerLink]=\"'/nav/unit/'+producer.producer.id\">\n                {{producer.producer.name}}\n              </a>\n            </clr-dg-cell>\n            <clr-dg-cell>\n              <span [class.noEnought]=\"producer.rateo.lt(0)\"\n                    class=\"monospace\">\n                {{producer.prodPerSec | format}}\n              </span>\n            </clr-dg-cell>\n            <clr-dg-cell>\n              <span [class.noEnought]=\"producer.rateo.lt(0)\"\n                    class=\"monospace\">\n                {{producer.prodPerSec.times(producer.producer.quantity) | format}}</span>\n            </clr-dg-cell>\n          </clr-dg-row>\n\n          <clr-dg-footer>\n            <clr-dg-pagination #pagination\n                               [clrDgPageSize]=\"10\">\n              {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}} of {{pagination.totalItems}}\n            </clr-dg-pagination>\n          </clr-dg-footer>\n\n        </clr-datagrid>\n      </div>\n\n    </div>\n  </div>\n</div>\n"
+module.exports = "<div *ngIf=\"unit\">\n  <div class=\"clr-row\">\n    <div class=\"clr-col-xs-12\tclr-col-sm-6\tclr-col-md-6\tclr-col-lg-6\tclr-col-xl-6\">\n\n      <h5>{{unit.description}}</h5>\n\n      <p *ngIf=\"ms.game.researches.team1.done && unit.buyAction && unit.bonus.gt(0)\">\n        你购买了这个 {{unit.buyAction.quantity | format}} 次; 奖励加成: + {{unit.bonus.times(100) | format}}%\n      </p>\n\n      <p *ngIf=\"unit.c.abs().gt(0.01)\">\n        产量:\n        <app-polynom [a]=\"unit.a\"\n                     [b]=\"unit.b\"\n                     [c]=\"unit.c\"></app-polynom>\n      </p>\n\n      <clr-alert *ngIf=\"unit.isEnding\"\n                 [clrAlertType]=\"malus ? 'alert-success': (ms.game.firstEndingUnit.endIn < 3600000 ? 'alert-danger':'alert-warning')\"\n                 [clrAlertClosable]=\"false\"\n                 [clrAlertSizeSmall]=\"false\">\n        <clr-alert-item>\n          <span class=\"alert-text\">\n            耗尽: {{unit.endIn | endIn}}\n          </span>\n        </clr-alert-item>\n      </clr-alert>\n\n      <clr-alert *ngIf=\"malus && malus.first && malus.isActive()\"\n                 [clrAlertType]=\"'alert-danger'\"\n                 [clrAlertSizeSmall]=\"false\"\n                 [clrAlertClosable]=\"false\">\n        <clr-alert-item>\n          <span>\n            {{malus.name}} 正在导致\n            <span class=\"monospace\"> {{malus.priceMultiplier.minus(1).times(100) | format}} %\n            </span>\n            \n            <a [routerLink]=\"'/nav/unit/'+malus.malusType.id\">\n              {{malus.malusType.name}}\n            </a>\n            价格增长.\n          </span>\n        </clr-alert-item>\n      </clr-alert>\n\n      <div *ngIf=\"unit.produces.length > 0 && !malus\">\n        <span>工作者比例: {{unit.efficiency | format}} %</span>\n\n        <p-slider [min]=\"0\"\n                  [max]=\"100\"\n                  [step]=\"0.01\"\n                  [(ngModel)]=\"unit.efficiency\"\n                  animate=\"true\"></p-slider>\n      </div>\n\n      <app-action *ngIf=\"unit.buyAction\"\n                  [action]=\"unit.buyAction\"></app-action>\n      <app-action *ngIf=\"unit.teamAction && ms.game.researches.team2.done\"\n                  [action]=\"unit.teamAction\"></app-action>\n      <app-action *ngIf=\"unit.twinAction && ms.game.researches.twin.done\"\n                  [action]=\"unit.twinAction\"></app-action>\n\n      <div *ngIf=\"madeChart\"\n           class=\"chartDiv\">\n        <app-made-by-chart [unit]=\"unit\"></app-made-by-chart>\n        <app-made-by-chart [unit]=\"unit\"\n                           [consumers]=\"true\"></app-made-by-chart>\n      </div>\n\n    </div>\n    <div class=\"clr-col-xs-12\tclr-col-sm-6 clr-col-md-6\tclr-col-lg-6 clr-col-xl-6\">\n      <div *ngIf=\"activeProduct?.length > 0\">\n        <h6>\n          {{unit.name}} 生产:\n        </h6>\n        <clr-datagrid class=\"datagrid-compact\">\n          <clr-dg-column [clrDgField]=\"'product.name'\">名称</clr-dg-column>\n          <clr-dg-column [clrDgSortBy]=\"prodSorter\">每个单位的产量/秒</clr-dg-column>\n          <clr-dg-column [clrDgSortBy]=\"totalProdSorter\">总产量</clr-dg-column>\n\n          <clr-dg-row *clrDgItems=\"let product of activeProduct\">\n            <clr-dg-cell>\n              <a [routerLink]=\"'/nav/unit/'+product.product.id\">\n                {{product.product.name}}\n              </a>\n            </clr-dg-cell>\n            <clr-dg-cell>\n              <span [class.notEnough]=\"product.ratio.lt(0)\"\n                    class=\"monospace\">\n                {{product.prodPerSec | format}}</span>\n              <app-production-signposts [production]=\"product\"></app-production-signposts>\n            </clr-dg-cell>\n            <clr-dg-cell>\n              <span [class.notEnough]=\"product.ratio.lt(0)\"\n                    class=\"monospace\">\n                {{product.prodPerSec.times(unit.quantity) | format}}\n              </span>\n            </clr-dg-cell>\n          </clr-dg-row>\n\n          <clr-dg-footer>\n            <clr-dg-pagination #pagination\n                               [clrDgPageSize]=\"10\">\n              {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}} of {{pagination.totalItems}}\n            </clr-dg-pagination>\n          </clr-dg-footer>\n\n        </clr-datagrid>\n      </div>\n\n      <div *ngIf=\"activeProducer?.length > 0\">\n        <h6>\n          {{unit.name}} 产量来自:\n        </h6>\n        <clr-datagrid class=\"datagrid-compact\">\n          <clr-dg-column [clrDgField]=\"'producer.name'\">名字</clr-dg-column>\n          <clr-dg-column [clrDgSortBy]=\"prodSorter\">每个单位的产量/秒</clr-dg-column>\n          <clr-dg-column [clrDgSortBy]=\"totalProdSorter\">总产量</clr-dg-column>\n\n          <clr-dg-row *clrDgItems=\"let producer of activeProducer\">\n            <clr-dg-cell>\n              <a [routerLink]=\"'/nav/unit/'+producer.producer.id\">\n                {{producer.producer.name}}\n              </a>\n            </clr-dg-cell>\n            <clr-dg-cell>\n              <span [class.notEnough]=\"producer.ratio.lt(0)\"\n                    class=\"monospace\">\n                {{producer.prodPerSec | format}}\n              </span>\n            </clr-dg-cell>\n            <clr-dg-cell>\n              <span [class.notEnough]=\"producer.ratio.lt(0)\"\n                    class=\"monospace\">\n                {{producer.prodPerSec.times(producer.producer.quantity) | format}}</span>\n            </clr-dg-cell>\n          </clr-dg-row>\n\n          <clr-dg-footer>\n            <clr-dg-pagination #pagination\n                               [clrDgPageSize]=\"10\">\n              {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}} of {{pagination.totalItems}}\n            </clr-dg-pagination>\n          </clr-dg-footer>\n\n        </clr-datagrid>\n      </div>\n\n    </div>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -11296,7 +11453,7 @@ var UnitComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"card-block\"\n     *ngIf=\"world\"\n     (click)=\"openModal()\">\n  <h3 class=\"card-title\">{{world.name}} ({{world.level |format:true}})</h3>\n  <span class=\"p2\">经验:\n    <span class=\"monospace\">{{world.prestige | format:true}}</span>\n  </span>\n  <ul class=\"list\">\n    <li *ngFor=\"let bug of world.additionalBugs; trackBy:getBugId\">\n      {{getBugName(bug)}}\n    </li>\n    <li *ngFor=\"let bon of world.productionsBonus; trackBy:getBonusId\">\n      {{bon[0].name }} + {{bon[0].usedForProductionBonus[0].getBonusPercentForNum(bon[1]) |format }}%\n    </li>\n    <li *ngFor=\"let bon of world.productionsEfficienty; trackBy:getBonusId\">\n      {{bon[0].name }} + {{bon[0].usedForProductionBonus[0].getBonusPercentForNum(bon[1]) |format }}%\n    </li>\n    <li *ngFor=\"let bon of world.productionsAll; trackBy:getBonusId\">\n      {{bon[0].name }} + {{bon[0].usedForProductionBonus[0].getBonusPercentForNum(bon[1]) |format }}%\n    </li>\n    <li *ngFor=\"let unl of world.startingUnlocked; trackBy:getResearchId\">\n      {{unl.name}} 可用.\n    </li>\n    <li *ngFor=\"let start of world.startingUnit; trackBy:getStartId\">\n      <ng-container *ngIf=\"start[1].gt(0);else zero\">{{start[1] | format}} x {{start[0].name}}</ng-container>\n      <ng-template #zero>{{start[0].name}} 可用。</ng-template>\n    </li>\n  </ul>\n\n  <span class=\"p2\">胜利条件:</span>\n  <ul class=\"list\">\n    <li *ngFor=\"let win of world.winContidions; trackBy:getWinId\">\n      {{win.price | format:true}} {{win.base.name}}\n    </li>\n  </ul>\n\n  <div *ngIf=\"world.notWinConditions?.length > 0\">\n    <span class=\"p2\">敌人:</span>\n    <ul class=\"list\">\n      <li *ngFor=\"let mal of world.notWinConditions; trackBy:getMalusId\">\n        {{mal.name}}\n      </li>\n    </ul>\n  </div>\n\n</div>\n"
+module.exports = "<div class=\"card-block\"\n     *ngIf=\"world\"\n     (click)=\"openModal()\">\n  <h3 class=\"card-title\">{{world.name}} ({{world.level |format:true}})</h3>\n  <span class=\"p2\">经验:\n    <span class=\"monospace\">{{world.prestige | format:true}}</span>\n  </span>\n  <ul class=\"list\">\n    <li *ngFor=\"let bug of world.additionalBugs; trackBy:getBugId\">\n      {{getBugName(bug)}}\n    </li>\n    <li *ngFor=\"let bon of world.productionsBonus; trackBy:getBonusId\">\n      {{bon[0].name }} + {{bon[0].usedForProductionBonus[0].getBonusPercentForNum(bon[1]) |format }}%\n    </li>\n    <li *ngFor=\"let bon of world.productionsEfficiency; trackBy:getBonusId\">\n      {{bon[0].name }} + {{bon[0].usedForProductionBonus[0].getBonusPercentForNum(bon[1]) |format }}%\n    </li>\n    <li *ngFor=\"let bon of world.productionsAll; trackBy:getBonusId\">\n      {{bon[0].name }} + {{bon[0].usedForProductionBonus[0].getBonusPercentForNum(bon[1]) |format }}%\n    </li>\n    <li *ngFor=\"let unl of world.startingUnlocked; trackBy:getResearchId\">\n      {{unl.name}} 可用.\n    </li>\n    <li *ngFor=\"let start of world.startingUnit; trackBy:getStartId\">\n      <ng-container *ngIf=\"start[1].gt(0);else zero\">{{start[1] | format}} x {{start[0].name}}</ng-container>\n      <ng-template #zero>{{start[0].name}} 可用。</ng-template>\n    </li>\n  </ul>\n\n  <span class=\"p2\">胜利条件:</span>\n  <ul class=\"list\">\n    <li *ngFor=\"let win of world.winConditions; trackBy:getWinId\">\n      {{win.price | format:true}} {{win.base.name}}\n    </li>\n  </ul>\n\n  <div *ngIf=\"world.notWinConditions?.length > 0\">\n    <span class=\"p2\">敌人:</span>\n    <ul class=\"list\">\n      <li *ngFor=\"let mal of world.notWinConditions; trackBy:getMalusId\">\n        {{mal.name}}\n      </li>\n    </ul>\n  </div>\n\n</div>\n"
 
 /***/ }),
 

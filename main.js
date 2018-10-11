@@ -1460,7 +1460,7 @@ var FormatPipe = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"clr-row\">\n  <div *ngIf=\"unitGroup\"\n       class=\"clr-col-xs-12\tclr-col-sm-6\tclr-col-md-6\tclr-col-lg-6\tclr-col-xl-6\">\n\n    <app-action-group *ngIf=\"hatchActionGrp\"\n                      [actGr]=\"hatchActionGrp\"></app-action-group>\n    <app-action-group *ngIf=\"teamActionGrp && ms.game.researches.team2.done\"\n                      [actGr]=\"teamActionGrp\"></app-action-group>\n    <app-action-group *ngIf=\"twinActionGrp && ms.game.researches.twin.done\"\n                      [actGr]=\"twinActionGrp\"></app-action-group>\n\n  </div>\n  <div *ngIf=\"unitGroup\"\n       class=\"clr-col-xs-12\tclr-col-sm-6\tclr-col-md-6\tclr-col-lg-6\tclr-col-xl-6\">\n\n    <clr-datagrid *ngIf=\"unitGroup\"\n                  class=\"datagrid-compact\"\n                  [(clrDgSelected)]=\"unitGroup.selected\"\n                  (clrDgSelectedChange)=\"selectedChanged($event)\">\n\n\n    </clr-datagrid>\n\n  </div>\n</div>\n"
+module.exports = "<div class=\"clr-row\">\n  <div *ngIf=\"unitGroup\"\n       class=\"clr-col-xs-12\tclr-col-sm-6\tclr-col-md-6\tclr-col-lg-6\tclr-col-xl-6\">\n\n    <h5>\n      Aggregate group for AutoBuyers.\n    </h5>\n\n    <button class=\"btn btn-success-outline\"\n            (click)=\"allOn(true)\">All ON</button>\n    <button class=\"btn btn-danger-outline\"\n            (click)=\"allOn(false)\">All OFF</button>\n    <button class=\"btn btn-outline\"\n            (click)=\"multiModal = true\">MaxBuy multi</button>\n\n    <clr-modal [(clrModalOpen)]=\"multiModal\">\n      <h3 class=\"modal-title\">Set MaxBuy multi</h3>\n      <div class=\"modal-body\">\n        <form clrForm\n              class=\"clr-form clr-form-compact\">\n\n          <div class=\"form-group\">\n            <label for=\"price_m\">MaxBuy multi:</label>\n            <input class=\"clr-input\"\n                   placeholder=\"Priority\"\n                   name=\"price_m\"\n                   [(ngModel)]=\"reqMulti\"\n                   type=\"number\"\n                   placeholder=\"1\"\n                   min=\"0\"\n                   max=\"1\"\n                   step=\"0.01\"\n                   size=\"2\" />\n          </div>\n\n          <!-- <label>AutoBuyer type:</label> -->\n          <div class=\"form-group\">\n            <label for=\"sel\">AutoBuyer type:</label>\n            <div class=\"select\">\n              <select name=\"sel\"\n                      [(ngModel)]=\"autoBuyType\">\n                <option value=\"0\">All Types</option>\n                <option value=\"1\"\n                        *ngIf=\"ms.game.allPrestige.autoBuyUnlock.autoBuyQuantity.done\">Hatch</option>\n                <option value=\"2\"\n                        *ngIf=\"ms.game.allPrestige.autoBuyUnlock.autoBuyTeam.done\">Team</option>\n                <option value=\"3\"\n                        *ngIf=\"ms.game.allPrestige.autoBuyUnlock.autoBuyTwin.done\">Twin</option>\n              </select>\n            </div>\n          </div>\n\n        </form>\n\n      </div>\n      <div class=\"modal-footer\">\n        <button type=\"button\"\n                class=\"btn btn-outline\"\n                (click)=\"multiModal = false\">Cancel</button>\n        <button type=\"button\"\n                class=\"btn btn-primary\"\n                (click)=\"setMulti(false)\">Selected</button>\n        <button type=\"button\"\n                class=\"btn btn-primary\"\n                (click)=\"setMulti(true)\">All</button>\n      </div>\n    </clr-modal>\n\n    <app-action-group *ngIf=\"hatchActionGrp\"\n                      [actGr]=\"hatchActionGrp\"></app-action-group>\n    <app-action-group *ngIf=\"teamActionGrp && ms.game.researches.team2.done\"\n                      [actGr]=\"teamActionGrp\"></app-action-group>\n    <app-action-group *ngIf=\"twinActionGrp && ms.game.researches.twin.done\"\n                      [actGr]=\"twinActionGrp\"></app-action-group>\n\n  </div>\n  <div *ngIf=\"unitGroup\"\n       class=\"clr-col-xs-12\tclr-col-sm-6\tclr-col-md-6\tclr-col-lg-6\tclr-col-xl-6\">\n    <h6> Auto Buyers: </h6>\n\n    <clr-datagrid *ngIf=\"unitGroup\"\n                  class=\"datagrid-compact\"\n                  [(clrDgSelected)]=\"unitGroup.selected\"\n                  (clrDgSelectedChange)=\"selectedChanged($event)\">\n\n      <clr-dg-column [clrDgField]=\"'unit.name'\">Name</clr-dg-column>\n\n      <clr-dg-column [clrDgSortBy]=\"unitAutoHatchSorter\"\n                     *ngIf=\"ms.game.allPrestige.autoBuyUnlock.autoBuyQuantity.done\">\n        Hatch - multi\n      </clr-dg-column>\n      <clr-dg-column [clrDgSortBy]=\"unitAutoTeamSorter\"\n                     *ngIf=\"ms.game.allPrestige.autoBuyUnlock.autoBuyTeam.done\">\n        Team - multi\n      </clr-dg-column>\n      <clr-dg-column [clrDgSortBy]=\"unitAutoTwinSorter\"\n                     *ngIf=\"ms.game.allPrestige.autoBuyUnlock.autoBuyTwin.done\">\n        Twin - multi\n      </clr-dg-column>\n      <clr-dg-row *clrDgItems=\"let unit of unitGroup.unlocked\"\n                  [clrDgItem]=\"unit\">\n        <clr-dg-cell>\n          <a [routerLink]=\"'/nav/unit/'+unit.id\">\n            {{unit.name}}\n          </a>\n        </clr-dg-cell>\n\n        <clr-dg-cell *ngIf=\"ms.game.allPrestige.autoBuyUnlock.autoBuyQuantity.done && unit.buyAction?.autoBuyer\"\n                     class=\"monospace\">\n          <clr-checkbox *ngIf=\"unit.buyAction?.autoBuyer?.quantity.gt(0)\"\n                        name=\"chkH\"\n                        [attr.id]=\"unit.id+ 'chkH'\"\n                        (change)=\"reload()\"\n                        [(ngModel)]=\"unit.buyAction.autoBuyer.active\">\n            <span class=\"monospace\">\n              {{unit.buyAction?.autoBuyer?.quantity | format: true}}\n              {{unit.buyAction?.autoBuyer?.priceSavePercent | format: false}}\n            </span>\n          </clr-checkbox>\n        </clr-dg-cell>\n        <clr-dg-cell *ngIf=\"ms.game.allPrestige.autoBuyUnlock.autoBuyTeam.done\"\n                     class=\"monospace\">\n          <clr-checkbox *ngIf=\"unit.teamAction?.autoBuyer?.quantity.gt(0)\"\n                        name=\"chkT\"\n                        [attr.id]=\"unit.id+ 'chkT'\"\n                        (change)=\"reload()\"\n                        [(ngModel)]=\"unit.teamAction.autoBuyer.active\">\n            <span class=\"monospace\">\n              {{unit.teamAction?.autoBuyer?.quantity | format: true}}\n              {{unit.teamAction?.autoBuyer?.priceSavePercent | format: false}}\n            </span>\n          </clr-checkbox>\n        </clr-dg-cell>\n        <clr-dg-cell *ngIf=\"ms.game.allPrestige.autoBuyUnlock.autoBuyTwin.done\"\n                     class=\"monospace\">\n          <clr-checkbox *ngIf=\"unit.twinAction?.autoBuyer?.quantity.gt(0)\"\n                        name=\"chkW\"\n                        [attr.id]=\"unit.id+ 'chkW'\"\n                        (change)=\"reload()\"\n                        [(ngModel)]=\"unit.twinAction.autoBuyer.active\">\n            <span class=\"monospace\">\n              {{unit.twinAction?.autoBuyer?.quantity | format: true}}\n              {{unit.twinAction?.autoBuyer?.priceSavePercent | format: false}}\n            </span>\n          </clr-checkbox>\n        </clr-dg-cell>\n\n      </clr-dg-row>\n\n\n    </clr-datagrid>\n\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -1489,6 +1489,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _main_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../main.service */ "./src/app/main.service.ts");
 /* harmony import */ var _model_actions_action_group__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../model/actions/action-group */ "./src/app/model/actions/action-group.ts");
 /* harmony import */ var _model_unit_group__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../model/unit-group */ "./src/app/model/unit-group.ts");
+/* harmony import */ var _model_utility__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../model/utility */ "./src/app/model/utility.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1502,10 +1503,17 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var GroupAutoBuyComponent = /** @class */ (function () {
     function GroupAutoBuyComponent(ms, cd) {
         this.ms = ms;
         this.cd = cd;
+        this.unitAutoHatchSorter = new _model_utility__WEBPACK_IMPORTED_MODULE_4__["UnitAutoHatchSorter"]();
+        this.unitAutoTeamSorter = new _model_utility__WEBPACK_IMPORTED_MODULE_4__["UnitAutoTeamSorter"]();
+        this.unitAutoTwinSorter = new _model_utility__WEBPACK_IMPORTED_MODULE_4__["UnitAutoTwinSorter"]();
+        this.multiModal = false;
+        this.reqMulti = 1;
+        this.autoBuyType = "0";
     }
     GroupAutoBuyComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -1560,6 +1568,54 @@ var GroupAutoBuyComponent = /** @class */ (function () {
             this.twinActionGrp = null;
         }
     };
+    GroupAutoBuyComponent.prototype.reload = function () {
+        this.ms.game.autoBuyManager.buildActiveList();
+    };
+    GroupAutoBuyComponent.prototype.allOn = function (status) {
+        if (status === void 0) { status = true; }
+        this.unitGroup.unlocked.forEach(function (u) {
+            if (u.buyAction && u.buyAction.autoBuyer) {
+                u.buyAction.autoBuyer.active = status;
+            }
+            if (u.teamAction && u.teamAction.autoBuyer) {
+                u.teamAction.autoBuyer.active = status;
+            }
+            if (u.twinAction && u.twinAction.autoBuyer) {
+                u.twinAction.autoBuyer.active = status;
+            }
+        });
+        this.reload();
+    };
+    GroupAutoBuyComponent.prototype.setMulti = function (all) {
+        var _this = this;
+        if (all === void 0) { all = true; }
+        if (this.reqMulti <= 1 && this.reqMulti > 0) {
+            var selection = all ? this.unitGroup.unlocked : this.unitGroup.selected;
+            selection.forEach(function (u) {
+                switch (_this.autoBuyType) {
+                    case "0": {
+                        u.buyAction.autoBuyer.priceSavePercent = _this.reqMulti;
+                        u.teamAction.autoBuyer.priceSavePercent = _this.reqMulti;
+                        u.twinAction.autoBuyer.priceSavePercent = _this.reqMulti;
+                        break;
+                    }
+                    case "1": {
+                        u.buyAction.autoBuyer.priceSavePercent = _this.reqMulti;
+                        break;
+                    }
+                    case "2": {
+                        u.teamAction.autoBuyer.priceSavePercent = _this.reqMulti;
+                        break;
+                    }
+                    case "3": {
+                        u.twinAction.autoBuyer.priceSavePercent = _this.reqMulti;
+                        break;
+                    }
+                }
+            });
+        }
+        this.multiModal = false;
+    };
     __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
         __metadata("design:type", _model_unit_group__WEBPACK_IMPORTED_MODULE_3__["UnitGroup"])
@@ -1587,7 +1643,7 @@ var GroupAutoBuyComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<h1>{{unitGroup.name}}\n\n  <clr-dropdown>\n    <button type=\"button\"\n            class=\"btn btn-outline-primary btn-link\"\n            clrDropdownTrigger>\n      操作\n      <clr-icon shape=\"caret down\"></clr-icon>\n    </button>\n    <clr-dropdown-menu *clrIfOpen>\n      <label class=\"dropdown-header\">选项</label>\n      <clr-dropdown>\n        <button type=\"button\"\n                clrDropdownTrigger>选择</button>\n        <clr-dropdown-menu>\n          <button type=\"button\"\n                  (click)=\"select(bug)\"\n                  clrDropdownItem\n                  *ngFor=\"let bug of bugs;trackBy getBugId\">\n            {{utility.getBugName(bug) }}\n          </button>\n        </clr-dropdown-menu>\n      </clr-dropdown>\n      <clr-dropdown>\n        <button type=\"button\"\n                clrDropdownTrigger>添加到选项</button>\n        <clr-dropdown-menu>\n          <button type=\"button\"\n                  (click)=\"selectAdd(bug)\"\n                  clrDropdownItem\n                  *ngFor=\"let bug of bugs;trackBy getBugId\">\n            {{utility.getBugName(bug) }}\n          </button>\n        </clr-dropdown-menu>\n      </clr-dropdown>\n      <clr-dropdown>\n        <button type=\"button\"\n                clrDropdownTrigger>取消选择</button>\n        <clr-dropdown-menu>\n          <button type=\"button\"\n                  (click)=\"selectRemove(bug)\"\n                  clrDropdownItem\n                  *ngFor=\"let bug of bugs;trackBy getBugId\">\n            {{utility.getBugName(bug) }}\n          </button>\n        </clr-dropdown-menu>\n      </clr-dropdown>\n\n    </clr-dropdown-menu>\n  </clr-dropdown>\n\n</h1>\n<clr-tabs>\n\n  <clr-tab>\n    <button clrTabLink\n            id=\"link1\">概览</button>\n    <clr-tab-content id=\"content1\"\n                     *clrIfActive=\"ms.overviewTaActive\">\n      <app-unit-group *ngIf=\"unitGroup\"\n                      [unitGroup]=\"unitGroup\"></app-unit-group>\n    </clr-tab-content>\n  </clr-tab>\n\n  <!-- <clr-tab *ngIf=\"ms.game.tabs.autoBuy.unlocked\">\n    <button clrTabLink>Auto Buyers</button>\n    <clr-tab-content *clrIfActive=\"ms.prestigeTaActive\">\n      <app-group-auto-buy [unitGroup]=\"unitGroup\"></app-group-auto-buy>\n    </clr-tab-content>\n  </clr-tab> -->\n\n</clr-tabs>\n"
+module.exports = "<h1>{{unitGroup.name}}\n\n  <clr-dropdown>\n    <button type=\"button\"\n            class=\"btn btn-outline-primary btn-link\"\n            clrDropdownTrigger>\n      操作\n      <clr-icon shape=\"caret down\"></clr-icon>\n    </button>\n    <clr-dropdown-menu *clrIfOpen>\n      <label class=\"dropdown-header\">选项</label>\n      <clr-dropdown>\n        <button type=\"button\"\n                clrDropdownTrigger>选择</button>\n        <clr-dropdown-menu>\n          <button type=\"button\"\n                  (click)=\"select(bug)\"\n                  clrDropdownItem\n                  *ngFor=\"let bug of bugs;trackBy getBugId\">\n            {{utility.getBugName(bug) }}\n          </button>\n        </clr-dropdown-menu>\n      </clr-dropdown>\n      <clr-dropdown>\n        <button type=\"button\"\n                clrDropdownTrigger>添加到选项</button>\n        <clr-dropdown-menu>\n          <button type=\"button\"\n                  (click)=\"selectAdd(bug)\"\n                  clrDropdownItem\n                  *ngFor=\"let bug of bugs;trackBy getBugId\">\n            {{utility.getBugName(bug) }}\n          </button>\n        </clr-dropdown-menu>\n      </clr-dropdown>\n      <clr-dropdown>\n        <button type=\"button\"\n                clrDropdownTrigger>取消选择</button>\n        <clr-dropdown-menu>\n          <button type=\"button\"\n                  (click)=\"selectRemove(bug)\"\n                  clrDropdownItem\n                  *ngFor=\"let bug of bugs;trackBy getBugId\">\n            {{utility.getBugName(bug) }}\n          </button>\n        </clr-dropdown-menu>\n      </clr-dropdown>\n\n    </clr-dropdown-menu>\n  </clr-dropdown>\n\n</h1>\n<clr-tabs>\n\n  <clr-tab>\n    <button clrTabLink\n            id=\"link1\">概览</button>\n    <clr-tab-content id=\"content1\"\n                     *clrIfActive=\"ms.overviewTaActive\">\n      <app-unit-group *ngIf=\"unitGroup\"\n                      [unitGroup]=\"unitGroup\"></app-unit-group>\n    </clr-tab-content>\n  </clr-tab>\n\n  <clr-tab *ngIf=\"ms.game.tabs.autoBuy.unlocked\">\n    <button clrTabLink>Auto Buyers</button>\n    <clr-tab-content *clrIfActive=\"ms.prestigeTaActive\">\n      <app-group-auto-buy [unitGroup]=\"unitGroup\"></app-group-auto-buy>\n    </clr-tab-content>\n  </clr-tab>\n\n</clr-tabs>\n"
 
 /***/ }),
 
@@ -1598,7 +1654,7 @@ module.exports = "<h1>{{unitGroup.name}}\n\n  <clr-dropdown>\n    <button type=\
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ":host /deep/ clr-tabs ul {\n  margin-top: -0.4rem; }\n"
+module.exports = ":host /deep/ clr-tabs ul {\n  margin-top: -0.4rem; }\n\n:host /deep/ h5 {\n  margin-bottom: 15px;\n  margin-top: 8px; }\n"
 
 /***/ }),
 
@@ -1714,7 +1770,7 @@ module.exports = "<div class=\"clr-row\">\n  <div *ngIf=\"unitGroup\"\n       cl
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".clr-row {\n  margin-left: 0;\n  margin-right: 0; }\n\nclr-datagrid {\n  margin-top: 0;\n  padding-top: 0; }\n\n@media only screen and (max-width: 768px) {\n  .clr-col-xs-12 {\n    padding-left: 0.2rem !important;\n    padding-right: 0 !important; }\n  .pieContainer {\n    max-width: calc(100% - 40px); } }\n\n.pieContainer {\n  display: flex;\n  height: 80%;\n  justify-content: center; }\n\nh5 {\n  margin-bottom: 15px;\n  margin-top: 8px; }\n"
+module.exports = ".clr-row {\n  margin-left: 0;\n  margin-right: 0; }\n\nclr-datagrid {\n  margin-top: 0;\n  padding-top: 0; }\n\n@media only screen and (max-width: 768px) {\n  .clr-col-xs-12 {\n    padding-left: 0.2rem !important;\n    padding-right: 0 !important; }\n  .pieContainer {\n    max-width: calc(100% - 40px); } }\n\n.pieContainer {\n  display: flex;\n  height: 80%;\n  justify-content: center; }\n"
 
 /***/ }),
 
@@ -5708,7 +5764,7 @@ var Mastery = /** @class */ (function () {
                 break;
             }
             case MasteryTypes.BETTER_WORLD: {
-                ret = "+20%\n世界加成";
+                ret = "+" + 20 * num + "%\n世界加成";
                 break;
             }
             case MasteryTypes.BETTER_WORLD_EXPERIENCE: {
@@ -8858,7 +8914,7 @@ var WorldMalus = /** @class */ (function (_super) {
 /*!**********************************!*\
   !*** ./src/app/model/utility.ts ***!
   \**********************************/
-/*! exports provided: Utility, ProductionSorter, TotalProductionSorter, UnitQuantitySorter, UnitBoughtSorter, UnitTeamSorter, UnitTwinSorter, RunExpSorter, RunExpPerSecSorter */
+/*! exports provided: Utility, ProductionSorter, TotalProductionSorter, UnitQuantitySorter, UnitBoughtSorter, UnitTeamSorter, UnitTwinSorter, UnitAutoHatchSorter, UnitAutoTeamSorter, UnitAutoTwinSorter, RunExpSorter, RunExpPerSecSorter */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8870,6 +8926,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UnitBoughtSorter", function() { return UnitBoughtSorter; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UnitTeamSorter", function() { return UnitTeamSorter; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UnitTwinSorter", function() { return UnitTwinSorter; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UnitAutoHatchSorter", function() { return UnitAutoHatchSorter; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UnitAutoTeamSorter", function() { return UnitAutoTeamSorter; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UnitAutoTwinSorter", function() { return UnitAutoTwinSorter; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RunExpSorter", function() { return RunExpSorter; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RunExpPerSecSorter", function() { return RunExpPerSecSorter; });
 /* harmony import */ var _strings__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./strings */ "./src/app/model/strings.ts");
@@ -9119,6 +9178,36 @@ var UnitTwinSorter = /** @class */ (function () {
         return a.twinAction.quantity.cmp(b.twinAction.quantity);
     };
     return UnitTwinSorter;
+}());
+
+// tslint:disable-next-line:max-classes-per-file
+var UnitAutoHatchSorter = /** @class */ (function () {
+    function UnitAutoHatchSorter() {
+    }
+    UnitAutoHatchSorter.prototype.compare = function (a, b) {
+        return a.buyAction.autoBuyer.quantity.cmp(b.buyAction.autoBuyer.quantity);
+    };
+    return UnitAutoHatchSorter;
+}());
+
+// tslint:disable-next-line:max-classes-per-file
+var UnitAutoTeamSorter = /** @class */ (function () {
+    function UnitAutoTeamSorter() {
+    }
+    UnitAutoTeamSorter.prototype.compare = function (a, b) {
+        return a.teamAction.autoBuyer.quantity.cmp(b.teamAction.autoBuyer.quantity);
+    };
+    return UnitAutoTeamSorter;
+}());
+
+// tslint:disable-next-line:max-classes-per-file
+var UnitAutoTwinSorter = /** @class */ (function () {
+    function UnitAutoTwinSorter() {
+    }
+    UnitAutoTwinSorter.prototype.compare = function (a, b) {
+        return a.twinAction.autoBuyer.quantity.cmp(b.twinAction.autoBuyer.quantity);
+    };
+    return UnitAutoTwinSorter;
 }());
 
 // tslint:disable-next-line:max-classes-per-file
@@ -11014,7 +11103,7 @@ var MadeByChartComponent = /** @class */ (function () {
     MadeByChartComponent.prototype.ngOnChanges = function () {
         this.title =
             (this.consumers ? "消耗比例" : "生产比例") + " % 关于 " + this.unit.name;
-        this.updateData();
+        this.updateData(true);
     };
     MadeByChartComponent.prototype.ngAfterViewInit = function () {
         setTimeout(this.initChart.bind(this), 0.1);
@@ -11047,8 +11136,9 @@ var MadeByChartComponent = /** @class */ (function () {
         });
         this.updateData();
     };
-    MadeByChartComponent.prototype.updateData = function () {
+    MadeByChartComponent.prototype.updateData = function (force) {
         var _this = this;
+        if (force === void 0) { force = false; }
         if (!this.chart)
             return;
         var activeProducer = this.unit.producedBy.filter(function (p) {
@@ -11058,7 +11148,7 @@ var MadeByChartComponent = /** @class */ (function () {
                     (_this.consumers && p.ratio.lt(0)));
         });
         var labels = activeProducer.map(function (p) { return p.producer.name; });
-        if (this.chart.data.labels.length !== labels.length) {
+        if (this.chart.data.labels.length !== labels.length || force) {
             this.chart.data.labels = labels;
         }
         var total = activeProducer
@@ -11070,7 +11160,7 @@ var MadeByChartComponent = /** @class */ (function () {
                 .div(total)
                 .toNumber() * 100);
         });
-        if (data.length !== this.chart.data.datasets[0].data) {
+        if (data.length !== this.chart.data.datasets[0].data || force) {
             this.chart.data.datasets[0].data = data;
             this.chart.update();
             this.cd.markForCheck();
@@ -11331,7 +11421,7 @@ var UnitTabsComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngIf=\"unit\">\n  <div class=\"clr-row\">\n    <div class=\"clr-col-xs-12\tclr-col-sm-6\tclr-col-md-6\tclr-col-lg-6\tclr-col-xl-6\">\n\n      <h5>{{unit.description}}</h5>\n\n      <p *ngIf=\"ms.game.researches.team1.done && unit.buyAction && unit.bonus.gt(0)\">\n        你购买了这个 {{unit.buyAction.quantity | format}} 次; 奖励加成: + {{unit.bonus.times(100) | format}}%\n      </p>\n\n      <p *ngIf=\"unit.c.abs().gt(0.01)\">\n        产量:\n        <app-polynom [a]=\"unit.a\"\n                     [b]=\"unit.b\"\n                     [c]=\"unit.c\"></app-polynom>\n      </p>\n\n      <clr-alert *ngIf=\"unit.isEnding\"\n                 [clrAlertType]=\"malus ? 'alert-success': (ms.game.firstEndingUnit.endIn < 3600000 ? 'alert-danger':'alert-warning')\"\n                 [clrAlertClosable]=\"false\"\n                 [clrAlertSizeSmall]=\"false\">\n        <clr-alert-item>\n          <span class=\"alert-text\">\n            耗尽: {{unit.endIn | endIn}}\n          </span>\n        </clr-alert-item>\n      </clr-alert>\n\n      <clr-alert *ngIf=\"malus && malus.first && malus.isActive()\"\n                 [clrAlertType]=\"'alert-danger'\"\n                 [clrAlertSizeSmall]=\"false\"\n                 [clrAlertClosable]=\"false\">\n        <clr-alert-item>\n          <span>\n            {{malus.name}} 正在导致\n            <span class=\"monospace\"> {{malus.priceMultiplier.minus(1).times(100) | format}} %\n            </span>\n            \n            <a [routerLink]=\"'/nav/unit/'+malus.malusType.id\">\n              {{malus.malusType.name}}\n            </a>\n            价格增长.\n          </span>\n        </clr-alert-item>\n      </clr-alert>\n\n      <div *ngIf=\"unit.produces.length > 0 && !malus\">\n        <span>工作者比例: {{unit.efficiency | format}} %</span>\n\n        <p-slider [min]=\"0\"\n                  [max]=\"100\"\n                  [step]=\"0.01\"\n                  [(ngModel)]=\"unit.efficiency\"\n                  animate=\"true\"></p-slider>\n      </div>\n\n      <app-action *ngIf=\"unit.buyAction\"\n                  [action]=\"unit.buyAction\"></app-action>\n      <app-action *ngIf=\"unit.teamAction && ms.game.researches.team2.done\"\n                  [action]=\"unit.teamAction\"></app-action>\n      <app-action *ngIf=\"unit.twinAction && ms.game.researches.twin.done\"\n                  [action]=\"unit.twinAction\"></app-action>\n\n      <div *ngIf=\"madeChart\"\n           class=\"chartDiv\">\n        <app-made-by-chart [unit]=\"unit\"></app-made-by-chart>\n        <app-made-by-chart [unit]=\"unit\"\n                           [consumers]=\"true\"></app-made-by-chart>\n      </div>\n\n    </div>\n    <div class=\"clr-col-xs-12\tclr-col-sm-6 clr-col-md-6\tclr-col-lg-6 clr-col-xl-6\">\n      <div *ngIf=\"activeProduct?.length > 0\">\n        <h6>\n          {{unit.name}} 生产:\n        </h6>\n        <clr-datagrid class=\"datagrid-compact\">\n          <clr-dg-column [clrDgField]=\"'product.name'\">名称</clr-dg-column>\n          <clr-dg-column [clrDgSortBy]=\"prodSorter\">每个单位的产量/秒</clr-dg-column>\n          <clr-dg-column [clrDgSortBy]=\"totalProdSorter\">总产量</clr-dg-column>\n\n          <clr-dg-row *clrDgItems=\"let product of activeProduct\">\n            <clr-dg-cell>\n              <a [routerLink]=\"'/nav/unit/'+product.product.id\">\n                {{product.product.name}}\n              </a>\n            </clr-dg-cell>\n            <clr-dg-cell>\n              <span [class.notEnough]=\"product.ratio.lt(0)\"\n                    class=\"monospace\">\n                {{product.prodPerSec | format}}</span>\n              <app-production-signposts [production]=\"product\"></app-production-signposts>\n            </clr-dg-cell>\n            <clr-dg-cell>\n              <span [class.notEnough]=\"product.ratio.lt(0)\"\n                    class=\"monospace\">\n                {{product.prodPerSec.times(unit.quantity) | format}}\n              </span>\n            </clr-dg-cell>\n          </clr-dg-row>\n\n          <clr-dg-footer>\n            <clr-dg-pagination #pagination\n                               [clrDgPageSize]=\"10\">\n              {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}} of {{pagination.totalItems}}\n            </clr-dg-pagination>\n          </clr-dg-footer>\n\n        </clr-datagrid>\n      </div>\n\n      <div *ngIf=\"activeProducer?.length > 0\">\n        <h6>\n          {{unit.name}} 产量来自:\n        </h6>\n        <clr-datagrid class=\"datagrid-compact\">\n          <clr-dg-column [clrDgField]=\"'producer.name'\">名字</clr-dg-column>\n          <clr-dg-column [clrDgSortBy]=\"prodSorter\">每个单位的产量/秒</clr-dg-column>\n          <clr-dg-column [clrDgSortBy]=\"totalProdSorter\">总产量</clr-dg-column>\n\n          <clr-dg-row *clrDgItems=\"let producer of activeProducer\">\n            <clr-dg-cell>\n              <a [routerLink]=\"'/nav/unit/'+producer.producer.id\">\n                {{producer.producer.name}}\n              </a>\n            </clr-dg-cell>\n            <clr-dg-cell>\n              <span [class.notEnough]=\"producer.ratio.lt(0)\"\n                    class=\"monospace\">\n                {{producer.prodPerSec | format}}\n              </span>\n            </clr-dg-cell>\n            <clr-dg-cell>\n              <span [class.notEnough]=\"producer.ratio.lt(0)\"\n                    class=\"monospace\">\n                {{producer.prodPerSec.times(producer.producer.quantity) | format}}</span>\n            </clr-dg-cell>\n          </clr-dg-row>\n\n          <clr-dg-footer>\n            <clr-dg-pagination #pagination\n                               [clrDgPageSize]=\"10\">\n              {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}} of {{pagination.totalItems}}\n            </clr-dg-pagination>\n          </clr-dg-footer>\n\n        </clr-datagrid>\n      </div>\n\n    </div>\n  </div>\n</div>\n"
+module.exports = "<div *ngIf=\"unit\">\n  <div class=\"clr-row\">\n    <div class=\"clr-col-xs-12\tclr-col-sm-6\tclr-col-md-6\tclr-col-lg-6\tclr-col-xl-6\">\n\n      <h5>{{unit.description}}</h5>\n\n      <p *ngIf=\"ms.game.researches.team1.done && unit.buyAction && unit.bonus.gt(0) && unit.produces.length > 0\">\n        你购买了这个 {{unit.buyAction.quantity | format}} 次; 奖励加成: + {{unit.bonus.times(100) | format}}%\n      </p>\n\n      <p *ngIf=\"unit.c.abs().gt(0.01)\">\n        产量:\n        <app-polynom [a]=\"unit.a\"\n                     [b]=\"unit.b\"\n                     [c]=\"unit.c\"></app-polynom>\n      </p>\n\n      <clr-alert *ngIf=\"unit.isEnding\"\n                 [clrAlertType]=\"malus ? 'alert-success': (ms.game.firstEndingUnit.endIn < 3600000 ? 'alert-danger':'alert-warning')\"\n                 [clrAlertClosable]=\"false\"\n                 [clrAlertSizeSmall]=\"false\">\n        <clr-alert-item>\n          <span class=\"alert-text\">\n            耗尽: {{unit.endIn | endIn}}\n          </span>\n        </clr-alert-item>\n      </clr-alert>\n\n      <clr-alert *ngIf=\"malus && malus.first && malus.isActive()\"\n                 [clrAlertType]=\"'alert-danger'\"\n                 [clrAlertSizeSmall]=\"false\"\n                 [clrAlertClosable]=\"false\">\n        <clr-alert-item>\n          <span>\n            {{malus.name}} 正在导致\n            <span class=\"monospace\"> {{malus.priceMultiplier.minus(1).times(100) | format}} %\n            </span>\n            \n            <a [routerLink]=\"'/nav/unit/'+malus.malusType.id\">\n              {{malus.malusType.name}}\n            </a>\n            价格增长.\n          </span>\n        </clr-alert-item>\n      </clr-alert>\n\n      <div *ngIf=\"unit.produces.length > 0 && !malus\">\n        <span>工作者比例: {{unit.efficiency | format}} %</span>\n\n        <p-slider [min]=\"0\"\n                  [max]=\"100\"\n                  [step]=\"0.01\"\n                  [(ngModel)]=\"unit.efficiency\"\n                  animate=\"true\"></p-slider>\n      </div>\n\n      <app-action *ngIf=\"unit.buyAction\"\n                  [action]=\"unit.buyAction\"></app-action>\n      <app-action *ngIf=\"unit.teamAction && ms.game.researches.team2.done\"\n                  [action]=\"unit.teamAction\"></app-action>\n      <app-action *ngIf=\"unit.twinAction && ms.game.researches.twin.done\"\n                  [action]=\"unit.twinAction\"></app-action>\n\n      <div *ngIf=\"madeChart\"\n           class=\"chartDiv\">\n        <app-made-by-chart [unit]=\"unit\"></app-made-by-chart>\n        <app-made-by-chart [unit]=\"unit\"\n                           [consumers]=\"true\"></app-made-by-chart>\n      </div>\n\n    </div>\n    <div class=\"clr-col-xs-12\tclr-col-sm-6 clr-col-md-6\tclr-col-lg-6 clr-col-xl-6\">\n      <div *ngIf=\"activeProduct?.length > 0\">\n        <h6>\n          {{unit.name}} 生产:\n        </h6>\n        <clr-datagrid class=\"datagrid-compact\">\n          <clr-dg-column [clrDgField]=\"'product.name'\">名称</clr-dg-column>\n          <clr-dg-column [clrDgSortBy]=\"prodSorter\">每个单位的产量/秒</clr-dg-column>\n          <clr-dg-column [clrDgSortBy]=\"totalProdSorter\">总产量</clr-dg-column>\n\n          <clr-dg-row *clrDgItems=\"let product of activeProduct\">\n            <clr-dg-cell>\n              <a [routerLink]=\"'/nav/unit/'+product.product.id\">\n                {{product.product.name}}\n              </a>\n            </clr-dg-cell>\n            <clr-dg-cell>\n              <span [class.notEnough]=\"product.ratio.lt(0)\"\n                    class=\"monospace\">\n                {{product.prodPerSec | format}}</span>\n              <app-production-signposts [production]=\"product\"></app-production-signposts>\n            </clr-dg-cell>\n            <clr-dg-cell>\n              <span [class.notEnough]=\"product.ratio.lt(0)\"\n                    class=\"monospace\">\n                {{product.prodPerSec.times(unit.quantity) | format}}\n              </span>\n            </clr-dg-cell>\n          </clr-dg-row>\n\n          <clr-dg-footer>\n            <clr-dg-pagination #pagination\n                               [clrDgPageSize]=\"10\">\n              {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}} of {{pagination.totalItems}}\n            </clr-dg-pagination>\n          </clr-dg-footer>\n\n        </clr-datagrid>\n      </div>\n\n      <div *ngIf=\"activeProducer?.length > 0\">\n        <h6>\n          {{unit.name}} 产量来自:\n        </h6>\n        <clr-datagrid class=\"datagrid-compact\">\n          <clr-dg-column [clrDgField]=\"'producer.name'\">名字</clr-dg-column>\n          <clr-dg-column [clrDgSortBy]=\"prodSorter\">每个单位的产量/秒</clr-dg-column>\n          <clr-dg-column [clrDgSortBy]=\"totalProdSorter\">总产量</clr-dg-column>\n\n          <clr-dg-row *clrDgItems=\"let producer of activeProducer\">\n            <clr-dg-cell>\n              <a [routerLink]=\"'/nav/unit/'+producer.producer.id\">\n                {{producer.producer.name}}\n              </a>\n            </clr-dg-cell>\n            <clr-dg-cell>\n              <span [class.notEnough]=\"producer.ratio.lt(0)\"\n                    class=\"monospace\">\n                {{producer.prodPerSec | format}}\n              </span>\n            </clr-dg-cell>\n            <clr-dg-cell>\n              <span [class.notEnough]=\"producer.ratio.lt(0)\"\n                    class=\"monospace\">\n                {{producer.prodPerSec.times(producer.producer.quantity) | format}}</span>\n            </clr-dg-cell>\n          </clr-dg-row>\n\n          <clr-dg-footer>\n            <clr-dg-pagination #pagination\n                               [clrDgPageSize]=\"10\">\n              {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}} of {{pagination.totalItems}}\n            </clr-dg-pagination>\n          </clr-dg-footer>\n\n        </clr-datagrid>\n      </div>\n\n    </div>\n  </div>\n</div>\n"
 
 /***/ }),
 

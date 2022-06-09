@@ -1,0 +1,108 @@
+{
+  "name": "idle-ant2",
+  "version": "0.0.0",
+  "scripts": {
+    "ng": "ng",
+    "start": "npm run make-themes && ng serve --open",
+    "start-prod": "npm run make-themes && ng serve --open --prod",
+    "build": "npm run make-themes && ng build --base-href ./",
+    "test": "ng test --source-map --code-coverage",
+    "test:watch": "ng test --watch",
+    "lint": "ng lint && sass-lint -v",
+    "e2e": "ng e2e",
+    "coveralls": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
+    "tslint-check": "tslint-config-prettier-check ./tslint.json",
+    "lint:fix": "ng lint IdleAnt2 --fix && sass-lint:fix",
+    "make-themes": "node-sass ./src/themes --output ./src/assets --output-style compact",
+    "analyze": "ng build --prod --stats-json --build-optimizer=false && webpack-bundle-analyzer dist/IdleAnt2/stats.json",
+    "sass-lint": "sass-lint -v",
+    "sass-lint:fix": "sass-lint-auto-fix",
+    "release": "ngh --dir=dist/IdleAnt2"
+  },
+  "husky": {
+    "hooks --no-verify": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.ts": [
+      "tslint --fix"
+    ],
+    "*.{js,json,css,md,.ts}": [
+      "prettier --write",
+      "git add"
+    ],
+    "*.scss": [
+      "npm run sass-lint:fix",
+      "git add"
+    ]
+  },
+  "private": true,
+  "dependencies": {
+    "@angular/animations": "^7.1.4",
+    "@angular/common": "^7.1.4",
+    "@angular/compiler": "^7.1.4",
+    "@angular/core": "^7.1.4",
+    "@angular/forms": "^7.1.4",
+    "@angular/http": "^7.1.4",
+    "@angular/platform-browser": "^7.1.4",
+    "@angular/platform-browser-dynamic": "^7.1.4",
+    "@angular/router": "^7.1.4",
+    "@clr/angular": "^1.0.3-patch",
+    "@clr/icons": "^1.0.3-patch",
+    "@clr/ui": "^1.0.3-patch",
+    "@types/chart.js": "^2.7.40",
+    "@types/lodash-es": "^4.17.1",
+    "@webcomponents/custom-elements": "^1.2.1",
+    "ant-utils": "^1.2.0",
+    "break_infinity.js": "^1.0.5",
+    "chart.js": "^2.7.3",
+    "classlist.js": "^1.1.20150312",
+    "core-js": "^2.5.7",
+    "date-fns": "^1.29.0",
+    "husky": "^1.1.2",
+    "lint-staged": "^7.3.0",
+    "lodash-es": "^4.17.11",
+    "lz-string": "^1.4.4",
+    "ngx-toastr": "^9.1.1",
+    "node-sass": "^4.13.0",
+    "normalize.css": "^8.0.0",
+    "primeicons": "^1.0.0",
+    "primeng": "^6.1.5",
+    "rxjs": "^6.3.3",
+    "swarm-numberformat": "^0.4.0",
+    "tslib": "^1.9.0",
+    "vis": "^4.21.0",
+    "zone.js": "^0.8.26"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "~0.11.0",
+    "@angular/cli": "~7.1.4",
+    "@angular/compiler-cli": "^7.1.4",
+    "@angular/language-service": "^7.1.4",
+    "@types/jasmine": "^2.8.9",
+    "@types/jasminewd2": "^2.0.5",
+    "@types/node": "^10.12.0",
+    "@types/vis": "^4.21.8",
+    "angular-cli-ghpages": "^0.5.3",
+    "codelyzer": "^4.5.0",
+    "coveralls": "^3.0.2",
+    "jasmine-core": "^3.3.0",
+    "jasmine-spec-reporter": "~4.2.1",
+    "karma": "~3.0.0",
+    "karma-chrome-launcher": "~2.2.0",
+    "karma-coverage-istanbul-reporter": "^2.0.4",
+    "karma-jasmine": "~1.1.1",
+    "karma-jasmine-html-reporter": "^1.3.1",
+    "karma-spec-reporter": "0.0.32",
+    "prettier": "^1.14.3",
+    "protractor": "^5.4.1",
+    "sass-lint": "^1.12.1",
+    "sass-lint-auto-fix": "^0.12.0",
+    "ts-node": "^7.0.1",
+    "tslint": "~5.11.0",
+    "tslint-config-prettier": "^1.15.0",
+    "tslint-plugin-prettier": "^1.3.0",
+    "typescript": "^3.1.6"
+  }
+}
